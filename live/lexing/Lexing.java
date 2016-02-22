@@ -2,7 +2,7 @@
 * This class starts the lexical phase from a main method.
 * David Carlin
 * Clifford Black
-* Cole Robertson
+* Christopher Houze
 */
 
 package lexing;
