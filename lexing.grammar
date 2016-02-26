@@ -1,0 +1,68 @@
+Package lexing;
+
+Helpers
+letter = ['a' .. 'z'] | ['A' .. 'Z'];
+digit = ['0' .. '9'];
+digits = digit+;
+newline = [10 + 13];
+
+Tokens
+double_slash_comment = '//' [[0 .. 0xffff] - newline]* newline;
+//slash_star_comment = '/*' [[0 .. 0xffff] - '*/']* '*/';
+//documentation_comment = '/**' [[0 .. 0xffff] - '*/']* '*/';
+space = ' ' | 9 | newline;
+//reserved words
+clas = 'class';
+public = 'public';
+static = 'static';
+void = 'void';
+main = 'main';
+string = 'String';
+extends = 'extends';
+return = 'return';
+int = 'int';
+println = 'System.out.println';
+boolean = 'boolean';
+if = 'if';
+do = 'do';
+while = 'while';
+for = 'for';
+switch = 'switch';
+else = 'else if';
+case = 'case';
+default = 'default';
+true = 'true';
+false = 'false';
+new = 'new';
+this = 'this';
+length = 'length';
+//other tokens
+assign = '=';
+less_than = '<';
+compare = '==' | '<' | '>' | '<=' | '>=' | '!=';
+and = '&&';
+or = '||';
+not = '!';
+plus = '+';
+minus = '-';
+mult = '*';
+divide = '/';
+mod = '%';
+left_paren = '(';
+right_paren = ')';
+left_bracket = '[';
+right_bracket = ']';
+left_brace = '{';
+right_brace = '}';
+left_quote = '“';
+right_quote = '”';
+dot = '.';
+comma = ',';
+colon = ':';
+semi = ';';
+identifier = letter (letter | digit | '_')*;
+int_num = digits;
+misc = [0 .. 0xffff];
+
+Ignored Tokens
+double_slash_comment, space;
