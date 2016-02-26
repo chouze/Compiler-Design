@@ -1,7 +1,7 @@
 package parsing;
 
 import lexing.lexer.*;
-
+import lexing.node.Token;
 import java.io.*;
 
 /*
@@ -13,8 +13,8 @@ import java.io.*;
  *  	Not --> Exp DotArray* 
  */
 public class Parser{
-	 Lexer lexer;
-	 Object token;
+	Lexer lexer;
+	Token token;
 
 	public Parser()
 	{
@@ -23,9 +23,9 @@ public class Parser{
 		try{
 			token = lexer.next();
 			Program();
-			
+
 		}catch(LexerException le) {System.err.println(le);}
-		 catch(IOException ioe) {System.err.println(ioe);}
+		catch(IOException ioe) {System.err.println(ioe);}
 	}
 
 	boolean peek(String tokenType)
@@ -41,32 +41,39 @@ public class Parser{
 		}
 		return false;
 	}
-	 boolean eat(boolean equals) {
-		if (equals) {
-			try {
-				while(lexer.peek().getClass().getName().equals("lexing.node.TSpace") ||
-						lexer.peek().getClass().getName().equals("lexer.node.TDoubleSlashComment"))
-				{
-					token = lexer.next();
-				}
-				
+
+	boolean eat(String name) {
+		try {
+			while(isToken("TSpace")|| isToken("TDoubleSlashComment")){
+				token = lexer.next();
+			}
+			
+			
+			if (isToken(name)) {
+				System.out.println("Eat token: " + token.getClass().getName() + " " + token.toString() + " om nom nom");
 				token = lexer.next();
 				return true;
-			} catch (LexerException e) {
-				e.printStackTrace();
-				return false;
-			} catch (IOException e) {
-				e.printStackTrace();
-				return false;
+			} else {
+				throw new ParsingException(token, name);
 			}
-		} else {
-			System.err.println("Incorrect");
+
+			
+		} catch (LexerException e) {
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			e.printStackTrace();
 			return false;
 		}
+
 	}
 
-	 boolean isToken(String tokenType) {
+	boolean isToken(String tokenType) {
 		return token.getClass().getName().equals("lexing.node." + tokenType);
+	}
+
+	boolean isToken(Token t, String tokenType){
+		return t.getClass().getName().equals(tokenType);
 	}
 
 	void Program(){
@@ -76,54 +83,54 @@ public class Parser{
 		}
 	}
 
-	 void MainClass() {
-		eat(isToken("TClas"));
-		eat(isToken("TIdentifier"));
-		eat(isToken("TLeftBrace"));
-		eat(isToken("TPublic"));
-		eat(isToken("TStatic"));
-		eat(isToken("TVoid"));
-		eat(isToken("TMain"));
-		eat(isToken("TLeftParen"));
-		eat(isToken("TString"));
-		eat(isToken("TLeftBracket"));
-		eat(isToken("TRightBracket"));
-		eat(isToken("TIdentifier"));
-		eat(isToken("TRightParen"));
-		eat(isToken("TLeftBrace"));
+	void MainClass() {
+		eat("TClas");
+		eat("TIdentifier");
+		eat("TLeftBrace");
+		eat("TPublic");
+		eat("TStatic");
+		eat("TVoid");
+		eat("TMain");
+		eat("TLeftParen");
+		eat("TString");
+		eat("TLeftBracket");
+		eat("TRightBracket");
+		eat("TIdentifier");
+		eat("TRightParen");
+		eat("TLeftBrace");
 		Statement();
-		eat(isToken("TRightBrace"));
-		eat(isToken("TRightBrace"));
+		eat("TRightBrace");
+		eat("TRightBrace");
 	}
 
-	 void ClassDecl() {
+	void ClassDecl() {
 		ClassDeclSpec();
 		ClassDeclDef();
 	}
 
-	 void ClassDeclSpec() {
-		eat(isToken("TClas"));
-		eat(isToken("TIdentifier"));
+	void ClassDeclSpec() {
+		eat("TClas");
+		eat("TIdentifier");
 	}
 
-	 void ClassDeclDef() {
+	void ClassDeclDef() {
 		if (isToken("TLeftBrace")) {
-			eat(isToken("TLeftBrace"));
+			eat("TLeftBrace");
 
 			while (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier")) {
 				VarDecl();
 			}
-			while (eat(isToken("TPublic"))) {
+			while (eat("TPublic")) {
 				MethodDecl();
 			}
 
-			eat(isToken("TRightBrace"));
+			eat("TRightBrace");
 		}
 
 		else {
-			eat(isToken("TExtends"));
-			eat(isToken("TIdentifier"));
-			eat(isToken("TLeftBrace"));
+			eat("TExtends");
+			eat("TIdentifier");
+			eat("TLeftBrace");
 
 			while (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier")) {
 				VarDecl();
@@ -132,45 +139,45 @@ public class Parser{
 				MethodDecl();
 			}
 
-			eat(isToken("TRightBrace"));
+			eat("TRightBrace");
 		}
 	}
 
-	 //NEED TO LOOK HERE
-	 void VarDecl() {
-		 while (isToken("TComma"))
-				VarDecl();
+	//NEED TO LOOK HERE
+	void VarDecl() {
+		while (isToken("TComma"))
+			VarDecl();
 		Type();
 		VarDeclType();
-		eat(isToken("TSemi"));
+		eat("TSemi");
 	}
 
-	 void VarDeclType() {
-		eat(isToken("TIdentifier"));
-		
+	void VarDeclType() {
+		eat("TIdentifier");
+
 		if(peek("TAssign"))
 			VarDeclTypeAssign();
 	}
 
-	 void VarDeclTypeAssign() {
+	void VarDeclTypeAssign() {
 		if (isToken("TAssign")) {
-			eat(isToken("TAssign"));
+			eat("TAssign");
 			Exp();
 		}
 	}
 
-	 void MultiDecl() {
-		eat(isToken("TComma"));
-		eat(isToken("TIdentifier"));
+	void MultiDecl() {
+		eat("TComma");
+		eat("TIdentifier");
 	}
 
-	 void MethodDecl() {
+	void MethodDecl() {
 		Type();
-		eat(isToken("TIdentifier"));
-		eat(isToken("TLeftParen"));
+		eat("TIdentifier");
+		eat("TLeftParen");
 		FormalList();
-		eat(isToken("TRightParen"));
-		eat(isToken("TLeftBrace"));
+		eat("TRightParen");
+		eat("TLeftBrace");
 		while (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier"))
 			VarDecl();
 
@@ -181,61 +188,63 @@ public class Parser{
 
 	}
 
-	 void FormalList() {
+	void FormalList() {
 		if (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier")) {
 			Type();
-			eat(isToken("TIdentifier"));
+			eat("TIdentifier");
 			while (isToken("TComma"))
 				FormalRest();
 		}
 	}
 
-	 void FormalRest() {
-		eat(isToken("TComma"));
+	void FormalRest() {
+		eat("TComma");
 		Type();
-		eat(isToken("TIdentifier"));
+		eat("TIdentifier");
 	}
 
-	 void Type() {
+	void Type() {
 		if (isToken("TInt")) {
-			eat(isToken("TInt"));
+			eat("TInt");
 			IntType();
 		} else if (isToken("TBoolean"))
-			eat(isToken("TBoolean"));
+			eat("TBoolean");
 		else if (isToken("TIdentifier"))
-			eat(isToken("TIdentifier"));
+			eat("TIdentifier");
 		else
-			System.err.println("error");
+			throw new ParsingException(token);
 	}
 
-	 void IntType() {
+	void IntType() {
 		if (isToken("TLeftParen")) {
-			eat(isToken("TLeftBracket"));
-			eat(isToken("TRightBracket"));
+			eat("TLeftBracket");
+			eat("TRightBracket");
 		}
 	}
 
-	 void Statement() {
+	void Statement() {
 		if (isToken("TLeftBrace")) { // {Statement*}
-			eat(isToken("TLeftBrace"));
+			eat("TLeftBrace");
 			while (isToken("TLeftBrace") || isToken("TIf") || isToken("TDo") || isToken("TWhile") || isToken("TFor")
 					|| isToken("TSwitch") || isToken("TPrintln") || isToken("TIdentifier")
 					|| isToken("TLeftParen"))
 				Statement();
-			eat(isToken("TRightBrace"));
+			eat("TRightBrace");
 		}
-
+		else if(isToken("TRightBrace")){
+			eat("TRightBrace");
+		}
 		else if (isToken("TIf")) { // if statement
-			eat(isToken("TIf"));
-			eat(isToken("TLeftParen"));
+			eat("TIf");
+			eat("TLeftParen");
 			Exp();
-			eat(isToken("TRightPern"));
+			eat("TRightPern");
 			Statement();
 
 			while (isToken("TElse")) { // I don't like the way this is, but it's
-										// the only way I can think of doing it.
-										// Please halp
-				eat(isToken("TElse"));
+				// the only way I can think of doing it.
+				// Please halp
+				eat("TElse");
 				if (isToken("TIf")) {
 					ElseIf();
 				} else {
@@ -244,193 +253,191 @@ public class Parser{
 				}
 			}
 
-		} else if (
-
-		isToken("TDo")) {
-			eat(isToken("TDo"));
-			eat(isToken("TLeftBrace"));
+		} else if (isToken("TDo")) {
+			eat("TDo");
+			eat("TLeftBrace");
 			Statement();
-			eat(isToken("TRightBrace"));
-			eat(isToken("TWhile"));
-			eat(isToken("TLeftParen"));
+			eat("TRightBrace");
+			eat("TWhile");
+			eat("TLeftParen");
 			Exp();
-			eat(isToken("TRightParen"));
-			eat(isToken("TSemi"));
+			eat("TRightParen");
+			eat("TSemi");
 
 		} else if (isToken("TWhile")) {
-			eat(isToken("TWhile"));
-			eat(isToken("TLeftParen"));
+			eat("TWhile");
+			eat("TLeftParen");
 			Exp();
-			eat(isToken("TRightParen"));
+			eat("TRightParen");
 			Statement();
 		} else if (isToken("TFor")) {
-			eat(isToken("TFor"));
-			eat(isToken("TLeftParen"));
+			eat("TFor");
+			eat("TLeftParen");
 			InitializationStm();
-			eat(isToken("TSemi"));
+			eat("TSemi");
 			Exp();
-			eat(isToken("TSemi"));
+			eat("TSemi");
 			IncrementStm();
-			eat(isToken("TRightParen"));
+			eat("TRightParen");
 			Statement();
 		} else if (isToken("TSwitch")) {
-			eat(isToken("TSwitch"));
-			eat(isToken("TLeftParen"));
-			eat(isToken("TIdentifier"));
-			eat(isToken("TRightParen"));
-			eat(isToken("TLeftBrace"));
+			eat("TSwitch");
+			eat("TLeftParen");
+			eat("TIdentifier");
+			eat("TRightParen");
+			eat("TLeftBrace");
 			CaseList();
-			eat(isToken("TRightBrace"));
+			eat("TRightBrace");
 		} else if (isToken("TPrintln")) {
-			eat(isToken("TPrintln"));
-			eat(isToken("TLeftParen"));
+			eat("TPrintln");
+			eat("TLeftParen");
 			Exp();
-			eat(isToken("TRightParen"));
-			eat(isToken("TSemi"));
+			eat("TRightParen");
+			eat("TSemi");
 
 		} else if (isToken("TIdentifier")) {
-			eat(isToken("TIdentifier"));
+			eat("TIdentifier");
 			Assign();
 		} else if (isToken("TLeftParen")) {
-			eat(isToken("TLeftParen"));
+			eat("TLeftParen");
 			Type();
-			eat(isToken("TIdentifier"));
-			eat(isToken("TAssign"));
+			eat("TIdentifier");
+			eat("TAssign");
 			Exp();
-			eat(isToken("TRightParen"));
+			eat("TRightParen");
 			while (isToken("TComma"))
 				FormalVarExp();
-			eat(isToken("TSemi"));
+			eat("TSemi");
 
 		} else
-			System.err.println("error");
+			throw new ParsingException(token, "statment");
 	}
 
-	 void ElseIf() {
-		eat(isToken("TIf"));
-		eat(isToken("TLeftParen"));
+	void ElseIf() {
+		eat("TIf");
+		eat("TLeftParen");
 		Exp();
-		eat(isToken("TRightParen"));
+		eat("TRightParen");
 		Statement();
 	}
 
-	 void Else() {
+	void Else() {
 		Statement();
 	}
 
-	 void Assign() {
+	void Assign() {
 		if (isToken("TAssign")) {
-			eat(isToken("TAssign"));
+			eat("TAssign");
 			Exp();
 		} else if (isToken("TLeftBracket")) {
-			eat(isToken("TLeftBracket"));
+			eat("TLeftBracket");
 			Exp();
-			eat(isToken("TRightBracket"));
-			eat(isToken("TAssign"));
+			eat("TRightBracket");
+			eat("TAssign");
 			Exp();
 		} else
-			System.err.println("error");
+			throw new ParsingException(token, "assign");
 	}
 
-	 void InitializationStm()
+	void InitializationStm()
 	{
 		if(isToken("TInt") || isToken("TBoolean")){ //Type id where Type is int or boolean
 			Type();
-			eat(isToken("TIdentifier"));
+			eat("TIdentifier");
 		}
 		if(isToken("TIdentifier")) { // this one is SUUUPER tough, cause identifier token can indicate id or id[] or id[Exp] = Exp or id = Exp
-			
+
 		}
 
 	}
 
-	 void IncrementStm() {
+	void IncrementStm() {
 
 	}
 
-	 void FormalVarExp() {
-		eat(isToken("TComma"));
-		eat(isToken("TLeftParen"));
+	void FormalVarExp() {
+		eat("TComma");
+		eat("TLeftParen");
 		Type();
-		eat(isToken("TIdentifier"));
-		eat(isToken("TAssign"));
+		eat("TIdentifier");
+		eat("TAssign");
 		Exp();
-		eat(isToken("TRightParen"));
+		eat("TRightParen");
 	}
 
-	 void CaseList() {
+	void CaseList() {
 		if (isToken("TCase")) {
-			eat(isToken("TCase"));
-			eat(isToken("TColon"));
+			eat("TCase");
+			eat("TColon");
 			Exp();
 			Statement();
 			CaseList();
 		} else if (isToken("TDefault")) {
-			eat(isToken("TDefault"));
-			eat(isToken("TColon"));
+			eat("TDefault");
+			eat("TColon");
 			Statement();
 		}
 	}
 
-	 void Exp() {
+	void Exp() {
 		And();
 		Elist();
 	}
 
-	 void Elist() {
+	void Elist() {
 		if (isToken("TAnd")) {
-			eat(isToken("TAnd"));
+			eat("TAnd");
 			And();
 			Elist();
 		}
 	}
 
-	 void And() {
+	void And() {
 		Less();
 		Alist();
 	}
 
-	 void Alist() {
+	void Alist() {
 		if (isToken("TLessThan")) {
-			eat(isToken("TLessThan"));
+			eat("TLessThan");
 			Less();
 			Alist();
 		}
 	}
 
-	 void Less() {
+	void Less() {
 		Term();
 		Llist();
 	}
 
-	 void Llist() {
+	void Llist() {
 		if (isToken("TPlus")) {
-			eat(isToken("TPlus"));
+			eat("TPlus");
 			Term();
 			Llist();
 		} else if (isToken("TMinus")) {
-			eat(isToken("TMinus"));
+			eat("TMinus");
 			Term();
 			Llist();
 		}
 	}
 
-	 void Term() {
+	void Term() {
 		Not();
 		Tlist();
 	}
 
-	 void Tlist() {
+	void Tlist() {
 		if (isToken("TMult")) {
-			eat(isToken("TMult"));
+			eat("TMult");
 			Not();
 			Tlist();
 		}
 	}
 
-	 void Not() {
+	void Not() {
 		if (isToken("TNot")) {
-			eat(isToken("TNot"));
+			eat("TNot");
 			Not();
 		} else if (isToken("TIntNum") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier")
 				|| isToken("TThis") || isToken("TNew") || isToken("TLeftParen")) {
@@ -441,31 +448,31 @@ public class Parser{
 		{
 			///////////////////
 		} else
-			System.err.println("Error");
+			throw new ParsingException(token, "not");
 	}
 
-	 void DotArray() {
+	void DotArray() {
 		if (isToken("TDot")) {
-			eat(isToken("TDot"));
+			eat("TDot");
 			Member();
 		} else if (isToken("TLeftBracket")) {
-			eat(isToken("TLeftBracket"));
+			eat("TLeftBracket");
 			Exp();
-			eat(isToken("TRightBracket"));
+			eat("TRightBracket");
 		}
 	}
 
-	 void Member() {
+	void Member() {
 		if (isToken("TLength")) {
-			eat(isToken("TLength"));
+			eat("TLength");
 		} else if (isToken("TIdentifier")) {
-			eat(isToken("TIdentifier"));
-			eat(isToken("TLeftParen"));
+			eat("TIdentifier");
+			eat("TLeftParen");
 			ExpList();
 		}
 	}
 
-	 void ExpList() {
+	void ExpList() {
 		if (isToken("TNumber") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier") || isToken("TThis")
 				|| isToken("TNew") || isToken("TLeftParen") || isToken("TNot")) {
 			Exp();
@@ -475,43 +482,43 @@ public class Parser{
 		}
 	}
 
-	 void ExpRest() {
-		eat(isToken("TComma"));
+	void ExpRest() {
+		eat("TComma");
 		Exp();
 	}
 
-	 void Factor() {
+	void Factor() {
 		if (isToken("TIntNum"))
-			eat(isToken("TIntNum"));
+			eat("TIntNum");
 		else if (isToken("TTrue"))
-			eat(isToken("TTrue"));
+			eat("TTrue");
 		else if (isToken("TFalse"))
-			eat(isToken("TFalse"));
+			eat("TFalse");
 		else if (isToken("TIdentifier"))
-			eat(isToken("TIdentifier"));
+			eat("TIdentifier");
 		else if (isToken("TThis"))
-			eat(isToken("TThis"));
+			eat("TThis");
 		else if (isToken("TNew")) {
-			eat(isToken("TNew"));
+			eat("TNew");
 			New();
 		} else if (isToken("TLeftParen")) {
-			eat(isToken("TLeftParen"));
+			eat("TLeftParen");
 			Exp();
-			eat(isToken("TRightParen"));
+			eat("TRightParen");
 		} else
-			System.err.println("Error");
+			throw new ParsingException(token, "factor");
 	}
 
-	 void New() {
+	void New() {
 		if (isToken("TInt")) {
-			eat(isToken("TInt"));
-			eat(isToken("TLeftBracket"));
+			eat("TInt");
+			eat("TLeftBracket");
 			Exp();
-			eat(isToken("TRightBracket"));
+			eat("TRightBracket");
 		} else if (isToken("TIdentifier")) {
-			eat(isToken("TIdentifier"));
-			eat(isToken("TLeftParen"));
-			eat(isToken("TRightParen"));
+			eat("TIdentifier");
+			eat("TLeftParen");
+			eat("TRightParen");
 		}
 	}
 }
