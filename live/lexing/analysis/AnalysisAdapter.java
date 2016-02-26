@@ -119,6 +119,11 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseTPrintln(TPrintln node)
+    {
+        defaultCase(node);
+    }
+
     public void caseTBoolean(TBoolean node)
     {
         defaultCase(node);
@@ -184,7 +189,17 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseTLength(TLength node)
+    {
+        defaultCase(node);
+    }
+
     public void caseTAssign(TAssign node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTLessThan(TLessThan node)
     {
         defaultCase(node);
     }
@@ -280,6 +295,11 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseTComma(TComma node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTColon(TColon node)
     {
         defaultCase(node);
     }
