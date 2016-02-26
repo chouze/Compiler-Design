@@ -1,7 +1,6 @@
 package parsing;
 
 import lexing.lexer.*;
-import lexing.node.*;
 
 import java.io.*;
 
@@ -12,32 +11,45 @@ import java.io.*;
  * 		InitializationStm
  *  	IncrementStm		
  *  	Not --> Exp DotArray* 
- *  	need TColon token
- *  	need TLessThan token
- *  	need TLength token
  */
-class Parser {
-	static Lexer lexer;
-	static Object token;
+public class Parser{
+	 Lexer lexer;
+	 Object token;
 
-	public static void main(String[] args) {
+	public Parser()
+	{
 		lexer = new Lexer(new PushbackReader(new InputStreamReader(System.in), 1024));
 		token = null;
-		try {
-			while (!(token instanceof EOF)) {
-				token = lexer.next();
-				System.out.println(token.getClass() + ": " + token);
-			}
-		} catch (LexerException le) {
-			System.err.println(le);
-		} catch (IOException ioe) {
-			System.err.println(ioe);
-		}
+		try{
+			token = lexer.next();
+			Program();
+			
+		}catch(LexerException le) {System.err.println(le);}
+		 catch(IOException ioe) {System.err.println(ioe);}
 	}
 
-	boolean eat(boolean equals) {
+	boolean peek(String tokenType)
+	{
+		try {
+			return lexer.peek().getClass().getName().equals("lexing.node." + tokenType);
+		} catch (LexerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	 boolean eat(boolean equals) {
 		if (equals) {
 			try {
+				while(lexer.peek().getClass().getName().equals("lexing.node.TSpace") ||
+						lexer.peek().getClass().getName().equals("lexer.node.TDoubleSlashComment"))
+				{
+					token = lexer.next();
+				}
+				
 				token = lexer.next();
 				return true;
 			} catch (LexerException e) {
@@ -53,18 +65,18 @@ class Parser {
 		}
 	}
 
-	boolean isToken(String tokenType) {
-		return token.getClass().equals("class lexing.node." + tokenType);
+	 boolean isToken(String tokenType) {
+		return token.getClass().getName().equals("lexing.node." + tokenType);
 	}
 
-	void Program() {
+	void Program(){
 		MainClass();
 		while (isToken("TClas")) {
 			ClassDecl();
 		}
 	}
 
-	void MainClass() {
+	 void MainClass() {
 		eat(isToken("TClas"));
 		eat(isToken("TIdentifier"));
 		eat(isToken("TLeftBrace"));
@@ -78,24 +90,23 @@ class Parser {
 		eat(isToken("TRightBracket"));
 		eat(isToken("TIdentifier"));
 		eat(isToken("TRightParen"));
-		eat(isToken("TLeftbrace"));
-		eat(isToken("TClas"));
+		eat(isToken("TLeftBrace"));
 		Statement();
 		eat(isToken("TRightBrace"));
 		eat(isToken("TRightBrace"));
 	}
 
-	void ClassDecl() {
+	 void ClassDecl() {
 		ClassDeclSpec();
 		ClassDeclDef();
 	}
 
-	void ClassDeclSpec() {
+	 void ClassDeclSpec() {
 		eat(isToken("TClas"));
 		eat(isToken("TIdentifier"));
 	}
 
-	void ClassDeclDef() {
+	 void ClassDeclDef() {
 		if (isToken("TLeftBrace")) {
 			eat(isToken("TLeftBrace"));
 
@@ -125,32 +136,35 @@ class Parser {
 		}
 	}
 
-	void VarDecl() {
+	 //NEED TO LOOK HERE
+	 void VarDecl() {
+		 while (isToken("TComma"))
+				VarDecl();
 		Type();
 		VarDeclType();
-		while (isToken("TComma"))
-			MultiDecl();
 		eat(isToken("TSemi"));
 	}
 
-	void VarDeclType() {
+	 void VarDeclType() {
 		eat(isToken("TIdentifier"));
+		
+		if(peek("TAssign"))
+			VarDeclTypeAssign();
 	}
 
-	void VarDeclTypeAssign() {
+	 void VarDeclTypeAssign() {
 		if (isToken("TAssign")) {
 			eat(isToken("TAssign"));
 			Exp();
 		}
 	}
 
-	void MultiDecl() {
+	 void MultiDecl() {
 		eat(isToken("TComma"));
 		eat(isToken("TIdentifier"));
 	}
 
-	void MethodDecl() {
-		eat(isToken("TPublic"));
+	 void MethodDecl() {
 		Type();
 		eat(isToken("TIdentifier"));
 		eat(isToken("TLeftParen"));
@@ -161,13 +175,13 @@ class Parser {
 			VarDecl();
 
 		while (isToken("TLeftBrace") || isToken("TIf") || isToken("TDo") || isToken("TWhile") || isToken("TFor")
-				|| isToken("TSwitch") || isToken("RESERVED FOR SYSTEM.OUT.PRINTLN") || isToken("TIdentifier")
-				|| isToken("TLeftParen")) // CHECK SYSTEM.OUT.PRINTLN!!!!!!
+				|| isToken("TSwitch") || isToken("TPrintln") || isToken("TIdentifier")
+				|| isToken("TLeftParen"))
 			Statement();
 
 	}
 
-	void FormalList() {
+	 void FormalList() {
 		if (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier")) {
 			Type();
 			eat(isToken("TIdentifier"));
@@ -176,13 +190,13 @@ class Parser {
 		}
 	}
 
-	void FormalRest() {
+	 void FormalRest() {
 		eat(isToken("TComma"));
 		Type();
 		eat(isToken("TIdentifier"));
 	}
 
-	void Type() {
+	 void Type() {
 		if (isToken("TInt")) {
 			eat(isToken("TInt"));
 			IntType();
@@ -194,19 +208,19 @@ class Parser {
 			System.err.println("error");
 	}
 
-	void IntType() {
+	 void IntType() {
 		if (isToken("TLeftParen")) {
 			eat(isToken("TLeftBracket"));
 			eat(isToken("TRightBracket"));
 		}
 	}
 
-	void Statement() {
+	 void Statement() {
 		if (isToken("TLeftBrace")) { // {Statement*}
 			eat(isToken("TLeftBrace"));
 			while (isToken("TLeftBrace") || isToken("TIf") || isToken("TDo") || isToken("TWhile") || isToken("TFor")
-					|| isToken("TSwitch") || isToken("RESERVED FOR SYSTEM.OUT.PRINTLN") || isToken("TIdentifier")
-					|| isToken("TLeftParen")) // CHECK SYSTEM.OUT.PRINTLN!!!!!!
+					|| isToken("TSwitch") || isToken("TPrintln") || isToken("TIdentifier")
+					|| isToken("TLeftParen"))
 				Statement();
 			eat(isToken("TRightBrace"));
 		}
@@ -257,21 +271,21 @@ class Parser {
 			Exp();
 			eat(isToken("TSemi"));
 			IncrementStm();
-			eat(isToken("TRightPern"));
+			eat(isToken("TRightParen"));
 			Statement();
 		} else if (isToken("TSwitch")) {
 			eat(isToken("TSwitch"));
 			eat(isToken("TLeftParen"));
 			eat(isToken("TIdentifier"));
-			eat(isToken("TRightPern"));
+			eat(isToken("TRightParen"));
 			eat(isToken("TLeftBrace"));
 			CaseList();
 			eat(isToken("TRightBrace"));
-		} else if (isToken("TSYSTEM.OUT.PRINTLN")) { // system.out.println
-			eat(isToken("System.our.ptintln token"));
+		} else if (isToken("TPrintln")) {
+			eat(isToken("TPrintln"));
 			eat(isToken("TLeftParen"));
 			Exp();
-			eat(isToken("TRightPern"));
+			eat(isToken("TRightParen"));
 			eat(isToken("TSemi"));
 
 		} else if (isToken("TIdentifier")) {
@@ -292,7 +306,7 @@ class Parser {
 			System.err.println("error");
 	}
 
-	void ElseIf() {
+	 void ElseIf() {
 		eat(isToken("TIf"));
 		eat(isToken("TLeftParen"));
 		Exp();
@@ -300,11 +314,11 @@ class Parser {
 		Statement();
 	}
 
-	void Else() {
+	 void Else() {
 		Statement();
 	}
 
-	void Assign() {
+	 void Assign() {
 		if (isToken("TAssign")) {
 			eat(isToken("TAssign"));
 			Exp();
@@ -318,7 +332,7 @@ class Parser {
 			System.err.println("error");
 	}
 
-	void InitializationStm()
+	 void InitializationStm()
 	{
 		if(isToken("TInt") || isToken("TBoolean")){ //Type id where Type is int or boolean
 			Type();
@@ -330,21 +344,21 @@ class Parser {
 
 	}
 
-	void IncrementStm() {
+	 void IncrementStm() {
 
 	}
 
-	void FormalVarExp() {
+	 void FormalVarExp() {
 		eat(isToken("TComma"));
 		eat(isToken("TLeftParen"));
 		Type();
 		eat(isToken("TIdentifier"));
 		eat(isToken("TAssign"));
 		Exp();
-		eat(isToken("TRightPern"));
+		eat(isToken("TRightParen"));
 	}
 
-	void CaseList() {
+	 void CaseList() {
 		if (isToken("TCase")) {
 			eat(isToken("TCase"));
 			eat(isToken("TColon"));
@@ -358,12 +372,12 @@ class Parser {
 		}
 	}
 
-	void Exp() {
+	 void Exp() {
 		And();
 		Elist();
 	}
 
-	void Elist() {
+	 void Elist() {
 		if (isToken("TAnd")) {
 			eat(isToken("TAnd"));
 			And();
@@ -371,12 +385,12 @@ class Parser {
 		}
 	}
 
-	void And() {
+	 void And() {
 		Less();
 		Alist();
 	}
 
-	void Alist() {
+	 void Alist() {
 		if (isToken("TLessThan")) {
 			eat(isToken("TLessThan"));
 			Less();
@@ -384,12 +398,12 @@ class Parser {
 		}
 	}
 
-	void Less() {
-		Less();
+	 void Less() {
+		Term();
 		Llist();
 	}
 
-	void Llist() {
+	 void Llist() {
 		if (isToken("TPlus")) {
 			eat(isToken("TPlus"));
 			Term();
@@ -401,12 +415,12 @@ class Parser {
 		}
 	}
 
-	void Term() {
+	 void Term() {
 		Not();
 		Tlist();
 	}
 
-	void Tlist() {
+	 void Tlist() {
 		if (isToken("TMult")) {
 			eat(isToken("TMult"));
 			Not();
@@ -414,11 +428,11 @@ class Parser {
 		}
 	}
 
-	void Not() {
+	 void Not() {
 		if (isToken("TNot")) {
 			eat(isToken("TNot"));
 			Not();
-		} else if (isToken("TNumber") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier")
+		} else if (isToken("TIntNum") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier")
 				|| isToken("TThis") || isToken("TNew") || isToken("TLeftParen")) {
 			Factor();
 			while (isToken("TDot") || isToken("LeftBracket"))
@@ -430,7 +444,7 @@ class Parser {
 			System.err.println("Error");
 	}
 
-	void DotArray() {
+	 void DotArray() {
 		if (isToken("TDot")) {
 			eat(isToken("TDot"));
 			Member();
@@ -441,7 +455,7 @@ class Parser {
 		}
 	}
 
-	void Member() {
+	 void Member() {
 		if (isToken("TLength")) {
 			eat(isToken("TLength"));
 		} else if (isToken("TIdentifier")) {
@@ -451,7 +465,7 @@ class Parser {
 		}
 	}
 
-	void ExpList() {
+	 void ExpList() {
 		if (isToken("TNumber") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier") || isToken("TThis")
 				|| isToken("TNew") || isToken("TLeftParen") || isToken("TNot")) {
 			Exp();
@@ -461,14 +475,14 @@ class Parser {
 		}
 	}
 
-	void ExpRest() {
+	 void ExpRest() {
 		eat(isToken("TComma"));
 		Exp();
 	}
 
-	void Factor() {
-		if (isToken("TNumber"))
-			eat(isToken("TNumber"));
+	 void Factor() {
+		if (isToken("TIntNum"))
+			eat(isToken("TIntNum"));
 		else if (isToken("TTrue"))
 			eat(isToken("TTrue"));
 		else if (isToken("TFalse"))
@@ -488,7 +502,7 @@ class Parser {
 			System.err.println("Error");
 	}
 
-	void New() {
+	 void New() {
 		if (isToken("TInt")) {
 			eat(isToken("TInt"));
 			eat(isToken("TLeftBracket"));
