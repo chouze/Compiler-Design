@@ -31,4 +31,8 @@ class AddNum
 
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/master
