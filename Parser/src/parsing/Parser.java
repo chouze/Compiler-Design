@@ -25,7 +25,7 @@ public class Parser{
 				token = lexer.next();
 			}while (isToken("TSpace")|| isToken("TDoubleSlashComment"));
 			Program();
-
+			//VarDecl();
 		}catch(LexerException le) {System.err.println(le);}
 		catch(IOException ioe) {System.err.println(ioe);}
 	}
@@ -164,7 +164,8 @@ public class Parser{
 			eat("TAssign");
 			Exp();
 		}
-		else if (isToken("TComma")){
+		
+		if (isToken("TComma")){
 			MultiDecl();
 		}
 	}
