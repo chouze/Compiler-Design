@@ -54,7 +54,6 @@ public class Parser{
 				do{
 					nextToken = lexer.next();
 				}while (isToken(nextToken, "TSpace") || isToken(nextToken, "TDoubleSlashComment"));
-				System.out.println(nextToken);
 				return true;
 				
 				
