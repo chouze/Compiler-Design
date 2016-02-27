@@ -4,6 +4,8 @@ import lexing.lexer.*;
 import lexing.node.Token;
 import java.io.*;
 
+
+
 /*
  * need to work on: 
  * 		statement -> else/elseif
@@ -13,8 +15,9 @@ import java.io.*;
  *  	Not --> Exp DotArray* 
  */
 public class Parser{
+	public static String space = "TSpace", comment = "TDoubleSlashComment", id = "TIdentifier", clas = "TClas", semi = "TSemi";
 	Lexer lexer;
-	Token token;
+	Token token, nextToken;
 
 	public Parser()
 	{
@@ -23,7 +26,12 @@ public class Parser{
 		try{
 			do{
 				token = lexer.next();
-			}while (isToken("TSpace")|| isToken("TDoubleSlashComment"));
+			}while (isToken("TSpace") || isToken("TDoubleSlashComment"));
+			
+			do {
+				nextToken = lexer.next();
+			}while(isToken(nextToken, "TSpace") || isToken(nextToken, "TDoubleSlashComment"));
+			
 			Program();
 			//VarDecl();
 		}catch(LexerException le) {System.err.println(le);}
@@ -32,29 +40,24 @@ public class Parser{
 
 	boolean peek(String tokenType)
 	{
-		try {
-			return lexer.peek().getClass().getName().equals("lexing.node." + tokenType);
-		} catch (LexerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+		return nextToken.getClass().getName().equals("lexing.node." + tokenType);
 	}
 
 	boolean eat(String name) {
+
 		try {
 			if (isToken(name)) {
 				System.out.println("Eat token: " + token.getClass().getName() + " " + token.toString() + " om nom nom");
-
-
+				token = nextToken;
+				
+				
 				do{
-					token = lexer.next();
-				}while (isToken("TSpace")|| isToken("TDoubleSlashComment"));
-
+					nextToken = lexer.next();
+				}while (isToken(nextToken, "TSpace") || isToken(nextToken, "TDoubleSlashComment"));
+				System.out.println(nextToken);
 				return true;
+				
+				
 			} else {
 				throw new ParsingException(token, name);
 			}
@@ -77,7 +80,7 @@ public class Parser{
 	}
 
 	boolean isToken(Token t, String tokenType){
-		return t.getClass().getName().equals(tokenType);
+		return t.getClass().getName().equals("lexing.node." + tokenType);
 	}
 
 	void Program(){
@@ -102,6 +105,9 @@ public class Parser{
 		eat("TIdentifier");
 		eat("TRightParen");
 		eat("TLeftBrace");
+		while (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier")) {
+			VarDecl();
+		}
 		Statement();
 		eat("TRightBrace");
 		eat("TRightBrace");
@@ -124,7 +130,7 @@ public class Parser{
 			while (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier")) {
 				VarDecl();
 			}
-			while (eat("TPublic")) {
+			while (isToken("TPublic")) {
 				MethodDecl();
 			}
 
@@ -139,7 +145,8 @@ public class Parser{
 			while (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier")) {
 				VarDecl();
 			}
-			while (isToken("TPublic")) {
+			while (eat("TPublic")) {
+				
 				MethodDecl();
 			}
 
@@ -164,7 +171,7 @@ public class Parser{
 			eat("TAssign");
 			Exp();
 		}
-		
+
 		if (isToken("TComma")){
 			MultiDecl();
 		}
@@ -177,14 +184,17 @@ public class Parser{
 	}
 
 	void MethodDecl() {
+		eat("TPublic");
 		Type();
 		eat("TIdentifier");
 		eat("TLeftParen");
 		FormalList();
 		eat("TRightParen");
 		eat("TLeftBrace");
-		while (isToken("TInt") || isToken("TBoolean") || isToken("TIdentifier"))
+		while (isToken("TInt") || isToken("TBoolean") || (isToken("TIdentifier") && isToken(nextToken, "TIdentifier"))){
 			VarDecl();
+		}
+			
 
 		while (isToken("TLeftBrace") || isToken("TIf") || isToken("TDo") || isToken("TWhile") || isToken("TFor")
 				|| isToken("TSwitch") || isToken("TPrintln") || isToken("TIdentifier")
@@ -232,18 +242,15 @@ public class Parser{
 			eat("TLeftBrace");
 			while (isToken("TLeftBrace") || isToken("TIf") || isToken("TDo") || isToken("TWhile") || isToken("TFor")
 					|| isToken("TSwitch") || isToken("TPrintln") || isToken("TIdentifier")
-					|| isToken("TLeftParen"))
+					|| isToken("TLeftParen") || isToken("TReturn"))
 				Statement();
-			eat("TRightBrace");
-		}
-		else if(isToken("TRightBrace")){
 			eat("TRightBrace");
 		}
 		else if (isToken("TIf")) { // if statement
 			eat("TIf");
 			eat("TLeftParen");
 			Exp();
-			eat("TRightPern");
+			eat("TRightParen");
 			Statement();
 
 			while (isToken("TElse")) { // I don't like the way this is, but it's
@@ -303,6 +310,7 @@ public class Parser{
 		} else if (isToken("TIdentifier")) {
 			eat("TIdentifier");
 			Assign();
+			eat("TSemi");
 		} else if (isToken("TLeftParen")) {
 			eat("TLeftParen");
 			Type();
@@ -314,8 +322,20 @@ public class Parser{
 				FormalVarExp();
 			eat("TSemi");
 
-		} else
+		} 
+		else if (isToken("TReturn")){
+			eat("TReturn");
+			eat(id);
+			eat(semi);
+		}
+		else if(isToken("TRightBrace")){
+			//Don't do anything
+		}
+		else{
 			throw new ParsingException(token, "statment");
+		}
+			
+
 	}
 
 	void ElseIf() {
@@ -443,16 +463,22 @@ public class Parser{
 		if (isToken("TNot")) {
 			eat("TNot");
 			Not();
-		} else if (isToken("TIntNum") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier")
+		} 
+		Factor();
+		while (isToken("TDot") || isToken("LeftBracket")){
+			DotArray();
+		}
+
+		/*else if (isToken("TIntNum") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier")
 				|| isToken("TThis") || isToken("TNew") || isToken("TLeftParen")) {
 			Factor();
 			while (isToken("TDot") || isToken("LeftBracket"))
 				DotArray();
-		} else if (false) // Not --> Exp DotArray
-		{
-			///////////////////
-		} else
-			throw new ParsingException(token, "not");
+		}else{
+
+			//throw new ParsingException(token, "not");
+		}*/
+
 	}
 
 	void DotArray() {
@@ -473,11 +499,12 @@ public class Parser{
 			eat("TIdentifier");
 			eat("TLeftParen");
 			ExpList();
+			eat("TRightParen");
 		}
 	}
 
 	void ExpList() {
-		if (isToken("TNumber") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier") || isToken("TThis")
+		if (isToken("TIntNum") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier") || isToken("TThis")
 				|| isToken("TNew") || isToken("TLeftParen") || isToken("TNot")) {
 			Exp();
 			while (isToken("TComma")) {

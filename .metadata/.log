@@ -1921,3 +1921,8 @@ Java Model Exception: Java Model Status [<default> [in <project root> [in Parser
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2016-02-26 19:34:24.659
 !MESSAGE <default> [in <project root> [in Parser]] does not exist
+
+!ENTRY org.eclipse.core.resources 2 2 2016-02-26 19:58:17.735
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2016-02-26 19:58:17.735
+!MESSAGE The project description file (.project) for 'RemoteSystemsTempFiles' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.

@@ -1,0 +1,35 @@
+class Test
+{
+    public static void main ( String [] args )
+    {
+	//This is a comment
+        AddNum an = new AddNum().addNumber(10, 9);
+    }
+}
+
+class AddNum
+{
+    public int addNumber( int a, int b)
+    {
+        int total, firstInt, secondInt;
+	{
+
+        	total = 0;
+        	firstInt = a;
+        	secondInt = b;
+	
+        	do
+        	{
+{
+            	total = firstInt + secondInt;
+            	System.out.println(total);
+}
+        	}
+        	while ( total < 100);
+
+            	return total;
+		
+	}
+    }
+}
+
