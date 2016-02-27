@@ -17,7 +17,7 @@ import java.io.*;
 public class Parser{
 	public static String space = "TSpace", comment = "TDoubleSlashComment", id = "TIdentifier", clas = "TClas", semi = "TSemi";
 	Lexer lexer;
-	Token token, nextToken;
+	Token token, lastToken, nextToken;
 
 	public Parser()
 	{
@@ -27,11 +27,11 @@ public class Parser{
 			do{
 				token = lexer.next();
 			}while (isToken("TSpace") || isToken("TDoubleSlashComment"));
-			
-			do {
-				nextToken = lexer.next();
-			}while(isToken(nextToken, "TSpace") || isToken(nextToken, "TDoubleSlashComment"));
-			
+
+			//do {
+			//	nextToken = lexer.next();
+			//}while(isToken(nextToken, "TSpace") || isToken(nextToken, "TDoubleSlashComment"));
+
 			Program();
 			//VarDecl();
 		}catch(LexerException le) {System.err.println(le);}
@@ -40,7 +40,24 @@ public class Parser{
 
 	boolean peek(String tokenType)
 	{
+		try{
+			do{
+				nextToken = lexer.next();
+			}while (isToken(nextToken, "TSpace") || isToken(nextToken, "TDoubleSlashComment"));
+		}
+		catch (LexerException | IOException e) {
+			e.printStackTrace();
+		}
 		return nextToken.getClass().getName().equals("lexing.node." + tokenType);
+	}
+
+	void unEat(){
+		if(lastToken != null){
+			nextToken = token;
+			token = lastToken;
+			lastToken = null;
+		}
+
 	}
 
 	boolean eat(String name) {
@@ -48,21 +65,23 @@ public class Parser{
 		try {
 			if (isToken(name)) {
 				System.out.println("Eat token: " + token.getClass().getName() + " " + token.toString() + " om nom nom");
-				token = nextToken;
-				
-				
-				do{
-					nextToken = lexer.next();
-				}while (isToken(nextToken, "TSpace") || isToken(nextToken, "TDoubleSlashComment"));
-				System.out.println(nextToken);
-				return true;
-				
-				
+				if (nextToken != null){
+					lastToken = token;
+					token = nextToken;
+					nextToken = null;
+					return true;
+				}
+				else{
+					do{
+						token = lexer.next();
+
+					}while (isToken("TSpace") || isToken("TDoubleSlashComment"));
+					return true;
+				}
+
 			} else {
 				throw new ParsingException(token, name);
 			}
-
-
 
 		} catch (LexerException e) {
 			e.printStackTrace();
@@ -146,7 +165,7 @@ public class Parser{
 				VarDecl();
 			}
 			while (eat("TPublic")) {
-				
+
 				MethodDecl();
 			}
 
@@ -191,16 +210,16 @@ public class Parser{
 		FormalList();
 		eat("TRightParen");
 		eat("TLeftBrace");
-		while (isToken("TInt") || isToken("TBoolean") || (isToken("TIdentifier") && isToken(nextToken, "TIdentifier"))){
+		while (isToken("TInt") || isToken("TBoolean") || (isToken("TIdentifier") && peek("TIdentifier"))){
 			VarDecl();
 		}
-			
+
 
 		while (isToken("TLeftBrace") || isToken("TIf") || isToken("TDo") || isToken("TWhile") || isToken("TFor")
 				|| isToken("TSwitch") || isToken("TPrintln") || isToken("TIdentifier")
 				|| isToken("TLeftParen"))
 			Statement();
-
+		eat("TRightBrace");
 	}
 
 	void FormalList() {
@@ -334,7 +353,7 @@ public class Parser{
 		else{
 			throw new ParsingException(token, "statment");
 		}
-			
+
 
 	}
 
