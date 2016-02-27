@@ -21,7 +21,9 @@ public class Parser{
 		lexer = new Lexer(new PushbackReader(new InputStreamReader(System.in), 1024));
 		token = null;
 		try{
-			token = lexer.next();
+			do{
+				token = lexer.next();
+			}while (isToken("TSpace")|| isToken("TDoubleSlashComment"));
 			Program();
 
 		}catch(LexerException le) {System.err.println(le);}
@@ -44,20 +46,21 @@ public class Parser{
 
 	boolean eat(String name) {
 		try {
-			while(isToken("TSpace")|| isToken("TDoubleSlashComment")){
-				token = lexer.next();
-			}
-			
-			
 			if (isToken(name)) {
 				System.out.println("Eat token: " + token.getClass().getName() + " " + token.toString() + " om nom nom");
-				token = lexer.next();
+
+
+				do{
+					token = lexer.next();
+				}while (isToken("TSpace")|| isToken("TDoubleSlashComment"));
+
 				return true;
 			} else {
 				throw new ParsingException(token, name);
 			}
 
-			
+
+
 		} catch (LexerException e) {
 			e.printStackTrace();
 			return false;
@@ -67,6 +70,7 @@ public class Parser{
 		}
 
 	}
+
 
 	boolean isToken(String tokenType) {
 		return token.getClass().getName().equals("lexing.node." + tokenType);
@@ -145,8 +149,6 @@ public class Parser{
 
 	//NEED TO LOOK HERE
 	void VarDecl() {
-		while (isToken("TComma"))
-			VarDecl();
 		Type();
 		VarDeclType();
 		eat("TSemi");
@@ -154,21 +156,23 @@ public class Parser{
 
 	void VarDeclType() {
 		eat("TIdentifier");
-
-		if(peek("TAssign"))
-			VarDeclTypeAssign();
+		VarDeclTypeAssign();
 	}
 
 	void VarDeclTypeAssign() {
-		if (isToken("TAssign")) {
+		if (isToken("TAssign")){
 			eat("TAssign");
 			Exp();
+		}
+		else if (isToken("TComma")){
+			MultiDecl();
 		}
 	}
 
 	void MultiDecl() {
 		eat("TComma");
 		eat("TIdentifier");
+		VarDeclTypeAssign();
 	}
 
 	void MethodDecl() {
@@ -348,7 +352,6 @@ public class Parser{
 		if(isToken("TIdentifier")) { // this one is SUUUPER tough, cause identifier token can indicate id or id[] or id[Exp] = Exp or id = Exp
 
 		}
-
 	}
 
 	void IncrementStm() {

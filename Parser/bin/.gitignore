@@ -1,6 +1,1 @@
-/lexing/
 /parsing/
-*.class
-*.metadata
-*.recommenders
-RemoteSystemsTempFiles
