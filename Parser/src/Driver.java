@@ -1,3 +1,6 @@
+/**
+ * @author Christopher Houze, David Carlin, Clifford Black
+ */
 import parsing.Parser;
 
 
