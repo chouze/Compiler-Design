@@ -39,6 +39,7 @@ public class Parser{
 			}while (isToken(tspace) || isToken(tdscomment));
 
 			Program();
+			
 
 		}catch(LexerException le) {System.err.println(le);}
 		catch(IOException ioe) {System.err.println(ioe);}
@@ -348,7 +349,10 @@ public class Parser{
 		} else if (isToken(tprintln)) {
 			eat(tprintln);
 			eat(tleftparen);
-			Exp();
+			if(!isToken(trightparen))
+			{
+				Exp();
+			}
 			eat(trightparen);
 			eat(tsemi);
 
@@ -406,13 +410,8 @@ public class Parser{
 
 	void InitializationStm()
 	{
-		if(isToken(tint) || isToken(tboolean)){
-			Type();
-			eat(tid);
-			eat(tassign);
-			Exp();
-		}
-		else if(isToken(tid)) 
+
+		if(isToken(tid)) 
 		{ 
 			if(peek(tleftbracket))
 			{
@@ -609,6 +608,10 @@ public class Parser{
 			eat(tleftparen);
 			Exp();
 			eat(trightparen);
+		}
+		else
+		{
+			throw new ParsingException(token, "factor");
 		}
 	}
 
