@@ -72,9 +72,7 @@ class AddNum
 			secondInt = b;
 
 			x = a && b < c + d * !e.f()[];
-
-			return total;
-
 		}
+		return total;
 	}
 }
