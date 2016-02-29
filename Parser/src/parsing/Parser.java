@@ -450,11 +450,8 @@ public class Parser{
 	}
 
 	void Exp() {
-		if(!isToken("TRightParen")){
 			And();
 			Elist();
-		}
-
 	}
 
 	void Elist() {
@@ -516,7 +513,7 @@ public class Parser{
 		else
 		{
 			Factor();
-			while (isToken("TDot") || isToken("LeftBracket")){
+			while (isToken("TDot") || isToken("TLeftBracket")){
 				DotArray();
 			}
 
@@ -590,8 +587,7 @@ public class Parser{
 			eat("TLeftParen");
 			Exp();
 			eat("TRightParen");
-		} else
-			throw new ParsingException(token, "factor");
+		}
 	}
 
 	void New() {

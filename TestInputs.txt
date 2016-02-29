@@ -41,10 +41,12 @@ class AddNum
 			}
 			else if(i < 10)
 				System.out.println(i < 10);
+		}
+				
 
 			return total;
 
-		}
+		
 	}
 }
 
@@ -54,6 +56,93 @@ class AddNum
 class Test
 {
 	public static void main ( String [] args )
+	{
+		//This is a comment
+		int i = new AddNum().addNumber(10, 9);
+	}
+}
+
+class AddNum
+{
+	public int addNumber( int a, int b)
+	{
+		int total, firstInt, secondInt;
+		{
+
+			total = 0;
+			firstInt = a;
+			secondInt = b;
+
+			x = a && b < c + d * !e.f()[];
+		}
+		return total;
+	}
+}
+
+--------------------------------------------------------------------
+** THIS SHOWS INCORRECT SYNTAX *It uses [] instead of {} for a statement.
+
+class Test
+{
+	public static void main ( String [] args )
+	[
+		//This is a comment
+		int i = new AddNum().addNumber(10, 9);
+	]
+}
+
+class AddNum
+{
+	public int addNumber( int a, int b)
+	{
+		int total, firstInt, secondInt;
+		{
+
+			total = 0;
+			firstInt = a;
+			secondInt = b;
+
+			x = a && b < c + d * !e.f()[];
+		}
+		return total;
+	}
+}
+
+--------------------------------------------------------------------
+** THIS SHOWS INCORRECT SYNTAX *It does not use the modifier public.
+
+class Test
+{
+	public static void main ( String [] args )
+	{
+		//This is a comment
+		int i = new AddNum().addNumber(10, 9);
+	}
+}
+
+class AddNum
+{
+	int addNumber( int a, int b)
+	{
+		int total, firstInt, secondInt;
+		{
+
+			total = 0;
+			firstInt = a;
+			secondInt = b;
+
+			x = a && b < c + d * !e.f()[];
+		}
+		return total;
+	}
+}
+
+--------------------------------------------------------------------
+** THIS SHOWS INCORRECT SYNTAX *It does not use String[] id in the main class.
+
+class Test
+{
+	public static void main ()
 	{
 		//This is a comment
 		int i = new AddNum().addNumber(10, 9);
