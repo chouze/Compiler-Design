@@ -1,3 +1,6 @@
+/**
+ * @author Christopher Houze, David Carlin, Clifford Black
+ */
 package parsing;
 import lexing.node.Token;
 

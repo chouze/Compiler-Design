@@ -1,3 +1,6 @@
+/**
+ * @author Christopher Houze, David Carlin, Clifford Black
+ */
 package parsing;
 
 import lexing.lexer.*;
@@ -8,7 +11,7 @@ import java.io.*;
 
 /*
  * need to work on: 
-		
+
  *  	Not --> Exp DotArray* 
  */
 public class Parser{
@@ -214,7 +217,7 @@ public class Parser{
 		Exp();
 		eat("TSemi");
 		eat("TRightBrace");
-		
+
 	}
 
 	void FormalList() {
@@ -269,7 +272,7 @@ public class Parser{
 
 			while (isToken("TElse")) { 
 				ElseIf();
-				
+
 			}
 
 		} else if (isToken("TDo")) {
@@ -417,7 +420,7 @@ public class Parser{
 				Exp();
 			}
 		}
-		
+
 	}
 
 	void FormalVarExp() {
@@ -445,8 +448,11 @@ public class Parser{
 	}
 
 	void Exp() {
-		And();
-		Elist();
+		if(!isToken("TRightParen")){
+			And();
+			Elist();
+		}
+
 	}
 
 	void Elist() {
@@ -510,9 +516,9 @@ public class Parser{
 			Factor();
 			while (isToken("TDot") || isToken("LeftBracket")){
 				DotArray();
-		}
-		
-		
+			}
+
+
 		}
 
 		/*else if (isToken("TIntNum") || isToken("TTrue") || isToken("TFalse") || isToken("TIdentifier")
