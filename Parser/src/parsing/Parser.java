@@ -11,11 +11,9 @@ import java.io.*;
 
 /*
  * need to work on: 
-<<<<<<< HEAD
-		ADDED COMMENT HERE
-=======
 
->>>>>>> origin/master
+		ADDED COMMENT HERE
+
  *  	Not --> Exp DotArray* 
  */
 public class Parser{
