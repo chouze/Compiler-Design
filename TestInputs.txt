@@ -1,0 +1,80 @@
+**THIS TESTS THE STATEMENTS
+
+class Test
+{
+	public static void main ( String [] args )
+	{
+		//This is a comment
+		int i = new AddNum().addNumber(10, 9);
+	}
+}
+
+class AddNum
+{
+	public int addNumber( int a, int b)
+	{
+		int total, firstInt, secondInt;
+		{
+
+			total = 0;
+			firstInt = a;
+			secondInt = b;
+
+			if(i < 10)
+			{
+				do
+				{
+					while(i < 10)
+					{
+						for(int i = 1; i < 10; i = i + 10)
+						{
+							switch(i)
+							{
+								case i < 10:
+									System.out.println(i < 10);
+								default:
+									i = 10;
+							}
+						}
+					}
+				} while(i < 10);
+			}
+			else if(i < 10)
+				System.out.println(i < 10);
+
+			return total;
+
+		}
+	}
+}
+
+-----------------------------------------------------------------------
+** THIS TESTS OPERANDS
+
+class Test
+{
+	public static void main ( String [] args )
+	{
+		//This is a comment
+		int i = new AddNum().addNumber(10, 9);
+	}
+}
+
+class AddNum
+{
+	public int addNumber( int a, int b)
+	{
+		int total, firstInt, secondInt;
+		{
+
+			total = 0;
+			firstInt = a;
+			secondInt = b;
+
+			x = a && b < c + d * !e.f()[];
+
+			return total;
+
+		}
+	}
+}
