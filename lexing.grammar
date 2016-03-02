@@ -21,6 +21,7 @@ string = 'String';
 extends = 'extends';
 return = 'return';
 int = 'int';
+println = 'System.out.println';
 boolean = 'boolean';
 if = 'if';
 do = 'do';
@@ -34,8 +35,10 @@ true = 'true';
 false = 'false';
 new = 'new';
 this = 'this';
+length = 'length';
 //other tokens
 assign = '=';
+less_than = '<';
 compare = '==' | '<' | '>' | '<=' | '>=' | '!=';
 and = '&&';
 or = '||';
@@ -55,11 +58,12 @@ left_quote = '“';
 right_quote = '”';
 dot = '.';
 comma = ',';
+colon = ':';
 semi = ';';
 identifier = letter (letter | digit | '_')*;
 int_num = digits;
 misc = [0 .. 0xffff];
 
 Ignored Tokens
- double_slash_comment, space;
+double_slash_comment, space;
 

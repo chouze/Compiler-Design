@@ -1,0 +1,37 @@
+Package lexing;
+
+Helpers
+letter = ['a' .. 'z'] | ['A' .. 'Z'];
+digit = ['0' .. '9'];
+digits = digit+;
+
+Tokens
+//reserved words
+print = 'print';
+//other tokens
+assign = ':=';
+plus = '+';
+left_paren = '(';
+right_paren = ')';
+comma = ',';
+semi = ';';
+id = letter (letter | digit | '_')*;
+num = digits;
+misc = [0 .. 0xffff];
+
+Ignored Tokens
+double_slash_comment, space;
+ 
+Productions
+
+s = {begin} [first]: s semi [second]: s |
+	{id} id assign e |
+	{print} print left_paren l right_paren;
+	
+e = {id} id |
+	{num} num |
+	{add} [first]: e plus [second]: e |
+	{list} left_paren s comma e right_paren;
+	
+l = {e} e |
+	{list} l comma e;
