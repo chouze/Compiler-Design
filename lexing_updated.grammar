@@ -28,7 +28,7 @@ do = 'do';
 while = 'while';
 for = 'for';
 switch = 'switch';
-else = 'else if';
+elseif = 'else if';
 case = 'case';
 default = 'default';
 true = 'true';
@@ -104,16 +104,16 @@ inttype = {array} left_bracket right_bracket |
 		  {empty} ;
 		  
 statement = {default} left_brace statement* right_brace |
-			{if} if left_paren exp right_paren statement else* |
+			{if} if left_paren exp right_paren left_brace statement right_brace elseif* |
 			{do} do left_brace statement right_brace while left_paren exp right_paren semi |
 			{while} while left_paren exp right_paren statement |
 			{for} for left_paren initializationstm [first_semi]: semi exp [second_semi]: semi incrementstm right_paren statement |
 			{switch} switch left_paren identifier right_paren left_brace caselist right_brace |
 			{println} println left_paren exp? right_paren semi |
-			{assign} identifier assignterminal |
-			{formalvarexp} left_paren type identifier assignterminal exp right_paren formalvarexp* semi;
+			{assign} identifier assignnonterminal |
+			{formalvarexp} left_paren type identifier assignnonterminal exp right_paren formalvarexp* semi;
 			
-assignterminal = {assign} assign exp semi |
+assignnonterminal = {assign} assign exp semi |
 				 {array} left_bracket [left]: exp right_bracket assign [right]: exp semi;
 		
 initializationstm = {assign} identifier assign exp |
@@ -122,19 +122,19 @@ initializationstm = {assign} identifier assign exp |
 incrementstm = {assign} identifier assign exp |
 			   {array} identifier left_bracket [left]: exp right_bracket assign [right]: exp;
 			   
-elseif = else left_paren exp right_paren statement;
+elseifnonterminal = elseif left_paren exp right_paren statement;
 
 formalvarexp = comma left_paren type identifier assign exp right_paren;
 
 caselist = {case} case exp colon statement caselist |
 		   {default} default colon statement;
 		   
-exp = andterminal elist;
+exp = andnonterminal elist;
 
-elist = {and} and andterminal elist |
+elist = {and} and andnonterminal elist |
 		{empty} ;
 		
-andterminal = less alist;
+andnonterminal = less alist;
 
 alist = {less} less_than less alist |
 		{empty} ;
@@ -145,12 +145,12 @@ llist = {plus} plus term llist |
 		{minus} minus term llist |
 		{empty} ;
 		
-term = {notterminal} notterminal tlist;
+term = {notnonterminal} notnonterminal tlist;
 
-tlist = {mult} mult notterminal tlist |
+tlist = {mult} mult notnonterminal tlist |
 		{empty} ;
 		
-notterminal = {not} not notterminal |
+notnonterminal = {not} not notnonterminal |
 			  {factor} factor dotarray*;
 	   
 dotarray = {dot} dot member |
@@ -169,11 +169,10 @@ factor = {num} int_num |
 		 {false} false |
 		 {identifier} identifier |
 		 {this} this |
-		 {new} new newterminal |
-		 {exp} left_paren exp right_paren |
-		 {empty} ;
+		 {new} new newnonterminal |
+		 {exp} left_paren exp right_paren;
 		 
-newterminal = {array} int left_bracket exp right_bracket |
+newnonterminal = {array} int left_bracket exp right_bracket |
 			  {identifier} identifier left_paren right_paren;
  
  
