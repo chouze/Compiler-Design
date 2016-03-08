@@ -10,7 +10,7 @@ Tokens
 double_slash_comment = '//' [[0 .. 0xffff] - newline]* newline;
 //slash_star_comment = '/*' [[0 .. 0xffff] - '*/']* '*/';
 //documentation_comment = '/**' [[0 .. 0xffff] - '*/']* '*/';
-space = ' ' | 9 | newline;
+space = ' ' | 9 | newline | 32 ;
 //reserved words
 clas = 'class';
 public = 'public';
