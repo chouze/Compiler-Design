@@ -95,7 +95,7 @@ public class TableCreator {
 						if(allNonTerminals.contains(r.afterDot.get(i+1)) && !lookedAt.contains(r.afterDot.get(i + 1))){
 							fol.addAll(findFolHelp(r.afterDot.get(i+1), lookedAt));
 						}
-						else{
+						else if(!allNonTerminals.contains(r.afterDot.get(i+1))){
 							fol.add(r.afterDot.get(i+1));
 						}
 					}
@@ -106,7 +106,7 @@ public class TableCreator {
 
 			}
 		}
-		
+		//System.out.println(fol + "\n");
 		return fol;
 
 	}
@@ -161,7 +161,7 @@ public class TableCreator {
 					output[result.get("$")] = "a";
 				}
 			}
-			
+
 			for(String s : state.transitions.keySet()){
 				if(!allNonTerminals.contains(s)){
 					output[result.get(s)] = "s" + state.transitions.get(s).stateNumber;
@@ -170,12 +170,12 @@ public class TableCreator {
 					output[result.get(s)] = "g" + state.transitions.get(s).stateNumber;
 				}
 			}
-			
-			for(int i = 0; i < output.length -1; i++){
-					writer.write(output[i] == null ? "," : output[i] + ",");
-				}
-				writer.write(output[output.length - 1] == null ? "\n" : output[output.length - 1] + "\n");
-			
+
+			for(int i = 0; i < output.length - 1; i++){
+				writer.write(output[i] == null ? "," : output[i] + ",");
+			}
+			writer.write(output[output.length - 1] == null ? "\n" : output[output.length - 1] + "\n");
+
 		}
 
 
