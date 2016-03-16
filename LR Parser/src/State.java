@@ -8,30 +8,27 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class State {
-	static int stateNumbers = 0;
+	static int stateNumbers = 1;
 	int stateNumber;
-	public Set<String> nonTerminals;
-	public Set<Rule> rules;
-	public Map<String, State> transitions;
-	public static Set<State> allStates = new LinkedHashSet<State>(); //Are you in good hands?
+	Set<String> nonTerminals;
+	Set<Rule> rules;
+	Map<String, State> transitions;
+	List<Rule> allRules;
+	//public static Set<State> allStates = new LinkedHashSet<State>(); //Are you in good hands?
+	private LinkedHashSet<State> allStates;
 
-	public State (){
+	public State (LinkedHashSet<State> allStates, List<Rule> allRules){
 		nonTerminals = new HashSet<String>();
 		rules = new LinkedHashSet<Rule>();
 		transitions = new HashMap<String, State>();
-
+		this.allStates = allStates;
+		this.allRules = allRules;
 	}
 
 	public void add(Rule rule){
 		List<Rule> newRules = new ArrayList<Rule>();
 		rules.add(rule);
-		/*
-		nonTerminals.add(rule.reduceTo);
-
-		newRules = TableCreator.rules.stream()
-				.filter(t -> t.reduceTo.equals(rule.afterDot.get(0))).
-				collect(Collectors.toList());
-		rules.addAll(newRules);*/
+		
 		boolean changed = true;
 
 		while(changed){
@@ -40,7 +37,7 @@ public class State {
 			for(Rule r : rules){
 				if (!r.isFinished() && !nonTerminals.contains(r.reduceTo)){
 					nonTerminals.add(r.reduceTo);
-					newRules.addAll(TableCreator.rules.stream()
+					newRules.addAll(allRules.stream()
 							.filter(t -> t.reduceTo.equals(r.afterDot.get(0))).
 							collect(Collectors.toList()));
 					changed = true;
@@ -51,22 +48,35 @@ public class State {
 	}
 
 
-	public void expand(){
+	public LinkedHashSet<State> expand(){
 		if(!allStates.contains(this)){
 			allStates.add(this);
 			this.stateNumber = stateNumbers++;
 
 			State newState;
+			List<Rule> continuingRules;
 
 			for(Rule rule : rules){
-				if(!rule.isFinished()){
-					newState = new State();
-					newState.add(rule.getNextVersion());
+				if(!rule.isFinished() && !rule.afterDot.get(0).equals("$")){
+					newState = new State(allStates, allRules);
+					
+					continuingRules = getRulesContinuingWith(rule.afterDot.get(0));
+					
+					for(Rule tempRule : continuingRules){
+						newState.add(tempRule.getNextVersion());
+					}
+					
+					//newState.add(rule.getNextVersion());
 
 					//System.out.println(newState);
+					/*
+					if(transitions.containsKey(rule.afterDot.get(0))){
+						transitions.get(rule.afterDot.get(0)).add(rule.getNextVersion());
+					}*/
+					
 					if(!allStates.contains(newState)){
 						transitions.put(rule.afterDot.get(0), newState);
-						newState.expand();
+						allStates = newState.expand();
 					}
 					else{
 						for(State state : allStates){
@@ -80,9 +90,18 @@ public class State {
 			}
 
 		}
-
-
-
+		return allStates;
+	}
+	
+	public ArrayList<Rule> getRulesContinuingWith(String token){
+		ArrayList<Rule> list = new ArrayList<Rule> ();
+		
+		for(Rule rule : rules){
+			if(!rule.isFinished() && rule.afterDot.get(0).equals(token)){
+				list.add(rule);
+			}
+		}
+		return list;
 	}
 
 
@@ -118,10 +137,7 @@ public class State {
 			return false;
 		return true;
 	}
-	/*
-	public boolean equals(State s){
-		return this.nonTerminals.equals(s.nonTerminals) && this.rules.equals(s.rules);
-	}*/
+
 
 	public String toString(){
 		String temp = "State Number: " + stateNumber + "\n";

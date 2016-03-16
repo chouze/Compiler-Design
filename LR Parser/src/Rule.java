@@ -1,38 +1,51 @@
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Rule {
+	static int ruleNumbers = 0;
 	String reduceTo;
 	ArrayList<String> beforeDot, afterDot;
+	int ruleNumber;
+	
+	
 
+	public Rule getNextVersion(){
+		if(!this.isFinished()){
+			Rule r = new Rule();
+			r.reduceTo = this.reduceTo;
+			r.beforeDot = new ArrayList<String>(this.beforeDot);
+			r.afterDot = new ArrayList<String>(this.afterDot);
+			r.beforeDot.add(r.afterDot.get(0));
+			r.afterDot.remove(0);
+			r.ruleNumber = this.ruleNumber;
 
+			return r;
+		}
+		else{
+			throw new ParsingException("Rule is already finished, cannot get the next verison");
+		}
+	}
+	
+	
+	public boolean isFinished(){
+		return afterDot.isEmpty();
+	}
+	
+	
 	public String toString(){
 		String t = reduceTo;
 		t += " -> ";
+		
 		for(String token : beforeDot){
-			/*
-			if(TableCreator.allNonTerminals.contains(token)){
-				t += "NonTerminal(" + token + ") ";
-			}
-			else{
-				t += "Terminal(" + token + ") ";
-			}*/
 			t += token + " ";
 		}
 
 		t += ".";
 
-		for(String token : afterDot){/*
-			if(TableCreator.allNonTerminals.contains(token)){
-				t += "NonTerminal(" + token + ") ";
-			}
-			else{
-				t += "Terminal(" + token + ") ";
-			}*/
+		for(String token : afterDot){
 			t += token + " ";
 		}
-
+		
 		return t;
 	}
 
@@ -76,27 +89,8 @@ public class Rule {
 	}
 
 
-	public boolean isFinished(){
-		return afterDot.isEmpty();
-	}
+	
 
-	public Rule getNextVersion(){
-		if(!this.isFinished()){
-			Rule r = new Rule();
-			r.reduceTo = this.reduceTo;
-			r.beforeDot = new ArrayList<String>(this.beforeDot);
-			r.afterDot = new ArrayList<String>(this.afterDot);
-			r.beforeDot.add(r.afterDot.get(0));
-			r.afterDot.remove(0);
-
-			return r;
-		}
-		else{
-			throw new ParsingException("Rule is already finished, cannot get the next verison");
-		}
-	}
-	/*
-	public boolean equals (Rule r){
-		return this.reduceTo.equals(r.reduceTo) && this.beforeDot.equals(r.beforeDot) && this.afterDot.equals(r.afterDot);
-	}*/
+	
+	
 }
