@@ -30,7 +30,7 @@ IntType -> [ ]
 IntType -> 
 Statement -> { StatementList }
 Statement -> if ( Exp ) { Statement } ElseIfList 
-Statement -> do {Statement } while ( Exp ) ;
+Statement -> do { Statement } while ( Exp ) ;
 Statement -> while ( Exp ) Statement
 Statement -> for( InitializationStm ; Exp ; IncrementStm ) Statement
 Statement -> switch ( id ) { caseList }
@@ -42,7 +42,7 @@ StatementList ->
 Assign -> = Exp ;
 Assign -> [ Exp ] = Exp ;
 InitializationStm -> id = Exp
-InitializationStm -> id [Exp] = Exp
+InitializationStm -> id [ Exp ] = Exp
 IncrementStm -> id = Exp
 IncrementStm -> id [ Exp ] = Exp
 ElseIf -> else if ( Exp ) Statement
