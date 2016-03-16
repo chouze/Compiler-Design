@@ -1,0 +1,88 @@
+S' -> Program $
+Program -> MainClass ClassDeclList
+MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList Statement } }
+ClassDeclList -> ClassDeclList ClassDecl
+ClassDeclList -> 
+ClassDecl -> ClassDeclSpec ClassDeclDeff
+ClassDeclSpec -> class id
+ClassDeclDeff -> { VarDeclList MethodDeclList }
+ClassDeclDeff -> extends id { VarDeclList MethodDeclList }
+VarDeclList -> VarDeclList VarDecl
+VarDeclList -> 
+VarDecl -> Type VarDeclType MultiDeclList ; 
+VarDeclType -> id VarDeclTypeAssign
+VarDeclTypeAssign -> = Exp 
+VarDeclTypeAssign -> 
+MultiDeclList -> MultiDeclList MultiDecl
+MultiDeclList -> 
+MultiDecl -> , id VarDeclTypeAssign
+MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return Exp ; }
+MethodDeclList -> MethodDeclList MethodDecl
+MethodDeclList -> 
+FormalList -> Type id FormalRest
+FormalList -> 
+FormalRest -> , Type id FormalRest
+FormalRest ->  
+Type -> int IntType
+Type -> boolean
+Type -> id
+IntType -> [ ]
+IntType -> 
+Statement -> { StatementList }
+Statement -> if ( Exp ) { Statement } ElseIfList 
+Statement -> do {Statement } while ( Exp ) ;
+Statement -> while ( Exp ) Statement
+Statement -> for( InitializationStm ; Exp ; IncrementStm ) Statement
+Statement -> switch ( id ) { caseList }
+Statement -> System.out.println ( Exp ) ;
+Statement -> id Assign
+Statement -> ( Type id = Exp ) FormalVarExp ;
+StatementList -> StatementList Statement
+StatementList -> 
+Assign -> = Exp ;
+Assign -> [ Exp ] = Exp ;
+InitializationStm -> id = Exp
+InitializationStm -> id [Exp] = Exp
+IncrementStm -> id = Exp
+IncrementStm -> id [ Exp ] = Exp
+ElseIf -> else if ( Exp ) Statement
+ElseIfList -> ElseIfList ElseIf
+ElseIfList -> 
+FormalVarExp -> , ( Type id = Exp ) FormalVarExp
+FormalVarExp -> 
+CaseList -> case Exp : Statement CaseList
+CaseList -> default : Statement
+Exp -> And Elist
+Elist -> && And Elist
+Elist -> 
+And -> Less Alist
+Alist -> < Less Alist
+Alist -> 
+Less -> Term Llist
+Llist -> + Term Llist
+Llist -> - Term Llist
+Llist -> 
+Term -> Not Tlist
+Tlist -> * Not Tlist
+Tlist -> 
+Not -> ! Not
+Not -> Factor DotArrayList
+DotArrayList -> DotArrayList DotArray
+DotArrayList -> 
+DotArray -> . Member
+DotArray -> [ Exp ]
+Member -> length
+Member -> id ( ExpList )
+ExpList -> Exp ExpRest
+ExpList -> 
+ExpRest -> , Exp ExpRest
+ExpRest -> 
+Factor -> number
+Factor -> true
+Factor -> false
+Factor -> id
+Factor -> this
+Factor -> new New
+Factor -> ( Exp )
+New -> int [ Exp ]
+New -> id ( )
