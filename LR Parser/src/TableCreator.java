@@ -148,7 +148,7 @@ public class TableCreator {
 
 		String[] output; 
 		for(State state : states){
-			output = new String[resultSize + 1];
+			output = new String[resultSize];
 			for(Rule rule : state.rules){
 				if (rule.isFinished()){
 					for(String folNT : folSet.get(rule.reduceTo)){
