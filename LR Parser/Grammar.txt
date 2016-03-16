@@ -32,7 +32,7 @@ Statement -> { StatementList }
 Statement -> if ( Exp ) { Statement } ElseIfList 
 Statement -> do { Statement } while ( Exp ) ;
 Statement -> while ( Exp ) Statement
-Statement -> for( InitializationStm ; Exp ; IncrementStm ) Statement
+Statement -> for ( InitializationStm ; Exp ; IncrementStm ) Statement
 Statement -> switch ( id ) { caseList }
 Statement -> System.out.println ( Exp ) ;
 Statement -> id Assign
