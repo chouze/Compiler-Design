@@ -65,7 +65,7 @@ Llist ->
 Term -> Not Tlist
 Tlist -> * Not Tlist
 Tlist -> 
-Not -> ! Not
+Not -> ! Factor DotArrayList
 Not -> Factor DotArrayList
 DotArrayList -> DotArrayList DotArray
 DotArrayList -> 
