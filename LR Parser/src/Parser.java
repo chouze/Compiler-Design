@@ -176,6 +176,7 @@ public class Parser {
 	public void shift(int state) {
 		// push the next string and shift states
 		inputStack.push(inputQueue.remove());
+		System.out.println(inputStack);
 		previousState = currentState;
 		currentState = stateMap.get(state);
 		previousStates.push(state);
@@ -188,7 +189,7 @@ public class Parser {
 		replaceStackForReduce(ruleNumber);/// POP THEN REPLACE
 		// currentState = previousState; /// CHANGE STATE TO THE PREVIOUS ONE
 		currentState = stateMap.get(previousStates.peek());
-
+		System.out.println(inputStack);
 		String action = currentState.getAction(inputStack.peek()); // Look at
 																	// stack for
 																	// NT to do
