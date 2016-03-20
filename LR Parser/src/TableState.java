@@ -25,6 +25,7 @@ public class TableState {
 				input += temp;
 			}		
 		}
+		actionMap.put(headerArr[index++], input);
 		actionScanner.close();
 		
 	}
