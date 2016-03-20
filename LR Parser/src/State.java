@@ -1,3 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,7 +34,7 @@ public class State {
 	public void add(Rule rule){
 		List<Rule> newRules = new ArrayList<Rule>();
 		rules.add(rule);
-		
+
 		boolean changed = true;
 
 		while(changed){
@@ -59,13 +65,13 @@ public class State {
 			for(Rule rule : rules){
 				if(!rule.isFinished() && !rule.afterDot.get(0).equals("$")){
 					newState = new State(allStates, allRules);
-					
+
 					continuingRules = getRulesContinuingWith(rule.afterDot.get(0));
-					
+
 					for(Rule tempRule : continuingRules){
 						newState.add(tempRule.getNextVersion());
 					}
-					
+
 					//newState.add(rule.getNextVersion());
 
 					//System.out.println(newState);
@@ -73,7 +79,7 @@ public class State {
 					if(transitions.containsKey(rule.afterDot.get(0))){
 						transitions.get(rule.afterDot.get(0)).add(rule.getNextVersion());
 					}*/
-					
+
 					if(!allStates.contains(newState)){
 						transitions.put(rule.afterDot.get(0), newState);
 						allStates = newState.expand();
@@ -90,17 +96,25 @@ public class State {
 			}
 
 		}
-		
-		for(State s : allStates){
-			//System.out.println(s);
+
+		try {
+			PrintStream bf = new PrintStream(new File("States.txt"));
+			for(State s : allStates){
+				bf.print(s.toString() + "\r\n");
+			}
+			bf.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
+
+
 		return allStates;
 	}
-	
+
 	public ArrayList<Rule> getRulesContinuingWith(String token){
 		ArrayList<Rule> list = new ArrayList<Rule> ();
-		
+
 		for(Rule rule : rules){
 			if(!rule.isFinished() && rule.afterDot.get(0).equals(token)){
 				list.add(rule);
@@ -145,30 +159,30 @@ public class State {
 
 
 	public String toString(){
-		String temp = "State Number: " + stateNumber + "\n";
+		String temp = "State Number: " + stateNumber + "\r\n";
 		for(Rule rule : rules){
-			temp += rule.toString() + "\n";
+			temp += rule.toString() + "\r\n";
 		}
-		temp += "\nTransitions: \n";
+		temp += "\r\nTransitions: \r\n";
 		if(!transitions.isEmpty()){
 			for(String key : transitions.keySet()){
-				temp += "Transition to " + transitions.get(key).stateNumber + " on " + key + "\n";
+				temp += "Transition to " + transitions.get(key).stateNumber + " on " + key + "\r\n";
 			}
 		}
 		else{
 			temp += "None";
 		}
-		temp += "\nReductions: \n";
+		temp += "\r\nReductions: \r\n";
 		for(Rule r : rules){
 			if (r.isFinished()){
-				temp += "Reduce on " + r + "\n";
+				temp += "Reduce on " + r + "\r\n";
 			}
 			else{
-				temp += "Can't reduce " + r + "\n";
+				temp += "Can't reduce " + r + "\r\n";
 			}
 		}
 
-		temp += "\n\n";
+		temp += "\r\n\r\n";
 		return temp;
 	}
 }
