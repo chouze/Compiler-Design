@@ -90,6 +90,11 @@ public class State {
 			}
 
 		}
+		
+		for(State s : allStates){
+			//System.out.println(s);
+		}
+		
 		return allStates;
 	}
 	
@@ -152,6 +157,15 @@ public class State {
 		}
 		else{
 			temp += "None";
+		}
+		temp += "\nReductions: \n";
+		for(Rule r : rules){
+			if (r.isFinished()){
+				temp += "Reduce on " + r + "\n";
+			}
+			else{
+				temp += "Can't reduce " + r + "\n";
+			}
 		}
 
 		temp += "\n\n";

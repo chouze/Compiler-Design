@@ -55,23 +55,34 @@ public class Parser {
 		
 		inputArr = temp.split("\\s+");
 	
-		
+		/*
 		for(String s: inputArr)
 		{
 			if(acceptableTokens.indexOf(s) < 0)
 			{
 				validInput = false;
-				System.err.println("Input is faulty");
+				System.err.println("The token: " + s + " could not be parsed");
 			}
 				
-		}
+		}*/
 		
 		if(validInput){
 		scanner = new Scanner(temp);
 		//I'll need to check for acceptable tokens but not right now, assume all input is correct
+		String tempToken;
 		while(scanner.hasNext())
 		{
-			inputQueue.add(scanner.next());
+			tempToken = scanner.next();
+			
+			if(!acceptableTokens.contains(tempToken)){
+				if(tempToken.matches("[-+]?(\\d*[.])?\\d+")){
+					tempToken = "num";
+				}
+				else {
+					tempToken = "id";
+				}
+			}
+			inputQueue.add(tempToken);
 		}
 		
 		scanner.close();
@@ -82,12 +93,16 @@ public class Parser {
 		while (!inputQueue.isEmpty()) {
 			
 			currentToken = inputQueue.peek();
+			//System.out.println(currentToken);
+			
 			
 			action = currentState.getAction(currentToken); // Retrieve the
 															// action for this
 															// token, based on
 															// the current state
-
+			int prev = previousStates.pop();
+			System.out.println("Current state is: " + prev +  " action on token: " + currentToken + " is " + action);
+			previousStates.push(prev);
 			char firstChar = action.charAt(0);
 			int stateOrRuleNum = 0;
 
@@ -115,7 +130,7 @@ public class Parser {
 	public void makeMap() throws FileNotFoundException {
 		stateMap = new HashMap<Integer, TableState>();
 
-		Scanner scanner = new Scanner(new File("Grammar3_1_Output.csv"));
+		Scanner scanner = new Scanner(new File("Grammar_Output.csv"));
 		String header = scanner.nextLine();
 		String[] headerArr = header.split(",");
 		
@@ -135,7 +150,7 @@ public class Parser {
 		ruleMap = new HashMap<Integer, TableRule>(); // map of rules using
 														// rulenumber as the key
 
-		Scanner scanner = new Scanner(new File("Grammar3_1.txt"));
+		Scanner scanner = new Scanner(new File("Grammar.txt"));
 		Scanner lineScanner;
 
 		String LSide;
