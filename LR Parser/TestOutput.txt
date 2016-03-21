@@ -1,0 +1,792 @@
+Current state is: 1 action on token: class value class is s226
+[class]
+Current state is: 226 action on token: id value id is s227
+[class, id]
+Current state is: 227 action on token: { value { is s228
+[class, id, {]
+Current state is: 228 action on token: public value public is s229
+[class, id, {, public]
+Current state is: 229 action on token: static value static is s230
+[class, id, {, public, static]
+Current state is: 230 action on token: void value void is s231
+[class, id, {, public, static, void]
+Current state is: 231 action on token: main value main is s232
+[class, id, {, public, static, void, main]
+Current state is: 232 action on token: ( value ( is s233
+[class, id, {, public, static, void, main, (]
+Current state is: 233 action on token: String value String is s234
+[class, id, {, public, static, void, main, (, String]
+Current state is: 234 action on token: [ value [ is s235
+[class, id, {, public, static, void, main, (, String, []
+Current state is: 235 action on token: ] value ] is s236
+[class, id, {, public, static, void, main, (, String, [, ]]
+Current state is: 236 action on token: id value id is s237
+[class, id, {, public, static, void, main, (, String, [, ], id]
+Current state is: 237 action on token: ) value ) is s238
+[class, id, {, public, static, void, main, (, String, [, ], id, )]
+Current state is: 238 action on token: { value { is s239
+[class, id, {, public, static, void, main, (, String, [, ], id, ), {]
+Current state is: 239 action on token: { value { is r10
+[class, id, {, public, static, void, main, (, String, [, ], id, ), {, VarDeclList]
+Current state is: 240 action on token: { value { is s241
+[class, id, {, public, static, void, main, (, String, [, ], id, ), {, VarDeclList, {]
+Current state is: 241 action on token: } value } is r40
+[class, id, {, public, static, void, main, (, String, [, ], id, ), {, VarDeclList, {, StatementList]
+Current state is: 242 action on token: } value } is s243
+[class, id, {, public, static, void, main, (, String, [, ], id, ), {, VarDeclList, {, StatementList, }]
+Current state is: 243 action on token: } value } is s244
+[class, id, {, public, static, void, main, (, String, [, ], id, ), {, VarDeclList, {, StatementList, }, }]
+Current state is: 244 action on token: } value } is s245
+[class, id, {, public, static, void, main, (, String, [, ], id, ), {, VarDeclList, {, StatementList, }, }, }]
+Current state is: 245 action on token: class value class is r2
+[MainClass]
+Current state is: 3 action on token: class value class is r4
+[MainClass, ClassDeclList]
+Current state is: 4 action on token: class value class is s224
+[MainClass, ClassDeclList, class]
+Current state is: 224 action on token: id value id is s225
+[MainClass, ClassDeclList, class, id]
+Current state is: 225 action on token: { value { is r6
+[MainClass, ClassDeclList, ClassDeclSpec]
+Current state is: 6 action on token: { value { is s220
+[MainClass, ClassDeclList, ClassDeclSpec, {]
+Current state is: 220 action on token: public value public is r10
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList]
+Current state is: 221 action on token: public value public is r20
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList]
+Current state is: 222 action on token: public value public is s15
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public]
+Current state is: 15 action on token: int value int is s163
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, int]
+Current state is: 163 action on token: id value id is r29
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, int, IntType]
+Current state is: 164 action on token: id value id is r25
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type]
+Current state is: 16 action on token: id value id is s17
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id]
+Current state is: 17 action on token: ( value ( is s18
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (]
+Current state is: 18 action on token: int value int is s163
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, int]
+Current state is: 163 action on token: id value id is r29
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, int, IntType]
+Current state is: 164 action on token: id value id is r25
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type]
+Current state is: 213 action on token: id value id is s214
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type, id]
+Current state is: 214 action on token: , value , is s216
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type, id, ,]
+Current state is: 216 action on token: int value int is s163
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type, id, ,, int]
+Current state is: 163 action on token: id value id is r29
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type, id, ,, int, IntType]
+Current state is: 164 action on token: id value id is r25
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type, id, ,, Type]
+Current state is: 217 action on token: id value id is s218
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type, id, ,, Type, id]
+Current state is: 218 action on token: ) value ) is r24
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type, id, ,, Type, id, FormalRest]
+Current state is: 219 action on token: ) value ) is r23
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, Type, id, FormalRest]
+Current state is: 215 action on token: ) value ) is r21
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList]
+Current state is: 19 action on token: ) value ) is s20
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, )]
+Current state is: 20 action on token: { value { is s21
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {]
+Current state is: 21 action on token: int value int is r10
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList]
+Current state is: 22 action on token: int value int is s163
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, int]
+Current state is: 163 action on token: id value id is r29
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, int, IntType]
+Current state is: 164 action on token: id value id is r25
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type]
+Current state is: 201 action on token: id value id is s211
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, id]
+Current state is: 211 action on token: , value , is r14
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, id, VarDeclAssign]
+Current state is: 212 action on token: , value , is r12
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID]
+Current state is: 202 action on token: , value , is r16
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList]
+Current state is: 203 action on token: , value , is s206
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, ,]
+Current state is: 206 action on token: id value id is s207
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, ,, id]
+Current state is: 207 action on token: , value , is r14
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, ,, id, VarDeclAssign]
+Current state is: 208 action on token: , value , is r17
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, MultiDecl]
+Current state is: 205 action on token: , value , is r15
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList]
+Current state is: 203 action on token: , value , is s206
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, ,]
+Current state is: 206 action on token: id value id is s207
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, ,, id]
+Current state is: 207 action on token: ; value ; is r14
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, ,, id, VarDeclAssign]
+Current state is: 208 action on token: ; value ; is r17
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, MultiDecl]
+Current state is: 205 action on token: ; value ; is r15
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList]
+Current state is: 203 action on token: ; value ; is s204
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, Type, VarDeclID, MultiDeclList, ;]
+Current state is: 204 action on token: { value { is r11
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, VarDecl]
+Current state is: 200 action on token: { value { is r9
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList]
+Current state is: 22 action on token: { value { is r40
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList]
+Current state is: 23 action on token: { value { is s99
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {]
+Current state is: 99 action on token: id value id is r40
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList]
+Current state is: 100 action on token: id value id is s111
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id]
+Current state is: 111 action on token: = value = is s113
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =]
+Current state is: 113 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, number]
+Current state is: 81 action on token: ; value ; is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Factor]
+Current state is: 66 action on token: ; value ; is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Factor, DotArrayList]
+Current state is: 67 action on token: ; value ; is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Not]
+Current state is: 46 action on token: ; value ; is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Not, Tlist]
+Current state is: 47 action on token: ; value ; is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Term]
+Current state is: 38 action on token: ; value ; is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Term, Llist]
+Current state is: 39 action on token: ; value ; is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Less]
+Current state is: 33 action on token: ; value ; is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Less, Alist]
+Current state is: 34 action on token: ; value ; is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, And]
+Current state is: 28 action on token: ; value ; is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, And, Elist]
+Current state is: 29 action on token: ; value ; is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Exp]
+Current state is: 114 action on token: ; value ; is s115
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Exp, ;]
+Current state is: 115 action on token: id value id is r41
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, Assign]
+Current state is: 112 action on token: id value id is r37
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, Statement]
+Current state is: 89 action on token: id value id is r39
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList]
+Current state is: 100 action on token: id value id is s111
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id]
+Current state is: 111 action on token: = value = is s113
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =]
+Current state is: 113 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, id]
+Current state is: 79 action on token: ; value ; is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Factor]
+Current state is: 66 action on token: ; value ; is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Factor, DotArrayList]
+Current state is: 67 action on token: ; value ; is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Not]
+Current state is: 46 action on token: ; value ; is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Not, Tlist]
+Current state is: 47 action on token: ; value ; is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Term]
+Current state is: 38 action on token: ; value ; is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Term, Llist]
+Current state is: 39 action on token: ; value ; is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Less]
+Current state is: 33 action on token: ; value ; is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Less, Alist]
+Current state is: 34 action on token: ; value ; is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, And]
+Current state is: 28 action on token: ; value ; is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, And, Elist]
+Current state is: 29 action on token: ; value ; is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Exp]
+Current state is: 114 action on token: ; value ; is s115
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Exp, ;]
+Current state is: 115 action on token: id value id is r41
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, Assign]
+Current state is: 112 action on token: id value id is r37
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, Statement]
+Current state is: 89 action on token: id value id is r39
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList]
+Current state is: 100 action on token: id value id is s111
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id]
+Current state is: 111 action on token: = value = is s113
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =]
+Current state is: 113 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, id]
+Current state is: 79 action on token: ; value ; is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Factor]
+Current state is: 66 action on token: ; value ; is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Factor, DotArrayList]
+Current state is: 67 action on token: ; value ; is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Not]
+Current state is: 46 action on token: ; value ; is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Not, Tlist]
+Current state is: 47 action on token: ; value ; is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Term]
+Current state is: 38 action on token: ; value ; is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Term, Llist]
+Current state is: 39 action on token: ; value ; is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Less]
+Current state is: 33 action on token: ; value ; is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Less, Alist]
+Current state is: 34 action on token: ; value ; is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, And]
+Current state is: 28 action on token: ; value ; is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, And, Elist]
+Current state is: 29 action on token: ; value ; is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Exp]
+Current state is: 114 action on token: ; value ; is s115
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, =, Exp, ;]
+Current state is: 115 action on token: if value if is r41
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, id, Assign]
+Current state is: 112 action on token: if value if is r37
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, Statement]
+Current state is: 89 action on token: if value if is r39
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList]
+Current state is: 100 action on token: if value if is s169
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if]
+Current state is: 169 action on token: ( value ( is s170
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (]
+Current state is: 170 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, id]
+Current state is: 79 action on token: < value < is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Factor]
+Current state is: 66 action on token: < value < is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Factor, DotArrayList]
+Current state is: 67 action on token: < value < is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Not]
+Current state is: 46 action on token: < value < is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Not, Tlist]
+Current state is: 47 action on token: < value < is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Term]
+Current state is: 38 action on token: < value < is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Term, Llist]
+Current state is: 39 action on token: < value < is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less]
+Current state is: 33 action on token: < value < is s35
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <]
+Current state is: 35 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, number]
+Current state is: 81 action on token: ) value ) is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, Factor]
+Current state is: 66 action on token: ) value ) is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, Factor, DotArrayList]
+Current state is: 67 action on token: ) value ) is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, Not]
+Current state is: 46 action on token: ) value ) is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, Not, Tlist]
+Current state is: 47 action on token: ) value ) is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, Term]
+Current state is: 38 action on token: ) value ) is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, Term, Llist]
+Current state is: 39 action on token: ) value ) is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, Less]
+Current state is: 36 action on token: ) value ) is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, <, Less, Alist]
+Current state is: 37 action on token: ) value ) is r58
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Less, Alist]
+Current state is: 34 action on token: ) value ) is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, And]
+Current state is: 28 action on token: ) value ) is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, And, Elist]
+Current state is: 29 action on token: ) value ) is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp]
+Current state is: 171 action on token: ) value ) is s172
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, )]
+Current state is: 172 action on token: { value { is s173
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {]
+Current state is: 173 action on token: do value do is s102
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do]
+Current state is: 102 action on token: { value { is s103
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {]
+Current state is: 103 action on token: while value while is s122
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while]
+Current state is: 122 action on token: ( value ( is s123
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (]
+Current state is: 123 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, id]
+Current state is: 79 action on token: < value < is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Factor]
+Current state is: 66 action on token: < value < is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Factor, DotArrayList]
+Current state is: 67 action on token: < value < is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Not]
+Current state is: 46 action on token: < value < is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Not, Tlist]
+Current state is: 47 action on token: < value < is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Term]
+Current state is: 38 action on token: < value < is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Term, Llist]
+Current state is: 39 action on token: < value < is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less]
+Current state is: 33 action on token: < value < is s35
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <]
+Current state is: 35 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, number]
+Current state is: 81 action on token: ) value ) is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, Factor]
+Current state is: 66 action on token: ) value ) is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, Factor, DotArrayList]
+Current state is: 67 action on token: ) value ) is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, Not]
+Current state is: 46 action on token: ) value ) is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, Not, Tlist]
+Current state is: 47 action on token: ) value ) is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, Term]
+Current state is: 38 action on token: ) value ) is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, Term, Llist]
+Current state is: 39 action on token: ) value ) is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, Less]
+Current state is: 36 action on token: ) value ) is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, <, Less, Alist]
+Current state is: 37 action on token: ) value ) is r58
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Less, Alist]
+Current state is: 34 action on token: ) value ) is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, And]
+Current state is: 28 action on token: ) value ) is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, And, Elist]
+Current state is: 29 action on token: ) value ) is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp]
+Current state is: 124 action on token: ) value ) is s125
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, )]
+Current state is: 125 action on token: { value { is s99
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {]
+Current state is: 99 action on token: for value for is r40
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList]
+Current state is: 100 action on token: for value for is s90
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for]
+Current state is: 90 action on token: ( value ( is s91
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (]
+Current state is: 91 action on token: id value id is s192
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id]
+Current state is: 192 action on token: = value = is s193
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =]
+Current state is: 193 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, number]
+Current state is: 81 action on token: ; value ; is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Factor]
+Current state is: 66 action on token: ; value ; is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Factor, DotArrayList]
+Current state is: 67 action on token: ; value ; is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Not]
+Current state is: 46 action on token: ; value ; is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Not, Tlist]
+Current state is: 47 action on token: ; value ; is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Term]
+Current state is: 38 action on token: ; value ; is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Term, Llist]
+Current state is: 39 action on token: ; value ; is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Less]
+Current state is: 33 action on token: ; value ; is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Less, Alist]
+Current state is: 34 action on token: ; value ; is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, And]
+Current state is: 28 action on token: ; value ; is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, And, Elist]
+Current state is: 29 action on token: ; value ; is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, id, =, Exp]
+Current state is: 194 action on token: ; value ; is r43
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm]
+Current state is: 92 action on token: ; value ; is s93
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;]
+Current state is: 93 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, id]
+Current state is: 79 action on token: < value < is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Factor]
+Current state is: 66 action on token: < value < is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Factor, DotArrayList]
+Current state is: 67 action on token: < value < is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Not]
+Current state is: 46 action on token: < value < is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Not, Tlist]
+Current state is: 47 action on token: < value < is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Term]
+Current state is: 38 action on token: < value < is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Term, Llist]
+Current state is: 39 action on token: < value < is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less]
+Current state is: 33 action on token: < value < is s35
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <]
+Current state is: 35 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, number]
+Current state is: 81 action on token: ; value ; is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, Factor]
+Current state is: 66 action on token: ; value ; is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, Factor, DotArrayList]
+Current state is: 67 action on token: ; value ; is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, Not]
+Current state is: 46 action on token: ; value ; is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, Not, Tlist]
+Current state is: 47 action on token: ; value ; is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, Term]
+Current state is: 38 action on token: ; value ; is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, Term, Llist]
+Current state is: 39 action on token: ; value ; is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, Less]
+Current state is: 36 action on token: ; value ; is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, <, Less, Alist]
+Current state is: 37 action on token: ; value ; is r58
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Less, Alist]
+Current state is: 34 action on token: ; value ; is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, And]
+Current state is: 28 action on token: ; value ; is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, And, Elist]
+Current state is: 29 action on token: ; value ; is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp]
+Current state is: 94 action on token: ; value ; is s95
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;]
+Current state is: 95 action on token: id value id is s184
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id]
+Current state is: 184 action on token: = value = is s185
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =]
+Current state is: 185 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, id]
+Current state is: 79 action on token: + value + is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Factor]
+Current state is: 66 action on token: + value + is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Factor, DotArrayList]
+Current state is: 67 action on token: + value + is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Not]
+Current state is: 46 action on token: + value + is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Not, Tlist]
+Current state is: 47 action on token: + value + is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term]
+Current state is: 38 action on token: + value + is s43
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, +]
+Current state is: 43 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, +, number]
+Current state is: 81 action on token: ) value ) is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, +, Factor]
+Current state is: 66 action on token: ) value ) is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, +, Factor, DotArrayList]
+Current state is: 67 action on token: ) value ) is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, +, Not]
+Current state is: 46 action on token: ) value ) is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, +, Not, Tlist]
+Current state is: 47 action on token: ) value ) is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, +, Term]
+Current state is: 44 action on token: ) value ) is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, +, Term, Llist]
+Current state is: 45 action on token: ) value ) is r61
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Term, Llist]
+Current state is: 39 action on token: ) value ) is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Less]
+Current state is: 33 action on token: ) value ) is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Less, Alist]
+Current state is: 34 action on token: ) value ) is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, And]
+Current state is: 28 action on token: ) value ) is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, And, Elist]
+Current state is: 29 action on token: ) value ) is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, id, =, Exp]
+Current state is: 186 action on token: ) value ) is r45
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm]
+Current state is: 96 action on token: ) value ) is s97
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, )]
+Current state is: 97 action on token: { value { is s99
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {]
+Current state is: 99 action on token: System.out.println value System.out.println is r40
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList]
+Current state is: 100 action on token: System.out.println value System.out.println is s142
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println]
+Current state is: 142 action on token: ( value ( is s143
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (]
+Current state is: 143 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, id]
+Current state is: 79 action on token: < value < is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Factor]
+Current state is: 66 action on token: < value < is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Factor, DotArrayList]
+Current state is: 67 action on token: < value < is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Not]
+Current state is: 46 action on token: < value < is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Not, Tlist]
+Current state is: 47 action on token: < value < is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Term]
+Current state is: 38 action on token: < value < is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Term, Llist]
+Current state is: 39 action on token: < value < is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less]
+Current state is: 33 action on token: < value < is s35
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <]
+Current state is: 35 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, number]
+Current state is: 81 action on token: ) value ) is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, Factor]
+Current state is: 66 action on token: ) value ) is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, Factor, DotArrayList]
+Current state is: 67 action on token: ) value ) is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, Not]
+Current state is: 46 action on token: ) value ) is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, Not, Tlist]
+Current state is: 47 action on token: ) value ) is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, Term]
+Current state is: 38 action on token: ) value ) is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, Term, Llist]
+Current state is: 39 action on token: ) value ) is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, Less]
+Current state is: 36 action on token: ) value ) is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, <, Less, Alist]
+Current state is: 37 action on token: ) value ) is r58
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Less, Alist]
+Current state is: 34 action on token: ) value ) is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, And]
+Current state is: 28 action on token: ) value ) is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, And, Elist]
+Current state is: 29 action on token: ) value ) is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Exp]
+Current state is: 144 action on token: ) value ) is s145
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Exp, )]
+Current state is: 145 action on token: ; value ; is s146
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, System.out.println, (, Exp, ), ;]
+Current state is: 146 action on token: } value } is r36
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, Statement]
+Current state is: 89 action on token: } value } is r39
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList]
+Current state is: 100 action on token: } value } is s101
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), {, StatementList, }]
+Current state is: 101 action on token: } value } is r30
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, for, (, InitializationStm, ;, Exp, ;, IncrementStm, ), Statement]
+Current state is: 98 action on token: } value } is r34
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, Statement]
+Current state is: 89 action on token: } value } is r39
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList]
+Current state is: 100 action on token: } value } is s101
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), {, StatementList, }]
+Current state is: 101 action on token: } value } is r30
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, while, (, Exp, ), Statement]
+Current state is: 126 action on token: } value } is r33
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement]
+Current state is: 104 action on token: } value } is s105
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }]
+Current state is: 105 action on token: while value while is s106
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while]
+Current state is: 106 action on token: ( value ( is s107
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (]
+Current state is: 107 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, id]
+Current state is: 79 action on token: < value < is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Factor]
+Current state is: 66 action on token: < value < is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Factor, DotArrayList]
+Current state is: 67 action on token: < value < is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Not]
+Current state is: 46 action on token: < value < is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Not, Tlist]
+Current state is: 47 action on token: < value < is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Term]
+Current state is: 38 action on token: < value < is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Term, Llist]
+Current state is: 39 action on token: < value < is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less]
+Current state is: 33 action on token: < value < is s35
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <]
+Current state is: 35 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, number]
+Current state is: 81 action on token: ) value ) is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, Factor]
+Current state is: 66 action on token: ) value ) is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, Factor, DotArrayList]
+Current state is: 67 action on token: ) value ) is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, Not]
+Current state is: 46 action on token: ) value ) is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, Not, Tlist]
+Current state is: 47 action on token: ) value ) is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, Term]
+Current state is: 38 action on token: ) value ) is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, Term, Llist]
+Current state is: 39 action on token: ) value ) is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, Less]
+Current state is: 36 action on token: ) value ) is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, <, Less, Alist]
+Current state is: 37 action on token: ) value ) is r58
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Less, Alist]
+Current state is: 34 action on token: ) value ) is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, And]
+Current state is: 28 action on token: ) value ) is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, And, Elist]
+Current state is: 29 action on token: ) value ) is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Exp]
+Current state is: 108 action on token: ) value ) is s109
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Exp, )]
+Current state is: 109 action on token: ; value ; is s110
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, do, {, Statement, }, while, (, Exp, ), ;]
+Current state is: 110 action on token: } value } is r32
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement]
+Current state is: 174 action on token: } value } is s175
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }]
+Current state is: 175 action on token: else value else is r49
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList]
+Current state is: 176 action on token: else value else is s178
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else]
+Current state is: 178 action on token: if value if is s179
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if]
+Current state is: 179 action on token: ( value ( is s180
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (]
+Current state is: 180 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, id]
+Current state is: 79 action on token: < value < is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Factor]
+Current state is: 66 action on token: < value < is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Factor, DotArrayList]
+Current state is: 67 action on token: < value < is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Not]
+Current state is: 46 action on token: < value < is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Not, Tlist]
+Current state is: 47 action on token: < value < is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Term]
+Current state is: 38 action on token: < value < is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Term, Llist]
+Current state is: 39 action on token: < value < is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less]
+Current state is: 33 action on token: < value < is s35
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <]
+Current state is: 35 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, number]
+Current state is: 81 action on token: ) value ) is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, Factor]
+Current state is: 66 action on token: ) value ) is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, Factor, DotArrayList]
+Current state is: 67 action on token: ) value ) is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, Not]
+Current state is: 46 action on token: ) value ) is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, Not, Tlist]
+Current state is: 47 action on token: ) value ) is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, Term]
+Current state is: 38 action on token: ) value ) is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, Term, Llist]
+Current state is: 39 action on token: ) value ) is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, Less]
+Current state is: 36 action on token: ) value ) is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, <, Less, Alist]
+Current state is: 37 action on token: ) value ) is r58
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Less, Alist]
+Current state is: 34 action on token: ) value ) is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, And]
+Current state is: 28 action on token: ) value ) is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, And, Elist]
+Current state is: 29 action on token: ) value ) is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp]
+Current state is: 181 action on token: ) value ) is s182
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, )]
+Current state is: 182 action on token: System.out.println value System.out.println is s142
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println]
+Current state is: 142 action on token: ( value ( is s143
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (]
+Current state is: 143 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, id]
+Current state is: 79 action on token: < value < is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Factor]
+Current state is: 66 action on token: < value < is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Factor, DotArrayList]
+Current state is: 67 action on token: < value < is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Not]
+Current state is: 46 action on token: < value < is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Not, Tlist]
+Current state is: 47 action on token: < value < is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Term]
+Current state is: 38 action on token: < value < is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Term, Llist]
+Current state is: 39 action on token: < value < is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less]
+Current state is: 33 action on token: < value < is s35
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <]
+Current state is: 35 action on token: number value number is s81
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, number]
+Current state is: 81 action on token: ) value ) is r79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, Factor]
+Current state is: 66 action on token: ) value ) is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, Factor, DotArrayList]
+Current state is: 67 action on token: ) value ) is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, Not]
+Current state is: 46 action on token: ) value ) is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, Not, Tlist]
+Current state is: 47 action on token: ) value ) is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, Term]
+Current state is: 38 action on token: ) value ) is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, Term, Llist]
+Current state is: 39 action on token: ) value ) is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, Less]
+Current state is: 36 action on token: ) value ) is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, <, Less, Alist]
+Current state is: 37 action on token: ) value ) is r58
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Less, Alist]
+Current state is: 34 action on token: ) value ) is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, And]
+Current state is: 28 action on token: ) value ) is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, And, Elist]
+Current state is: 29 action on token: ) value ) is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Exp]
+Current state is: 144 action on token: ) value ) is s145
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Exp, )]
+Current state is: 145 action on token: ; value ; is s146
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), System.out.println, (, Exp, ), ;]
+Current state is: 146 action on token: } value } is r36
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, else, if, (, Exp, ), Statement]
+Current state is: 183 action on token: } value } is r47
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList, ElseIf]
+Current state is: 177 action on token: } value } is r48
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, if, (, Exp, ), {, Statement, }, ElseIfList]
+Current state is: 176 action on token: } value } is r31
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, Statement]
+Current state is: 89 action on token: } value } is r39
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList]
+Current state is: 100 action on token: } value } is s101
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, {, StatementList, }]
+Current state is: 101 action on token: return value return is r30
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, Statement]
+Current state is: 89 action on token: return value return is r39
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList]
+Current state is: 23 action on token: return value return is s24
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return]
+Current state is: 24 action on token: id value id is s79
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, id]
+Current state is: 79 action on token: ; value ; is r82
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Factor]
+Current state is: 66 action on token: ; value ; is r70
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Factor, DotArrayList]
+Current state is: 67 action on token: ; value ; is r68
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Not]
+Current state is: 46 action on token: ; value ; is r66
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Not, Tlist]
+Current state is: 47 action on token: ; value ; is r64
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Term]
+Current state is: 38 action on token: ; value ; is r63
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Term, Llist]
+Current state is: 39 action on token: ; value ; is r60
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Less]
+Current state is: 33 action on token: ; value ; is r59
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Less, Alist]
+Current state is: 34 action on token: ; value ; is r57
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, And]
+Current state is: 28 action on token: ; value ; is r56
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, And, Elist]
+Current state is: 29 action on token: ; value ; is r54
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Exp]
+Current state is: 25 action on token: ; value ; is s26
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Exp, ;]
+Current state is: 26 action on token: } value } is s27
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, public, Type, id, (, FormalList, ), {, VarDeclList, StatementList, return, Exp, ;, }]
+Current state is: 27 action on token: } value } is r18
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, MethodDecl]
+Current state is: 14 action on token: } value } is r19
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList]
+Current state is: 222 action on token: } value } is s223
+[MainClass, ClassDeclList, ClassDeclSpec, {, VarDeclList, MethodDeclList, }]
+Current state is: 223 action on token: $ value $ is r7
+[MainClass, ClassDeclList, ClassDeclSpec, ClassDeclDeff]
+Current state is: 7 action on token: $ value $ is r5
+[MainClass, ClassDeclList, ClassDecl]
+Current state is: 5 action on token: $ value $ is r3
+[MainClass, ClassDeclList]
+Current state is: 4 action on token: $ value $ is r1
+[Program]
+Current state is: 2 action on token: $ value $ is a
+No syntax errors detected

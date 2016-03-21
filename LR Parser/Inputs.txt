@@ -1,25 +1,22 @@
-**FOR GRAMMAR 3.1**
-
 //x  :=  (print(y), 2 + 3) 
-*GOOD WITH GRAMMAR 3.1* id := ( print ( id ) , num + num ) $
+** id := ( print ( id ) , num + num ) $
 
 
-** THIS TESTS OPERANDS
 
-*Good* class id { public static void main ( String [ ] id ) { { { } } } } class id { public int id ( int id , int id ) { int id , id , id ; { id = number ; id = id ; id = id ; id = id && id < id + id * ! id . id ( ) [ number ] ; } return id ; } } $
-
-
-*Good* class id { public static void main ( String [ ] id ) { { { } } } } $
+** class id { public static void main ( String [ ] id ) { { { } } } } class id { public int id ( int id , int id ) { int id , id , id ; { id = number ; id = id ; id = id ; id = id && id < id + id * ! id . id ( ) [ number ] ; } return id ; } } $
 
 
-*Good* class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( ) { { { } } return number ; } } $
-
-*Good* class id { public static void main ( String [ ] id ) { { System.out.println ( number ) ; } } } $
-
-class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( int id , int id ) { int id , id , id ; { id = number ; id = id ; id = id ; if ( id < number ) { do { while ( id < number ) { for ( id = number ; id < number ; id = id + number ) { switch ( id ) { case id < number : System.out.println ( id < number ) ; default : ( int id = number ) , ( int id = number ) ; } } } } while ( id < number ) ; } else if ( id < number ) System.out.println ( id < number ) ; } return id ; } } $
+** class id { public static void main ( String [ ] id ) { { { } } } } $
 
 
-class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( int id , int id ) { int id , id , id ; { id = number ; id = id ; id = id ; if ( id < number ) { do { while ( id < number ) { for ( id = number ; id < number ; id = id + number ) { System.out.println ( id < number ) ;  } } } while ( id < number ) ; } else if ( id < number ) System.out.println ( id < number ) ; } return id ; } } $
+** class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( ) { { { } } return number ; } } $
+
+** class id { public static void main ( String [ ] id ) { { System.out.println ( number ) ; } } } $
+
+** class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( int id , int id ) { int id , id , id ; { id = number ; id = id ; id = id ; if ( id < number ) { do { while ( id < number ) { for ( id = number ; id < number ; id = id + number ) { switch ( id ) { case id < number : System.out.println ( id < number ) ; default : ( int id = number ) , ( int id = number ) ; } } } } while ( id < number ) ; } else if ( id < number ) System.out.println ( id < number ) ; } return id ; } } $
+
+
+** class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( int id , int id ) { int id , id , id ; { id = number ; id = id ; id = id ; if ( id < number ) { do { while ( id < number ) { for ( id = number ; id < number ; id = id + number ) { System.out.println ( id < number ) ;  } } } while ( id < number ) ; } else if ( id < number ) System.out.println ( id < number ) ; } return id ; } } $
 
 *THIS LINE OF CODE REPRESENTS THE FOLLOWING CODE*
 
