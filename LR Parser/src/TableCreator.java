@@ -12,7 +12,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TableCreator {
-	ArrayList<String> allNonTerminals;
+	static final String ruleSeparator = "->";
+	ArrayList<String> allNonTerminals, allTerminals;
 	HashMap <String, HashSet<String>> folSet;
 	Scanner sc;
 	File file;
@@ -24,19 +25,36 @@ public class TableCreator {
 		sc = new Scanner(new FileReader(file));
 		rules = new ArrayList<Rule>();
 		allNonTerminals = new ArrayList<String> (100);
+		allTerminals = new ArrayList<String> (100);
 		states = new LinkedHashSet<State> (200);
 		folSet = new HashMap<String, HashSet<String>>();
 	}
 
-	public void scanForNTs(){
+	public void scanForNTs() throws FileNotFoundException{
 		Scanner lineScanner;
+		String temp;
 		while (sc.hasNext()){
 			lineScanner = new Scanner(sc.nextLine());
-			String temp = lineScanner.next();
+			temp = lineScanner.next();
 			if(!allNonTerminals.contains(temp)){
 				allNonTerminals.add(temp);
 			}
 		}
+		sc = new Scanner(new FileReader(file));
+		while(sc.hasNext()){
+			lineScanner = new Scanner(sc.nextLine());
+			while(lineScanner.hasNext()){
+				temp = lineScanner.next();
+				if(!temp.equals(ruleSeparator) && !allNonTerminals.contains(temp) && !allTerminals.contains(temp)){
+					allTerminals.add(temp);
+				}
+			}
+		}
+		
+		for(String s : allNonTerminals){
+			System.out.println(s);
+		}
+		
 	}
 
 	public void readRules() throws FileNotFoundException{
@@ -94,6 +112,7 @@ public class TableCreator {
 					if(nt.equals(r.afterDot.get(i))){
 						if(allNonTerminals.contains(r.afterDot.get(i+1)) && !lookedAt.contains(r.afterDot.get(i + 1))){
 							fol.addAll(findFolHelp(r.afterDot.get(i+1), lookedAt));
+							fol.addAll(findFirst(r.afterDot.get(i+1), new HashSet<String>()));
 						}
 						else if(!allNonTerminals.contains(r.afterDot.get(i+1))){
 							fol.add(r.afterDot.get(i+1));
@@ -111,6 +130,21 @@ public class TableCreator {
 
 	}
 
+	private HashSet<String> findFirst(String nt, Set<String> lookedAt){
+		HashSet<String> first = new HashSet<String>();
+		for(Rule r : rules){
+			if(r.reduceTo.equals(nt) && !r.isFinished() ){
+				if(!allNonTerminals.contains(r.afterDot.get(0))){
+					first.add(r.afterDot.get(0));
+				}
+				else if(!lookedAt.contains(r.afterDot.get(0))){
+					lookedAt.add(r.afterDot.get(0));
+					first.addAll(findFirst(r.afterDot.get(0), lookedAt));
+				}
+			}
+		}
+		return first;
+	}
 
 	public void createTable(String filename) throws IOException{
 		Set<String> terminals = new LinkedHashSet<String>();
@@ -177,7 +211,6 @@ public class TableCreator {
 			writer.write(output[output.length - 1] == null ? "\n" : output[output.length - 1] + "\n");
 
 		}
-
 
 		writer.close();
 	}

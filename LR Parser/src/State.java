@@ -16,25 +16,26 @@ import java.util.stream.Collectors;
 public class State {
 	static int stateNumbers = 1;
 	int stateNumber;
-	Set<String> nonTerminals;
-	Set<Rule> rules;
+	List<String> nonTerminals;
+	LinkedHashSet<Rule> rules;
 	Map<String, State> transitions;
 	List<Rule> allRules;
+	List<String> allTerminals;
 	//public static Set<State> allStates = new LinkedHashSet<State>(); //Are you in good hands?
 	private LinkedHashSet<State> allStates;
 
-	public State (LinkedHashSet<State> allStates, List<Rule> allRules){
-		nonTerminals = new HashSet<String>();
+	public State (LinkedHashSet<State> allStates, List<Rule> allRules/*, List<String> allTerminals*/){
+		nonTerminals = new ArrayList<String>();
 		rules = new LinkedHashSet<Rule>();
 		transitions = new HashMap<String, State>();
 		this.allStates = allStates;
 		this.allRules = allRules;
+		//this.allTerminals = allTerminals;
 	}
-
+/*
 	public void add(Rule rule){
 		List<Rule> newRules = new ArrayList<Rule>();
 		rules.add(rule);
-
 		boolean changed = true;
 
 		while(changed){
@@ -43,16 +44,71 @@ public class State {
 			for(Rule r : rules){
 				if (!r.isFinished() && !nonTerminals.contains(r.reduceTo)){
 					nonTerminals.add(r.reduceTo);
+					changed = true;
 					newRules.addAll(allRules.stream()
 							.filter(t -> t.reduceTo.equals(r.afterDot.get(0))).
 							collect(Collectors.toList()));
-					changed = true;
+					
+					
+					if(r.afterDot.get(0).equals("Factor")){
+						System.out.println(r.afterDot.get(0) + " " + r.reduceTo);
+						System.out.println(newRules);
+					}
 				}
 			}
 			rules.addAll(newRules);
 		}
 	}
-
+*/
+	
+	public void add(Rule rule){
+		boolean newRules = true;
+		Set<Rule> addingRules = new HashSet<Rule>();
+		Set<String> usedNonTerminals = new HashSet<String>();
+		rules.add(rule);
+		
+		while(newRules){
+			newRules = false;
+			for(Rule r : rules){
+				if(r.reduceTo.equals("Not")){
+					//Debug point
+					System.out.println("Debug started");
+				}
+				if (!r.isFinished() && !usedNonTerminals.contains(r.afterDot.get(0))){ //Keep going
+					for(Rule tempRule : allRules){
+						if(r.afterDot.get(0).equals(tempRule.reduceTo)){
+							
+							if(addingRules.add(tempRule)){
+								newRules = true;
+							}
+							addingRules.add(tempRule);
+							if(!tempRule.isFinished()){
+								usedNonTerminals.remove(tempRule.afterDot.get(0));
+							}
+							
+						}
+					}
+				}
+				usedNonTerminals.add(r.reduceTo);
+			}
+			for(Rule r : addingRules){
+				if(rules.add(r)){
+					newRules = true;
+					System.out.println("Successfully added rule: " + r);
+				}
+				else{
+					System.out.println("Failed to add rule: " + r + " to set:\n");
+					
+				}
+				
+			}
+			for(Rule r2 : rules){
+				System.out.println(r2);
+			}
+			System.out.println();
+			
+		}
+	}
 
 	public LinkedHashSet<State> expand(){
 		if(!allStates.contains(this)){

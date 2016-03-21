@@ -9,13 +9,13 @@ ClassDeclDeff -> { VarDeclList MethodDeclList }
 ClassDeclDeff -> extends id { VarDeclList MethodDeclList }
 VarDeclList -> VarDeclList VarDecl
 VarDeclList -> 
-VarDecl -> Type VarDeclType MultiDeclList ; 
-VarDeclType -> id VarDeclTypeAssign
-VarDeclTypeAssign -> = Exp 
-VarDeclTypeAssign -> 
+VarDecl -> Type VarDeclID MultiDeclList ; 
+VarDeclID -> id VarDeclTypeAssign
+VarDeclIDAssign -> = Exp 
+VarDeclIDAssign -> 
 MultiDeclList -> MultiDeclList MultiDecl
 MultiDeclList -> 
-MultiDecl -> , id VarDeclTypeAssign
+MultiDecl -> , id VarDeclIDAssign
 MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return Exp ; }
 MethodDeclList -> MethodDeclList MethodDecl
 MethodDeclList -> 
@@ -77,10 +77,10 @@ ExpList -> Exp ExpRest
 ExpList -> 
 ExpRest -> , Exp ExpRest
 ExpRest -> 
-Factor -> number
-Factor -> true
-Factor -> false
-Factor -> id
+Factor -> number 
+Factor -> true 
+Factor -> false 
+Factor -> id 
 Factor -> this
 Factor -> new New
 Factor -> ( Exp )

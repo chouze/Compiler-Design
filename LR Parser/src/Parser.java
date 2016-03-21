@@ -17,17 +17,20 @@ public class Parser {
 	Map<Integer, TableRule> ruleMap;
 	Stack<String> inputStack;
 	Stack<Integer> previousStates;
-	Queue<String> inputQueue;
+	Queue<SimpleToken> inputQueue;
 	TableState currentState;
 	TableState previousState;
-	String currentToken;
+	SimpleToken currentToken;
 	ArrayList<String> acceptableTokens;
 	String[] inputArr;
+	String tableName, grammarName;
 
 	int startStateNum = 1;
 	int startRuleNum = 0;
 
-	public Parser() {
+	public Parser(String tableName, String grammarName) {
+		this.tableName = tableName;
+		this.grammarName = grammarName;
 		// Prework
 		try {
 			makeMap();
@@ -42,7 +45,7 @@ public class Parser {
 
 	public void parseInput() {
 		inputStack = new Stack<String>();
-		inputQueue = new LinkedList<String>();
+		inputQueue = new LinkedList<SimpleToken>();
 		previousStates = new Stack<Integer>();
 		boolean validInput = true;
 
@@ -69,25 +72,31 @@ public class Parser {
 		if(validInput){
 		scanner = new Scanner(temp);
 		//I'll need to check for acceptable tokens but not right now, assume all input is correct
-		String tempToken;
+		String tempString;
+		SimpleToken tempToken;
 		while(scanner.hasNext())
 		{
-			tempToken = scanner.next();
+			tempString = scanner.next();
 			
-			if(!acceptableTokens.contains(tempToken)){
-				if(tempToken.matches("[-+]?(\\d*[.])?\\d+")){
-					tempToken = "num";
+			if(!acceptableTokens.contains(tempString)){
+				if(tempString.matches("[-+]?(\\d*[.])?\\d+")){
+					System.out.println("Changing: " + tempString + " to number");
+					tempToken = new SimpleToken("number", tempString);
 				}
 				else {
-					tempToken = "id";
+					System.out.println("Changing: " + tempString + " to id");
+					tempToken = new SimpleToken("id", tempString);
 				}
+			}
+			else{
+				tempToken = new SimpleToken(tempString);
 			}
 			inputQueue.add(tempToken);
 		}
 		
 		scanner.close();
 		
-		currentToken = "";
+
 		String action = "";
 
 		while (!inputQueue.isEmpty()) {
@@ -96,12 +105,12 @@ public class Parser {
 			//System.out.println(currentToken);
 			
 			
-			action = currentState.getAction(currentToken); // Retrieve the
+			action = currentState.getAction(currentToken.tokenName); // Retrieve the
 															// action for this
 															// token, based on
 															// the current state
 			int prev = previousStates.pop();
-			System.out.println("Current state is: " + prev +  " action on token: " + currentToken + " is " + action);
+			System.out.println("Current state is: " + prev +  " action on token: " + currentToken.tokenName + " value " + currentToken.tokenValue + " is " + action);
 			previousStates.push(prev);
 			char firstChar = action.charAt(0);
 			int stateOrRuleNum = 0;
@@ -130,9 +139,15 @@ public class Parser {
 	public void makeMap() throws FileNotFoundException {
 		stateMap = new HashMap<Integer, TableState>();
 
-		Scanner scanner = new Scanner(new File("Grammar_Output.csv"));
+		Scanner scanner = new Scanner(new File(tableName));
 		String header = scanner.nextLine();
 		String[] headerArr = header.split(",");
+		
+		for(int i = 0; i < headerArr.length; i++){
+			if(headerArr[i].equals("\"comma\"")){
+				headerArr[i] = ",";
+			}
+		}
 		
 		acceptableTokens = new ArrayList<String>(Arrays.asList(headerArr));
 
@@ -150,7 +165,7 @@ public class Parser {
 		ruleMap = new HashMap<Integer, TableRule>(); // map of rules using
 														// rulenumber as the key
 
-		Scanner scanner = new Scanner(new File("Grammar.txt"));
+		Scanner scanner = new Scanner(new File(grammarName));
 		Scanner lineScanner;
 
 		String LSide;
@@ -190,7 +205,7 @@ public class Parser {
 
 	public void shift(int state) {
 		// push the next string and shift states
-		inputStack.push(inputQueue.remove());
+		inputStack.push(inputQueue.remove().tokenName);
 		System.out.println(inputStack);
 		previousState = currentState;
 		currentState = stateMap.get(state);
@@ -246,7 +261,7 @@ public class Parser {
 	}
 
 	public void accept() {
-		inputStack.push(inputQueue.remove());
-		System.out.println("S'all good homie");
+		inputStack.push(inputQueue.remove().tokenName);
+		System.out.println("No syntax errors detected");
 	}
 }

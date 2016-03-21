@@ -27,16 +27,16 @@ Can't reduce S' -> Program .$
 
 State Number: 3
 Program -> MainClass .ClassDeclList 
-ClassDeclList -> .ClassDeclList ClassDecl 
 ClassDeclList -> .
+ClassDeclList -> .ClassDeclList ClassDecl 
 
 Transitions: 
 Transition to 4 on ClassDeclList
 
 Reductions: 
 Can't reduce Program -> MainClass .ClassDeclList 
-Can't reduce ClassDeclList -> .ClassDeclList ClassDecl 
 Reduce on ClassDeclList -> .
+Can't reduce ClassDeclList -> .ClassDeclList ClassDecl 
 
 
 
@@ -71,18 +71,18 @@ Reduce on ClassDeclList -> ClassDeclList ClassDecl .
 
 State Number: 6
 ClassDecl -> ClassDeclSpec .ClassDeclDeff 
-ClassDeclDeff -> .{ VarDeclList MethodDeclList } 
 ClassDeclDeff -> .extends id { VarDeclList MethodDeclList } 
+ClassDeclDeff -> .{ VarDeclList MethodDeclList } 
 
 Transitions: 
 Transition to 7 on ClassDeclDeff
-Transition to 210 on extends
-Transition to 8 on {
+Transition to 8 on extends
+Transition to 212 on {
 
 Reductions: 
 Can't reduce ClassDecl -> ClassDeclSpec .ClassDeclDeff 
-Can't reduce ClassDeclDeff -> .{ VarDeclList MethodDeclList } 
 Can't reduce ClassDeclDeff -> .extends id { VarDeclList MethodDeclList } 
+Can't reduce ClassDeclDeff -> .{ VarDeclList MethodDeclList } 
 
 
 
@@ -97,78 +97,100 @@ Reduce on ClassDecl -> ClassDeclSpec ClassDeclDeff .
 
 
 State Number: 8
-ClassDeclDeff -> { .VarDeclList MethodDeclList } 
-VarDeclList -> .VarDeclList VarDecl 
-VarDeclList -> .
+ClassDeclDeff -> extends .id { VarDeclList MethodDeclList } 
 
 Transitions: 
-Transition to 9 on VarDeclList
+Transition to 9 on id
 
 Reductions: 
-Can't reduce ClassDeclDeff -> { .VarDeclList MethodDeclList } 
-Can't reduce VarDeclList -> .VarDeclList VarDecl 
-Reduce on VarDeclList -> .
+Can't reduce ClassDeclDeff -> extends .id { VarDeclList MethodDeclList } 
 
 
 
 State Number: 9
-ClassDeclDeff -> { VarDeclList .MethodDeclList } 
+ClassDeclDeff -> extends id .{ VarDeclList MethodDeclList } 
+
+Transitions: 
+Transition to 10 on {
+
+Reductions: 
+Can't reduce ClassDeclDeff -> extends id .{ VarDeclList MethodDeclList } 
+
+
+
+State Number: 10
+ClassDeclDeff -> extends id { .VarDeclList MethodDeclList } 
+VarDeclList -> .
+VarDeclList -> .VarDeclList VarDecl 
+
+Transitions: 
+Transition to 11 on VarDeclList
+
+Reductions: 
+Can't reduce ClassDeclDeff -> extends id { .VarDeclList MethodDeclList } 
+Reduce on VarDeclList -> .
+Can't reduce VarDeclList -> .VarDeclList VarDecl 
+
+
+
+State Number: 11
+ClassDeclDeff -> extends id { VarDeclList .MethodDeclList } 
 MethodDeclList -> .MethodDeclList MethodDecl 
 MethodDeclList -> .
 VarDeclList -> VarDeclList .VarDecl 
-VarDecl -> .Type VarDeclType MultiDeclList ; 
+VarDecl -> .Type VarDeclID MultiDeclList ; 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 191 on Type
-Transition to 172 on boolean
-Transition to 10 on MethodDeclList
-Transition to 190 on VarDecl
-Transition to 173 on id
-Transition to 168 on int
+Transition to 193 on Type
+Transition to 159 on boolean
+Transition to 12 on MethodDeclList
+Transition to 192 on VarDecl
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
-Can't reduce ClassDeclDeff -> { VarDeclList .MethodDeclList } 
+Can't reduce ClassDeclDeff -> extends id { VarDeclList .MethodDeclList } 
 Can't reduce MethodDeclList -> .MethodDeclList MethodDecl 
 Reduce on MethodDeclList -> .
 Can't reduce VarDeclList -> VarDeclList .VarDecl 
-Can't reduce VarDecl -> .Type VarDeclType MultiDeclList ; 
+Can't reduce VarDecl -> .Type VarDeclID MultiDeclList ; 
 Can't reduce Type -> .int IntType 
 Can't reduce Type -> .boolean 
 Can't reduce Type -> .id 
 
 
 
-State Number: 10
-ClassDeclDeff -> { VarDeclList MethodDeclList .} 
+State Number: 12
+ClassDeclDeff -> extends id { VarDeclList MethodDeclList .} 
 MethodDeclList -> MethodDeclList .MethodDecl 
 MethodDecl -> .public Type id ( FormalList ) { VarDeclList StatementList return Exp ; } 
 
 Transitions: 
-Transition to 13 on public
-Transition to 12 on MethodDecl
-Transition to 11 on }
+Transition to 15 on public
+Transition to 14 on MethodDecl
+Transition to 13 on }
 
 Reductions: 
-Can't reduce ClassDeclDeff -> { VarDeclList MethodDeclList .} 
+Can't reduce ClassDeclDeff -> extends id { VarDeclList MethodDeclList .} 
 Can't reduce MethodDeclList -> MethodDeclList .MethodDecl 
 Can't reduce MethodDecl -> .public Type id ( FormalList ) { VarDeclList StatementList return Exp ; } 
 
 
 
-State Number: 11
-ClassDeclDeff -> { VarDeclList MethodDeclList } .
+State Number: 13
+ClassDeclDeff -> extends id { VarDeclList MethodDeclList } .
 
 Transitions: 
 None
 Reductions: 
-Reduce on ClassDeclDeff -> { VarDeclList MethodDeclList } .
+Reduce on ClassDeclDeff -> extends id { VarDeclList MethodDeclList } .
 
 
 
-State Number: 12
+State Number: 14
 MethodDeclList -> MethodDeclList MethodDecl .
 
 Transitions: 
@@ -178,17 +200,17 @@ Reduce on MethodDeclList -> MethodDeclList MethodDecl .
 
 
 
-State Number: 13
+State Number: 15
 MethodDecl -> public .Type id ( FormalList ) { VarDeclList StatementList return Exp ; } 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 14 on Type
-Transition to 172 on boolean
-Transition to 173 on id
-Transition to 168 on int
+Transition to 16 on Type
+Transition to 159 on boolean
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
 Can't reduce MethodDecl -> public .Type id ( FormalList ) { VarDeclList StatementList return Exp ; } 
@@ -198,162 +220,162 @@ Can't reduce Type -> .id
 
 
 
-State Number: 14
+State Number: 16
 MethodDecl -> public Type .id ( FormalList ) { VarDeclList StatementList return Exp ; } 
 
 Transitions: 
-Transition to 15 on id
+Transition to 17 on id
 
 Reductions: 
 Can't reduce MethodDecl -> public Type .id ( FormalList ) { VarDeclList StatementList return Exp ; } 
 
 
 
-State Number: 15
+State Number: 17
 MethodDecl -> public Type id .( FormalList ) { VarDeclList StatementList return Exp ; } 
 
 Transitions: 
-Transition to 16 on (
+Transition to 18 on (
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id .( FormalList ) { VarDeclList StatementList return Exp ; } 
 
 
 
-State Number: 16
+State Number: 18
 MethodDecl -> public Type id ( .FormalList ) { VarDeclList StatementList return Exp ; } 
-FormalList -> .Type id FormalRest 
 FormalList -> .
+FormalList -> .Type id FormalRest 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 203 on Type
-Transition to 172 on boolean
-Transition to 17 on FormalList
-Transition to 173 on id
-Transition to 168 on int
+Transition to 205 on Type
+Transition to 159 on boolean
+Transition to 19 on FormalList
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( .FormalList ) { VarDeclList StatementList return Exp ; } 
-Can't reduce FormalList -> .Type id FormalRest 
 Reduce on FormalList -> .
+Can't reduce FormalList -> .Type id FormalRest 
 Can't reduce Type -> .int IntType 
 Can't reduce Type -> .boolean 
 Can't reduce Type -> .id 
 
 
 
-State Number: 17
+State Number: 19
 MethodDecl -> public Type id ( FormalList .) { VarDeclList StatementList return Exp ; } 
 
 Transitions: 
-Transition to 18 on )
+Transition to 20 on )
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( FormalList .) { VarDeclList StatementList return Exp ; } 
 
 
 
-State Number: 18
+State Number: 20
 MethodDecl -> public Type id ( FormalList ) .{ VarDeclList StatementList return Exp ; } 
 
 Transitions: 
-Transition to 19 on {
+Transition to 21 on {
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( FormalList ) .{ VarDeclList StatementList return Exp ; } 
 
 
 
-State Number: 19
+State Number: 21
 MethodDecl -> public Type id ( FormalList ) { .VarDeclList StatementList return Exp ; } 
-VarDeclList -> .VarDeclList VarDecl 
 VarDeclList -> .
+VarDeclList -> .VarDeclList VarDecl 
 
 Transitions: 
-Transition to 20 on VarDeclList
+Transition to 22 on VarDeclList
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( FormalList ) { .VarDeclList StatementList return Exp ; } 
-Can't reduce VarDeclList -> .VarDeclList VarDecl 
 Reduce on VarDeclList -> .
+Can't reduce VarDeclList -> .VarDeclList VarDecl 
 
 
 
-State Number: 20
+State Number: 22
 MethodDecl -> public Type id ( FormalList ) { VarDeclList .StatementList return Exp ; } 
-StatementList -> .StatementList Statement 
 StatementList -> .
+StatementList -> .StatementList Statement 
 VarDeclList -> VarDeclList .VarDecl 
-VarDecl -> .Type VarDeclType MultiDeclList ; 
+VarDecl -> .Type VarDeclID MultiDeclList ; 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 191 on Type
-Transition to 172 on boolean
-Transition to 190 on VarDecl
-Transition to 21 on StatementList
-Transition to 173 on id
-Transition to 168 on int
+Transition to 193 on Type
+Transition to 159 on boolean
+Transition to 192 on VarDecl
+Transition to 23 on StatementList
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( FormalList ) { VarDeclList .StatementList return Exp ; } 
-Can't reduce StatementList -> .StatementList Statement 
 Reduce on StatementList -> .
+Can't reduce StatementList -> .StatementList Statement 
 Can't reduce VarDeclList -> VarDeclList .VarDecl 
-Can't reduce VarDecl -> .Type VarDeclType MultiDeclList ; 
+Can't reduce VarDecl -> .Type VarDeclID MultiDeclList ; 
 Can't reduce Type -> .int IntType 
 Can't reduce Type -> .boolean 
 Can't reduce Type -> .id 
 
 
 
-State Number: 21
+State Number: 23
 MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList .return Exp ; } 
 StatementList -> StatementList .Statement 
-Statement -> .{ StatementList } 
-Statement -> .if ( Exp ) { Statement } ElseIfList 
-Statement -> .do { Statement } while ( Exp ) ; 
-Statement -> .while ( Exp ) Statement 
 Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Statement -> .switch ( id ) { caseList } 
-Statement -> .System.out.println ( Exp ) ; 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
+Statement -> .switch ( id ) { caseList } 
+Statement -> .while ( Exp ) Statement 
+Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 Transitions: 
-Transition to 87 on Statement
-Transition to 120 on for
-Transition to 152 on (
-Transition to 88 on {
-Transition to 106 on do
-Transition to 141 on id
-Transition to 115 on while
-Transition to 91 on if
-Transition to 22 on return
-Transition to 129 on switch
-Transition to 136 on System.out.println
+Transition to 89 on Statement
+Transition to 90 on for
+Transition to 139 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 129 on while
+Transition to 161 on if
+Transition to 24 on return
+Transition to 122 on switch
+Transition to 134 on System.out.println
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList .return Exp ; } 
 Can't reduce StatementList -> StatementList .Statement 
-Can't reduce Statement -> .{ StatementList } 
-Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
-Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
-Can't reduce Statement -> .while ( Exp ) Statement 
 Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Can't reduce Statement -> .switch ( id ) { caseList } 
-Can't reduce Statement -> .System.out.println ( Exp ) ; 
+Can't reduce Statement -> .{ StatementList } 
+Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
 Can't reduce Statement -> .id Assign 
+Can't reduce Statement -> .switch ( id ) { caseList } 
+Can't reduce Statement -> .while ( Exp ) Statement 
+Can't reduce Statement -> .System.out.println ( Exp ) ; 
 Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
+Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 
 
-State Number: 22
+State Number: 24
 MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return .Exp ; } 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -361,15 +383,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 23 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 25 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return .Exp ; } 
@@ -379,32 +415,39 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 23
+State Number: 25
 MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return Exp .; } 
 
 Transitions: 
-Transition to 24 on ;
+Transition to 26 on ;
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return Exp .; } 
 
 
 
-State Number: 24
+State Number: 26
 MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return Exp ; .} 
 
 Transitions: 
-Transition to 25 on }
+Transition to 27 on }
 
 Reductions: 
 Can't reduce MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return Exp ; .} 
 
 
 
-State Number: 25
+State Number: 27
 MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return Exp ; } .
 
 Transitions: 
@@ -414,14 +457,14 @@ Reduce on MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementLis
 
 
 
-State Number: 26
+State Number: 28
 Exp -> And .Elist 
 Elist -> .&& And Elist 
 Elist -> .
 
 Transitions: 
-Transition to 28 on &&
-Transition to 27 on Elist
+Transition to 30 on &&
+Transition to 29 on Elist
 
 Reductions: 
 Can't reduce Exp -> And .Elist 
@@ -430,7 +473,7 @@ Reduce on Elist -> .
 
 
 
-State Number: 27
+State Number: 29
 Exp -> And Elist .
 
 Transitions: 
@@ -440,21 +483,35 @@ Reduce on Exp -> And Elist .
 
 
 
-State Number: 28
+State Number: 30
 Elist -> && .And Elist 
 And -> .Less Alist 
 Less -> .Term Llist 
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 29 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 83 on this
+Transition to 73 on (
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 31 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce Elist -> && .And Elist 
@@ -463,17 +520,24 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+Can't reduce Factor -> .( Exp ) 
 
 
 
-State Number: 29
+State Number: 31
 Elist -> && And .Elist 
 Elist -> .&& And Elist 
 Elist -> .
 
 Transitions: 
-Transition to 28 on &&
-Transition to 30 on Elist
+Transition to 30 on &&
+Transition to 32 on Elist
 
 Reductions: 
 Can't reduce Elist -> && And .Elist 
@@ -482,7 +546,7 @@ Reduce on Elist -> .
 
 
 
-State Number: 30
+State Number: 32
 Elist -> && And Elist .
 
 Transitions: 
@@ -492,23 +556,23 @@ Reduce on Elist -> && And Elist .
 
 
 
-State Number: 31
+State Number: 33
 And -> Less .Alist 
-Alist -> .< Less Alist 
 Alist -> .
+Alist -> .< Less Alist 
 
 Transitions: 
-Transition to 32 on Alist
-Transition to 33 on <
+Transition to 34 on Alist
+Transition to 35 on <
 
 Reductions: 
 Can't reduce And -> Less .Alist 
-Can't reduce Alist -> .< Less Alist 
 Reduce on Alist -> .
+Can't reduce Alist -> .< Less Alist 
 
 
 
-State Number: 32
+State Number: 34
 And -> Less Alist .
 
 Transitions: 
@@ -518,19 +582,33 @@ Reduce on And -> Less Alist .
 
 
 
-State Number: 33
+State Number: 35
 Alist -> < .Less Alist 
 Less -> .Term Llist 
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 34 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 71 on false
+Transition to 83 on this
+Transition to 73 on (
+Transition to 38 on Term
+Transition to 72 on id
+Transition to 36 on Less
 
 Reductions: 
 Can't reduce Alist -> < .Less Alist 
@@ -538,26 +616,33 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+Can't reduce Factor -> .( Exp ) 
 
 
 
-State Number: 34
+State Number: 36
 Alist -> < Less .Alist 
-Alist -> .< Less Alist 
 Alist -> .
+Alist -> .< Less Alist 
 
 Transitions: 
-Transition to 35 on Alist
-Transition to 33 on <
+Transition to 37 on Alist
+Transition to 35 on <
 
 Reductions: 
 Can't reduce Alist -> < Less .Alist 
-Can't reduce Alist -> .< Less Alist 
 Reduce on Alist -> .
+Can't reduce Alist -> .< Less Alist 
 
 
 
-State Number: 35
+State Number: 37
 Alist -> < Less Alist .
 
 Transitions: 
@@ -567,26 +652,26 @@ Reduce on Alist -> < Less Alist .
 
 
 
-State Number: 36
+State Number: 38
 Less -> Term .Llist 
-Llist -> .+ Term Llist 
 Llist -> .- Term Llist 
+Llist -> .+ Term Llist 
 Llist -> .
 
 Transitions: 
-Transition to 37 on Llist
-Transition to 38 on +
-Transition to 41 on -
+Transition to 39 on Llist
+Transition to 43 on +
+Transition to 40 on -
 
 Reductions: 
 Can't reduce Less -> Term .Llist 
-Can't reduce Llist -> .+ Term Llist 
 Can't reduce Llist -> .- Term Llist 
+Can't reduce Llist -> .+ Term Llist 
 Reduce on Llist -> .
 
 
 
-State Number: 37
+State Number: 39
 Less -> Term Llist .
 
 Transitions: 
@@ -596,95 +681,67 @@ Reduce on Less -> Term Llist .
 
 
 
-State Number: 38
-Llist -> + .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-
-Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 65 on Factor
-Transition to 39 on Term
-
-Reductions: 
-Can't reduce Llist -> + .Term Llist 
-Can't reduce Term -> .Not Tlist 
-Can't reduce Not -> .! Factor DotArrayList 
-Can't reduce Not -> .Factor DotArrayList 
-
-
-
-State Number: 39
-Llist -> + Term .Llist 
-Llist -> .+ Term Llist 
-Llist -> .- Term Llist 
-Llist -> .
-
-Transitions: 
-Transition to 40 on Llist
-Transition to 38 on +
-Transition to 41 on -
-
-Reductions: 
-Can't reduce Llist -> + Term .Llist 
-Can't reduce Llist -> .+ Term Llist 
-Can't reduce Llist -> .- Term Llist 
-Reduce on Llist -> .
-
-
-
 State Number: 40
-Llist -> + Term Llist .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Llist -> + Term Llist .
-
-
-
-State Number: 41
 Llist -> - .Term Llist 
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 65 on Factor
-Transition to 42 on Term
+Transition to 51 on !
+Transition to 76 on new
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 71 on false
+Transition to 83 on this
+Transition to 73 on (
+Transition to 41 on Term
+Transition to 72 on id
 
 Reductions: 
 Can't reduce Llist -> - .Term Llist 
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+Can't reduce Factor -> .( Exp ) 
 
 
 
-State Number: 42
+State Number: 41
 Llist -> - Term .Llist 
-Llist -> .+ Term Llist 
 Llist -> .- Term Llist 
+Llist -> .+ Term Llist 
 Llist -> .
 
 Transitions: 
-Transition to 43 on Llist
-Transition to 38 on +
-Transition to 41 on -
+Transition to 42 on Llist
+Transition to 43 on +
+Transition to 40 on -
 
 Reductions: 
 Can't reduce Llist -> - Term .Llist 
-Can't reduce Llist -> .+ Term Llist 
 Can't reduce Llist -> .- Term Llist 
+Can't reduce Llist -> .+ Term Llist 
 Reduce on Llist -> .
 
 
 
-State Number: 43
+State Number: 42
 Llist -> - Term Llist .
 
 Transitions: 
@@ -694,23 +751,93 @@ Reduce on Llist -> - Term Llist .
 
 
 
-State Number: 44
-Term -> Not .Tlist 
-Tlist -> .* Not Tlist 
-Tlist -> .
+State Number: 43
+Llist -> + .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
 
 Transitions: 
-Transition to 45 on Tlist
-Transition to 46 on *
+Transition to 51 on !
+Transition to 76 on new
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 71 on false
+Transition to 83 on this
+Transition to 73 on (
+Transition to 44 on Term
+Transition to 72 on id
 
 Reductions: 
-Can't reduce Term -> Not .Tlist 
-Can't reduce Tlist -> .* Not Tlist 
-Reduce on Tlist -> .
+Can't reduce Llist -> + .Term Llist 
+Can't reduce Term -> .Not Tlist 
+Can't reduce Not -> .! Factor DotArrayList 
+Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+Can't reduce Factor -> .( Exp ) 
+
+
+
+State Number: 44
+Llist -> + Term .Llist 
+Llist -> .- Term Llist 
+Llist -> .+ Term Llist 
+Llist -> .
+
+Transitions: 
+Transition to 45 on Llist
+Transition to 43 on +
+Transition to 40 on -
+
+Reductions: 
+Can't reduce Llist -> + Term .Llist 
+Can't reduce Llist -> .- Term Llist 
+Can't reduce Llist -> .+ Term Llist 
+Reduce on Llist -> .
 
 
 
 State Number: 45
+Llist -> + Term Llist .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Llist -> + Term Llist .
+
+
+
+State Number: 46
+Term -> Not .Tlist 
+Tlist -> .
+Tlist -> .* Not Tlist 
+
+Transitions: 
+Transition to 47 on Tlist
+Transition to 48 on *
+
+Reductions: 
+Can't reduce Term -> Not .Tlist 
+Reduce on Tlist -> .
+Can't reduce Tlist -> .* Not Tlist 
+
+
+
+State Number: 47
 Term -> Not Tlist .
 
 Transitions: 
@@ -720,40 +847,61 @@ Reduce on Term -> Not Tlist .
 
 
 
-State Number: 46
+State Number: 48
 Tlist -> * .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
 
 Transitions: 
-Transition to 49 on !
-Transition to 47 on Not
-Transition to 65 on Factor
+Transition to 51 on !
+Transition to 76 on new
+Transition to 84 on number
+Transition to 49 on Not
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 71 on false
+Transition to 83 on this
+Transition to 73 on (
+Transition to 72 on id
 
 Reductions: 
 Can't reduce Tlist -> * .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+Can't reduce Factor -> .( Exp ) 
 
 
 
-State Number: 47
+State Number: 49
 Tlist -> * Not .Tlist 
-Tlist -> .* Not Tlist 
 Tlist -> .
+Tlist -> .* Not Tlist 
 
 Transitions: 
-Transition to 48 on Tlist
-Transition to 46 on *
+Transition to 50 on Tlist
+Transition to 48 on *
 
 Reductions: 
 Can't reduce Tlist -> * Not .Tlist 
-Can't reduce Tlist -> .* Not Tlist 
 Reduce on Tlist -> .
+Can't reduce Tlist -> .* Not Tlist 
 
 
 
-State Number: 48
+State Number: 50
 Tlist -> * Not Tlist .
 
 Transitions: 
@@ -763,45 +911,45 @@ Reduce on Tlist -> * Not Tlist .
 
 
 
-State Number: 49
+State Number: 51
 Not -> ! .Factor DotArrayList 
-Factor -> .number 
+Factor -> .new New 
 Factor -> .true 
 Factor -> .false 
 Factor -> .id 
 Factor -> .this 
-Factor -> .new New 
+Factor -> .number 
 Factor -> .( Exp ) 
 
 Transitions: 
-Transition to 70 on number
-Transition to 75 on new
-Transition to 50 on Factor
-Transition to 71 on true
-Transition to 72 on false
-Transition to 74 on this
-Transition to 84 on (
-Transition to 73 on id
+Transition to 76 on new
+Transition to 84 on number
+Transition to 52 on Factor
+Transition to 82 on true
+Transition to 71 on false
+Transition to 83 on this
+Transition to 73 on (
+Transition to 72 on id
 
 Reductions: 
 Can't reduce Not -> ! .Factor DotArrayList 
-Can't reduce Factor -> .number 
+Can't reduce Factor -> .new New 
 Can't reduce Factor -> .true 
 Can't reduce Factor -> .false 
 Can't reduce Factor -> .id 
 Can't reduce Factor -> .this 
-Can't reduce Factor -> .new New 
+Can't reduce Factor -> .number 
 Can't reduce Factor -> .( Exp ) 
 
 
 
-State Number: 50
+State Number: 52
 Not -> ! Factor .DotArrayList 
 DotArrayList -> .DotArrayList DotArray 
 DotArrayList -> .
 
 Transitions: 
-Transition to 51 on DotArrayList
+Transition to 53 on DotArrayList
 
 Reductions: 
 Can't reduce Not -> ! Factor .DotArrayList 
@@ -810,16 +958,16 @@ Reduce on DotArrayList -> .
 
 
 
-State Number: 51
+State Number: 53
 Not -> ! Factor DotArrayList .
 DotArrayList -> DotArrayList .DotArray 
 DotArray -> .. Member 
 DotArray -> .[ Exp ] 
 
 Transitions: 
-Transition to 67 on [
-Transition to 53 on .
-Transition to 52 on DotArray
+Transition to 68 on [
+Transition to 55 on .
+Transition to 54 on DotArray
 
 Reductions: 
 Reduce on Not -> ! Factor DotArrayList .
@@ -829,7 +977,7 @@ Can't reduce DotArray -> .[ Exp ]
 
 
 
-State Number: 52
+State Number: 54
 DotArrayList -> DotArrayList DotArray .
 
 Transitions: 
@@ -839,24 +987,24 @@ Reduce on DotArrayList -> DotArrayList DotArray .
 
 
 
-State Number: 53
+State Number: 55
 DotArray -> . .Member 
-Member -> .length 
 Member -> .id ( ExpList ) 
+Member -> .length 
 
 Transitions: 
-Transition to 55 on length
-Transition to 56 on id
-Transition to 54 on Member
+Transition to 88 on length
+Transition to 57 on id
+Transition to 56 on Member
 
 Reductions: 
 Can't reduce DotArray -> . .Member 
-Can't reduce Member -> .length 
 Can't reduce Member -> .id ( ExpList ) 
+Can't reduce Member -> .length 
 
 
 
-State Number: 54
+State Number: 56
 DotArray -> . Member .
 
 Transitions: 
@@ -866,28 +1014,18 @@ Reduce on DotArray -> . Member .
 
 
 
-State Number: 55
-Member -> length .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Member -> length .
-
-
-
-State Number: 56
+State Number: 57
 Member -> id .( ExpList ) 
 
 Transitions: 
-Transition to 57 on (
+Transition to 58 on (
 
 Reductions: 
 Can't reduce Member -> id .( ExpList ) 
 
 
 
-State Number: 57
+State Number: 58
 Member -> id ( .ExpList ) 
 ExpList -> .Exp ExpRest 
 ExpList -> .
@@ -897,16 +1035,30 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 58 on ExpList
-Transition to 36 on Term
-Transition to 60 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 59 on ExpList
+Transition to 72 on id
+Transition to 61 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce Member -> id ( .ExpList ) 
@@ -918,21 +1070,28 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 58
+State Number: 59
 Member -> id ( ExpList .) 
 
 Transitions: 
-Transition to 59 on )
+Transition to 60 on )
 
 Reductions: 
 Can't reduce Member -> id ( ExpList .) 
 
 
 
-State Number: 59
+State Number: 60
 Member -> id ( ExpList ) .
 
 Transitions: 
@@ -942,14 +1101,14 @@ Reduce on Member -> id ( ExpList ) .
 
 
 
-State Number: 60
+State Number: 61
 ExpList -> Exp .ExpRest 
 ExpRest -> ., Exp ExpRest 
 ExpRest -> .
 
 Transitions: 
-Transition to 61 on ExpRest
-Transition to 62 on ,
+Transition to 62 on ExpRest
+Transition to 63 on ,
 
 Reductions: 
 Can't reduce ExpList -> Exp .ExpRest 
@@ -958,7 +1117,7 @@ Reduce on ExpRest -> .
 
 
 
-State Number: 61
+State Number: 62
 ExpList -> Exp ExpRest .
 
 Transitions: 
@@ -968,7 +1127,7 @@ Reduce on ExpList -> Exp ExpRest .
 
 
 
-State Number: 62
+State Number: 63
 ExpRest -> , .Exp ExpRest 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -976,15 +1135,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 63 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 64 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce ExpRest -> , .Exp ExpRest 
@@ -994,17 +1167,24 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 63
+State Number: 64
 ExpRest -> , Exp .ExpRest 
 ExpRest -> ., Exp ExpRest 
 ExpRest -> .
 
 Transitions: 
-Transition to 64 on ExpRest
-Transition to 62 on ,
+Transition to 65 on ExpRest
+Transition to 63 on ,
 
 Reductions: 
 Can't reduce ExpRest -> , Exp .ExpRest 
@@ -1013,7 +1193,7 @@ Reduce on ExpRest -> .
 
 
 
-State Number: 64
+State Number: 65
 ExpRest -> , Exp ExpRest .
 
 Transitions: 
@@ -1023,13 +1203,13 @@ Reduce on ExpRest -> , Exp ExpRest .
 
 
 
-State Number: 65
+State Number: 66
 Not -> Factor .DotArrayList 
 DotArrayList -> .DotArrayList DotArray 
 DotArrayList -> .
 
 Transitions: 
-Transition to 66 on DotArrayList
+Transition to 67 on DotArrayList
 
 Reductions: 
 Can't reduce Not -> Factor .DotArrayList 
@@ -1038,16 +1218,16 @@ Reduce on DotArrayList -> .
 
 
 
-State Number: 66
+State Number: 67
 Not -> Factor DotArrayList .
 DotArrayList -> DotArrayList .DotArray 
 DotArray -> .. Member 
 DotArray -> .[ Exp ] 
 
 Transitions: 
-Transition to 67 on [
-Transition to 53 on .
-Transition to 52 on DotArray
+Transition to 68 on [
+Transition to 55 on .
+Transition to 54 on DotArray
 
 Reductions: 
 Reduce on Not -> Factor DotArrayList .
@@ -1057,7 +1237,7 @@ Can't reduce DotArray -> .[ Exp ]
 
 
 
-State Number: 67
+State Number: 68
 DotArray -> [ .Exp ] 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -1065,15 +1245,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 68 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 69 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce DotArray -> [ .Exp ] 
@@ -1083,21 +1277,28 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 68
+State Number: 69
 DotArray -> [ Exp .] 
 
 Transitions: 
-Transition to 69 on ]
+Transition to 70 on ]
 
 Reductions: 
 Can't reduce DotArray -> [ Exp .] 
 
 
 
-State Number: 69
+State Number: 70
 DotArray -> [ Exp ] .
 
 Transitions: 
@@ -1107,27 +1308,7 @@ Reduce on DotArray -> [ Exp ] .
 
 
 
-State Number: 70
-Factor -> number .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Factor -> number .
-
-
-
 State Number: 71
-Factor -> true .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Factor -> true .
-
-
-
-State Number: 72
 Factor -> false .
 
 Transitions: 
@@ -1137,7 +1318,7 @@ Reduce on Factor -> false .
 
 
 
-State Number: 73
+State Number: 72
 Factor -> id .
 
 Transitions: 
@@ -1147,137 +1328,7 @@ Reduce on Factor -> id .
 
 
 
-State Number: 74
-Factor -> this .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Factor -> this .
-
-
-
-State Number: 75
-Factor -> new .New 
-New -> .int [ Exp ] 
-New -> .id ( ) 
-
-Transitions: 
-Transition to 76 on New
-Transition to 81 on id
-Transition to 77 on int
-
-Reductions: 
-Can't reduce Factor -> new .New 
-Can't reduce New -> .int [ Exp ] 
-Can't reduce New -> .id ( ) 
-
-
-
-State Number: 76
-Factor -> new New .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Factor -> new New .
-
-
-
-State Number: 77
-New -> int .[ Exp ] 
-
-Transitions: 
-Transition to 78 on [
-
-Reductions: 
-Can't reduce New -> int .[ Exp ] 
-
-
-
-State Number: 78
-New -> int [ .Exp ] 
-Exp -> .And Elist 
-And -> .Less Alist 
-Less -> .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-
-Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 79 on Exp
-Transition to 31 on Less
-
-Reductions: 
-Can't reduce New -> int [ .Exp ] 
-Can't reduce Exp -> .And Elist 
-Can't reduce And -> .Less Alist 
-Can't reduce Less -> .Term Llist 
-Can't reduce Term -> .Not Tlist 
-Can't reduce Not -> .! Factor DotArrayList 
-Can't reduce Not -> .Factor DotArrayList 
-
-
-
-State Number: 79
-New -> int [ Exp .] 
-
-Transitions: 
-Transition to 80 on ]
-
-Reductions: 
-Can't reduce New -> int [ Exp .] 
-
-
-
-State Number: 80
-New -> int [ Exp ] .
-
-Transitions: 
-None
-Reductions: 
-Reduce on New -> int [ Exp ] .
-
-
-
-State Number: 81
-New -> id .( ) 
-
-Transitions: 
-Transition to 82 on (
-
-Reductions: 
-Can't reduce New -> id .( ) 
-
-
-
-State Number: 82
-New -> id ( .) 
-
-Transitions: 
-Transition to 83 on )
-
-Reductions: 
-Can't reduce New -> id ( .) 
-
-
-
-State Number: 83
-New -> id ( ) .
-
-Transitions: 
-None
-Reductions: 
-Reduce on New -> id ( ) .
-
-
-
-State Number: 84
+State Number: 73
 Factor -> ( .Exp ) 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -1285,15 +1336,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 85 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 74 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce Factor -> ( .Exp ) 
@@ -1303,21 +1368,28 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 85
+State Number: 74
 Factor -> ( Exp .) 
 
 Transitions: 
-Transition to 86 on )
+Transition to 75 on )
 
 Reductions: 
 Can't reduce Factor -> ( Exp .) 
 
 
 
-State Number: 86
+State Number: 75
 Factor -> ( Exp ) .
 
 Transitions: 
@@ -1327,7 +1399,188 @@ Reduce on Factor -> ( Exp ) .
 
 
 
+State Number: 76
+Factor -> new .New 
+New -> .int [ Exp ] 
+New -> .id ( ) 
+
+Transitions: 
+Transition to 77 on New
+Transition to 85 on id
+Transition to 78 on int
+
+Reductions: 
+Can't reduce Factor -> new .New 
+Can't reduce New -> .int [ Exp ] 
+Can't reduce New -> .id ( ) 
+
+
+
+State Number: 77
+Factor -> new New .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Factor -> new New .
+
+
+
+State Number: 78
+New -> int .[ Exp ] 
+
+Transitions: 
+Transition to 79 on [
+
+Reductions: 
+Can't reduce New -> int .[ Exp ] 
+
+
+
+State Number: 79
+New -> int [ .Exp ] 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
+
+Transitions: 
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 80 on Exp
+Transition to 33 on Less
+
+Reductions: 
+Can't reduce New -> int [ .Exp ] 
+Can't reduce Exp -> .And Elist 
+Can't reduce And -> .Less Alist 
+Can't reduce Less -> .Term Llist 
+Can't reduce Term -> .Not Tlist 
+Can't reduce Not -> .! Factor DotArrayList 
+Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+
+
+
+State Number: 80
+New -> int [ Exp .] 
+
+Transitions: 
+Transition to 81 on ]
+
+Reductions: 
+Can't reduce New -> int [ Exp .] 
+
+
+
+State Number: 81
+New -> int [ Exp ] .
+
+Transitions: 
+None
+Reductions: 
+Reduce on New -> int [ Exp ] .
+
+
+
+State Number: 82
+Factor -> true .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Factor -> true .
+
+
+
+State Number: 83
+Factor -> this .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Factor -> this .
+
+
+
+State Number: 84
+Factor -> number .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Factor -> number .
+
+
+
+State Number: 85
+New -> id .( ) 
+
+Transitions: 
+Transition to 86 on (
+
+Reductions: 
+Can't reduce New -> id .( ) 
+
+
+
+State Number: 86
+New -> id ( .) 
+
+Transitions: 
+Transition to 87 on )
+
+Reductions: 
+Can't reduce New -> id ( .) 
+
+
+
 State Number: 87
+New -> id ( ) .
+
+Transitions: 
+None
+Reductions: 
+Reduce on New -> id ( ) .
+
+
+
+State Number: 88
+Member -> length .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Member -> length .
+
+
+
+State Number: 89
 StatementList -> StatementList Statement .
 
 Transitions: 
@@ -1337,595 +1590,25 @@ Reduce on StatementList -> StatementList Statement .
 
 
 
-State Number: 88
-Statement -> { .StatementList } 
-StatementList -> .StatementList Statement 
-StatementList -> .
-
-Transitions: 
-Transition to 89 on StatementList
-
-Reductions: 
-Can't reduce Statement -> { .StatementList } 
-Can't reduce StatementList -> .StatementList Statement 
-Reduce on StatementList -> .
-
-
-
-State Number: 89
-Statement -> { StatementList .} 
-StatementList -> StatementList .Statement 
-Statement -> .{ StatementList } 
-Statement -> .if ( Exp ) { Statement } ElseIfList 
-Statement -> .do { Statement } while ( Exp ) ; 
-Statement -> .while ( Exp ) Statement 
-Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Statement -> .switch ( id ) { caseList } 
-Statement -> .System.out.println ( Exp ) ; 
-Statement -> .id Assign 
-Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-Transitions: 
-Transition to 87 on Statement
-Transition to 120 on for
-Transition to 152 on (
-Transition to 88 on {
-Transition to 106 on do
-Transition to 141 on id
-Transition to 115 on while
-Transition to 90 on }
-Transition to 91 on if
-Transition to 129 on switch
-Transition to 136 on System.out.println
-
-Reductions: 
-Can't reduce Statement -> { StatementList .} 
-Can't reduce StatementList -> StatementList .Statement 
-Can't reduce Statement -> .{ StatementList } 
-Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
-Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
-Can't reduce Statement -> .while ( Exp ) Statement 
-Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Can't reduce Statement -> .switch ( id ) { caseList } 
-Can't reduce Statement -> .System.out.println ( Exp ) ; 
-Can't reduce Statement -> .id Assign 
-Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-
-
 State Number: 90
-Statement -> { StatementList } .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Statement -> { StatementList } .
-
-
-
-State Number: 91
-Statement -> if .( Exp ) { Statement } ElseIfList 
-
-Transitions: 
-Transition to 92 on (
-
-Reductions: 
-Can't reduce Statement -> if .( Exp ) { Statement } ElseIfList 
-
-
-
-State Number: 92
-Statement -> if ( .Exp ) { Statement } ElseIfList 
-Exp -> .And Elist 
-And -> .Less Alist 
-Less -> .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-
-Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 93 on Exp
-Transition to 31 on Less
-
-Reductions: 
-Can't reduce Statement -> if ( .Exp ) { Statement } ElseIfList 
-Can't reduce Exp -> .And Elist 
-Can't reduce And -> .Less Alist 
-Can't reduce Less -> .Term Llist 
-Can't reduce Term -> .Not Tlist 
-Can't reduce Not -> .! Factor DotArrayList 
-Can't reduce Not -> .Factor DotArrayList 
-
-
-
-State Number: 93
-Statement -> if ( Exp .) { Statement } ElseIfList 
-
-Transitions: 
-Transition to 94 on )
-
-Reductions: 
-Can't reduce Statement -> if ( Exp .) { Statement } ElseIfList 
-
-
-
-State Number: 94
-Statement -> if ( Exp ) .{ Statement } ElseIfList 
-
-Transitions: 
-Transition to 95 on {
-
-Reductions: 
-Can't reduce Statement -> if ( Exp ) .{ Statement } ElseIfList 
-
-
-
-State Number: 95
-Statement -> if ( Exp ) { .Statement } ElseIfList 
-Statement -> .{ StatementList } 
-Statement -> .if ( Exp ) { Statement } ElseIfList 
-Statement -> .do { Statement } while ( Exp ) ; 
-Statement -> .while ( Exp ) Statement 
-Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Statement -> .switch ( id ) { caseList } 
-Statement -> .System.out.println ( Exp ) ; 
-Statement -> .id Assign 
-Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-Transitions: 
-Transition to 96 on Statement
-Transition to 120 on for
-Transition to 152 on (
-Transition to 88 on {
-Transition to 106 on do
-Transition to 141 on id
-Transition to 115 on while
-Transition to 91 on if
-Transition to 129 on switch
-Transition to 136 on System.out.println
-
-Reductions: 
-Can't reduce Statement -> if ( Exp ) { .Statement } ElseIfList 
-Can't reduce Statement -> .{ StatementList } 
-Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
-Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
-Can't reduce Statement -> .while ( Exp ) Statement 
-Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Can't reduce Statement -> .switch ( id ) { caseList } 
-Can't reduce Statement -> .System.out.println ( Exp ) ; 
-Can't reduce Statement -> .id Assign 
-Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-
-
-State Number: 96
-Statement -> if ( Exp ) { Statement .} ElseIfList 
-
-Transitions: 
-Transition to 97 on }
-
-Reductions: 
-Can't reduce Statement -> if ( Exp ) { Statement .} ElseIfList 
-
-
-
-State Number: 97
-Statement -> if ( Exp ) { Statement } .ElseIfList 
-ElseIfList -> .ElseIfList ElseIf 
-ElseIfList -> .
-
-Transitions: 
-Transition to 98 on ElseIfList
-
-Reductions: 
-Can't reduce Statement -> if ( Exp ) { Statement } .ElseIfList 
-Can't reduce ElseIfList -> .ElseIfList ElseIf 
-Reduce on ElseIfList -> .
-
-
-
-State Number: 98
-Statement -> if ( Exp ) { Statement } ElseIfList .
-ElseIfList -> ElseIfList .ElseIf 
-ElseIf -> .else if ( Exp ) Statement 
-
-Transitions: 
-Transition to 99 on ElseIf
-Transition to 100 on else
-
-Reductions: 
-Reduce on Statement -> if ( Exp ) { Statement } ElseIfList .
-Can't reduce ElseIfList -> ElseIfList .ElseIf 
-Can't reduce ElseIf -> .else if ( Exp ) Statement 
-
-
-
-State Number: 99
-ElseIfList -> ElseIfList ElseIf .
-
-Transitions: 
-None
-Reductions: 
-Reduce on ElseIfList -> ElseIfList ElseIf .
-
-
-
-State Number: 100
-ElseIf -> else .if ( Exp ) Statement 
-
-Transitions: 
-Transition to 101 on if
-
-Reductions: 
-Can't reduce ElseIf -> else .if ( Exp ) Statement 
-
-
-
-State Number: 101
-ElseIf -> else if .( Exp ) Statement 
-
-Transitions: 
-Transition to 102 on (
-
-Reductions: 
-Can't reduce ElseIf -> else if .( Exp ) Statement 
-
-
-
-State Number: 102
-ElseIf -> else if ( .Exp ) Statement 
-Exp -> .And Elist 
-And -> .Less Alist 
-Less -> .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-
-Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 103 on Exp
-Transition to 31 on Less
-
-Reductions: 
-Can't reduce ElseIf -> else if ( .Exp ) Statement 
-Can't reduce Exp -> .And Elist 
-Can't reduce And -> .Less Alist 
-Can't reduce Less -> .Term Llist 
-Can't reduce Term -> .Not Tlist 
-Can't reduce Not -> .! Factor DotArrayList 
-Can't reduce Not -> .Factor DotArrayList 
-
-
-
-State Number: 103
-ElseIf -> else if ( Exp .) Statement 
-
-Transitions: 
-Transition to 104 on )
-
-Reductions: 
-Can't reduce ElseIf -> else if ( Exp .) Statement 
-
-
-
-State Number: 104
-ElseIf -> else if ( Exp ) .Statement 
-Statement -> .{ StatementList } 
-Statement -> .if ( Exp ) { Statement } ElseIfList 
-Statement -> .do { Statement } while ( Exp ) ; 
-Statement -> .while ( Exp ) Statement 
-Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Statement -> .switch ( id ) { caseList } 
-Statement -> .System.out.println ( Exp ) ; 
-Statement -> .id Assign 
-Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-Transitions: 
-Transition to 105 on Statement
-Transition to 120 on for
-Transition to 152 on (
-Transition to 88 on {
-Transition to 106 on do
-Transition to 141 on id
-Transition to 115 on while
-Transition to 91 on if
-Transition to 129 on switch
-Transition to 136 on System.out.println
-
-Reductions: 
-Can't reduce ElseIf -> else if ( Exp ) .Statement 
-Can't reduce Statement -> .{ StatementList } 
-Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
-Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
-Can't reduce Statement -> .while ( Exp ) Statement 
-Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Can't reduce Statement -> .switch ( id ) { caseList } 
-Can't reduce Statement -> .System.out.println ( Exp ) ; 
-Can't reduce Statement -> .id Assign 
-Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-
-
-State Number: 105
-ElseIf -> else if ( Exp ) Statement .
-
-Transitions: 
-None
-Reductions: 
-Reduce on ElseIf -> else if ( Exp ) Statement .
-
-
-
-State Number: 106
-Statement -> do .{ Statement } while ( Exp ) ; 
-
-Transitions: 
-Transition to 107 on {
-
-Reductions: 
-Can't reduce Statement -> do .{ Statement } while ( Exp ) ; 
-
-
-
-State Number: 107
-Statement -> do { .Statement } while ( Exp ) ; 
-Statement -> .{ StatementList } 
-Statement -> .if ( Exp ) { Statement } ElseIfList 
-Statement -> .do { Statement } while ( Exp ) ; 
-Statement -> .while ( Exp ) Statement 
-Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Statement -> .switch ( id ) { caseList } 
-Statement -> .System.out.println ( Exp ) ; 
-Statement -> .id Assign 
-Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-Transitions: 
-Transition to 108 on Statement
-Transition to 120 on for
-Transition to 152 on (
-Transition to 88 on {
-Transition to 106 on do
-Transition to 141 on id
-Transition to 115 on while
-Transition to 91 on if
-Transition to 129 on switch
-Transition to 136 on System.out.println
-
-Reductions: 
-Can't reduce Statement -> do { .Statement } while ( Exp ) ; 
-Can't reduce Statement -> .{ StatementList } 
-Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
-Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
-Can't reduce Statement -> .while ( Exp ) Statement 
-Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Can't reduce Statement -> .switch ( id ) { caseList } 
-Can't reduce Statement -> .System.out.println ( Exp ) ; 
-Can't reduce Statement -> .id Assign 
-Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-
-
-State Number: 108
-Statement -> do { Statement .} while ( Exp ) ; 
-
-Transitions: 
-Transition to 109 on }
-
-Reductions: 
-Can't reduce Statement -> do { Statement .} while ( Exp ) ; 
-
-
-
-State Number: 109
-Statement -> do { Statement } .while ( Exp ) ; 
-
-Transitions: 
-Transition to 110 on while
-
-Reductions: 
-Can't reduce Statement -> do { Statement } .while ( Exp ) ; 
-
-
-
-State Number: 110
-Statement -> do { Statement } while .( Exp ) ; 
-
-Transitions: 
-Transition to 111 on (
-
-Reductions: 
-Can't reduce Statement -> do { Statement } while .( Exp ) ; 
-
-
-
-State Number: 111
-Statement -> do { Statement } while ( .Exp ) ; 
-Exp -> .And Elist 
-And -> .Less Alist 
-Less -> .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-
-Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 112 on Exp
-Transition to 31 on Less
-
-Reductions: 
-Can't reduce Statement -> do { Statement } while ( .Exp ) ; 
-Can't reduce Exp -> .And Elist 
-Can't reduce And -> .Less Alist 
-Can't reduce Less -> .Term Llist 
-Can't reduce Term -> .Not Tlist 
-Can't reduce Not -> .! Factor DotArrayList 
-Can't reduce Not -> .Factor DotArrayList 
-
-
-
-State Number: 112
-Statement -> do { Statement } while ( Exp .) ; 
-
-Transitions: 
-Transition to 113 on )
-
-Reductions: 
-Can't reduce Statement -> do { Statement } while ( Exp .) ; 
-
-
-
-State Number: 113
-Statement -> do { Statement } while ( Exp ) .; 
-
-Transitions: 
-Transition to 114 on ;
-
-Reductions: 
-Can't reduce Statement -> do { Statement } while ( Exp ) .; 
-
-
-
-State Number: 114
-Statement -> do { Statement } while ( Exp ) ; .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Statement -> do { Statement } while ( Exp ) ; .
-
-
-
-State Number: 115
-Statement -> while .( Exp ) Statement 
-
-Transitions: 
-Transition to 116 on (
-
-Reductions: 
-Can't reduce Statement -> while .( Exp ) Statement 
-
-
-
-State Number: 116
-Statement -> while ( .Exp ) Statement 
-Exp -> .And Elist 
-And -> .Less Alist 
-Less -> .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-
-Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 117 on Exp
-Transition to 31 on Less
-
-Reductions: 
-Can't reduce Statement -> while ( .Exp ) Statement 
-Can't reduce Exp -> .And Elist 
-Can't reduce And -> .Less Alist 
-Can't reduce Less -> .Term Llist 
-Can't reduce Term -> .Not Tlist 
-Can't reduce Not -> .! Factor DotArrayList 
-Can't reduce Not -> .Factor DotArrayList 
-
-
-
-State Number: 117
-Statement -> while ( Exp .) Statement 
-
-Transitions: 
-Transition to 118 on )
-
-Reductions: 
-Can't reduce Statement -> while ( Exp .) Statement 
-
-
-
-State Number: 118
-Statement -> while ( Exp ) .Statement 
-Statement -> .{ StatementList } 
-Statement -> .if ( Exp ) { Statement } ElseIfList 
-Statement -> .do { Statement } while ( Exp ) ; 
-Statement -> .while ( Exp ) Statement 
-Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Statement -> .switch ( id ) { caseList } 
-Statement -> .System.out.println ( Exp ) ; 
-Statement -> .id Assign 
-Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-Transitions: 
-Transition to 119 on Statement
-Transition to 120 on for
-Transition to 152 on (
-Transition to 88 on {
-Transition to 106 on do
-Transition to 141 on id
-Transition to 115 on while
-Transition to 91 on if
-Transition to 129 on switch
-Transition to 136 on System.out.println
-
-Reductions: 
-Can't reduce Statement -> while ( Exp ) .Statement 
-Can't reduce Statement -> .{ StatementList } 
-Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
-Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
-Can't reduce Statement -> .while ( Exp ) Statement 
-Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Can't reduce Statement -> .switch ( id ) { caseList } 
-Can't reduce Statement -> .System.out.println ( Exp ) ; 
-Can't reduce Statement -> .id Assign 
-Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
-
-
-
-State Number: 119
-Statement -> while ( Exp ) Statement .
-
-Transitions: 
-None
-Reductions: 
-Reduce on Statement -> while ( Exp ) Statement .
-
-
-
-State Number: 120
 Statement -> for .( InitializationStm ; Exp ; IncrementStm ) Statement 
 
 Transitions: 
-Transition to 121 on (
+Transition to 91 on (
 
 Reductions: 
 Can't reduce Statement -> for .( InitializationStm ; Exp ; IncrementStm ) Statement 
 
 
 
-State Number: 121
+State Number: 91
 Statement -> for ( .InitializationStm ; Exp ; IncrementStm ) Statement 
 InitializationStm -> .id = Exp 
 InitializationStm -> .id [ Exp ] = Exp 
 
 Transitions: 
-Transition to 182 on id
-Transition to 122 on InitializationStm
+Transition to 184 on id
+Transition to 92 on InitializationStm
 
 Reductions: 
 Can't reduce Statement -> for ( .InitializationStm ; Exp ; IncrementStm ) Statement 
@@ -1934,18 +1617,18 @@ Can't reduce InitializationStm -> .id [ Exp ] = Exp
 
 
 
-State Number: 122
+State Number: 92
 Statement -> for ( InitializationStm .; Exp ; IncrementStm ) Statement 
 
 Transitions: 
-Transition to 123 on ;
+Transition to 93 on ;
 
 Reductions: 
 Can't reduce Statement -> for ( InitializationStm .; Exp ; IncrementStm ) Statement 
 
 
 
-State Number: 123
+State Number: 93
 Statement -> for ( InitializationStm ; .Exp ; IncrementStm ) Statement 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -1953,15 +1636,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 124 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 94 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce Statement -> for ( InitializationStm ; .Exp ; IncrementStm ) Statement 
@@ -1971,28 +1668,35 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 124
+State Number: 94
 Statement -> for ( InitializationStm ; Exp .; IncrementStm ) Statement 
 
 Transitions: 
-Transition to 125 on ;
+Transition to 95 on ;
 
 Reductions: 
 Can't reduce Statement -> for ( InitializationStm ; Exp .; IncrementStm ) Statement 
 
 
 
-State Number: 125
+State Number: 95
 Statement -> for ( InitializationStm ; Exp ; .IncrementStm ) Statement 
 IncrementStm -> .id = Exp 
 IncrementStm -> .id [ Exp ] = Exp 
 
 Transitions: 
-Transition to 126 on IncrementStm
-Transition to 174 on id
+Transition to 96 on IncrementStm
+Transition to 176 on id
 
 Reductions: 
 Can't reduce Statement -> for ( InitializationStm ; Exp ; .IncrementStm ) Statement 
@@ -2001,56 +1705,56 @@ Can't reduce IncrementStm -> .id [ Exp ] = Exp
 
 
 
-State Number: 126
+State Number: 96
 Statement -> for ( InitializationStm ; Exp ; IncrementStm .) Statement 
 
 Transitions: 
-Transition to 127 on )
+Transition to 97 on )
 
 Reductions: 
 Can't reduce Statement -> for ( InitializationStm ; Exp ; IncrementStm .) Statement 
 
 
 
-State Number: 127
+State Number: 97
 Statement -> for ( InitializationStm ; Exp ; IncrementStm ) .Statement 
-Statement -> .{ StatementList } 
-Statement -> .if ( Exp ) { Statement } ElseIfList 
-Statement -> .do { Statement } while ( Exp ) ; 
-Statement -> .while ( Exp ) Statement 
 Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Statement -> .switch ( id ) { caseList } 
-Statement -> .System.out.println ( Exp ) ; 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
+Statement -> .switch ( id ) { caseList } 
+Statement -> .while ( Exp ) Statement 
+Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 Transitions: 
-Transition to 128 on Statement
-Transition to 120 on for
-Transition to 152 on (
-Transition to 88 on {
-Transition to 106 on do
-Transition to 141 on id
-Transition to 115 on while
-Transition to 91 on if
-Transition to 129 on switch
-Transition to 136 on System.out.println
+Transition to 98 on Statement
+Transition to 90 on for
+Transition to 139 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 129 on while
+Transition to 161 on if
+Transition to 122 on switch
+Transition to 134 on System.out.println
 
 Reductions: 
 Can't reduce Statement -> for ( InitializationStm ; Exp ; IncrementStm ) .Statement 
-Can't reduce Statement -> .{ StatementList } 
-Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
-Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
-Can't reduce Statement -> .while ( Exp ) Statement 
 Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Can't reduce Statement -> .switch ( id ) { caseList } 
-Can't reduce Statement -> .System.out.println ( Exp ) ; 
+Can't reduce Statement -> .{ StatementList } 
+Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
 Can't reduce Statement -> .id Assign 
+Can't reduce Statement -> .switch ( id ) { caseList } 
+Can't reduce Statement -> .while ( Exp ) Statement 
+Can't reduce Statement -> .System.out.println ( Exp ) ; 
 Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
+Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 
 
-State Number: 128
+State Number: 98
 Statement -> for ( InitializationStm ; Exp ; IncrementStm ) Statement .
 
 Transitions: 
@@ -2060,163 +1764,218 @@ Reduce on Statement -> for ( InitializationStm ; Exp ; IncrementStm ) Statement 
 
 
 
-State Number: 129
-Statement -> switch .( id ) { caseList } 
+State Number: 99
+Statement -> { .StatementList } 
+StatementList -> .
+StatementList -> .StatementList Statement 
 
 Transitions: 
-Transition to 130 on (
+Transition to 100 on StatementList
 
 Reductions: 
-Can't reduce Statement -> switch .( id ) { caseList } 
+Can't reduce Statement -> { .StatementList } 
+Reduce on StatementList -> .
+Can't reduce StatementList -> .StatementList Statement 
 
 
 
-State Number: 130
-Statement -> switch ( .id ) { caseList } 
+State Number: 100
+Statement -> { StatementList .} 
+StatementList -> StatementList .Statement 
 
 Transitions: 
-Transition to 131 on id
+Transition to 89 on Statement
+Transition to 101 on }
 
 Reductions: 
-Can't reduce Statement -> switch ( .id ) { caseList } 
+Can't reduce Statement -> { StatementList .} 
+Can't reduce StatementList -> StatementList .Statement 
 
 
 
-State Number: 131
-Statement -> switch ( id .) { caseList } 
-
-Transitions: 
-Transition to 132 on )
-
-Reductions: 
-Can't reduce Statement -> switch ( id .) { caseList } 
-
-
-
-State Number: 132
-Statement -> switch ( id ) .{ caseList } 
-
-Transitions: 
-Transition to 133 on {
-
-Reductions: 
-Can't reduce Statement -> switch ( id ) .{ caseList } 
-
-
-
-State Number: 133
-Statement -> switch ( id ) { .caseList } 
-
-Transitions: 
-Transition to 134 on caseList
-
-Reductions: 
-Can't reduce Statement -> switch ( id ) { .caseList } 
-
-
-
-State Number: 134
-Statement -> switch ( id ) { caseList .} 
-
-Transitions: 
-Transition to 135 on }
-
-Reductions: 
-Can't reduce Statement -> switch ( id ) { caseList .} 
-
-
-
-State Number: 135
-Statement -> switch ( id ) { caseList } .
+State Number: 101
+Statement -> { StatementList } .
 
 Transitions: 
 None
 Reductions: 
-Reduce on Statement -> switch ( id ) { caseList } .
+Reduce on Statement -> { StatementList } .
 
 
 
-State Number: 136
-Statement -> System.out.println .( Exp ) ; 
+State Number: 102
+Statement -> do .{ Statement } while ( Exp ) ; 
 
 Transitions: 
-Transition to 137 on (
+Transition to 103 on {
 
 Reductions: 
-Can't reduce Statement -> System.out.println .( Exp ) ; 
+Can't reduce Statement -> do .{ Statement } while ( Exp ) ; 
 
 
 
-State Number: 137
-Statement -> System.out.println ( .Exp ) ; 
+State Number: 103
+Statement -> do { .Statement } while ( Exp ) ; 
+Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
+Statement -> .id Assign 
+Statement -> .switch ( id ) { caseList } 
+Statement -> .while ( Exp ) Statement 
+Statement -> .System.out.println ( Exp ) ; 
+Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+Transitions: 
+Transition to 104 on Statement
+Transition to 90 on for
+Transition to 139 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 129 on while
+Transition to 161 on if
+Transition to 122 on switch
+Transition to 134 on System.out.println
+
+Reductions: 
+Can't reduce Statement -> do { .Statement } while ( Exp ) ; 
+Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Can't reduce Statement -> .{ StatementList } 
+Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
+Can't reduce Statement -> .id Assign 
+Can't reduce Statement -> .switch ( id ) { caseList } 
+Can't reduce Statement -> .while ( Exp ) Statement 
+Can't reduce Statement -> .System.out.println ( Exp ) ; 
+Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
+Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+
+
+State Number: 104
+Statement -> do { Statement .} while ( Exp ) ; 
+
+Transitions: 
+Transition to 105 on }
+
+Reductions: 
+Can't reduce Statement -> do { Statement .} while ( Exp ) ; 
+
+
+
+State Number: 105
+Statement -> do { Statement } .while ( Exp ) ; 
+
+Transitions: 
+Transition to 106 on while
+
+Reductions: 
+Can't reduce Statement -> do { Statement } .while ( Exp ) ; 
+
+
+
+State Number: 106
+Statement -> do { Statement } while .( Exp ) ; 
+
+Transitions: 
+Transition to 107 on (
+
+Reductions: 
+Can't reduce Statement -> do { Statement } while .( Exp ) ; 
+
+
+
+State Number: 107
+Statement -> do { Statement } while ( .Exp ) ; 
 Exp -> .And Elist 
 And -> .Less Alist 
 Less -> .Term Llist 
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 138 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 108 on Exp
+Transition to 33 on Less
 
 Reductions: 
-Can't reduce Statement -> System.out.println ( .Exp ) ; 
+Can't reduce Statement -> do { Statement } while ( .Exp ) ; 
 Can't reduce Exp -> .And Elist 
 Can't reduce And -> .Less Alist 
 Can't reduce Less -> .Term Llist 
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 138
-Statement -> System.out.println ( Exp .) ; 
-
-Transitions: 
-Transition to 139 on )
-
-Reductions: 
-Can't reduce Statement -> System.out.println ( Exp .) ; 
-
-
-
-State Number: 139
-Statement -> System.out.println ( Exp ) .; 
+State Number: 108
+Statement -> do { Statement } while ( Exp .) ; 
 
 Transitions: 
-Transition to 140 on ;
+Transition to 109 on )
 
 Reductions: 
-Can't reduce Statement -> System.out.println ( Exp ) .; 
+Can't reduce Statement -> do { Statement } while ( Exp .) ; 
 
 
 
-State Number: 140
-Statement -> System.out.println ( Exp ) ; .
+State Number: 109
+Statement -> do { Statement } while ( Exp ) .; 
+
+Transitions: 
+Transition to 110 on ;
+
+Reductions: 
+Can't reduce Statement -> do { Statement } while ( Exp ) .; 
+
+
+
+State Number: 110
+Statement -> do { Statement } while ( Exp ) ; .
 
 Transitions: 
 None
 Reductions: 
-Reduce on Statement -> System.out.println ( Exp ) ; .
+Reduce on Statement -> do { Statement } while ( Exp ) ; .
 
 
 
-State Number: 141
+State Number: 111
 Statement -> id .Assign 
 Assign -> .= Exp ; 
 Assign -> .[ Exp ] = Exp ; 
 
 Transitions: 
-Transition to 142 on Assign
-Transition to 146 on [
-Transition to 143 on =
+Transition to 112 on Assign
+Transition to 116 on [
+Transition to 113 on =
 
 Reductions: 
 Can't reduce Statement -> id .Assign 
@@ -2225,7 +1984,7 @@ Can't reduce Assign -> .[ Exp ] = Exp ;
 
 
 
-State Number: 142
+State Number: 112
 Statement -> id Assign .
 
 Transitions: 
@@ -2235,7 +1994,7 @@ Reduce on Statement -> id Assign .
 
 
 
-State Number: 143
+State Number: 113
 Assign -> = .Exp ; 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2243,15 +2002,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 144 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 114 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce Assign -> = .Exp ; 
@@ -2261,21 +2034,28 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 144
+State Number: 114
 Assign -> = Exp .; 
 
 Transitions: 
-Transition to 145 on ;
+Transition to 115 on ;
 
 Reductions: 
 Can't reduce Assign -> = Exp .; 
 
 
 
-State Number: 145
+State Number: 115
 Assign -> = Exp ; .
 
 Transitions: 
@@ -2285,7 +2065,7 @@ Reduce on Assign -> = Exp ; .
 
 
 
-State Number: 146
+State Number: 116
 Assign -> [ .Exp ] = Exp ; 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2293,15 +2073,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 147 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 117 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce Assign -> [ .Exp ] = Exp ; 
@@ -2311,32 +2105,39 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 147
+State Number: 117
 Assign -> [ Exp .] = Exp ; 
 
 Transitions: 
-Transition to 148 on ]
+Transition to 118 on ]
 
 Reductions: 
 Can't reduce Assign -> [ Exp .] = Exp ; 
 
 
 
-State Number: 148
+State Number: 118
 Assign -> [ Exp ] .= Exp ; 
 
 Transitions: 
-Transition to 149 on =
+Transition to 119 on =
 
 Reductions: 
 Can't reduce Assign -> [ Exp ] .= Exp ; 
 
 
 
-State Number: 149
+State Number: 119
 Assign -> [ Exp ] = .Exp ; 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2344,15 +2145,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 150 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 120 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce Assign -> [ Exp ] = .Exp ; 
@@ -2362,21 +2177,28 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 150
+State Number: 120
 Assign -> [ Exp ] = Exp .; 
 
 Transitions: 
-Transition to 151 on ;
+Transition to 121 on ;
 
 Reductions: 
 Can't reduce Assign -> [ Exp ] = Exp .; 
 
 
 
-State Number: 151
+State Number: 121
 Assign -> [ Exp ] = Exp ; .
 
 Transitions: 
@@ -2386,17 +2208,306 @@ Reduce on Assign -> [ Exp ] = Exp ; .
 
 
 
-State Number: 152
+State Number: 122
+Statement -> switch .( id ) { caseList } 
+
+Transitions: 
+Transition to 123 on (
+
+Reductions: 
+Can't reduce Statement -> switch .( id ) { caseList } 
+
+
+
+State Number: 123
+Statement -> switch ( .id ) { caseList } 
+
+Transitions: 
+Transition to 124 on id
+
+Reductions: 
+Can't reduce Statement -> switch ( .id ) { caseList } 
+
+
+
+State Number: 124
+Statement -> switch ( id .) { caseList } 
+
+Transitions: 
+Transition to 125 on )
+
+Reductions: 
+Can't reduce Statement -> switch ( id .) { caseList } 
+
+
+
+State Number: 125
+Statement -> switch ( id ) .{ caseList } 
+
+Transitions: 
+Transition to 126 on {
+
+Reductions: 
+Can't reduce Statement -> switch ( id ) .{ caseList } 
+
+
+
+State Number: 126
+Statement -> switch ( id ) { .caseList } 
+
+Transitions: 
+Transition to 127 on caseList
+
+Reductions: 
+Can't reduce Statement -> switch ( id ) { .caseList } 
+
+
+
+State Number: 127
+Statement -> switch ( id ) { caseList .} 
+
+Transitions: 
+Transition to 128 on }
+
+Reductions: 
+Can't reduce Statement -> switch ( id ) { caseList .} 
+
+
+
+State Number: 128
+Statement -> switch ( id ) { caseList } .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Statement -> switch ( id ) { caseList } .
+
+
+
+State Number: 129
+Statement -> while .( Exp ) Statement 
+
+Transitions: 
+Transition to 130 on (
+
+Reductions: 
+Can't reduce Statement -> while .( Exp ) Statement 
+
+
+
+State Number: 130
+Statement -> while ( .Exp ) Statement 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
+
+Transitions: 
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 131 on Exp
+Transition to 33 on Less
+
+Reductions: 
+Can't reduce Statement -> while ( .Exp ) Statement 
+Can't reduce Exp -> .And Elist 
+Can't reduce And -> .Less Alist 
+Can't reduce Less -> .Term Llist 
+Can't reduce Term -> .Not Tlist 
+Can't reduce Not -> .! Factor DotArrayList 
+Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+
+
+
+State Number: 131
+Statement -> while ( Exp .) Statement 
+
+Transitions: 
+Transition to 132 on )
+
+Reductions: 
+Can't reduce Statement -> while ( Exp .) Statement 
+
+
+
+State Number: 132
+Statement -> while ( Exp ) .Statement 
+Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
+Statement -> .id Assign 
+Statement -> .switch ( id ) { caseList } 
+Statement -> .while ( Exp ) Statement 
+Statement -> .System.out.println ( Exp ) ; 
+Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+Transitions: 
+Transition to 133 on Statement
+Transition to 90 on for
+Transition to 139 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 129 on while
+Transition to 161 on if
+Transition to 122 on switch
+Transition to 134 on System.out.println
+
+Reductions: 
+Can't reduce Statement -> while ( Exp ) .Statement 
+Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Can't reduce Statement -> .{ StatementList } 
+Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
+Can't reduce Statement -> .id Assign 
+Can't reduce Statement -> .switch ( id ) { caseList } 
+Can't reduce Statement -> .while ( Exp ) Statement 
+Can't reduce Statement -> .System.out.println ( Exp ) ; 
+Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
+Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+
+
+State Number: 133
+Statement -> while ( Exp ) Statement .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Statement -> while ( Exp ) Statement .
+
+
+
+State Number: 134
+Statement -> System.out.println .( Exp ) ; 
+
+Transitions: 
+Transition to 135 on (
+
+Reductions: 
+Can't reduce Statement -> System.out.println .( Exp ) ; 
+
+
+
+State Number: 135
+Statement -> System.out.println ( .Exp ) ; 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
+
+Transitions: 
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 136 on Exp
+Transition to 33 on Less
+
+Reductions: 
+Can't reduce Statement -> System.out.println ( .Exp ) ; 
+Can't reduce Exp -> .And Elist 
+Can't reduce And -> .Less Alist 
+Can't reduce Less -> .Term Llist 
+Can't reduce Term -> .Not Tlist 
+Can't reduce Not -> .! Factor DotArrayList 
+Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+
+
+
+State Number: 136
+Statement -> System.out.println ( Exp .) ; 
+
+Transitions: 
+Transition to 137 on )
+
+Reductions: 
+Can't reduce Statement -> System.out.println ( Exp .) ; 
+
+
+
+State Number: 137
+Statement -> System.out.println ( Exp ) .; 
+
+Transitions: 
+Transition to 138 on ;
+
+Reductions: 
+Can't reduce Statement -> System.out.println ( Exp ) .; 
+
+
+
+State Number: 138
+Statement -> System.out.println ( Exp ) ; .
+
+Transitions: 
+None
+Reductions: 
+Reduce on Statement -> System.out.println ( Exp ) ; .
+
+
+
+State Number: 139
 Statement -> ( .Type id = Exp ) FormalVarExp ; 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 153 on Type
-Transition to 172 on boolean
-Transition to 173 on id
-Transition to 168 on int
+Transition to 140 on Type
+Transition to 159 on boolean
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
 Can't reduce Statement -> ( .Type id = Exp ) FormalVarExp ; 
@@ -2406,29 +2517,29 @@ Can't reduce Type -> .id
 
 
 
-State Number: 153
+State Number: 140
 Statement -> ( Type .id = Exp ) FormalVarExp ; 
 
 Transitions: 
-Transition to 154 on id
+Transition to 141 on id
 
 Reductions: 
 Can't reduce Statement -> ( Type .id = Exp ) FormalVarExp ; 
 
 
 
-State Number: 154
+State Number: 141
 Statement -> ( Type id .= Exp ) FormalVarExp ; 
 
 Transitions: 
-Transition to 155 on =
+Transition to 142 on =
 
 Reductions: 
 Can't reduce Statement -> ( Type id .= Exp ) FormalVarExp ; 
 
 
 
-State Number: 155
+State Number: 142
 Statement -> ( Type id = .Exp ) FormalVarExp ; 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2436,15 +2547,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 156 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 143 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce Statement -> ( Type id = .Exp ) FormalVarExp ; 
@@ -2454,48 +2579,55 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 156
+State Number: 143
 Statement -> ( Type id = Exp .) FormalVarExp ; 
 
 Transitions: 
-Transition to 157 on )
+Transition to 144 on )
 
 Reductions: 
 Can't reduce Statement -> ( Type id = Exp .) FormalVarExp ; 
 
 
 
-State Number: 157
+State Number: 144
 Statement -> ( Type id = Exp ) .FormalVarExp ; 
-FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 FormalVarExp -> .
+FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 158 on FormalVarExp
-Transition to 160 on ,
+Transition to 145 on FormalVarExp
+Transition to 147 on ,
 
 Reductions: 
 Can't reduce Statement -> ( Type id = Exp ) .FormalVarExp ; 
-Can't reduce FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 Reduce on FormalVarExp -> .
+Can't reduce FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 
 
 
-State Number: 158
+State Number: 145
 Statement -> ( Type id = Exp ) FormalVarExp .; 
 
 Transitions: 
-Transition to 159 on ;
+Transition to 146 on ;
 
 Reductions: 
 Can't reduce Statement -> ( Type id = Exp ) FormalVarExp .; 
 
 
 
-State Number: 159
+State Number: 146
 Statement -> ( Type id = Exp ) FormalVarExp ; .
 
 Transitions: 
@@ -2505,28 +2637,28 @@ Reduce on Statement -> ( Type id = Exp ) FormalVarExp ; .
 
 
 
-State Number: 160
+State Number: 147
 FormalVarExp -> , .( Type id = Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 161 on (
+Transition to 148 on (
 
 Reductions: 
 Can't reduce FormalVarExp -> , .( Type id = Exp ) FormalVarExp 
 
 
 
-State Number: 161
+State Number: 148
 FormalVarExp -> , ( .Type id = Exp ) FormalVarExp 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 162 on Type
-Transition to 172 on boolean
-Transition to 173 on id
-Transition to 168 on int
+Transition to 149 on Type
+Transition to 159 on boolean
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
 Can't reduce FormalVarExp -> , ( .Type id = Exp ) FormalVarExp 
@@ -2536,29 +2668,29 @@ Can't reduce Type -> .id
 
 
 
-State Number: 162
+State Number: 149
 FormalVarExp -> , ( Type .id = Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 163 on id
+Transition to 150 on id
 
 Reductions: 
 Can't reduce FormalVarExp -> , ( Type .id = Exp ) FormalVarExp 
 
 
 
-State Number: 163
+State Number: 150
 FormalVarExp -> , ( Type id .= Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 164 on =
+Transition to 151 on =
 
 Reductions: 
 Can't reduce FormalVarExp -> , ( Type id .= Exp ) FormalVarExp 
 
 
 
-State Number: 164
+State Number: 151
 FormalVarExp -> , ( Type id = .Exp ) FormalVarExp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2566,15 +2698,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 165 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 152 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce FormalVarExp -> , ( Type id = .Exp ) FormalVarExp 
@@ -2584,37 +2730,44 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 165
+State Number: 152
 FormalVarExp -> , ( Type id = Exp .) FormalVarExp 
 
 Transitions: 
-Transition to 166 on )
+Transition to 153 on )
 
 Reductions: 
 Can't reduce FormalVarExp -> , ( Type id = Exp .) FormalVarExp 
 
 
 
-State Number: 166
+State Number: 153
 FormalVarExp -> , ( Type id = Exp ) .FormalVarExp 
-FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 FormalVarExp -> .
+FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 167 on FormalVarExp
-Transition to 160 on ,
+Transition to 154 on FormalVarExp
+Transition to 147 on ,
 
 Reductions: 
 Can't reduce FormalVarExp -> , ( Type id = Exp ) .FormalVarExp 
-Can't reduce FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 Reduce on FormalVarExp -> .
+Can't reduce FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 
 
 
-State Number: 167
+State Number: 154
 FormalVarExp -> , ( Type id = Exp ) FormalVarExp .
 
 Transitions: 
@@ -2624,14 +2777,14 @@ Reduce on FormalVarExp -> , ( Type id = Exp ) FormalVarExp .
 
 
 
-State Number: 168
+State Number: 155
 Type -> int .IntType 
 IntType -> .[ ] 
 IntType -> .
 
 Transitions: 
-Transition to 170 on [
-Transition to 169 on IntType
+Transition to 157 on [
+Transition to 156 on IntType
 
 Reductions: 
 Can't reduce Type -> int .IntType 
@@ -2640,7 +2793,7 @@ Reduce on IntType -> .
 
 
 
-State Number: 169
+State Number: 156
 Type -> int IntType .
 
 Transitions: 
@@ -2650,18 +2803,18 @@ Reduce on Type -> int IntType .
 
 
 
-State Number: 170
+State Number: 157
 IntType -> [ .] 
 
 Transitions: 
-Transition to 171 on ]
+Transition to 158 on ]
 
 Reductions: 
 Can't reduce IntType -> [ .] 
 
 
 
-State Number: 171
+State Number: 158
 IntType -> [ ] .
 
 Transitions: 
@@ -2671,7 +2824,7 @@ Reduce on IntType -> [ ] .
 
 
 
-State Number: 172
+State Number: 159
 Type -> boolean .
 
 Transitions: 
@@ -2681,7 +2834,7 @@ Reduce on Type -> boolean .
 
 
 
-State Number: 173
+State Number: 160
 Type -> id .
 
 Transitions: 
@@ -2691,13 +2844,317 @@ Reduce on Type -> id .
 
 
 
+State Number: 161
+Statement -> if .( Exp ) { Statement } ElseIfList 
+
+Transitions: 
+Transition to 162 on (
+
+Reductions: 
+Can't reduce Statement -> if .( Exp ) { Statement } ElseIfList 
+
+
+
+State Number: 162
+Statement -> if ( .Exp ) { Statement } ElseIfList 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
+
+Transitions: 
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 163 on Exp
+Transition to 33 on Less
+
+Reductions: 
+Can't reduce Statement -> if ( .Exp ) { Statement } ElseIfList 
+Can't reduce Exp -> .And Elist 
+Can't reduce And -> .Less Alist 
+Can't reduce Less -> .Term Llist 
+Can't reduce Term -> .Not Tlist 
+Can't reduce Not -> .! Factor DotArrayList 
+Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+
+
+
+State Number: 163
+Statement -> if ( Exp .) { Statement } ElseIfList 
+
+Transitions: 
+Transition to 164 on )
+
+Reductions: 
+Can't reduce Statement -> if ( Exp .) { Statement } ElseIfList 
+
+
+
+State Number: 164
+Statement -> if ( Exp ) .{ Statement } ElseIfList 
+
+Transitions: 
+Transition to 165 on {
+
+Reductions: 
+Can't reduce Statement -> if ( Exp ) .{ Statement } ElseIfList 
+
+
+
+State Number: 165
+Statement -> if ( Exp ) { .Statement } ElseIfList 
+Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
+Statement -> .id Assign 
+Statement -> .switch ( id ) { caseList } 
+Statement -> .while ( Exp ) Statement 
+Statement -> .System.out.println ( Exp ) ; 
+Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+Transitions: 
+Transition to 166 on Statement
+Transition to 90 on for
+Transition to 139 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 129 on while
+Transition to 161 on if
+Transition to 122 on switch
+Transition to 134 on System.out.println
+
+Reductions: 
+Can't reduce Statement -> if ( Exp ) { .Statement } ElseIfList 
+Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Can't reduce Statement -> .{ StatementList } 
+Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
+Can't reduce Statement -> .id Assign 
+Can't reduce Statement -> .switch ( id ) { caseList } 
+Can't reduce Statement -> .while ( Exp ) Statement 
+Can't reduce Statement -> .System.out.println ( Exp ) ; 
+Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
+Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+
+
+State Number: 166
+Statement -> if ( Exp ) { Statement .} ElseIfList 
+
+Transitions: 
+Transition to 167 on }
+
+Reductions: 
+Can't reduce Statement -> if ( Exp ) { Statement .} ElseIfList 
+
+
+
+State Number: 167
+Statement -> if ( Exp ) { Statement } .ElseIfList 
+ElseIfList -> .ElseIfList ElseIf 
+ElseIfList -> .
+
+Transitions: 
+Transition to 168 on ElseIfList
+
+Reductions: 
+Can't reduce Statement -> if ( Exp ) { Statement } .ElseIfList 
+Can't reduce ElseIfList -> .ElseIfList ElseIf 
+Reduce on ElseIfList -> .
+
+
+
+State Number: 168
+Statement -> if ( Exp ) { Statement } ElseIfList .
+ElseIfList -> ElseIfList .ElseIf 
+ElseIf -> .else if ( Exp ) Statement 
+
+Transitions: 
+Transition to 169 on ElseIf
+Transition to 170 on else
+
+Reductions: 
+Reduce on Statement -> if ( Exp ) { Statement } ElseIfList .
+Can't reduce ElseIfList -> ElseIfList .ElseIf 
+Can't reduce ElseIf -> .else if ( Exp ) Statement 
+
+
+
+State Number: 169
+ElseIfList -> ElseIfList ElseIf .
+
+Transitions: 
+None
+Reductions: 
+Reduce on ElseIfList -> ElseIfList ElseIf .
+
+
+
+State Number: 170
+ElseIf -> else .if ( Exp ) Statement 
+
+Transitions: 
+Transition to 171 on if
+
+Reductions: 
+Can't reduce ElseIf -> else .if ( Exp ) Statement 
+
+
+
+State Number: 171
+ElseIf -> else if .( Exp ) Statement 
+
+Transitions: 
+Transition to 172 on (
+
+Reductions: 
+Can't reduce ElseIf -> else if .( Exp ) Statement 
+
+
+
+State Number: 172
+ElseIf -> else if ( .Exp ) Statement 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
+
+Transitions: 
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 173 on Exp
+Transition to 33 on Less
+
+Reductions: 
+Can't reduce ElseIf -> else if ( .Exp ) Statement 
+Can't reduce Exp -> .And Elist 
+Can't reduce And -> .Less Alist 
+Can't reduce Less -> .Term Llist 
+Can't reduce Term -> .Not Tlist 
+Can't reduce Not -> .! Factor DotArrayList 
+Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
+
+
+
+State Number: 173
+ElseIf -> else if ( Exp .) Statement 
+
+Transitions: 
+Transition to 174 on )
+
+Reductions: 
+Can't reduce ElseIf -> else if ( Exp .) Statement 
+
+
+
 State Number: 174
+ElseIf -> else if ( Exp ) .Statement 
+Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
+Statement -> .id Assign 
+Statement -> .switch ( id ) { caseList } 
+Statement -> .while ( Exp ) Statement 
+Statement -> .System.out.println ( Exp ) ; 
+Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+Transitions: 
+Transition to 175 on Statement
+Transition to 90 on for
+Transition to 139 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 129 on while
+Transition to 161 on if
+Transition to 122 on switch
+Transition to 134 on System.out.println
+
+Reductions: 
+Can't reduce ElseIf -> else if ( Exp ) .Statement 
+Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Can't reduce Statement -> .{ StatementList } 
+Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
+Can't reduce Statement -> .id Assign 
+Can't reduce Statement -> .switch ( id ) { caseList } 
+Can't reduce Statement -> .while ( Exp ) Statement 
+Can't reduce Statement -> .System.out.println ( Exp ) ; 
+Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
+Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+
+
+State Number: 175
+ElseIf -> else if ( Exp ) Statement .
+
+Transitions: 
+None
+Reductions: 
+Reduce on ElseIf -> else if ( Exp ) Statement .
+
+
+
+State Number: 176
 IncrementStm -> id .= Exp 
 IncrementStm -> id .[ Exp ] = Exp 
 
 Transitions: 
-Transition to 177 on [
-Transition to 175 on =
+Transition to 179 on [
+Transition to 177 on =
 
 Reductions: 
 Can't reduce IncrementStm -> id .= Exp 
@@ -2705,7 +3162,7 @@ Can't reduce IncrementStm -> id .[ Exp ] = Exp
 
 
 
-State Number: 175
+State Number: 177
 IncrementStm -> id = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2713,15 +3170,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 176 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 178 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce IncrementStm -> id = .Exp 
@@ -2731,10 +3202,17 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 176
+State Number: 178
 IncrementStm -> id = Exp .
 
 Transitions: 
@@ -2744,7 +3222,7 @@ Reduce on IncrementStm -> id = Exp .
 
 
 
-State Number: 177
+State Number: 179
 IncrementStm -> id [ .Exp ] = Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2752,15 +3230,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 178 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 180 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce IncrementStm -> id [ .Exp ] = Exp 
@@ -2770,32 +3262,39 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 178
+State Number: 180
 IncrementStm -> id [ Exp .] = Exp 
 
 Transitions: 
-Transition to 179 on ]
+Transition to 181 on ]
 
 Reductions: 
 Can't reduce IncrementStm -> id [ Exp .] = Exp 
 
 
 
-State Number: 179
+State Number: 181
 IncrementStm -> id [ Exp ] .= Exp 
 
 Transitions: 
-Transition to 180 on =
+Transition to 182 on =
 
 Reductions: 
 Can't reduce IncrementStm -> id [ Exp ] .= Exp 
 
 
 
-State Number: 180
+State Number: 182
 IncrementStm -> id [ Exp ] = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2803,15 +3302,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 181 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 183 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce IncrementStm -> id [ Exp ] = .Exp 
@@ -2821,10 +3334,17 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 181
+State Number: 183
 IncrementStm -> id [ Exp ] = Exp .
 
 Transitions: 
@@ -2834,13 +3354,13 @@ Reduce on IncrementStm -> id [ Exp ] = Exp .
 
 
 
-State Number: 182
+State Number: 184
 InitializationStm -> id .= Exp 
 InitializationStm -> id .[ Exp ] = Exp 
 
 Transitions: 
-Transition to 185 on [
-Transition to 183 on =
+Transition to 187 on [
+Transition to 185 on =
 
 Reductions: 
 Can't reduce InitializationStm -> id .= Exp 
@@ -2848,7 +3368,7 @@ Can't reduce InitializationStm -> id .[ Exp ] = Exp
 
 
 
-State Number: 183
+State Number: 185
 InitializationStm -> id = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2856,15 +3376,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 184 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 186 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce InitializationStm -> id = .Exp 
@@ -2874,10 +3408,17 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 184
+State Number: 186
 InitializationStm -> id = Exp .
 
 Transitions: 
@@ -2887,7 +3428,7 @@ Reduce on InitializationStm -> id = Exp .
 
 
 
-State Number: 185
+State Number: 187
 InitializationStm -> id [ .Exp ] = Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2895,15 +3436,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 186 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 188 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce InitializationStm -> id [ .Exp ] = Exp 
@@ -2913,32 +3468,39 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 186
+State Number: 188
 InitializationStm -> id [ Exp .] = Exp 
 
 Transitions: 
-Transition to 187 on ]
+Transition to 189 on ]
 
 Reductions: 
 Can't reduce InitializationStm -> id [ Exp .] = Exp 
 
 
 
-State Number: 187
+State Number: 189
 InitializationStm -> id [ Exp ] .= Exp 
 
 Transitions: 
-Transition to 188 on =
+Transition to 190 on =
 
 Reductions: 
 Can't reduce InitializationStm -> id [ Exp ] .= Exp 
 
 
 
-State Number: 188
+State Number: 190
 InitializationStm -> id [ Exp ] = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2946,15 +3508,29 @@ Less -> .Term Llist
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 189 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 191 on Exp
+Transition to 33 on Less
 
 Reductions: 
 Can't reduce InitializationStm -> id [ Exp ] = .Exp 
@@ -2964,10 +3540,17 @@ Can't reduce Less -> .Term Llist
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
-State Number: 189
+State Number: 191
 InitializationStm -> id [ Exp ] = Exp .
 
 Transitions: 
@@ -2977,7 +3560,7 @@ Reduce on InitializationStm -> id [ Exp ] = Exp .
 
 
 
-State Number: 190
+State Number: 192
 VarDeclList -> VarDeclList VarDecl .
 
 Transitions: 
@@ -2987,63 +3570,63 @@ Reduce on VarDeclList -> VarDeclList VarDecl .
 
 
 
-State Number: 191
-VarDecl -> Type .VarDeclType MultiDeclList ; 
-VarDeclType -> .id VarDeclTypeAssign 
+State Number: 193
+VarDecl -> Type .VarDeclID MultiDeclList ; 
+VarDeclID -> .id VarDeclTypeAssign 
 
 Transitions: 
-Transition to 192 on VarDeclType
-Transition to 201 on id
+Transition to 194 on VarDeclID
+Transition to 203 on id
 
 Reductions: 
-Can't reduce VarDecl -> Type .VarDeclType MultiDeclList ; 
-Can't reduce VarDeclType -> .id VarDeclTypeAssign 
+Can't reduce VarDecl -> Type .VarDeclID MultiDeclList ; 
+Can't reduce VarDeclID -> .id VarDeclTypeAssign 
 
 
 
-State Number: 192
-VarDecl -> Type VarDeclType .MultiDeclList ; 
+State Number: 194
+VarDecl -> Type VarDeclID .MultiDeclList ; 
 MultiDeclList -> .MultiDeclList MultiDecl 
 MultiDeclList -> .
 
 Transitions: 
-Transition to 193 on MultiDeclList
+Transition to 195 on MultiDeclList
 
 Reductions: 
-Can't reduce VarDecl -> Type VarDeclType .MultiDeclList ; 
+Can't reduce VarDecl -> Type VarDeclID .MultiDeclList ; 
 Can't reduce MultiDeclList -> .MultiDeclList MultiDecl 
 Reduce on MultiDeclList -> .
 
 
 
-State Number: 193
-VarDecl -> Type VarDeclType MultiDeclList .; 
+State Number: 195
+VarDecl -> Type VarDeclID MultiDeclList .; 
 MultiDeclList -> MultiDeclList .MultiDecl 
-MultiDecl -> ., id VarDeclTypeAssign 
+MultiDecl -> ., id VarDeclIDAssign 
 
 Transitions: 
-Transition to 195 on MultiDecl
-Transition to 194 on ;
-Transition to 196 on ,
+Transition to 197 on MultiDecl
+Transition to 196 on ;
+Transition to 198 on ,
 
 Reductions: 
-Can't reduce VarDecl -> Type VarDeclType MultiDeclList .; 
+Can't reduce VarDecl -> Type VarDeclID MultiDeclList .; 
 Can't reduce MultiDeclList -> MultiDeclList .MultiDecl 
-Can't reduce MultiDecl -> ., id VarDeclTypeAssign 
+Can't reduce MultiDecl -> ., id VarDeclIDAssign 
 
 
 
-State Number: 194
-VarDecl -> Type VarDeclType MultiDeclList ; .
+State Number: 196
+VarDecl -> Type VarDeclID MultiDeclList ; .
 
 Transitions: 
 None
 Reductions: 
-Reduce on VarDecl -> Type VarDeclType MultiDeclList ; .
+Reduce on VarDecl -> Type VarDeclID MultiDeclList ; .
 
 
 
-State Number: 195
+State Number: 197
 MultiDeclList -> MultiDeclList MultiDecl .
 
 Transitions: 
@@ -3053,127 +3636,143 @@ Reduce on MultiDeclList -> MultiDeclList MultiDecl .
 
 
 
-State Number: 196
-MultiDecl -> , .id VarDeclTypeAssign 
-
-Transitions: 
-Transition to 197 on id
-
-Reductions: 
-Can't reduce MultiDecl -> , .id VarDeclTypeAssign 
-
-
-
-State Number: 197
-MultiDecl -> , id .VarDeclTypeAssign 
-VarDeclTypeAssign -> .= Exp 
-VarDeclTypeAssign -> .
-
-Transitions: 
-Transition to 199 on =
-Transition to 198 on VarDeclTypeAssign
-
-Reductions: 
-Can't reduce MultiDecl -> , id .VarDeclTypeAssign 
-Can't reduce VarDeclTypeAssign -> .= Exp 
-Reduce on VarDeclTypeAssign -> .
-
-
-
 State Number: 198
-MultiDecl -> , id VarDeclTypeAssign .
+MultiDecl -> , .id VarDeclIDAssign 
 
 Transitions: 
-None
+Transition to 199 on id
+
 Reductions: 
-Reduce on MultiDecl -> , id VarDeclTypeAssign .
+Can't reduce MultiDecl -> , .id VarDeclIDAssign 
 
 
 
 State Number: 199
-VarDeclTypeAssign -> = .Exp 
+MultiDecl -> , id .VarDeclIDAssign 
+VarDeclIDAssign -> .
+VarDeclIDAssign -> .= Exp 
+
+Transitions: 
+Transition to 200 on VarDeclIDAssign
+Transition to 201 on =
+
+Reductions: 
+Can't reduce MultiDecl -> , id .VarDeclIDAssign 
+Reduce on VarDeclIDAssign -> .
+Can't reduce VarDeclIDAssign -> .= Exp 
+
+
+
+State Number: 200
+MultiDecl -> , id VarDeclIDAssign .
+
+Transitions: 
+None
+Reductions: 
+Reduce on MultiDecl -> , id VarDeclIDAssign .
+
+
+
+State Number: 201
+VarDeclIDAssign -> = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
 Less -> .Term Llist 
 Term -> .Not Tlist 
 Not -> .! Factor DotArrayList 
 Not -> .Factor DotArrayList 
+Factor -> .false 
+Factor -> .id 
+Factor -> .( Exp ) 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .this 
+Factor -> .number 
 
 Transitions: 
-Transition to 49 on !
-Transition to 44 on Not
-Transition to 26 on And
-Transition to 65 on Factor
-Transition to 36 on Term
-Transition to 200 on Exp
-Transition to 31 on Less
+Transition to 51 on !
+Transition to 76 on new
+Transition to 71 on false
+Transition to 73 on (
+Transition to 83 on this
+Transition to 38 on Term
+Transition to 84 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 82 on true
+Transition to 72 on id
+Transition to 202 on Exp
+Transition to 33 on Less
 
 Reductions: 
-Can't reduce VarDeclTypeAssign -> = .Exp 
+Can't reduce VarDeclIDAssign -> = .Exp 
 Can't reduce Exp -> .And Elist 
 Can't reduce And -> .Less Alist 
 Can't reduce Less -> .Term Llist 
 Can't reduce Term -> .Not Tlist 
 Can't reduce Not -> .! Factor DotArrayList 
 Can't reduce Not -> .Factor DotArrayList 
-
-
-
-State Number: 200
-VarDeclTypeAssign -> = Exp .
-
-Transitions: 
-None
-Reductions: 
-Reduce on VarDeclTypeAssign -> = Exp .
-
-
-
-State Number: 201
-VarDeclType -> id .VarDeclTypeAssign 
-VarDeclTypeAssign -> .= Exp 
-VarDeclTypeAssign -> .
-
-Transitions: 
-Transition to 199 on =
-Transition to 202 on VarDeclTypeAssign
-
-Reductions: 
-Can't reduce VarDeclType -> id .VarDeclTypeAssign 
-Can't reduce VarDeclTypeAssign -> .= Exp 
-Reduce on VarDeclTypeAssign -> .
+Can't reduce Factor -> .false 
+Can't reduce Factor -> .id 
+Can't reduce Factor -> .( Exp ) 
+Can't reduce Factor -> .new New 
+Can't reduce Factor -> .true 
+Can't reduce Factor -> .this 
+Can't reduce Factor -> .number 
 
 
 
 State Number: 202
-VarDeclType -> id VarDeclTypeAssign .
+VarDeclIDAssign -> = Exp .
 
 Transitions: 
 None
 Reductions: 
-Reduce on VarDeclType -> id VarDeclTypeAssign .
+Reduce on VarDeclIDAssign -> = Exp .
 
 
 
 State Number: 203
+VarDeclID -> id .VarDeclTypeAssign 
+
+Transitions: 
+Transition to 204 on VarDeclTypeAssign
+
+Reductions: 
+Can't reduce VarDeclID -> id .VarDeclTypeAssign 
+
+
+
+State Number: 204
+VarDeclID -> id VarDeclTypeAssign .
+
+Transitions: 
+None
+Reductions: 
+Reduce on VarDeclID -> id VarDeclTypeAssign .
+
+
+
+State Number: 205
 FormalList -> Type .id FormalRest 
 
 Transitions: 
-Transition to 204 on id
+Transition to 206 on id
 
 Reductions: 
 Can't reduce FormalList -> Type .id FormalRest 
 
 
 
-State Number: 204
+State Number: 206
 FormalList -> Type id .FormalRest 
 FormalRest -> ., Type id FormalRest 
 FormalRest -> .
 
 Transitions: 
-Transition to 206 on ,
-Transition to 205 on FormalRest
+Transition to 208 on ,
+Transition to 207 on FormalRest
 
 Reductions: 
 Can't reduce FormalList -> Type id .FormalRest 
@@ -3182,7 +3781,7 @@ Reduce on FormalRest -> .
 
 
 
-State Number: 205
+State Number: 207
 FormalList -> Type id FormalRest .
 
 Transitions: 
@@ -3192,17 +3791,17 @@ Reduce on FormalList -> Type id FormalRest .
 
 
 
-State Number: 206
+State Number: 208
 FormalRest -> , .Type id FormalRest 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 207 on Type
-Transition to 172 on boolean
-Transition to 173 on id
-Transition to 168 on int
+Transition to 209 on Type
+Transition to 159 on boolean
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
 Can't reduce FormalRest -> , .Type id FormalRest 
@@ -3212,25 +3811,25 @@ Can't reduce Type -> .id
 
 
 
-State Number: 207
+State Number: 209
 FormalRest -> , Type .id FormalRest 
 
 Transitions: 
-Transition to 208 on id
+Transition to 210 on id
 
 Reductions: 
 Can't reduce FormalRest -> , Type .id FormalRest 
 
 
 
-State Number: 208
+State Number: 210
 FormalRest -> , Type id .FormalRest 
 FormalRest -> ., Type id FormalRest 
 FormalRest -> .
 
 Transitions: 
-Transition to 206 on ,
-Transition to 209 on FormalRest
+Transition to 208 on ,
+Transition to 211 on FormalRest
 
 Reductions: 
 Can't reduce FormalRest -> , Type id .FormalRest 
@@ -3239,7 +3838,7 @@ Reduce on FormalRest -> .
 
 
 
-State Number: 209
+State Number: 211
 FormalRest -> , Type id FormalRest .
 
 Transitions: 
@@ -3249,67 +3848,45 @@ Reduce on FormalRest -> , Type id FormalRest .
 
 
 
-State Number: 210
-ClassDeclDeff -> extends .id { VarDeclList MethodDeclList } 
-
-Transitions: 
-Transition to 211 on id
-
-Reductions: 
-Can't reduce ClassDeclDeff -> extends .id { VarDeclList MethodDeclList } 
-
-
-
-State Number: 211
-ClassDeclDeff -> extends id .{ VarDeclList MethodDeclList } 
-
-Transitions: 
-Transition to 212 on {
-
-Reductions: 
-Can't reduce ClassDeclDeff -> extends id .{ VarDeclList MethodDeclList } 
-
-
-
 State Number: 212
-ClassDeclDeff -> extends id { .VarDeclList MethodDeclList } 
-VarDeclList -> .VarDeclList VarDecl 
+ClassDeclDeff -> { .VarDeclList MethodDeclList } 
 VarDeclList -> .
+VarDeclList -> .VarDeclList VarDecl 
 
 Transitions: 
 Transition to 213 on VarDeclList
 
 Reductions: 
-Can't reduce ClassDeclDeff -> extends id { .VarDeclList MethodDeclList } 
-Can't reduce VarDeclList -> .VarDeclList VarDecl 
+Can't reduce ClassDeclDeff -> { .VarDeclList MethodDeclList } 
 Reduce on VarDeclList -> .
+Can't reduce VarDeclList -> .VarDeclList VarDecl 
 
 
 
 State Number: 213
-ClassDeclDeff -> extends id { VarDeclList .MethodDeclList } 
+ClassDeclDeff -> { VarDeclList .MethodDeclList } 
 MethodDeclList -> .MethodDeclList MethodDecl 
 MethodDeclList -> .
 VarDeclList -> VarDeclList .VarDecl 
-VarDecl -> .Type VarDeclType MultiDeclList ; 
+VarDecl -> .Type VarDeclID MultiDeclList ; 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 191 on Type
-Transition to 172 on boolean
+Transition to 193 on Type
+Transition to 159 on boolean
 Transition to 214 on MethodDeclList
-Transition to 190 on VarDecl
-Transition to 173 on id
-Transition to 168 on int
+Transition to 192 on VarDecl
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
-Can't reduce ClassDeclDeff -> extends id { VarDeclList .MethodDeclList } 
+Can't reduce ClassDeclDeff -> { VarDeclList .MethodDeclList } 
 Can't reduce MethodDeclList -> .MethodDeclList MethodDecl 
 Reduce on MethodDeclList -> .
 Can't reduce VarDeclList -> VarDeclList .VarDecl 
-Can't reduce VarDecl -> .Type VarDeclType MultiDeclList ; 
+Can't reduce VarDecl -> .Type VarDeclID MultiDeclList ; 
 Can't reduce Type -> .int IntType 
 Can't reduce Type -> .boolean 
 Can't reduce Type -> .id 
@@ -3317,29 +3894,29 @@ Can't reduce Type -> .id
 
 
 State Number: 214
-ClassDeclDeff -> extends id { VarDeclList MethodDeclList .} 
+ClassDeclDeff -> { VarDeclList MethodDeclList .} 
 MethodDeclList -> MethodDeclList .MethodDecl 
 MethodDecl -> .public Type id ( FormalList ) { VarDeclList StatementList return Exp ; } 
 
 Transitions: 
-Transition to 13 on public
-Transition to 12 on MethodDecl
+Transition to 15 on public
+Transition to 14 on MethodDecl
 Transition to 215 on }
 
 Reductions: 
-Can't reduce ClassDeclDeff -> extends id { VarDeclList MethodDeclList .} 
+Can't reduce ClassDeclDeff -> { VarDeclList MethodDeclList .} 
 Can't reduce MethodDeclList -> MethodDeclList .MethodDecl 
 Can't reduce MethodDecl -> .public Type id ( FormalList ) { VarDeclList StatementList return Exp ; } 
 
 
 
 State Number: 215
-ClassDeclDeff -> extends id { VarDeclList MethodDeclList } .
+ClassDeclDeff -> { VarDeclList MethodDeclList } .
 
 Transitions: 
 None
 Reductions: 
-Reduce on ClassDeclDeff -> extends id { VarDeclList MethodDeclList } .
+Reduce on ClassDeclDeff -> { VarDeclList MethodDeclList } .
 
 
 
@@ -3509,43 +4086,43 @@ Can't reduce MainClass -> class id { public static void main ( String [ ] id ) .
 
 State Number: 231
 MainClass -> class id { public static void main ( String [ ] id ) { .VarDeclList StatementList } } 
-VarDeclList -> .VarDeclList VarDecl 
 VarDeclList -> .
+VarDeclList -> .VarDeclList VarDecl 
 
 Transitions: 
 Transition to 232 on VarDeclList
 
 Reductions: 
 Can't reduce MainClass -> class id { public static void main ( String [ ] id ) { .VarDeclList StatementList } } 
-Can't reduce VarDeclList -> .VarDeclList VarDecl 
 Reduce on VarDeclList -> .
+Can't reduce VarDeclList -> .VarDeclList VarDecl 
 
 
 
 State Number: 232
 MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList .StatementList } } 
-StatementList -> .StatementList Statement 
 StatementList -> .
+StatementList -> .StatementList Statement 
 VarDeclList -> VarDeclList .VarDecl 
-VarDecl -> .Type VarDeclType MultiDeclList ; 
+VarDecl -> .Type VarDeclID MultiDeclList ; 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 191 on Type
-Transition to 172 on boolean
-Transition to 190 on VarDecl
+Transition to 193 on Type
+Transition to 159 on boolean
+Transition to 192 on VarDecl
 Transition to 233 on StatementList
-Transition to 173 on id
-Transition to 168 on int
+Transition to 160 on id
+Transition to 155 on int
 
 Reductions: 
 Can't reduce MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList .StatementList } } 
-Can't reduce StatementList -> .StatementList Statement 
 Reduce on StatementList -> .
+Can't reduce StatementList -> .StatementList Statement 
 Can't reduce VarDeclList -> VarDeclList .VarDecl 
-Can't reduce VarDecl -> .Type VarDeclType MultiDeclList ; 
+Can't reduce VarDecl -> .Type VarDeclID MultiDeclList ; 
 Can't reduce Type -> .int IntType 
 Can't reduce Type -> .boolean 
 Can't reduce Type -> .id 
@@ -3555,41 +4132,41 @@ Can't reduce Type -> .id
 State Number: 233
 MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList StatementList .} } 
 StatementList -> StatementList .Statement 
-Statement -> .{ StatementList } 
-Statement -> .if ( Exp ) { Statement } ElseIfList 
-Statement -> .do { Statement } while ( Exp ) ; 
-Statement -> .while ( Exp ) Statement 
 Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Statement -> .switch ( id ) { caseList } 
-Statement -> .System.out.println ( Exp ) ; 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
+Statement -> .switch ( id ) { caseList } 
+Statement -> .while ( Exp ) Statement 
+Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 Transitions: 
-Transition to 87 on Statement
-Transition to 120 on for
-Transition to 152 on (
-Transition to 88 on {
-Transition to 106 on do
-Transition to 141 on id
-Transition to 115 on while
+Transition to 89 on Statement
+Transition to 90 on for
+Transition to 139 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 129 on while
 Transition to 234 on }
-Transition to 91 on if
-Transition to 129 on switch
-Transition to 136 on System.out.println
+Transition to 161 on if
+Transition to 122 on switch
+Transition to 134 on System.out.println
 
 Reductions: 
 Can't reduce MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList StatementList .} } 
 Can't reduce StatementList -> StatementList .Statement 
-Can't reduce Statement -> .{ StatementList } 
-Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
-Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
-Can't reduce Statement -> .while ( Exp ) Statement 
 Can't reduce Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
-Can't reduce Statement -> .switch ( id ) { caseList } 
-Can't reduce Statement -> .System.out.println ( Exp ) ; 
+Can't reduce Statement -> .{ StatementList } 
+Can't reduce Statement -> .do { Statement } while ( Exp ) ; 
 Can't reduce Statement -> .id Assign 
+Can't reduce Statement -> .switch ( id ) { caseList } 
+Can't reduce Statement -> .while ( Exp ) Statement 
+Can't reduce Statement -> .System.out.println ( Exp ) ; 
 Can't reduce Statement -> .( Type id = Exp ) FormalVarExp ; 
+Can't reduce Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 
 
