@@ -3572,7 +3572,7 @@ Reduce on VarDeclList -> VarDeclList VarDecl .
 
 State Number: 193
 VarDecl -> Type .VarDeclID MultiDeclList ; 
-VarDeclID -> .id VarDeclTypeAssign 
+VarDeclID -> .id VarDeclAssign 
 
 Transitions: 
 Transition to 194 on VarDeclID
@@ -3580,7 +3580,7 @@ Transition to 203 on id
 
 Reductions: 
 Can't reduce VarDecl -> Type .VarDeclID MultiDeclList ; 
-Can't reduce VarDeclID -> .id VarDeclTypeAssign 
+Can't reduce VarDeclID -> .id VarDeclAssign 
 
 
 
@@ -3602,7 +3602,7 @@ Reduce on MultiDeclList -> .
 State Number: 195
 VarDecl -> Type VarDeclID MultiDeclList .; 
 MultiDeclList -> MultiDeclList .MultiDecl 
-MultiDecl -> ., id VarDeclIDAssign 
+MultiDecl -> ., id VarDeclAssign 
 
 Transitions: 
 Transition to 197 on MultiDecl
@@ -3612,7 +3612,7 @@ Transition to 198 on ,
 Reductions: 
 Can't reduce VarDecl -> Type VarDeclID MultiDeclList .; 
 Can't reduce MultiDeclList -> MultiDeclList .MultiDecl 
-Can't reduce MultiDecl -> ., id VarDeclIDAssign 
+Can't reduce MultiDecl -> ., id VarDeclAssign 
 
 
 
@@ -3637,44 +3637,44 @@ Reduce on MultiDeclList -> MultiDeclList MultiDecl .
 
 
 State Number: 198
-MultiDecl -> , .id VarDeclIDAssign 
+MultiDecl -> , .id VarDeclAssign 
 
 Transitions: 
 Transition to 199 on id
 
 Reductions: 
-Can't reduce MultiDecl -> , .id VarDeclIDAssign 
+Can't reduce MultiDecl -> , .id VarDeclAssign 
 
 
 
 State Number: 199
-MultiDecl -> , id .VarDeclIDAssign 
-VarDeclIDAssign -> .
-VarDeclIDAssign -> .= Exp 
+MultiDecl -> , id .VarDeclAssign 
+VarDeclAssign -> .
+VarDeclAssign -> .= Exp 
 
 Transitions: 
-Transition to 200 on VarDeclIDAssign
+Transition to 200 on VarDeclAssign
 Transition to 201 on =
 
 Reductions: 
-Can't reduce MultiDecl -> , id .VarDeclIDAssign 
-Reduce on VarDeclIDAssign -> .
-Can't reduce VarDeclIDAssign -> .= Exp 
+Can't reduce MultiDecl -> , id .VarDeclAssign 
+Reduce on VarDeclAssign -> .
+Can't reduce VarDeclAssign -> .= Exp 
 
 
 
 State Number: 200
-MultiDecl -> , id VarDeclIDAssign .
+MultiDecl -> , id VarDeclAssign .
 
 Transitions: 
 None
 Reductions: 
-Reduce on MultiDecl -> , id VarDeclIDAssign .
+Reduce on MultiDecl -> , id VarDeclAssign .
 
 
 
 State Number: 201
-VarDeclIDAssign -> = .Exp 
+VarDeclAssign -> = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
 Less -> .Term Llist 
@@ -3706,7 +3706,7 @@ Transition to 202 on Exp
 Transition to 33 on Less
 
 Reductions: 
-Can't reduce VarDeclIDAssign -> = .Exp 
+Can't reduce VarDeclAssign -> = .Exp 
 Can't reduce Exp -> .And Elist 
 Can't reduce And -> .Less Alist 
 Can't reduce Less -> .Term Llist 
@@ -3724,33 +3724,38 @@ Can't reduce Factor -> .number
 
 
 State Number: 202
-VarDeclIDAssign -> = Exp .
+VarDeclAssign -> = Exp .
 
 Transitions: 
 None
 Reductions: 
-Reduce on VarDeclIDAssign -> = Exp .
+Reduce on VarDeclAssign -> = Exp .
 
 
 
 State Number: 203
-VarDeclID -> id .VarDeclTypeAssign 
+VarDeclID -> id .VarDeclAssign 
+VarDeclAssign -> .
+VarDeclAssign -> .= Exp 
 
 Transitions: 
-Transition to 204 on VarDeclTypeAssign
+Transition to 204 on VarDeclAssign
+Transition to 201 on =
 
 Reductions: 
-Can't reduce VarDeclID -> id .VarDeclTypeAssign 
+Can't reduce VarDeclID -> id .VarDeclAssign 
+Reduce on VarDeclAssign -> .
+Can't reduce VarDeclAssign -> .= Exp 
 
 
 
 State Number: 204
-VarDeclID -> id VarDeclTypeAssign .
+VarDeclID -> id VarDeclAssign .
 
 Transitions: 
 None
 Reductions: 
-Reduce on VarDeclID -> id VarDeclTypeAssign .
+Reduce on VarDeclID -> id VarDeclAssign .
 
 
 
