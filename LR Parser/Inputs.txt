@@ -1,11 +1,14 @@
-class id { public static void main ( String [ ] id ) { { id = number ; } } } class id {  } $
+**FOR GRAMMAR 3.1**
+
+//x  :=  (print(y), 2 + 3) 
+*THIS SOULD WORK WITH GRAMMAR 3.1* id := ( print ( id ) "comma" num + num ) $
 
 ** THIS TESTS OPERANDS
 
 class id { public static void main ( String [] id ) { } } class id { public int id( int id, int id) { int id, id, id; { id = number; id = id; id = id; id = id && id < id + id * !id.id()[number]; } return id; } } $
 
-class id { public static void main ( String [ ] id ) { { { } } } }
+*BAD* class id { public static void main ( String [ ] id ) { { { } } } }
 
-class id { public static void main ( String [ ] id ) { } }
+*GOOD* class id { public static void main ( String [ ] id ) { } }
 
-class id { public static void main ( String [ ] id ) { } } class id ( public int id ( ) { { } return number ; } 
+*WORKING PROGRESS* class id { public static void main ( String [ ] id ) { } } class id ( public int id ( ) { { } return number ; } 
