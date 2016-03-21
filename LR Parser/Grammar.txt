@@ -10,12 +10,12 @@ ClassDeclDeff -> extends id { VarDeclList MethodDeclList }
 VarDeclList -> VarDeclList VarDecl
 VarDeclList -> 
 VarDecl -> Type VarDeclID MultiDeclList ; 
-VarDeclID -> id VarDeclTypeAssign
-VarDeclIDAssign -> = Exp 
-VarDeclIDAssign -> 
+VarDeclID -> id VarDeclAssign
+VarDeclAssign -> = Exp 
+VarDeclAssign -> 
 MultiDeclList -> MultiDeclList MultiDecl
 MultiDeclList -> 
-MultiDecl -> , id VarDeclIDAssign
+MultiDecl -> , id VarDeclAssign
 MethodDecl -> public Type id ( FormalList ) { VarDeclList StatementList return Exp ; }
 MethodDeclList -> MethodDeclList MethodDecl
 MethodDeclList -> 
