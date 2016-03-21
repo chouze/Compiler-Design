@@ -3,25 +3,39 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * 
+ * @author Christopher Houze, Clifford Black, David Carlin
+ *
+ */
 public class TableCreator {
+	//Specify which string the rules are separated by
 	static final String ruleSeparator = "->";
+	
+	//Variable declarations
 	ArrayList<String> allNonTerminals, allTerminals;
 	HashMap <String, HashSet<String>> folSet;
 	Scanner sc;
 	File file;
+	String filename;
 	ArrayList<Rule> rules;
 	LinkedHashSet<State> states;
 	HashSet<Rule> nullableRules;
 
+	/**
+	 * Constructor
+	 * @param filename the name of the grammar file
+	 * @throws FileNotFoundException of the grammar file could not be found
+	 */
 	public TableCreator(String filename) throws FileNotFoundException{
 		file = new File(filename);
 		sc = new Scanner(new FileReader(file));
@@ -30,10 +44,31 @@ public class TableCreator {
 		allTerminals = new ArrayList<String> (100);
 		states = new LinkedHashSet<State> (200);
 		folSet = new HashMap<String, HashSet<String>>();
-		
+		this.filename = filename;
 	}
 
-	public void scanForNTs() throws FileNotFoundException{
+	
+	/**
+	 * Run the table creator to produce the output file
+	 * @throws IOException if the files we unable to be accessed or created
+	 */
+	public void run() throws IOException{
+		scanForTokens();
+		readRules();
+		createStates();
+		findFOLs();
+		createTable(filename.split("\\.")[0] + "_Output.csv");
+	}
+	
+	
+	/**
+	 * Scan the input file for non terminal and terminal tokens
+	 * In order for a token to found to be a non terminal, if must appear on the
+	 * left hand side of a rule at least once. Any tokens that appear in the grammar, but 
+	 * do not appear on the left hand side of a rule are found to be terminal
+	 * @throws FileNotFoundException if the file could not be found
+	 */
+	public void scanForTokens() throws FileNotFoundException{
 		Scanner lineScanner;
 		String temp;
 		while (sc.hasNext()){
@@ -43,7 +78,10 @@ public class TableCreator {
 				allNonTerminals.add(temp);
 			}
 		}
+		
+		//Reset the scanner
 		sc = new Scanner(new FileReader(file));
+		
 		while(sc.hasNext()){
 			lineScanner = new Scanner(sc.nextLine());
 			while(lineScanner.hasNext()){
@@ -53,27 +91,25 @@ public class TableCreator {
 				}
 			}
 		}
-
-		for(String s : allNonTerminals){
-			//	System.out.println(s);
-		}
-
 	}
 
+	
+	/**
+	 * Read the grammar rules and create the rule objects
+	 * @throws FileNotFoundException
+	 */
 	public void readRules() throws FileNotFoundException{
 		Scanner lineScanner;
 		sc = new Scanner(new FileReader(file));
 		Rule r;
+		
 		while(sc.hasNext()){
 			lineScanner = new Scanner(sc.nextLine());
-			r = new Rule();
 			String temp = lineScanner.next();
+			
 			if(allNonTerminals.contains(temp)){
-				r.reduceTo = temp;
+				r = new Rule(temp);
 				lineScanner.next(); //Eat the ->
-				r.beforeDot = new ArrayList<String>();
-				r.afterDot = new ArrayList<String>();
-				r.ruleNumber = Rule.ruleNumbers++;
 				while(lineScanner.hasNext()){
 					r.afterDot.add(lineScanner.next());
 				}
@@ -87,28 +123,39 @@ public class TableCreator {
 	}
 
 
+	/**
+	 * Create the state objects based on the grammar rules
+	 */
 	public void createStates(){
 		states = new LinkedHashSet<State>();
 		State current = new State(states, rules);
-		current.add(rules.get(0)); //Add the first rule
+		
+		//Add the first rule
+		current.add(rules.get(0)); 
 
+		//Create the rest of the states based on the rules and the first state
 		states = current.expand();
-		//System.out.println(states);
 	}
 
 
+	/**
+	 * Find the FOL sets of all the non terminal characters
+	 */
 	public void findFOLs(){
 		HashSet<String> fol = new HashSet<String>();
-		nullableRules = findNullableRules();
 
 		for(String nt : allNonTerminals){
 			fol = findFolHelp(nt, new HashSet<String>());
 			folSet.put(nt, fol);
 		}
-		System.out.println(folSet.get("StatementList")/*findFirst("Statement", new HashSet<String>())*/ + "\n");
-		System.out.println(findFirst("StatementList", new HashSet<String>()));
 	}
 
+	/**
+	 * Recursive helper method for finding the FOL set of a single non terminal
+	 * @param nt the non terminal to find the FOL set for
+	 * @param lookedAt the non terminals that have already had their FOL set calculated
+	 * @return the set of all terminals that can follow this non terminal
+	 */
 	private HashSet<String> findFolHelp(String nt, Set<String> lookedAt){
 		HashSet<String> fol = new HashSet<String>();
 		lookedAt.add(nt);
@@ -116,13 +163,10 @@ public class TableCreator {
 			if(r.afterDot.contains(nt)){
 				for(int i = 0; i < r.afterDot.size() - 1; i++){
 					if(nt.equals(r.afterDot.get(i))){
-						if(allNonTerminals.contains(r.afterDot.get(i+1)) /*&& !lookedAt.contains(r.afterDot.get(i + 1))*/){
+						if(allNonTerminals.contains(r.afterDot.get(i+1))){
 							if(!lookedAt.contains(r.afterDot.get(i + 1))){
 								fol.addAll(findFolHelp(r.afterDot.get(i+1), lookedAt));
 							}
-							
-							//Check for nullable first
-							
 							fol.addAll(findFirst(r.afterDot.get(i+1), new HashSet<String>()));
 						}
 						else {
@@ -136,16 +180,15 @@ public class TableCreator {
 
 			}
 		}
-		
-		
 		return fol;
-
 	}
 
 
 	/**
-	 * Add nullable finder
+	 * Find the nullable rules in the rule set (currently unused)
+	 * @return the set of all nullable rules
 	 */
+	@SuppressWarnings("unused")
 	private HashSet<Rule> findNullableRules(){
 		HashSet<Rule> nullableRules = new HashSet<Rule>();
 		for(Rule r : rules){
@@ -157,9 +200,15 @@ public class TableCreator {
 
 	}
 
+	/**
+	 * Helper method to determine if a specific rule is nullable
+	 * @param rule the rule in question
+	 * @param lookedAt the set of rules that have already been tested 
+	 * @return whether or not the rule is nullable
+	 */
 	private boolean findNullableHelper(Rule rule, HashSet<Rule> lookedAt){
 		lookedAt.add(rule);
-		
+
 		for(String nt : rule.afterDot){
 			if(allNonTerminals.contains(nt)){
 				for(Rule r : rules){
@@ -172,13 +221,16 @@ public class TableCreator {
 				}
 			}
 		}
-
-
 		return false;
-
 	}
 
 
+	/**
+	 * Find the set of terminals that could begin a derivation of the specified non terminal
+	 * @param nt the non terminal in question
+	 * @param lookedAt the set of non terminals that have already been tested
+	 * @return
+	 */
 	private HashSet<String> findFirst(String nt, Set<String> lookedAt){
 		HashSet<String> first = new HashSet<String>();
 		for(Rule r : rules){
@@ -198,6 +250,11 @@ public class TableCreator {
 		return first;
 	}
 
+	/**
+	 * Create the output file
+	 * @param filename the name of the output file
+	 * @throws IOException if the output file could not be created
+	 */
 	public void createTable(String filename) throws IOException{
 		Set<String> terminals = new LinkedHashSet<String>();
 		HashMap<String, Integer> result = new HashMap<String, Integer>();
@@ -238,9 +295,7 @@ public class TableCreator {
 			for(Rule rule : state.rules){
 				if (rule.isFinished()){
 					for(String folNT : folSet.get(rule.reduceTo)){
-						if(output[result.get(folNT)] == null){
-							output[result.get(folNT)] = "r" + rule.ruleNumber ;
-						}
+						output[result.get(folNT)] = "r" + rule.ruleNumber ;
 					}
 				}
 				else if(rule.afterDot.get(0).equals("$")){

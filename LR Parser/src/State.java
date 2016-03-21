@@ -1,9 +1,7 @@
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.Writer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,117 +9,87 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+/**
+ * 
+ * @author Christopher Houze, Clifford Black, David Carlin
+ *
+ */
 public class State {
-	static int stateNumbers = 1;
+	//The current available state number
+	private static int stateNumbers = 1;
+	
+	//Variable declarations
 	int stateNumber;
 	List<String> nonTerminals;
 	LinkedHashSet<Rule> rules;
 	Map<String, State> transitions;
 	List<Rule> allRules;
-	List<String> allTerminals;
-	//public static Set<State> allStates = new LinkedHashSet<State>(); //Are you in good hands?
-	private LinkedHashSet<State> allStates;
+	LinkedHashSet<State> allStates;
+	String filename;
 
-	public State (LinkedHashSet<State> allStates, List<Rule> allRules/*, List<String> allTerminals*/){
+	/**
+	 * Constructor
+	 * @param allStates all the states that have been created so far
+	 * @param allRules all the rules in the grammar
+	 */
+	public State (LinkedHashSet<State> allStates, List<Rule> allRules){
 		nonTerminals = new ArrayList<String>();
 		rules = new LinkedHashSet<Rule>();
 		transitions = new HashMap<String, State>();
 		this.allStates = allStates;
 		this.allRules = allRules;
-		//this.allTerminals = allTerminals;
 	}
-/*
-	public void add(Rule rule){
-		List<Rule> newRules = new ArrayList<Rule>();
-		rules.add(rule);
-		boolean changed = true;
 
-		while(changed){
-			changed = false;
-			newRules.clear();
-			for(Rule r : rules){
-				if (!r.isFinished() && !nonTerminals.contains(r.reduceTo)){
-					nonTerminals.add(r.reduceTo);
-					changed = true;
-					newRules.addAll(allRules.stream()
-							.filter(t -> t.reduceTo.equals(r.afterDot.get(0))).
-							collect(Collectors.toList()));
-					
-					
-					if(r.afterDot.get(0).equals("Factor")){
-						System.out.println(r.afterDot.get(0) + " " + r.reduceTo);
-						System.out.println(newRules);
-					}
-				}
-			}
-			rules.addAll(newRules);
-		}
+	/**
+	 * Overloaded Constructor
+	 * @param allStates all the states that have been created so far
+	 * @param allRules all the rules in the grammar
+	 * @param outputFileName filename to output the state information to
+	 */
+	public State(LinkedHashSet<State> allStates, List<Rule> allRules, String outputFileName){
+		nonTerminals = new ArrayList<String>();
+		rules = new LinkedHashSet<Rule>();
+		transitions = new HashMap<String, State>();
+		this.allStates = allStates;
+		this.allRules = allRules;
+		this.filename = outputFileName;
 	}
-*/
-	
+
+
+	/**
+	 * Add the specified rule to the state, and all the rules that the specified rule requires
+	 * @param rule the rule to add
+	 */
 	public void add(Rule rule){
 		boolean newRules = true;
 		Set<Rule> addingRules = new HashSet<Rule>();
-		Set<String> usedNonTerminals = new HashSet<String>();
 		rules.add(rule);
-		
+
 		while(newRules){
 			newRules = false;
 			for(Rule r : rules){
 				if(!r.isFinished()){
 					addingRules = getRulesStartingWith(r.afterDot.get(0));
 				}
-				/*
-				if (!r.isFinished() && !usedNonTerminals.contains(r.afterDot.get(0))){ //Keep going
-					for(Rule tempRule : allRules){
-						if(r.afterDot.get(0).equals(tempRule.reduceTo)){
-							
-							if(addingRules.add(tempRule)){
-								newRules = true;
-							}
-							addingRules.add(tempRule);
-							if(!tempRule.isFinished()){
-								usedNonTerminals.remove(tempRule.afterDot.get(0));
-							}
-							
-						}
-					}
-				}
-			
-				usedNonTerminals.add(r.reduceTo);*/
-				
 			}
 			for(Rule addingRule : addingRules){
 				if(rules.add(addingRule)){
 					newRules = true;
 				}
 			}
-			//rules.addAll(addingRules);
-			/*
-			for(Rule r : addingRules){
-				if(rules.add(r)){
-					newRules = true;
-					//System.out.println("Successfully added rule: " + r);
-				}
-				else{
-					//System.out.println("Failed to add rule: " + r + " to set:\n");
-					
-				}
-				
-			}
-			for(Rule r2 : rules){
-				//System.out.println(r2);
-			}
-			//System.out.println();*/
-			
 		}
 	}
+
 	
+	/**
+	 * Get all the rules that reduce to the specified non terminal
+	 * @param nt the nonterminal to look for
+	 * @return the set of rules that reduce to the specified non terminal
+	 */
 	private Set<Rule> getRulesStartingWith(String nt){
 		HashSet<Rule> rulesStartingWithNT = new HashSet<Rule>();
-		
+
 		for(Rule r : allRules){
 			if(r.reduceTo.equals(nt)){
 				rulesStartingWithNT.add(r);
@@ -130,6 +98,11 @@ public class State {
 		return rulesStartingWithNT;
 	}
 
+	/**
+	 * Create all the transitions from this state
+	 * If the state that this state transitions to does not exist, create it
+	 * @return all the states that have been created so far
+	 */
 	public LinkedHashSet<State> expand(){
 		if(!allStates.contains(this)){
 			allStates.add(this);
@@ -148,14 +121,6 @@ public class State {
 						newState.add(tempRule.getNextVersion());
 					}
 
-					//newState.add(rule.getNextVersion());
-
-					//System.out.println(newState);
-					/*
-					if(transitions.containsKey(rule.afterDot.get(0))){
-						transitions.get(rule.afterDot.get(0)).add(rule.getNextVersion());
-					}*/
-
 					if(!allStates.contains(newState)){
 						transitions.put(rule.afterDot.get(0), newState);
 						allStates = newState.expand();
@@ -167,28 +132,44 @@ public class State {
 							}
 						}
 					}
-
 				}
 			}
-
 		}
 
-		try {
-			PrintStream bf = new PrintStream(new File("States.txt"));
-			for(State s : allStates){
-				bf.print(s.toString() + "\r\n");
-			}
-			bf.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		printStates();
 
 		return allStates;
 	}
 
-	public ArrayList<Rule> getRulesContinuingWith(String token){
+	
+	/**
+	 * Print the state and their information to a file
+	 */
+	private void printStates(){
+		try {
+			PrintStream ps;
+			if(filename != null){
+				ps = new PrintStream(new File(filename));
+			}
+			else{
+				ps = new PrintStream(new File("States.txt"));
+			}
+			for(State s : allStates){
+				ps.print(s.toString() + "\r\n");
+			}
+			ps.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	/**
+	 * Get all rules whose next token is the specified token
+	 * @param token the token to look for
+	 * @return an ArrayList of all the rules whose first token after the dot matches this token
+	 */
+	private ArrayList<Rule> getRulesContinuingWith(String token){
 		ArrayList<Rule> list = new ArrayList<Rule> ();
 
 		for(Rule rule : rules){
@@ -201,7 +182,10 @@ public class State {
 
 
 
-
+	/**
+	 * Auto Generated
+	 * @return the hash representation of this object
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -211,6 +195,11 @@ public class State {
 		return result;
 	}
 
+	/**
+	 * Auto Generated
+	 * @param obj the object to compare against
+	 * @return whether the two objects are equal
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -233,7 +222,10 @@ public class State {
 		return true;
 	}
 
-
+	/**
+	 * Get a string representation of the object
+	 * @return a string representing the object
+	 */
 	public String toString(){
 		String temp = "State Number: " + stateNumber + "\r\n";
 		for(Rule rule : rules){
@@ -248,17 +240,6 @@ public class State {
 		else{
 			temp += "None";
 		}
-		/*
-		temp += "\r\nReductions: \r\n";
-		for(Rule r : rules){
-			if (r.isFinished()){
-				temp += "Reduce on " + r + "\r\n";
-			}
-			else{
-				temp += "Can't reduce " + r + "\r\n";
-			}
-		}*/
-
 		temp += "\r\n\r\n";
 		return temp;
 	}

@@ -2,9 +2,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author Christopher Houze, Clifford Black, David Carlin
+ *
+ */
 public class TableState {
 	Map<String, String> actionMap;
 
+	/**
+	 * Constructor
+	 * @param headerArr the header from the parsing table
+	 * @param actions the row from the parsing table representing this state
+	 */
 	public TableState(String[] headerArr, String actions)
 	{
 		actionMap = new HashMap<String,String>();
@@ -30,13 +40,19 @@ public class TableState {
 		
 	}
 	
-	/*
+	/**
+	 * Get the action based on the given input
+	 * @param input the input to check
 	 * @return action to occur based on input
 	 */
 	public String getAction(String input){
 		return actionMap.get(input);
 	}
 
+	/**
+	 * Return a string representation of this object
+	 * @return the string representing this object
+	 */
 	public String toString(){
 		String temp = "";
 		

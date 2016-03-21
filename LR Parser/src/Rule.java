@@ -1,24 +1,40 @@
 import java.util.ArrayList;
 
-
+/**
+ * 
+ * @author Christopher Houze, Clifford Black, David Carlin
+ *
+ */
 public class Rule {
-	static int ruleNumbers = 0;
+	private static int ruleNumbers = 0;
 	String reduceTo;
 	ArrayList<String> beforeDot, afterDot;
 	int ruleNumber;
 	
-	
+	/**
+	 * Constructor
+	 * @param reduceTo the nonterminal that this rule reduces to
+	 */
+	public Rule (String reduceTo){
+		this.reduceTo = reduceTo;
+		this.beforeDot = new ArrayList<String>();
+		this.afterDot = new ArrayList<String>();
+		this.ruleNumber = ruleNumbers++;
+	}
 
+	
+	/**
+	 * Get the next version of the rule, if there is one
+	 * @return the new version of the rule
+	 */
 	public Rule getNextVersion(){
 		if(!this.isFinished()){
-			Rule r = new Rule();
-			r.reduceTo = this.reduceTo;
+			Rule r = new Rule(this.reduceTo);
 			r.beforeDot = new ArrayList<String>(this.beforeDot);
 			r.afterDot = new ArrayList<String>(this.afterDot);
 			r.beforeDot.add(r.afterDot.get(0));
 			r.afterDot.remove(0);
 			r.ruleNumber = this.ruleNumber;
-
 			return r;
 		}
 		else{
@@ -27,11 +43,19 @@ public class Rule {
 	}
 	
 	
+	/**
+	 * Find out whether or not the rule has reached the end
+	 * @return true if the rule is finished, false otherwise
+	 */
 	public boolean isFinished(){
 		return afterDot.isEmpty();
 	}
 	
 	
+	/**
+	 * Get a string representation of the object
+	 * @return a string representing the object
+	 */
 	public String toString(){
 		String t = reduceTo;
 		t += " -> ";
@@ -50,6 +74,10 @@ public class Rule {
 	}
 
 
+	/**
+	 * Auto Generated
+	 * @return the hash representation of this object
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -61,6 +89,11 @@ public class Rule {
 	}
 
 
+	/**
+	 * Auto Generated
+	 * @param obj the object to compare against
+	 * @return whether the two objects are equal
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
