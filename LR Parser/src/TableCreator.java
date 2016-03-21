@@ -105,8 +105,8 @@ public class TableCreator {
 			fol = findFolHelp(nt, new HashSet<String>());
 			folSet.put(nt, fol);
 		}
-		//System.out.println(folSet.get("Type")/*findFirst("Statement", new HashSet<String>())*/ + "\n");
-		//System.out.println(findFirst("Type", new HashSet<String>()));
+		System.out.println(folSet.get("StatementList")/*findFirst("Statement", new HashSet<String>())*/ + "\n");
+		System.out.println(findFirst("StatementList", new HashSet<String>()));
 	}
 
 	private HashSet<String> findFolHelp(String nt, Set<String> lookedAt){
@@ -120,10 +120,12 @@ public class TableCreator {
 							if(!lookedAt.contains(r.afterDot.get(i + 1))){
 								fol.addAll(findFolHelp(r.afterDot.get(i+1), lookedAt));
 							}
+							
 							//Check for nullable first
+							
 							fol.addAll(findFirst(r.afterDot.get(i+1), new HashSet<String>()));
 						}
-						else if(!allNonTerminals.contains(r.afterDot.get(i+1))){
+						else {
 							fol.add(r.afterDot.get(i+1));
 						}
 					}
@@ -180,8 +182,11 @@ public class TableCreator {
 	private HashSet<String> findFirst(String nt, Set<String> lookedAt){
 		HashSet<String> first = new HashSet<String>();
 		for(Rule r : rules){
-			if(r.reduceTo.equals(nt) && !r.isFinished() ){
-				if(!allNonTerminals.contains(r.afterDot.get(0))){
+			if(r.reduceTo.equals(nt)){
+				if(r.isFinished()){
+					//first.add("Epsilon");
+				}
+				else if(!allNonTerminals.contains(r.afterDot.get(0))){
 					first.add(r.afterDot.get(0));
 				}
 				else if(!lookedAt.contains(r.afterDot.get(0))){

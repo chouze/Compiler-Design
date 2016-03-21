@@ -1,6 +1,6 @@
 S' -> Program $
 Program -> MainClass ClassDeclList
-MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList StatementList } }
+MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList { StatementList } } }
 ClassDeclList -> ClassDeclList ClassDecl
 ClassDeclList -> 
 ClassDecl -> ClassDeclSpec ClassDeclDeff

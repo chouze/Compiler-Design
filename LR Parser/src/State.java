@@ -70,10 +70,10 @@ public class State {
 		while(newRules){
 			newRules = false;
 			for(Rule r : rules){
-				if(r.reduceTo.equals("Not")){
-					//Debug point
-					//System.out.println("Debug started");
+				if(!r.isFinished()){
+					addingRules = getRulesStartingWith(r.afterDot.get(0));
 				}
+				/*
 				if (!r.isFinished() && !usedNonTerminals.contains(r.afterDot.get(0))){ //Keep going
 					for(Rule tempRule : allRules){
 						if(r.afterDot.get(0).equals(tempRule.reduceTo)){
@@ -89,8 +89,17 @@ public class State {
 						}
 					}
 				}
-				usedNonTerminals.add(r.reduceTo);
+			
+				usedNonTerminals.add(r.reduceTo);*/
+				
 			}
+			for(Rule addingRule : addingRules){
+				if(rules.add(addingRule)){
+					newRules = true;
+				}
+			}
+			//rules.addAll(addingRules);
+			/*
 			for(Rule r : addingRules){
 				if(rules.add(r)){
 					newRules = true;
@@ -105,9 +114,20 @@ public class State {
 			for(Rule r2 : rules){
 				//System.out.println(r2);
 			}
-			//System.out.println();
+			//System.out.println();*/
 			
 		}
+	}
+	
+	private Set<Rule> getRulesStartingWith(String nt){
+		HashSet<Rule> rulesStartingWithNT = new HashSet<Rule>();
+		
+		for(Rule r : allRules){
+			if(r.reduceTo.equals(nt)){
+				rulesStartingWithNT.add(r);
+			}
+		}
+		return rulesStartingWithNT;
 	}
 
 	public LinkedHashSet<State> expand(){
@@ -228,6 +248,7 @@ public class State {
 		else{
 			temp += "None";
 		}
+		/*
 		temp += "\r\nReductions: \r\n";
 		for(Rule r : rules){
 			if (r.isFinished()){
@@ -236,7 +257,7 @@ public class State {
 			else{
 				temp += "Can't reduce " + r + "\r\n";
 			}
-		}
+		}*/
 
 		temp += "\r\n\r\n";
 		return temp;
