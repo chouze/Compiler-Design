@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class TableCreator {
 	File file;
 	ArrayList<Rule> rules;
 	LinkedHashSet<State> states;
+	HashSet<Rule> nullableRules;
 
 	public TableCreator(String filename) throws FileNotFoundException{
 		file = new File(filename);
@@ -28,6 +30,7 @@ public class TableCreator {
 		allTerminals = new ArrayList<String> (100);
 		states = new LinkedHashSet<State> (200);
 		folSet = new HashMap<String, HashSet<String>>();
+		
 	}
 
 	public void scanForNTs() throws FileNotFoundException{
@@ -50,11 +53,11 @@ public class TableCreator {
 				}
 			}
 		}
-		
+
 		for(String s : allNonTerminals){
-			System.out.println(s);
+			//	System.out.println(s);
 		}
-		
+
 	}
 
 	public void readRules() throws FileNotFoundException{
@@ -96,11 +99,14 @@ public class TableCreator {
 
 	public void findFOLs(){
 		HashSet<String> fol = new HashSet<String>();
+		nullableRules = findNullableRules();
 
 		for(String nt : allNonTerminals){
 			fol = findFolHelp(nt, new HashSet<String>());
 			folSet.put(nt, fol);
 		}
+		//System.out.println(folSet.get("Type")/*findFirst("Statement", new HashSet<String>())*/ + "\n");
+		//System.out.println(findFirst("Type", new HashSet<String>()));
 	}
 
 	private HashSet<String> findFolHelp(String nt, Set<String> lookedAt){
@@ -110,8 +116,11 @@ public class TableCreator {
 			if(r.afterDot.contains(nt)){
 				for(int i = 0; i < r.afterDot.size() - 1; i++){
 					if(nt.equals(r.afterDot.get(i))){
-						if(allNonTerminals.contains(r.afterDot.get(i+1)) && !lookedAt.contains(r.afterDot.get(i + 1))){
-							fol.addAll(findFolHelp(r.afterDot.get(i+1), lookedAt));
+						if(allNonTerminals.contains(r.afterDot.get(i+1)) /*&& !lookedAt.contains(r.afterDot.get(i + 1))*/){
+							if(!lookedAt.contains(r.afterDot.get(i + 1))){
+								fol.addAll(findFolHelp(r.afterDot.get(i+1), lookedAt));
+							}
+							//Check for nullable first
 							fol.addAll(findFirst(r.afterDot.get(i+1), new HashSet<String>()));
 						}
 						else if(!allNonTerminals.contains(r.afterDot.get(i+1))){
@@ -125,10 +134,48 @@ public class TableCreator {
 
 			}
 		}
-		//System.out.println(fol + "\n");
+		
+		
 		return fol;
 
 	}
+
+
+	/**
+	 * Add nullable finder
+	 */
+	private HashSet<Rule> findNullableRules(){
+		HashSet<Rule> nullableRules = new HashSet<Rule>();
+		for(Rule r : rules){
+			if(r.isFinished() || findNullableHelper(r, new HashSet<Rule>())){
+				nullableRules.add(r);
+			}
+		}
+		return nullableRules;
+
+	}
+
+	private boolean findNullableHelper(Rule rule, HashSet<Rule> lookedAt){
+		lookedAt.add(rule);
+		
+		for(String nt : rule.afterDot){
+			if(allNonTerminals.contains(nt)){
+				for(Rule r : rules){
+					if((!lookedAt.contains(r) && r.reduceTo.equals(nt)) && (r.isFinished() || findNullableHelper(r, lookedAt))){
+						return true;
+					}
+					else{
+						break;
+					}
+				}
+			}
+		}
+
+
+		return false;
+
+	}
+
 
 	private HashSet<String> findFirst(String nt, Set<String> lookedAt){
 		HashSet<String> first = new HashSet<String>();

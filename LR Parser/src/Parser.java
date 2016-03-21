@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.io.PushbackReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -112,6 +110,9 @@ public class Parser {
 			int prev = previousStates.pop();
 			System.out.println("Current state is: " + prev +  " action on token: " + currentToken.tokenName + " value " + currentToken.tokenValue + " is " + action);
 			previousStates.push(prev);
+			if(action.length() < 1){
+				throw new ParsingException("Table does not contain information for this input");
+			}
 			char firstChar = action.charAt(0);
 			int stateOrRuleNum = 0;
 

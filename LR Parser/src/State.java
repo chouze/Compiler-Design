@@ -72,7 +72,7 @@ public class State {
 			for(Rule r : rules){
 				if(r.reduceTo.equals("Not")){
 					//Debug point
-					System.out.println("Debug started");
+					//System.out.println("Debug started");
 				}
 				if (!r.isFinished() && !usedNonTerminals.contains(r.afterDot.get(0))){ //Keep going
 					for(Rule tempRule : allRules){
@@ -94,18 +94,18 @@ public class State {
 			for(Rule r : addingRules){
 				if(rules.add(r)){
 					newRules = true;
-					System.out.println("Successfully added rule: " + r);
+					//System.out.println("Successfully added rule: " + r);
 				}
 				else{
-					System.out.println("Failed to add rule: " + r + " to set:\n");
+					//System.out.println("Failed to add rule: " + r + " to set:\n");
 					
 				}
 				
 			}
 			for(Rule r2 : rules){
-				System.out.println(r2);
+				//System.out.println(r2);
 			}
-			System.out.println();
+			//System.out.println();
 			
 		}
 	}
