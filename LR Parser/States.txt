@@ -6,7 +6,7 @@ MainClass -> .class id { public static void main ( String [ ] id ) { VarDeclList
 Transitions: 
 Transition to 3 on MainClass
 Transition to 2 on Program
-Transition to 218 on class
+Transition to 226 on class
 
 
 
@@ -36,7 +36,7 @@ ClassDeclSpec -> .class id
 Transitions: 
 Transition to 6 on ClassDeclSpec
 Transition to 5 on ClassDecl
-Transition to 216 on class
+Transition to 224 on class
 
 
 
@@ -55,7 +55,7 @@ ClassDeclDeff -> .{ VarDeclList MethodDeclList }
 Transitions: 
 Transition to 7 on ClassDeclDeff
 Transition to 8 on extends
-Transition to 212 on {
+Transition to 220 on {
 
 
 
@@ -103,12 +103,12 @@ Type -> .boolean
 Type -> .id 
 
 Transitions: 
-Transition to 193 on Type
-Transition to 159 on boolean
+Transition to 201 on Type
+Transition to 167 on boolean
 Transition to 12 on MethodDeclList
-Transition to 192 on VarDecl
-Transition to 160 on id
-Transition to 155 on int
+Transition to 200 on VarDecl
+Transition to 168 on id
+Transition to 163 on int
 
 
 
@@ -146,9 +146,9 @@ Type -> .id
 
 Transitions: 
 Transition to 16 on Type
-Transition to 159 on boolean
-Transition to 160 on id
-Transition to 155 on int
+Transition to 167 on boolean
+Transition to 168 on id
+Transition to 163 on int
 
 
 
@@ -177,11 +177,11 @@ Type -> .boolean
 Type -> .id 
 
 Transitions: 
-Transition to 205 on Type
-Transition to 159 on boolean
+Transition to 213 on Type
+Transition to 167 on boolean
 Transition to 19 on FormalList
-Transition to 160 on id
-Transition to 155 on int
+Transition to 168 on id
+Transition to 163 on int
 
 
 
@@ -222,12 +222,12 @@ Type -> .boolean
 Type -> .id 
 
 Transitions: 
-Transition to 193 on Type
-Transition to 159 on boolean
-Transition to 192 on VarDecl
+Transition to 201 on Type
+Transition to 167 on boolean
+Transition to 200 on VarDecl
 Transition to 23 on StatementList
-Transition to 160 on id
-Transition to 155 on int
+Transition to 168 on id
+Transition to 163 on int
 
 
 
@@ -238,8 +238,8 @@ Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement
 Statement -> .{ StatementList } 
 Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
-Statement -> .switch ( id ) { caseList } 
 Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
 Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
 Statement -> .if ( Exp ) { Statement } ElseIfList 
@@ -247,15 +247,15 @@ Statement -> .if ( Exp ) { Statement } ElseIfList
 Transitions: 
 Transition to 89 on Statement
 Transition to 90 on for
-Transition to 139 on (
+Transition to 147 on (
 Transition to 99 on {
 Transition to 102 on do
 Transition to 111 on id
-Transition to 129 on while
-Transition to 161 on if
+Transition to 122 on while
+Transition to 169 on if
 Transition to 24 on return
-Transition to 122 on switch
-Transition to 134 on System.out.println
+Transition to 127 on switch
+Transition to 142 on System.out.println
 
 
 
@@ -1112,7 +1112,7 @@ InitializationStm -> .id = Exp
 InitializationStm -> .id [ Exp ] = Exp 
 
 Transitions: 
-Transition to 184 on id
+Transition to 192 on id
 Transition to 92 on InitializationStm
 
 
@@ -1174,7 +1174,7 @@ IncrementStm -> .id [ Exp ] = Exp
 
 Transitions: 
 Transition to 96 on IncrementStm
-Transition to 176 on id
+Transition to 184 on id
 
 
 
@@ -1192,8 +1192,8 @@ Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement
 Statement -> .{ StatementList } 
 Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
-Statement -> .switch ( id ) { caseList } 
 Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
 Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
 Statement -> .if ( Exp ) { Statement } ElseIfList 
@@ -1201,14 +1201,14 @@ Statement -> .if ( Exp ) { Statement } ElseIfList
 Transitions: 
 Transition to 98 on Statement
 Transition to 90 on for
-Transition to 139 on (
+Transition to 147 on (
 Transition to 99 on {
 Transition to 102 on do
 Transition to 111 on id
-Transition to 129 on while
-Transition to 161 on if
-Transition to 122 on switch
-Transition to 134 on System.out.println
+Transition to 122 on while
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
 
 
 
@@ -1236,8 +1236,8 @@ Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement
 Statement -> .{ StatementList } 
 Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
-Statement -> .switch ( id ) { caseList } 
 Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
 Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
 Statement -> .if ( Exp ) { Statement } ElseIfList 
@@ -1245,15 +1245,15 @@ Statement -> .if ( Exp ) { Statement } ElseIfList
 Transitions: 
 Transition to 89 on Statement
 Transition to 90 on for
-Transition to 139 on (
+Transition to 147 on (
 Transition to 99 on {
 Transition to 102 on do
 Transition to 111 on id
-Transition to 129 on while
+Transition to 122 on while
 Transition to 101 on }
-Transition to 161 on if
-Transition to 122 on switch
-Transition to 134 on System.out.println
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
 
 
 
@@ -1278,8 +1278,8 @@ Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement
 Statement -> .{ StatementList } 
 Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
-Statement -> .switch ( id ) { caseList } 
 Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
 Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
 Statement -> .if ( Exp ) { Statement } ElseIfList 
@@ -1287,14 +1287,14 @@ Statement -> .if ( Exp ) { Statement } ElseIfList
 Transitions: 
 Transition to 104 on Statement
 Transition to 90 on for
-Transition to 139 on (
+Transition to 147 on (
 Transition to 99 on {
 Transition to 102 on do
 Transition to 111 on id
-Transition to 129 on while
-Transition to 161 on if
-Transition to 122 on switch
-Transition to 134 on System.out.println
+Transition to 122 on while
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
 
 
 
@@ -1547,7 +1547,7 @@ None
 
 
 State Number: 122
-Statement -> switch .( id ) { caseList } 
+Statement -> while .( Exp ) Statement 
 
 Transitions: 
 Transition to 123 on (
@@ -1555,61 +1555,6 @@ Transition to 123 on (
 
 
 State Number: 123
-Statement -> switch ( .id ) { caseList } 
-
-Transitions: 
-Transition to 124 on id
-
-
-
-State Number: 124
-Statement -> switch ( id .) { caseList } 
-
-Transitions: 
-Transition to 125 on )
-
-
-
-State Number: 125
-Statement -> switch ( id ) .{ caseList } 
-
-Transitions: 
-Transition to 126 on {
-
-
-
-State Number: 126
-Statement -> switch ( id ) { .caseList } 
-
-Transitions: 
-Transition to 127 on caseList
-
-
-
-State Number: 127
-Statement -> switch ( id ) { caseList .} 
-
-Transitions: 
-Transition to 128 on }
-
-
-
-State Number: 128
-Statement -> switch ( id ) { caseList } .
-
-Transitions: 
-None
-
-
-State Number: 129
-Statement -> while .( Exp ) Statement 
-
-Transitions: 
-Transition to 130 on (
-
-
-
-State Number: 130
 Statement -> while ( .Exp ) Statement 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -1638,61 +1583,248 @@ Transition to 28 on And
 Transition to 66 on Factor
 Transition to 77 on true
 Transition to 79 on id
-Transition to 131 on Exp
+Transition to 124 on Exp
 Transition to 33 on Less
 
 
 
-State Number: 131
+State Number: 124
 Statement -> while ( Exp .) Statement 
 
 Transitions: 
-Transition to 132 on )
+Transition to 125 on )
 
 
 
-State Number: 132
+State Number: 125
 Statement -> while ( Exp ) .Statement 
 Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
 Statement -> .{ StatementList } 
 Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
-Statement -> .switch ( id ) { caseList } 
 Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
 Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
 Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 Transitions: 
-Transition to 133 on Statement
+Transition to 126 on Statement
 Transition to 90 on for
-Transition to 139 on (
+Transition to 147 on (
 Transition to 99 on {
 Transition to 102 on do
 Transition to 111 on id
-Transition to 129 on while
-Transition to 161 on if
-Transition to 122 on switch
-Transition to 134 on System.out.println
+Transition to 122 on while
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
 
 
 
-State Number: 133
+State Number: 126
 Statement -> while ( Exp ) Statement .
 
 Transitions: 
 None
 
 
-State Number: 134
-Statement -> System.out.println .( Exp ) ; 
+State Number: 127
+Statement -> switch .( id ) { CaseList } 
 
 Transitions: 
-Transition to 135 on (
+Transition to 128 on (
+
+
+
+State Number: 128
+Statement -> switch ( .id ) { CaseList } 
+
+Transitions: 
+Transition to 129 on id
+
+
+
+State Number: 129
+Statement -> switch ( id .) { CaseList } 
+
+Transitions: 
+Transition to 130 on )
+
+
+
+State Number: 130
+Statement -> switch ( id ) .{ CaseList } 
+
+Transitions: 
+Transition to 131 on {
+
+
+
+State Number: 131
+Statement -> switch ( id ) { .CaseList } 
+CaseList -> .case Exp : Statement CaseList 
+CaseList -> .default : Statement 
+
+Transitions: 
+Transition to 139 on default
+Transition to 132 on CaseList
+Transition to 134 on case
+
+
+
+State Number: 132
+Statement -> switch ( id ) { CaseList .} 
+
+Transitions: 
+Transition to 133 on }
+
+
+
+State Number: 133
+Statement -> switch ( id ) { CaseList } .
+
+Transitions: 
+None
+
+
+State Number: 134
+CaseList -> case .Exp : Statement CaseList 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
+
+Transitions: 
+Transition to 51 on !
+Transition to 71 on new
+Transition to 78 on false
+Transition to 80 on this
+Transition to 82 on (
+Transition to 38 on Term
+Transition to 81 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 77 on true
+Transition to 79 on id
+Transition to 135 on Exp
+Transition to 33 on Less
 
 
 
 State Number: 135
+CaseList -> case Exp .: Statement CaseList 
+
+Transitions: 
+Transition to 136 on :
+
+
+
+State Number: 136
+CaseList -> case Exp : .Statement CaseList 
+Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
+Statement -> .id Assign 
+Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
+Statement -> .System.out.println ( Exp ) ; 
+Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+Transitions: 
+Transition to 137 on Statement
+Transition to 90 on for
+Transition to 147 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 122 on while
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
+
+
+
+State Number: 137
+CaseList -> case Exp : Statement .CaseList 
+CaseList -> .case Exp : Statement CaseList 
+CaseList -> .default : Statement 
+
+Transitions: 
+Transition to 139 on default
+Transition to 138 on CaseList
+Transition to 134 on case
+
+
+
+State Number: 138
+CaseList -> case Exp : Statement CaseList .
+
+Transitions: 
+None
+
+
+State Number: 139
+CaseList -> default .: Statement 
+
+Transitions: 
+Transition to 140 on :
+
+
+
+State Number: 140
+CaseList -> default : .Statement 
+Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
+Statement -> .{ StatementList } 
+Statement -> .do { Statement } while ( Exp ) ; 
+Statement -> .id Assign 
+Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
+Statement -> .System.out.println ( Exp ) ; 
+Statement -> .( Type id = Exp ) FormalVarExp ; 
+Statement -> .if ( Exp ) { Statement } ElseIfList 
+
+Transitions: 
+Transition to 141 on Statement
+Transition to 90 on for
+Transition to 147 on (
+Transition to 99 on {
+Transition to 102 on do
+Transition to 111 on id
+Transition to 122 on while
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
+
+
+
+State Number: 141
+CaseList -> default : Statement .
+
+Transitions: 
+None
+
+
+State Number: 142
+Statement -> System.out.println .( Exp ) ; 
+
+Transitions: 
+Transition to 143 on (
+
+
+
+State Number: 143
 Statement -> System.out.println ( .Exp ) ; 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -1721,65 +1853,65 @@ Transition to 28 on And
 Transition to 66 on Factor
 Transition to 77 on true
 Transition to 79 on id
-Transition to 136 on Exp
+Transition to 144 on Exp
 Transition to 33 on Less
 
 
 
-State Number: 136
+State Number: 144
 Statement -> System.out.println ( Exp .) ; 
 
 Transitions: 
-Transition to 137 on )
+Transition to 145 on )
 
 
 
-State Number: 137
+State Number: 145
 Statement -> System.out.println ( Exp ) .; 
 
 Transitions: 
-Transition to 138 on ;
+Transition to 146 on ;
 
 
 
-State Number: 138
+State Number: 146
 Statement -> System.out.println ( Exp ) ; .
 
 Transitions: 
 None
 
 
-State Number: 139
+State Number: 147
 Statement -> ( .Type id = Exp ) FormalVarExp ; 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 140 on Type
-Transition to 159 on boolean
-Transition to 160 on id
-Transition to 155 on int
+Transition to 148 on Type
+Transition to 167 on boolean
+Transition to 168 on id
+Transition to 163 on int
 
 
 
-State Number: 140
+State Number: 148
 Statement -> ( Type .id = Exp ) FormalVarExp ; 
 
 Transitions: 
-Transition to 141 on id
+Transition to 149 on id
 
 
 
-State Number: 141
+State Number: 149
 Statement -> ( Type id .= Exp ) FormalVarExp ; 
 
 Transitions: 
-Transition to 142 on =
+Transition to 150 on =
 
 
 
-State Number: 142
+State Number: 150
 Statement -> ( Type id = .Exp ) FormalVarExp ; 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -1808,84 +1940,84 @@ Transition to 28 on And
 Transition to 66 on Factor
 Transition to 77 on true
 Transition to 79 on id
-Transition to 143 on Exp
+Transition to 151 on Exp
 Transition to 33 on Less
 
 
 
-State Number: 143
+State Number: 151
 Statement -> ( Type id = Exp .) FormalVarExp ; 
 
 Transitions: 
-Transition to 144 on )
+Transition to 152 on )
 
 
 
-State Number: 144
+State Number: 152
 Statement -> ( Type id = Exp ) .FormalVarExp ; 
 FormalVarExp -> .
 FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 145 on FormalVarExp
-Transition to 147 on ,
+Transition to 153 on FormalVarExp
+Transition to 155 on ,
 
 
 
-State Number: 145
+State Number: 153
 Statement -> ( Type id = Exp ) FormalVarExp .; 
 
 Transitions: 
-Transition to 146 on ;
+Transition to 154 on ;
 
 
 
-State Number: 146
+State Number: 154
 Statement -> ( Type id = Exp ) FormalVarExp ; .
 
 Transitions: 
 None
 
 
-State Number: 147
+State Number: 155
 FormalVarExp -> , .( Type id = Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 148 on (
+Transition to 156 on (
 
 
 
-State Number: 148
+State Number: 156
 FormalVarExp -> , ( .Type id = Exp ) FormalVarExp 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 149 on Type
-Transition to 159 on boolean
-Transition to 160 on id
-Transition to 155 on int
+Transition to 157 on Type
+Transition to 167 on boolean
+Transition to 168 on id
+Transition to 163 on int
 
 
 
-State Number: 149
+State Number: 157
 FormalVarExp -> , ( Type .id = Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 150 on id
+Transition to 158 on id
 
 
 
-State Number: 150
+State Number: 158
 FormalVarExp -> , ( Type id .= Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 151 on =
+Transition to 159 on =
 
 
 
-State Number: 151
+State Number: 159
 FormalVarExp -> , ( Type id = .Exp ) FormalVarExp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -1914,93 +2046,93 @@ Transition to 28 on And
 Transition to 66 on Factor
 Transition to 77 on true
 Transition to 79 on id
-Transition to 152 on Exp
+Transition to 160 on Exp
 Transition to 33 on Less
 
 
 
-State Number: 152
+State Number: 160
 FormalVarExp -> , ( Type id = Exp .) FormalVarExp 
 
 Transitions: 
-Transition to 153 on )
+Transition to 161 on )
 
 
 
-State Number: 153
+State Number: 161
 FormalVarExp -> , ( Type id = Exp ) .FormalVarExp 
 FormalVarExp -> .
 FormalVarExp -> ., ( Type id = Exp ) FormalVarExp 
 
 Transitions: 
-Transition to 154 on FormalVarExp
-Transition to 147 on ,
+Transition to 162 on FormalVarExp
+Transition to 155 on ,
 
 
 
-State Number: 154
+State Number: 162
 FormalVarExp -> , ( Type id = Exp ) FormalVarExp .
 
 Transitions: 
 None
 
 
-State Number: 155
+State Number: 163
 Type -> int .IntType 
 IntType -> .[ ] 
 IntType -> .
 
 Transitions: 
-Transition to 157 on [
-Transition to 156 on IntType
+Transition to 165 on [
+Transition to 164 on IntType
 
 
 
-State Number: 156
+State Number: 164
 Type -> int IntType .
 
 Transitions: 
 None
 
 
-State Number: 157
+State Number: 165
 IntType -> [ .] 
 
 Transitions: 
-Transition to 158 on ]
+Transition to 166 on ]
 
 
 
-State Number: 158
+State Number: 166
 IntType -> [ ] .
 
 Transitions: 
 None
 
 
-State Number: 159
+State Number: 167
 Type -> boolean .
 
 Transitions: 
 None
 
 
-State Number: 160
+State Number: 168
 Type -> id .
 
 Transitions: 
 None
 
 
-State Number: 161
+State Number: 169
 Statement -> if .( Exp ) { Statement } ElseIfList 
 
 Transitions: 
-Transition to 162 on (
+Transition to 170 on (
 
 
 
-State Number: 162
+State Number: 170
 Statement -> if ( .Exp ) { Statement } ElseIfList 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2029,106 +2161,106 @@ Transition to 28 on And
 Transition to 66 on Factor
 Transition to 77 on true
 Transition to 79 on id
-Transition to 163 on Exp
+Transition to 171 on Exp
 Transition to 33 on Less
 
 
 
-State Number: 163
+State Number: 171
 Statement -> if ( Exp .) { Statement } ElseIfList 
 
 Transitions: 
-Transition to 164 on )
+Transition to 172 on )
 
 
 
-State Number: 164
+State Number: 172
 Statement -> if ( Exp ) .{ Statement } ElseIfList 
 
 Transitions: 
-Transition to 165 on {
+Transition to 173 on {
 
 
 
-State Number: 165
+State Number: 173
 Statement -> if ( Exp ) { .Statement } ElseIfList 
 Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
 Statement -> .{ StatementList } 
 Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
-Statement -> .switch ( id ) { caseList } 
 Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
 Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
 Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 Transitions: 
-Transition to 166 on Statement
+Transition to 174 on Statement
 Transition to 90 on for
-Transition to 139 on (
+Transition to 147 on (
 Transition to 99 on {
 Transition to 102 on do
 Transition to 111 on id
-Transition to 129 on while
-Transition to 161 on if
-Transition to 122 on switch
-Transition to 134 on System.out.println
+Transition to 122 on while
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
 
 
 
-State Number: 166
+State Number: 174
 Statement -> if ( Exp ) { Statement .} ElseIfList 
 
 Transitions: 
-Transition to 167 on }
+Transition to 175 on }
 
 
 
-State Number: 167
+State Number: 175
 Statement -> if ( Exp ) { Statement } .ElseIfList 
 ElseIfList -> .ElseIfList ElseIf 
 ElseIfList -> .
 
 Transitions: 
-Transition to 168 on ElseIfList
+Transition to 176 on ElseIfList
 
 
 
-State Number: 168
+State Number: 176
 Statement -> if ( Exp ) { Statement } ElseIfList .
 ElseIfList -> ElseIfList .ElseIf 
 ElseIf -> .else if ( Exp ) Statement 
 
 Transitions: 
-Transition to 169 on ElseIf
-Transition to 170 on else
+Transition to 177 on ElseIf
+Transition to 178 on else
 
 
 
-State Number: 169
+State Number: 177
 ElseIfList -> ElseIfList ElseIf .
 
 Transitions: 
 None
 
 
-State Number: 170
+State Number: 178
 ElseIf -> else .if ( Exp ) Statement 
 
 Transitions: 
-Transition to 171 on if
+Transition to 179 on if
 
 
 
-State Number: 171
+State Number: 179
 ElseIf -> else if .( Exp ) Statement 
 
 Transitions: 
-Transition to 172 on (
+Transition to 180 on (
 
 
 
-State Number: 172
+State Number: 180
 ElseIf -> else if ( .Exp ) Statement 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2157,197 +2289,55 @@ Transition to 28 on And
 Transition to 66 on Factor
 Transition to 77 on true
 Transition to 79 on id
-Transition to 173 on Exp
+Transition to 181 on Exp
 Transition to 33 on Less
 
 
 
-State Number: 173
+State Number: 181
 ElseIf -> else if ( Exp .) Statement 
 
 Transitions: 
-Transition to 174 on )
+Transition to 182 on )
 
 
 
-State Number: 174
+State Number: 182
 ElseIf -> else if ( Exp ) .Statement 
 Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
 Statement -> .{ StatementList } 
 Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
-Statement -> .switch ( id ) { caseList } 
 Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
 Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
 Statement -> .if ( Exp ) { Statement } ElseIfList 
 
 Transitions: 
-Transition to 175 on Statement
+Transition to 183 on Statement
 Transition to 90 on for
-Transition to 139 on (
+Transition to 147 on (
 Transition to 99 on {
 Transition to 102 on do
 Transition to 111 on id
-Transition to 129 on while
-Transition to 161 on if
-Transition to 122 on switch
-Transition to 134 on System.out.println
+Transition to 122 on while
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
 
 
 
-State Number: 175
+State Number: 183
 ElseIf -> else if ( Exp ) Statement .
 
 Transitions: 
 None
 
 
-State Number: 176
+State Number: 184
 IncrementStm -> id .= Exp 
 IncrementStm -> id .[ Exp ] = Exp 
-
-Transitions: 
-Transition to 179 on [
-Transition to 177 on =
-
-
-
-State Number: 177
-IncrementStm -> id = .Exp 
-Exp -> .And Elist 
-And -> .Less Alist 
-Less -> .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-Factor -> .new New 
-Factor -> .true 
-Factor -> .false 
-Factor -> .id 
-Factor -> .this 
-Factor -> .number 
-Factor -> .( Exp ) 
-
-Transitions: 
-Transition to 51 on !
-Transition to 71 on new
-Transition to 78 on false
-Transition to 80 on this
-Transition to 82 on (
-Transition to 38 on Term
-Transition to 81 on number
-Transition to 46 on Not
-Transition to 28 on And
-Transition to 66 on Factor
-Transition to 77 on true
-Transition to 79 on id
-Transition to 178 on Exp
-Transition to 33 on Less
-
-
-
-State Number: 178
-IncrementStm -> id = Exp .
-
-Transitions: 
-None
-
-
-State Number: 179
-IncrementStm -> id [ .Exp ] = Exp 
-Exp -> .And Elist 
-And -> .Less Alist 
-Less -> .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-Factor -> .new New 
-Factor -> .true 
-Factor -> .false 
-Factor -> .id 
-Factor -> .this 
-Factor -> .number 
-Factor -> .( Exp ) 
-
-Transitions: 
-Transition to 51 on !
-Transition to 71 on new
-Transition to 78 on false
-Transition to 80 on this
-Transition to 82 on (
-Transition to 38 on Term
-Transition to 81 on number
-Transition to 46 on Not
-Transition to 28 on And
-Transition to 66 on Factor
-Transition to 77 on true
-Transition to 79 on id
-Transition to 180 on Exp
-Transition to 33 on Less
-
-
-
-State Number: 180
-IncrementStm -> id [ Exp .] = Exp 
-
-Transitions: 
-Transition to 181 on ]
-
-
-
-State Number: 181
-IncrementStm -> id [ Exp ] .= Exp 
-
-Transitions: 
-Transition to 182 on =
-
-
-
-State Number: 182
-IncrementStm -> id [ Exp ] = .Exp 
-Exp -> .And Elist 
-And -> .Less Alist 
-Less -> .Term Llist 
-Term -> .Not Tlist 
-Not -> .! Factor DotArrayList 
-Not -> .Factor DotArrayList 
-Factor -> .new New 
-Factor -> .true 
-Factor -> .false 
-Factor -> .id 
-Factor -> .this 
-Factor -> .number 
-Factor -> .( Exp ) 
-
-Transitions: 
-Transition to 51 on !
-Transition to 71 on new
-Transition to 78 on false
-Transition to 80 on this
-Transition to 82 on (
-Transition to 38 on Term
-Transition to 81 on number
-Transition to 46 on Not
-Transition to 28 on And
-Transition to 66 on Factor
-Transition to 77 on true
-Transition to 79 on id
-Transition to 183 on Exp
-Transition to 33 on Less
-
-
-
-State Number: 183
-IncrementStm -> id [ Exp ] = Exp .
-
-Transitions: 
-None
-
-
-State Number: 184
-InitializationStm -> id .= Exp 
-InitializationStm -> id .[ Exp ] = Exp 
 
 Transitions: 
 Transition to 187 on [
@@ -2356,7 +2346,7 @@ Transition to 185 on =
 
 
 State Number: 185
-InitializationStm -> id = .Exp 
+IncrementStm -> id = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
 Less -> .Term Llist 
@@ -2390,14 +2380,14 @@ Transition to 33 on Less
 
 
 State Number: 186
-InitializationStm -> id = Exp .
+IncrementStm -> id = Exp .
 
 Transitions: 
 None
 
 
 State Number: 187
-InitializationStm -> id [ .Exp ] = Exp 
+IncrementStm -> id [ .Exp ] = Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
 Less -> .Term Llist 
@@ -2431,7 +2421,7 @@ Transition to 33 on Less
 
 
 State Number: 188
-InitializationStm -> id [ Exp .] = Exp 
+IncrementStm -> id [ Exp .] = Exp 
 
 Transitions: 
 Transition to 189 on ]
@@ -2439,7 +2429,7 @@ Transition to 189 on ]
 
 
 State Number: 189
-InitializationStm -> id [ Exp ] .= Exp 
+IncrementStm -> id [ Exp ] .= Exp 
 
 Transitions: 
 Transition to 190 on =
@@ -2447,7 +2437,7 @@ Transition to 190 on =
 
 
 State Number: 190
-InitializationStm -> id [ Exp ] = .Exp 
+IncrementStm -> id [ Exp ] = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
 Less -> .Term Llist 
@@ -2481,92 +2471,234 @@ Transition to 33 on Less
 
 
 State Number: 191
-InitializationStm -> id [ Exp ] = Exp .
+IncrementStm -> id [ Exp ] = Exp .
 
 Transitions: 
 None
 
 
 State Number: 192
+InitializationStm -> id .= Exp 
+InitializationStm -> id .[ Exp ] = Exp 
+
+Transitions: 
+Transition to 195 on [
+Transition to 193 on =
+
+
+
+State Number: 193
+InitializationStm -> id = .Exp 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
+
+Transitions: 
+Transition to 51 on !
+Transition to 71 on new
+Transition to 78 on false
+Transition to 80 on this
+Transition to 82 on (
+Transition to 38 on Term
+Transition to 81 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 77 on true
+Transition to 79 on id
+Transition to 194 on Exp
+Transition to 33 on Less
+
+
+
+State Number: 194
+InitializationStm -> id = Exp .
+
+Transitions: 
+None
+
+
+State Number: 195
+InitializationStm -> id [ .Exp ] = Exp 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
+
+Transitions: 
+Transition to 51 on !
+Transition to 71 on new
+Transition to 78 on false
+Transition to 80 on this
+Transition to 82 on (
+Transition to 38 on Term
+Transition to 81 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 77 on true
+Transition to 79 on id
+Transition to 196 on Exp
+Transition to 33 on Less
+
+
+
+State Number: 196
+InitializationStm -> id [ Exp .] = Exp 
+
+Transitions: 
+Transition to 197 on ]
+
+
+
+State Number: 197
+InitializationStm -> id [ Exp ] .= Exp 
+
+Transitions: 
+Transition to 198 on =
+
+
+
+State Number: 198
+InitializationStm -> id [ Exp ] = .Exp 
+Exp -> .And Elist 
+And -> .Less Alist 
+Less -> .Term Llist 
+Term -> .Not Tlist 
+Not -> .! Factor DotArrayList 
+Not -> .Factor DotArrayList 
+Factor -> .new New 
+Factor -> .true 
+Factor -> .false 
+Factor -> .id 
+Factor -> .this 
+Factor -> .number 
+Factor -> .( Exp ) 
+
+Transitions: 
+Transition to 51 on !
+Transition to 71 on new
+Transition to 78 on false
+Transition to 80 on this
+Transition to 82 on (
+Transition to 38 on Term
+Transition to 81 on number
+Transition to 46 on Not
+Transition to 28 on And
+Transition to 66 on Factor
+Transition to 77 on true
+Transition to 79 on id
+Transition to 199 on Exp
+Transition to 33 on Less
+
+
+
+State Number: 199
+InitializationStm -> id [ Exp ] = Exp .
+
+Transitions: 
+None
+
+
+State Number: 200
 VarDeclList -> VarDeclList VarDecl .
 
 Transitions: 
 None
 
 
-State Number: 193
+State Number: 201
 VarDecl -> Type .VarDeclID MultiDeclList ; 
 VarDeclID -> .id VarDeclAssign 
 
 Transitions: 
-Transition to 194 on VarDeclID
-Transition to 203 on id
+Transition to 202 on VarDeclID
+Transition to 211 on id
 
 
 
-State Number: 194
+State Number: 202
 VarDecl -> Type VarDeclID .MultiDeclList ; 
 MultiDeclList -> .MultiDeclList MultiDecl 
 MultiDeclList -> .
 
 Transitions: 
-Transition to 195 on MultiDeclList
+Transition to 203 on MultiDeclList
 
 
 
-State Number: 195
+State Number: 203
 VarDecl -> Type VarDeclID MultiDeclList .; 
 MultiDeclList -> MultiDeclList .MultiDecl 
 MultiDecl -> ., id VarDeclAssign 
 
 Transitions: 
-Transition to 197 on MultiDecl
-Transition to 196 on ;
-Transition to 198 on ,
+Transition to 205 on MultiDecl
+Transition to 204 on ;
+Transition to 206 on ,
 
 
 
-State Number: 196
+State Number: 204
 VarDecl -> Type VarDeclID MultiDeclList ; .
 
 Transitions: 
 None
 
 
-State Number: 197
+State Number: 205
 MultiDeclList -> MultiDeclList MultiDecl .
 
 Transitions: 
 None
 
 
-State Number: 198
+State Number: 206
 MultiDecl -> , .id VarDeclAssign 
 
 Transitions: 
-Transition to 199 on id
+Transition to 207 on id
 
 
 
-State Number: 199
+State Number: 207
 MultiDecl -> , id .VarDeclAssign 
 VarDeclAssign -> .
 VarDeclAssign -> .= Exp 
 
 Transitions: 
-Transition to 200 on VarDeclAssign
-Transition to 201 on =
+Transition to 208 on VarDeclAssign
+Transition to 209 on =
 
 
 
-State Number: 200
+State Number: 208
 MultiDecl -> , id VarDeclAssign .
 
 Transitions: 
 None
 
 
-State Number: 201
+State Number: 209
 VarDeclAssign -> = .Exp 
 Exp -> .And Elist 
 And -> .Less Alist 
@@ -2595,113 +2727,113 @@ Transition to 28 on And
 Transition to 66 on Factor
 Transition to 77 on true
 Transition to 79 on id
-Transition to 202 on Exp
+Transition to 210 on Exp
 Transition to 33 on Less
 
 
 
-State Number: 202
+State Number: 210
 VarDeclAssign -> = Exp .
 
 Transitions: 
 None
 
 
-State Number: 203
+State Number: 211
 VarDeclID -> id .VarDeclAssign 
 VarDeclAssign -> .
 VarDeclAssign -> .= Exp 
 
 Transitions: 
-Transition to 204 on VarDeclAssign
-Transition to 201 on =
+Transition to 212 on VarDeclAssign
+Transition to 209 on =
 
 
 
-State Number: 204
+State Number: 212
 VarDeclID -> id VarDeclAssign .
 
 Transitions: 
 None
 
 
-State Number: 205
+State Number: 213
 FormalList -> Type .id FormalRest 
 
 Transitions: 
-Transition to 206 on id
+Transition to 214 on id
 
 
 
-State Number: 206
+State Number: 214
 FormalList -> Type id .FormalRest 
 FormalRest -> ., Type id FormalRest 
 FormalRest -> .
 
 Transitions: 
-Transition to 208 on ,
-Transition to 207 on FormalRest
+Transition to 216 on ,
+Transition to 215 on FormalRest
 
 
 
-State Number: 207
+State Number: 215
 FormalList -> Type id FormalRest .
 
 Transitions: 
 None
 
 
-State Number: 208
+State Number: 216
 FormalRest -> , .Type id FormalRest 
 Type -> .int IntType 
 Type -> .boolean 
 Type -> .id 
 
 Transitions: 
-Transition to 209 on Type
-Transition to 159 on boolean
-Transition to 160 on id
-Transition to 155 on int
+Transition to 217 on Type
+Transition to 167 on boolean
+Transition to 168 on id
+Transition to 163 on int
 
 
 
-State Number: 209
+State Number: 217
 FormalRest -> , Type .id FormalRest 
 
 Transitions: 
-Transition to 210 on id
+Transition to 218 on id
 
 
 
-State Number: 210
+State Number: 218
 FormalRest -> , Type id .FormalRest 
 FormalRest -> ., Type id FormalRest 
 FormalRest -> .
 
 Transitions: 
-Transition to 208 on ,
-Transition to 211 on FormalRest
+Transition to 216 on ,
+Transition to 219 on FormalRest
 
 
 
-State Number: 211
+State Number: 219
 FormalRest -> , Type id FormalRest .
 
 Transitions: 
 None
 
 
-State Number: 212
+State Number: 220
 ClassDeclDeff -> { .VarDeclList MethodDeclList } 
 VarDeclList -> .
 VarDeclList -> .VarDeclList VarDecl 
 
 Transitions: 
-Transition to 213 on VarDeclList
+Transition to 221 on VarDeclList
 
 
 
-State Number: 213
+State Number: 221
 ClassDeclDeff -> { VarDeclList .MethodDeclList } 
 MethodDeclList -> .MethodDeclList MethodDecl 
 MethodDeclList -> .
@@ -2712,16 +2844,16 @@ Type -> .boolean
 Type -> .id 
 
 Transitions: 
-Transition to 193 on Type
-Transition to 159 on boolean
-Transition to 214 on MethodDeclList
-Transition to 192 on VarDecl
-Transition to 160 on id
-Transition to 155 on int
+Transition to 201 on Type
+Transition to 167 on boolean
+Transition to 222 on MethodDeclList
+Transition to 200 on VarDecl
+Transition to 168 on id
+Transition to 163 on int
 
 
 
-State Number: 214
+State Number: 222
 ClassDeclDeff -> { VarDeclList MethodDeclList .} 
 MethodDeclList -> MethodDeclList .MethodDecl 
 MethodDecl -> .public Type id ( FormalList ) { VarDeclList StatementList return Exp ; } 
@@ -2729,147 +2861,147 @@ MethodDecl -> .public Type id ( FormalList ) { VarDeclList StatementList return 
 Transitions: 
 Transition to 15 on public
 Transition to 14 on MethodDecl
-Transition to 215 on }
+Transition to 223 on }
 
 
 
-State Number: 215
+State Number: 223
 ClassDeclDeff -> { VarDeclList MethodDeclList } .
 
 Transitions: 
 None
 
 
-State Number: 216
+State Number: 224
 ClassDeclSpec -> class .id 
 
 Transitions: 
-Transition to 217 on id
+Transition to 225 on id
 
 
 
-State Number: 217
+State Number: 225
 ClassDeclSpec -> class id .
 
 Transitions: 
 None
 
 
-State Number: 218
+State Number: 226
 MainClass -> class .id { public static void main ( String [ ] id ) { VarDeclList { StatementList } } } 
 
 Transitions: 
-Transition to 219 on id
-
-
-
-State Number: 219
-MainClass -> class id .{ public static void main ( String [ ] id ) { VarDeclList { StatementList } } } 
-
-Transitions: 
-Transition to 220 on {
-
-
-
-State Number: 220
-MainClass -> class id { .public static void main ( String [ ] id ) { VarDeclList { StatementList } } } 
-
-Transitions: 
-Transition to 221 on public
-
-
-
-State Number: 221
-MainClass -> class id { public .static void main ( String [ ] id ) { VarDeclList { StatementList } } } 
-
-Transitions: 
-Transition to 222 on static
-
-
-
-State Number: 222
-MainClass -> class id { public static .void main ( String [ ] id ) { VarDeclList { StatementList } } } 
-
-Transitions: 
-Transition to 223 on void
-
-
-
-State Number: 223
-MainClass -> class id { public static void .main ( String [ ] id ) { VarDeclList { StatementList } } } 
-
-Transitions: 
-Transition to 224 on main
-
-
-
-State Number: 224
-MainClass -> class id { public static void main .( String [ ] id ) { VarDeclList { StatementList } } } 
-
-Transitions: 
-Transition to 225 on (
-
-
-
-State Number: 225
-MainClass -> class id { public static void main ( .String [ ] id ) { VarDeclList { StatementList } } } 
-
-Transitions: 
-Transition to 226 on String
-
-
-
-State Number: 226
-MainClass -> class id { public static void main ( String .[ ] id ) { VarDeclList { StatementList } } } 
-
-Transitions: 
-Transition to 227 on [
+Transition to 227 on id
 
 
 
 State Number: 227
-MainClass -> class id { public static void main ( String [ .] id ) { VarDeclList { StatementList } } } 
+MainClass -> class id .{ public static void main ( String [ ] id ) { VarDeclList { StatementList } } } 
 
 Transitions: 
-Transition to 228 on ]
+Transition to 228 on {
 
 
 
 State Number: 228
-MainClass -> class id { public static void main ( String [ ] .id ) { VarDeclList { StatementList } } } 
+MainClass -> class id { .public static void main ( String [ ] id ) { VarDeclList { StatementList } } } 
 
 Transitions: 
-Transition to 229 on id
+Transition to 229 on public
 
 
 
 State Number: 229
-MainClass -> class id { public static void main ( String [ ] id .) { VarDeclList { StatementList } } } 
+MainClass -> class id { public .static void main ( String [ ] id ) { VarDeclList { StatementList } } } 
 
 Transitions: 
-Transition to 230 on )
+Transition to 230 on static
 
 
 
 State Number: 230
-MainClass -> class id { public static void main ( String [ ] id ) .{ VarDeclList { StatementList } } } 
+MainClass -> class id { public static .void main ( String [ ] id ) { VarDeclList { StatementList } } } 
 
 Transitions: 
-Transition to 231 on {
+Transition to 231 on void
 
 
 
 State Number: 231
+MainClass -> class id { public static void .main ( String [ ] id ) { VarDeclList { StatementList } } } 
+
+Transitions: 
+Transition to 232 on main
+
+
+
+State Number: 232
+MainClass -> class id { public static void main .( String [ ] id ) { VarDeclList { StatementList } } } 
+
+Transitions: 
+Transition to 233 on (
+
+
+
+State Number: 233
+MainClass -> class id { public static void main ( .String [ ] id ) { VarDeclList { StatementList } } } 
+
+Transitions: 
+Transition to 234 on String
+
+
+
+State Number: 234
+MainClass -> class id { public static void main ( String .[ ] id ) { VarDeclList { StatementList } } } 
+
+Transitions: 
+Transition to 235 on [
+
+
+
+State Number: 235
+MainClass -> class id { public static void main ( String [ .] id ) { VarDeclList { StatementList } } } 
+
+Transitions: 
+Transition to 236 on ]
+
+
+
+State Number: 236
+MainClass -> class id { public static void main ( String [ ] .id ) { VarDeclList { StatementList } } } 
+
+Transitions: 
+Transition to 237 on id
+
+
+
+State Number: 237
+MainClass -> class id { public static void main ( String [ ] id .) { VarDeclList { StatementList } } } 
+
+Transitions: 
+Transition to 238 on )
+
+
+
+State Number: 238
+MainClass -> class id { public static void main ( String [ ] id ) .{ VarDeclList { StatementList } } } 
+
+Transitions: 
+Transition to 239 on {
+
+
+
+State Number: 239
 MainClass -> class id { public static void main ( String [ ] id ) { .VarDeclList { StatementList } } } 
 VarDeclList -> .
 VarDeclList -> .VarDeclList VarDecl 
 
 Transitions: 
-Transition to 232 on VarDeclList
+Transition to 240 on VarDeclList
 
 
 
-State Number: 232
+State Number: 240
 MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList .{ StatementList } } } 
 VarDeclList -> VarDeclList .VarDecl 
 VarDecl -> .Type VarDeclID MultiDeclList ; 
@@ -2878,34 +3010,34 @@ Type -> .boolean
 Type -> .id 
 
 Transitions: 
-Transition to 193 on Type
-Transition to 159 on boolean
-Transition to 192 on VarDecl
-Transition to 233 on {
-Transition to 160 on id
-Transition to 155 on int
+Transition to 201 on Type
+Transition to 167 on boolean
+Transition to 200 on VarDecl
+Transition to 241 on {
+Transition to 168 on id
+Transition to 163 on int
 
 
 
-State Number: 233
+State Number: 241
 MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList { .StatementList } } } 
 StatementList -> .
 StatementList -> .StatementList Statement 
 
 Transitions: 
-Transition to 234 on StatementList
+Transition to 242 on StatementList
 
 
 
-State Number: 234
+State Number: 242
 MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList { StatementList .} } } 
 StatementList -> StatementList .Statement 
 Statement -> .for ( InitializationStm ; Exp ; IncrementStm ) Statement 
 Statement -> .{ StatementList } 
 Statement -> .do { Statement } while ( Exp ) ; 
 Statement -> .id Assign 
-Statement -> .switch ( id ) { caseList } 
 Statement -> .while ( Exp ) Statement 
+Statement -> .switch ( id ) { CaseList } 
 Statement -> .System.out.println ( Exp ) ; 
 Statement -> .( Type id = Exp ) FormalVarExp ; 
 Statement -> .if ( Exp ) { Statement } ElseIfList 
@@ -2913,35 +3045,35 @@ Statement -> .if ( Exp ) { Statement } ElseIfList
 Transitions: 
 Transition to 89 on Statement
 Transition to 90 on for
-Transition to 139 on (
+Transition to 147 on (
 Transition to 99 on {
 Transition to 102 on do
 Transition to 111 on id
-Transition to 129 on while
-Transition to 235 on }
-Transition to 161 on if
-Transition to 122 on switch
-Transition to 134 on System.out.println
+Transition to 122 on while
+Transition to 243 on }
+Transition to 169 on if
+Transition to 127 on switch
+Transition to 142 on System.out.println
 
 
 
-State Number: 235
+State Number: 243
 MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList { StatementList } .} } 
 
 Transitions: 
-Transition to 236 on }
+Transition to 244 on }
 
 
 
-State Number: 236
+State Number: 244
 MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList { StatementList } } .} 
 
 Transitions: 
-Transition to 237 on }
+Transition to 245 on }
 
 
 
-State Number: 237
+State Number: 245
 MainClass -> class id { public static void main ( String [ ] id ) { VarDeclList { StatementList } } } .
 
 Transitions: 
