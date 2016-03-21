@@ -12,6 +12,6 @@ class id { public static void main ( String [] id ) { } } class id { public int 
 
 *GOOD* class id { public static void main ( String [ ] id ) { } } $
 
-*WORKING PROGRESS* class id { public static void main ( String [ ] id ) { } } class id { public int id ( ) { { } return number ; } 
+*WORKING PROGRESS* class id { public static void main ( String [ ] id ) { } } class id { public int id ( ) { { } return number ; } } $
 
 class id { public static void main ( String [ ] id ) { System.out.println ( number ) ; } } $
