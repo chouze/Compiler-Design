@@ -15,3 +15,53 @@
 *Good* class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( ) { { { } } return number ; } } $
 
 *Good* class id { public static void main ( String [ ] id ) { { System.out.println ( number ) ; } } } $
+
+class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( int id , int id ) { int id , id , id ; { id = number ; id = id ; id = id ; if ( id < number ) { do { while ( id < number ) { for ( id = number ; id < number ; id = id + number ) { switch ( id ) { case id < number : System.out.println ( id < number ) ; default : ( int id = number ) , ( int id = number ) ; } } } } while ( id < number ) ; } else if ( id < number ) System.out.println ( id < number ) ; } return id ; } } $
+
+
+class id { public static void main ( String [ ] id ) { { } } } class id { public int id ( int id , int id ) { int id , id , id ; { id = number ; id = id ; id = id ; if ( id < number ) { do { while ( id < number ) { for ( id = number ; id < number ; id = id + number ) { System.out.println ( id < number ) ;  } } } while ( id < number ) ; } else if ( id < number ) System.out.println ( id < number ) ; } return id ; } } $
+
+*THIS LINE OF CODE REPRESENTS THE FOLLOWING CODE*
+
+class Test
+{
+	public static void main ( String [] args )
+	{
+
+	}
+}
+
+class AddNum
+{
+	public int addNumber( int a, int b)
+	{
+		int total, firstInt, secondInt;
+		{
+
+			total = 0;
+			firstInt = a;
+			secondInt = b;
+
+			if(i < 10)
+			{
+				do
+				{
+					while(i < 10)
+					{
+						for(i = 1; i < 10; i = i + 10)
+						{
+							System.out.println(i < 10);	
+						}
+					}
+				} while(i < 10);
+			}
+			else if(i < 10)
+				System.out.println(i < 10);
+		}
+				
+
+			return total;
+
+		
+	}
+}
