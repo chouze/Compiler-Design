@@ -1,5 +1,3 @@
-** THIS SHOWS INCORRECT SYNTAX *It does not use String[] id in the main class.
-
 class Test
 {
 	public static void main ()

@@ -14,7 +14,7 @@ class Compiler
 	{
 	
 		try{
-				Parser p = new Parser(new Lexer (new PushbackReader(new InputStreamReader(System.in), 1024)));
+				Parser p = new Parser(new Lexer (new PushbackReader(new FileReader(args[0]), 1024)));
 				
 				Start tree = p.parse();
 				tree.apply(new Translation());

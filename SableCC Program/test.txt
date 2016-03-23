@@ -2,7 +2,8 @@ class Test
 {
 	public static void main ( String [] args )
 	{
-	
+		//This is a comment
+		int i = new AddNum().addNumber(10, 9);
 	}
 }
 
