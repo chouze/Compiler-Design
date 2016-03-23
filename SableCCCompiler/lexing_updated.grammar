@@ -1,0 +1,180 @@
+Package lexing;
+
+Helpers
+letter = ['a' .. 'z'] | ['A' .. 'Z'];
+digit = ['0' .. '9'];
+digits = digit+;
+newline = [10 + 13];
+
+Tokens
+double_slash_comment = '//' [[0 .. 0xffff] - newline]* newline;
+//slash_star_comment = '/*' [[0 .. 0xffff] - '*/']* '*/';
+//documentation_comment = '/**' [[0 .. 0xffff] - '*/']* '*/';
+space = ' ' | 9 | newline | 32 ;
+//reserved words
+clas = 'class';
+public = 'public';
+static = 'static';
+void = 'void';
+main = 'main';
+string = 'String';
+extends = 'extends';
+return = 'return';
+int = 'int';
+println = 'System.out.println';
+boolean = 'boolean';
+if = 'if';
+do = 'do';
+while = 'while';
+for = 'for';
+switch = 'switch';
+elseif = 'else if';
+case = 'case';
+default = 'default';
+true = 'true';
+false = 'false';
+new = 'new';
+this = 'this';
+length = 'length';
+
+//other tokens
+assign = '=';
+less_than = '<';
+compare = '==' | '<' | '>' | '<=' | '>=' | '!=';
+and = '&&';
+or = '||';
+not = '!';
+plus = '+';
+minus = '-';
+mult = '*';
+divide = '/';
+mod = '%';
+left_paren = '(';
+right_paren = ')';
+left_bracket = '[';
+right_bracket = ']';
+left_brace = '{';
+right_brace = '}';
+left_quote = '“';
+right_quote = '”';
+dot = '.';
+comma = ',';
+colon = ':';
+semi = ';';
+identifier = letter (letter | digit | '_')*;
+int_num = digits;
+misc = [0 .. 0xffff];
+
+Ignored Tokens
+double_slash_comment, space;
+ 
+Productions
+
+program = mainclass classdecl*;
+
+mainclass =	clas [class_name]: identifier [first_left_brace]: left_brace public static void main left_paren string left_bracket right_bracket [args]: identifier right_paren [second_left_brace]: left_brace vardecl* statement? [first_right_brace]: right_brace [second_right_brace]: right_brace;
+
+classdecl = classdeclspec classdecldeff;
+
+classdeclspec = clas identifier;
+
+classdecldeff = {no_extends} left_brace vardecl* methoddecl* right_brace |
+				{extends} extends identifier left_brace vardecl* methoddecl* right_brace;
+				
+vardecl = type vardecltype multidecl* semi;
+
+vardecltype = identifier vardecltypeassign;
+
+vardecltypeassign = {assign} assign exp |
+					{epsilon} ;
+			  
+multidecl = comma identifier vardecltypeassign;
+
+methoddecl = public type identifier left_paren formallist right_paren left_brace vardecl* statement* return exp semi right_brace;
+
+formallist = {formalrest} type identifier formalrest* |
+			 {epsilon };
+			 
+formalrest = comma type identifier;
+
+type = {array} int inttype |
+	   {boolean} boolean |
+	   {identifier} identifier;
+	   
+inttype = {array} left_bracket right_bracket |
+		  {epsilon} ;
+		  
+statement = {default} left_brace statement* right_brace |
+			{if} if left_paren exp right_paren left_brace statement right_brace elseif_nonterminal* |
+			{do} do left_brace statement right_brace while left_paren exp right_paren semi |
+			{while} while left_paren exp right_paren statement |
+			{for} for left_paren initializationstm [first_semi]: semi exp [second_semi]: semi incrementstm right_paren statement |
+			{switch} switch left_paren identifier right_paren left_brace caselist right_brace |
+			{println} println left_paren exp? right_paren semi |
+			{assign} identifier assign_nonterminal semi |
+			{formalvarexp} left_paren type identifier assign_nonterminal right_paren formalvarexp* semi;
+			
+assign_nonterminal = {assign} assign exp |
+				 {array} left_bracket [left]: exp right_bracket assign [right]: exp ;
+		
+initializationstm = {assign} identifier assign exp |
+					{array} identifier left_bracket [left]: exp right_bracket assign [right]: exp;
+					
+incrementstm = {assign} identifier assign exp |
+			   {array} identifier left_bracket [left]: exp right_bracket assign [right]: exp;
+			   
+elseif_nonterminal = elseif left_paren exp right_paren statement;
+
+formalvarexp = comma left_paren type identifier assign_nonterminal right_paren;
+
+caselist = {case} case exp colon statement caselist |
+		   {default} default colon statement;
+		   
+exp = and_nonterminal elist;
+
+elist = {and} and and_nonterminal elist |
+		{epsilon} ;
+		
+and_nonterminal = less alist;
+
+alist = {less} less_than less alist |
+		{epsilon} ;
+		
+less = term llist;
+
+llist = {plus} plus term llist |
+		{minus} minus term llist |
+		{epsilon} ;
+		
+term = {not_nonterminal} not_nonterminal tlist;
+
+tlist = {mult} mult not_nonterminal tlist |
+		{epsilon} ;
+		
+not_nonterminal = {not} not not_nonterminal |
+			  {factor} factor dotarray*;
+	   
+dotarray = {dot} dot member |
+		   {array} left_bracket exp right_bracket;
+		   
+member = {length} length |
+		 {identifier} identifier left_paren explist right_paren;
+		 
+explist = {exp} exp exprest* |
+		  {epsilon} ;
+		  
+exprest = comma exp;
+
+factor = {num} int_num |
+		 {true} true |
+		 {false} false |
+		 {identifier} identifier |
+		 {this} this |
+		 {new} new new_nonterminal |
+		 {exp} left_paren exp right_paren;
+		 
+new_nonterminal = {array} int left_bracket exp right_bracket |
+			  {identifier} identifier left_paren right_paren;
+ 
+ 
+

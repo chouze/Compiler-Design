@@ -1,0 +1,48 @@
+class Test
+{
+	public static void main ( String [] args )
+	{
+	
+	}
+}
+
+class AddNum
+{
+	public int addNumber( int a, int b)
+	{
+		int total, firstInt, secondInt;
+		{
+
+			total = 0;
+			firstInt = a;
+			secondInt = b;
+
+			if(i < 10)
+			{
+				do
+				{
+					while(i < 10)
+					{
+						for(i = 1; i < 10; i = i + 10)
+						{
+							switch(i)
+							{
+								case i < 10:
+									System.out.println(i < 10);
+								default:
+									(int i = 10), (int y = 5);
+							}
+						}
+					}
+				} while(i < 10);
+			}
+			else if(i < 10)
+				System.out.println(i < 10);
+		}
+				
+
+			return total;
+
+		
+	}
+}
