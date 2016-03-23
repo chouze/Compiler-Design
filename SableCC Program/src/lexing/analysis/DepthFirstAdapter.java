@@ -1138,6 +1138,39 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAArrayAssignNonterminal(node);
     }
 
+    public void inAInitializeInitializationstm(AInitializeInitializationstm node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAInitializeInitializationstm(AInitializeInitializationstm node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAInitializeInitializationstm(AInitializeInitializationstm node)
+    {
+        inAInitializeInitializationstm(node);
+        if(node.getType() != null)
+        {
+            node.getType().apply(this);
+        }
+        if(node.getIdentifier() != null)
+        {
+            node.getIdentifier().apply(this);
+        }
+        if(node.getAssign() != null)
+        {
+            node.getAssign().apply(this);
+        }
+        if(node.getExp() != null)
+        {
+            node.getExp().apply(this);
+        }
+        outAInitializeInitializationstm(node);
+    }
+
     public void inAAssignInitializationstm(AAssignInitializationstm node)
     {
         defaultIn(node);

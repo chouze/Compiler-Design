@@ -43,6 +43,7 @@ public interface Analysis extends Switch
     void caseAFormalvarexpStatement(AFormalvarexpStatement node);
     void caseAAssignAssignNonterminal(AAssignAssignNonterminal node);
     void caseAArrayAssignNonterminal(AArrayAssignNonterminal node);
+    void caseAInitializeInitializationstm(AInitializeInitializationstm node);
     void caseAAssignInitializationstm(AAssignInitializationstm node);
     void caseAArrayInitializationstm(AArrayInitializationstm node);
     void caseAAssignIncrementstm(AAssignIncrementstm node);

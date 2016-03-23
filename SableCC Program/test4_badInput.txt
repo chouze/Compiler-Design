@@ -1,5 +1,3 @@
-** THIS SHOWS INCORRECT SYNTAX *It uses [] instead of {} for a statement.
-
 class Test
 {
 	public static void main ( String [] args )

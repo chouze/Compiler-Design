@@ -106,19 +106,20 @@ inttype = {array} left_bracket right_bracket |
 		  {epsilon} ;
 		  
 statement = {default} left_brace statement* right_brace |
-			{if} if left_paren exp right_paren left_brace statement right_brace elseif_nonterminal* end_if|
+			{if} if left_paren exp right_paren left_brace statement right_brace elseif_nonterminal* end_if |
 			{do} do left_brace statement right_brace while left_paren exp right_paren semi |
 			{while} while left_paren exp right_paren statement |
 			{for} for left_paren initializationstm [first_semi]: semi exp [second_semi]: semi incrementstm right_paren statement |
 			{switch} switch left_paren identifier right_paren left_brace caselist right_brace |
 			{println} println left_paren exp? right_paren semi |
 			{assign} identifier assign_nonterminal semi |
-			{formalvarexp} left_paren type identifier assign_nonterminal right_paren formalvarexp* semi;
+			{formalvarexp} left_paren type identifier assign_nonterminal  right_paren formalvarexp* semi;
 			
 assign_nonterminal = {assign} assign exp |
 				 {array} left_bracket [left]: exp right_bracket assign [right]: exp ;
 		
-initializationstm = {assign} identifier assign exp |
+initializationstm = {initialize} type identifier assign exp |
+					{assign} identifier assign exp |
 					{array} identifier left_bracket [left]: exp right_bracket assign [right]: exp;
 					
 incrementstm = {assign} identifier assign exp |
@@ -126,7 +127,7 @@ incrementstm = {assign} identifier assign exp |
 			   
 elseif_nonterminal = elseif left_paren exp right_paren statement;
 
-formalvarexp = comma left_paren type identifier assign_nonterminal right_paren;
+formalvarexp = comma left_paren type identifier assign_nonterminal  right_paren;
 
 caselist = {case} case exp colon statement caselist |
 		   {default} default colon statement;

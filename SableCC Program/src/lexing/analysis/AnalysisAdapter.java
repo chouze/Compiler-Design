@@ -224,6 +224,11 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseAInitializeInitializationstm(AInitializeInitializationstm node)
+    {
+        defaultCase(node);
+    }
+
     public void caseAAssignInitializationstm(AAssignInitializationstm node)
     {
         defaultCase(node);
