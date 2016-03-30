@@ -1,4 +1,4 @@
-package SemanticBuild;
+package semanticBuild;
 
 /* 
  * An Equals Visitor can compare two Expressions for equality.
@@ -32,5 +32,10 @@ public class Equals implements Visitor {
 		
 		return ((Constant)e1).value.equals(((Constant)e2).value);
 	}
-
+	
+	public Object visit(Assign n){
+		return visit(n.left, n.right);
+	}
+	
+	
 }

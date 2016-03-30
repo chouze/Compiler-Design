@@ -1,6 +1,7 @@
-package SemanticBuild;
+package semanticBuild;
 
-public abstract class Exp {
+public abstract class Exp 
+{
 	Exp left;
 	Exp right;
 	

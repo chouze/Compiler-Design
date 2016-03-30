@@ -1,4 +1,4 @@
-package SemanticBuild;
+package semanticBuild;
 
 public class Driver {
 

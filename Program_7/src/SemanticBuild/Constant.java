@@ -1,13 +1,14 @@
-package SemanticBuild;
+package semanticBuild;
 
-/* 
+/**
  * A Constant is an Expression which has a value
  * @author ()
  * @version ()
  */
-public class Constant extends Exp {
-
+public class Constant extends Exp 
+{
 	Integer value;
+	
 	public Constant(Integer n)
 	{
 		value = n;

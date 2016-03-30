@@ -1,4 +1,4 @@
-package SemanticBuild;
+package semanticBuild;
 
 
 /* 
@@ -24,4 +24,11 @@ public class Simplify implements Visitor{
 	public Exp visit(Constant n) {
 		return n;
 	}
+	
+	public Exp visit(Assign n)
+	{
+		return new Assign((Exp)n.left.accept(this), (Exp)n.right.accept(this)); //
+	}
+	
+	
 }

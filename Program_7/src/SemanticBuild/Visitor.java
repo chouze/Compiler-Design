@@ -1,9 +1,15 @@
-package SemanticBuild;
+package semanticBuild;
 
 public interface Visitor {
-	Object visit(Sum n);
-	Object visit(Difference n);
+	Object visit(Assign n);
 	Object visit(Constant n);
-	//Object visit(Exp e1, Exp e2);
+	Object visit(Difference n);
+	Object visit(Exp n);
+	Object visit(Mod n);
+	Object visit(Product n);
+	Object visit(Quotient n);
+	Object visit(Sum n);
+	Object visit(Variable n);
+
 	
 }

@@ -1,4 +1,4 @@
-package SemanticBuild;
+package semanticBuild;
 
 /*
 * An Eval will evaluate an Expression
@@ -20,6 +20,8 @@ public class Eval implements Visitor{
 	public Integer visit(Constant n) {
 		return n.value;
 	}
+	
+
 	
 	
 }
