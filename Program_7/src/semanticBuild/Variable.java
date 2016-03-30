@@ -3,6 +3,7 @@ package semanticBuild;
 public class Variable extends Exp 
 {
 	String variableName;
+	Constant value;
 	
 	public Variable(String name)
 	{

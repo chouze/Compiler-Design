@@ -1,15 +1,14 @@
 package semanticBuild;
 
-public interface Visitor {
+public interface Visitor 
+{
 	Object visit(Assign n);
 	Object visit(Constant n);
 	Object visit(Difference n);
-	Object visit(Exp n);
 	Object visit(Mod n);
 	Object visit(Product n);
 	Object visit(Quotient n);
 	Object visit(Sum n);
 	Object visit(Variable n);
-
-	
+	Object visit(Exp n);
 }

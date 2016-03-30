@@ -8,8 +8,8 @@ public class Difference extends Exp
 		right = r;
 	}
 
-	public Integer accept(Visitor v)
+	public Object accept(Visitor v)
 	{
-		return (Integer)v.visit(this);
+		return v.visit(this);
 	}
 }
