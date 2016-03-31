@@ -1,6 +1,6 @@
 package symbolTableBuilder;
 
-public class ClassDecl 
+public class ClassDecl extends java.util.LinkedList
 {
 	ClassDeclSpec classDeclSpec;
 	ClassDeclDeff classDeclDeff;

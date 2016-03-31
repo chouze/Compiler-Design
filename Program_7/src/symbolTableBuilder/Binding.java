@@ -23,7 +23,7 @@ public class Binding {
 		id = i;
 		usage = u;
 		type = t;
-		if(u == TdType.METHOD)
+		if(u == IdType.METHOD)
 			parms = new LinkedList<String>();
 	}
 	
@@ -32,7 +32,7 @@ public class Binding {
 	{
 		id = i;
 		usage = u;
-		if(u == TdType.METHOD)
+		if(u == IdType.METHOD)
 			parms = new LinkedList<String>();
 	}
 }

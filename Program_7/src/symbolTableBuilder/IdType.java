@@ -7,6 +7,7 @@
 
 package symbolTableBuilder;
 
-public class IdType {
-	 public static  VARIABLE, METHOD, CLASS;
+public enum IdType 
+{
+	 VARIABLE, METHOD, CLASS;
 }
