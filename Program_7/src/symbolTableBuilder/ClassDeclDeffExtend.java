@@ -1,14 +1,16 @@
 package symbolTableBuilder;
 
-public class ClassDeclDeffExtend extends ClassDeclDeff 
+public class ClassDeclDeffExtend extends ClassDecl 
 {
+	Identifier className;
 	Identifier extendedClass;
 	VarDecl variableList;
 	MethodDecl methodList;
 	
-	public ClassDeclDeffExtend(Identifier extendedClass, VarDecl variableList,
+	public ClassDeclDeffExtend(Identifier className, Identifier extendedClass, VarDecl variableList,
 			MethodDecl methodList) 
 	{
+		this.className = className;
 		this.extendedClass = extendedClass;
 		this.variableList = variableList;
 		this.methodList = methodList;

@@ -28,7 +28,7 @@ public class BuildST implements Visitor {
 		n.stmt.accept(this); // ??
 	}
 
-	public void visit(ClassDecl n) {
+	public void visit(ClassDeclList n) {
 		
 
 	}
