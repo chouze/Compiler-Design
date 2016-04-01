@@ -21,9 +21,9 @@ public class Eval implements Visitor
 
 	public Object visit(Assign n) 
 	{
-		if(n.right.accept(this) instanceof Constant)
+		if(n.right.accept(this) instanceof Integer)
 		{
-			return ((Variable)n.left).value = (Constant) n.right.accept(this);
+			return ((Variable)n.left).value = new Constant((Integer) n.right.accept(this));
 		}
 		else
 		{
@@ -50,11 +50,11 @@ public class Eval implements Visitor
 	{
 		if(n.value != null)
 		{
-			return n.accept(this);
+			return /*n.accept(this);*/ n.value;
 		}
 		else
 		{
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Can't evaluate an unassigned variable: " + n.variableName);
 		}
 	}
 

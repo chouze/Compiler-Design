@@ -7,6 +7,8 @@ public class Driver {
 		Exp a = new Variable("a");
 		Exp assign = new Assign(a, new Constant(17));
 		Visitor intrp = new Eval();
+		
+		
 		try { intrp.visit(a); }
 		catch (Exception e)
 		{
@@ -14,7 +16,11 @@ public class Driver {
 		}
 		
 		intrp.visit(assign);
+		System.out.println("assign visited");
+		
 		intrp.visit(a);
+		System.out.println("a visited");
+		
 		
 		Exp b = new Variable("b");		
 		Exp e = new Quotient(a, new Sum(b, new Constant(2)));
