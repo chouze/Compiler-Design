@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PushbackReader;
 
-import parsing.ParsingException;
+//import parsing.ParsingException;
 import lexing.lexer.Lexer;
 import lexing.lexer.LexerException;
 import lexing.node.Token;
@@ -37,7 +37,7 @@ public class Parser
 				token = lexer.next();
 			}while (isToken(tspace) || isToken(tdscomment));
 
-			program();
+			//program();
 			
 
 		}catch(LexerException le) {System.err.println(le);}
@@ -87,7 +87,7 @@ public class Parser
 	{
 		return token.getClass().getName().equals("lexing.node." + tokenType);
 	}
-	
+	/*
 	//find example of Program
 	public Program program()
 	{
@@ -103,6 +103,6 @@ public class Parser
 			error(tclas);
 		}
 		
-	}
+	}*/
 	
 }

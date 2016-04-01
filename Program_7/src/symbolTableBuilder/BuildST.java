@@ -7,6 +7,7 @@ package symbolTableBuilder;
  * @author ()
  * @version (Mar 2016)
  */
+/*
 public class BuildST implements Visitor {
 	SymbolTable symTab, symTabMethod, symTabClass, symTabProg;
 
@@ -44,4 +45,4 @@ public class BuildST implements Visitor {
 	
 	//continue in this manner for the following classes:
 	//ClassDeclExtends, VarDecl, MethodDecl, Formal
-}
+}*/

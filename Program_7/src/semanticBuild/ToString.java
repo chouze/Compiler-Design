@@ -3,49 +3,54 @@ package semanticBuild;
 public class ToString implements Visitor 
 {
 
-	public Object visit(Assign n) 
+	public String visit(Assign n) 
 	{
 		return n.left.accept(this) + " = " + n.right.accept(this);
 	}
 
-	public Object visit(Constant n) 
+	public String visit(Constant n) 
 	{
-		return n.value;
+		return n.value.toString();
 	}
 
-	public Object visit(Difference n) 
+	public String visit(Difference n) 
 	{
 		return "(" + n.left.accept(this) + " - " + n.right.accept(this) + ")";
 	}
 
-	public Object visit(Mod n) 
+	public String visit(Mod n) 
 	{
 		return "(" + n.left.accept(this) + " % " + n.right.accept(this) + ")";
 	}
 
-	public Object visit(Product n) 
+	public String visit(Product n) 
 	{
 		return "(" + n.left.accept(this) + " * " + n.right.accept(this) + ")";
 	}
 
-	public Object visit(Quotient n) 
+	public String visit(Quotient n) 
 	{
 		return "(" + n.left.accept(this) + " / " + n.right.accept(this) + ")";
 	}
 
-	public Object visit(Sum n) 
+	public String visit(Sum n) 
 	{
 		return "(" + n.left.accept(this) + " + " + n.right.accept(this) + ")";
 	}
 
-	public Object visit(Variable n) 
+	public String visit(Variable n) 
 	{
-		return n.variableName;
+		if(n.value != null){
+			return n.value.accept(this).toString();
+		}
+		else {
+			return n.variableName;
+		}
 	}
 
-	public Object visit(Exp n) 
+	public String visit(Exp n) 
 	{
-		return n.accept(this);
+		return n.accept(this).toString();
 	}
 
 }
