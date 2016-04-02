@@ -34,6 +34,7 @@ public class Driver {
 		
 		
 		Exp b = new Variable("b");		
+<<<<<<< HEAD
 		Exp c = new Product(new Quotient(a, new Sum(b, new Constant(2))), new Constant (3));
 		Visitor toStr = new ToString();
 		System.out.println(toStr.visit(c));
@@ -94,6 +95,14 @@ public class Driver {
 		
 		
 		    
+=======
+		Exp e = new Quotient(a, new Sum(b, new Constant(2)));
+		Exp assign2 = new Assign(b, new Constant(2));
+		intrp.visit(assign2);
+		Visitor toStr = new ToString();
+		System.out.println(toStr.visit(e));
+		System.out.println(intrp.visit(e));
+>>>>>>> origin/master
 	}
 
 }

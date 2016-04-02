@@ -26,11 +26,12 @@ public class Eval implements Visitor
 		return n.value;
 	}
 
-	public Object visit(Assign n) 
+	public Integer visit(Assign n) 
 	{
 		if(n.right.accept(this) instanceof Integer)
 		{
-			return ((Variable)n.left).value = new Constant((Integer) n.right.accept(this));
+			((Variable)n.left).value = new Constant((Integer)n.right.accept(this));
+			return (Integer)n.right.accept(this);
 		}
 		else
 		{
@@ -53,11 +54,15 @@ public class Eval implements Visitor
 		return(Integer)n.left.accept(this) / (Integer)n.right.accept(this);
 	}
 
-	public Object visit(Variable n) 
+	public Integer visit(Variable n) 
 	{
 		if(n.value != null)
 		{
+<<<<<<< HEAD
 			return n.value;
+=======
+			return /*n.accept(this);*/ (Integer)n.value.accept(this);
+>>>>>>> origin/master
 		}
 		else
 		{
@@ -65,9 +70,9 @@ public class Eval implements Visitor
 		}
 	}
 
-	public Object visit(Exp n) 
+	public Integer visit(Exp n) 
 	{
-		return n.accept(this);
+		return (Integer)n.accept(this);
 	}
 	
 
