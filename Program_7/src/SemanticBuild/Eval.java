@@ -58,11 +58,7 @@ public class Eval implements Visitor
 	{
 		if(n.value != null)
 		{
-<<<<<<< HEAD
-			return n.value;
-=======
-			return /*n.accept(this);*/ (Integer)n.value.accept(this);
->>>>>>> origin/master
+			return (Integer)n.value.accept(this);
 		}
 		else
 		{
