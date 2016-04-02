@@ -1,10 +1,13 @@
 package semanticBuild;
 
 /**
- * A Constant is an Expression which has a value
- * @author ()
- * @version ()
+ * @author David Carlin
+ * @author Clifford Black
+ * @author Christopher Houze
+ * Version 3/31/2016
+ *
  */
+
 public class Constant extends Exp 
 {
 	Integer value;

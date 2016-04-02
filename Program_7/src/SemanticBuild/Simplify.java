@@ -1,5 +1,13 @@
 package semanticBuild;
 
+/**
+ * @author David Carlin
+ * @author Clifford Black
+ * @author Christopher Houze
+ * Version 3/31/2016
+ *
+ */
+
 public class Simplify implements Visitor{
 
 	public Exp visit(Sum n) 
@@ -84,7 +92,7 @@ public class Simplify implements Visitor{
 
 	public Object visit(Variable n) 
 	{
-		return n.accept(this);
+		return n.value.accept(this);
 	}
 
 	public Object visit(Exp n) 

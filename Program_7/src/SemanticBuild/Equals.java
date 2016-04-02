@@ -1,5 +1,13 @@
 package semanticBuild;
 
+/**
+ * @author David Carlin
+ * @author Clifford Black
+ * @author Christopher Houze
+ * Version 3/31/2016
+ *
+ */
+
 public class Equals implements Visitor {
 
 	public Object visit(Sum n) 

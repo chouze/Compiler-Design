@@ -1,5 +1,12 @@
 package semanticBuild;
 
+/**
+ * @author David Carlin
+ * @author Clifford Black
+ * @author Christopher Houze
+ * Version 3/31/2016
+ *
+ */
 
 public class Eval implements Visitor
 {
@@ -31,26 +38,26 @@ public class Eval implements Visitor
 		}
 	}
 
-	public Object visit(Mod n) 
+	public Integer visit(Mod n) 
 	{
-		return(Integer)n.left.accept(this) % (Integer)n.accept(this);
+		return(Integer)n.left.accept(this) % (Integer)n.right.accept(this);
 	}
 
-	public Object visit(Product n) 
+	public Integer visit(Product n) 
 	{
-		return(Integer)n.left.accept(this) * (Integer)n.accept(this);
+		return(Integer)n.left.accept(this) * (Integer)n.right.accept(this);
 	}
 
-	public Object visit(Quotient n) 
+	public Integer visit(Quotient n) 
 	{
-		return(Integer)n.left.accept(this) / (Integer)n.accept(this);
+		return(Integer)n.left.accept(this) / (Integer)n.right.accept(this);
 	}
 
 	public Object visit(Variable n) 
 	{
 		if(n.value != null)
 		{
-			return /*n.accept(this);*/ n.value;
+			return n.value;
 		}
 		else
 		{
