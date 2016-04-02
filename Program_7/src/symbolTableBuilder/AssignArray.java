@@ -10,5 +10,10 @@ public class AssignArray extends Assign
 		super(id);
 		this.arrayExp = arrayExp;
 		this.assignExp = assignExp;
-	};
+	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

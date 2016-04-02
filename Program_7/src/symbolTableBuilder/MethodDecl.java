@@ -20,4 +20,9 @@ public class MethodDecl extends java.util.LinkedList
 		this.statements = statements;
 		this.expReturn = ex;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

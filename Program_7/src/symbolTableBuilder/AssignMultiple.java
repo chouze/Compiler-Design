@@ -15,4 +15,9 @@ public class AssignMultiple extends Statement
 		this.assignExp = assignExp;
 		this.moreDeclare = moreDeclare;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

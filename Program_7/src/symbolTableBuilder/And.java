@@ -11,4 +11,8 @@ public class And extends Exp
 		this.e2 = e2;
 	}
 	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

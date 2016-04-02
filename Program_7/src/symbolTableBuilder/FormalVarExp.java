@@ -14,4 +14,9 @@ public class FormalVarExp extends LinkedList
 		this.paramName = paramName;
 		this.assignValue = assignValue;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

@@ -13,4 +13,9 @@ public class FormalList
 		this.parameterName = parameterName;
 		this.moreParams = moreParams;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

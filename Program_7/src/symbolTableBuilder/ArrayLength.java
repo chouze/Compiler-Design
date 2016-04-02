@@ -8,4 +8,9 @@ public class ArrayLength extends Exp
 	{
 		this.e1 = e1;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

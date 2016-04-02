@@ -8,4 +8,9 @@ public class NewArray extends Exp
 	{
 		this.e = e;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

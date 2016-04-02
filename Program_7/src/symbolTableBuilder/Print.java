@@ -8,4 +8,9 @@ public class Print extends Statement
 	{
 		this.statementToPrint = statementToPrint;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

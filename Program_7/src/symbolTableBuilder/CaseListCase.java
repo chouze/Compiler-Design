@@ -12,4 +12,9 @@ public class CaseListCase extends CaseList
 		this.s = s;
 		this.caseList = caseList;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

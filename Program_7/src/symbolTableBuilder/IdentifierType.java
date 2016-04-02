@@ -8,4 +8,9 @@ public class IdentifierType extends Type
 	{
 		this.id = id;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

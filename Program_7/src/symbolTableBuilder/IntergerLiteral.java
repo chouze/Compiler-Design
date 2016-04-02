@@ -9,5 +9,8 @@ public class IntergerLiteral extends Exp
 		this.i = i;
 	}
 	
-	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

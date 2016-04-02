@@ -10,4 +10,9 @@ public class InitializeSimple extends InitializationStm
 		this.id = id;
 		this.assignExp = assignExp;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

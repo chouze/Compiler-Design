@@ -7,5 +7,10 @@ public class CaseListDefault extends CaseList
 	public CaseListDefault(Statement s) 
 	{
 		this.s = s;
-	};
+	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

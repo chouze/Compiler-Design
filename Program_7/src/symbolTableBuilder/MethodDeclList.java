@@ -2,9 +2,8 @@ package symbolTableBuilder;
 
 import java.util.LinkedList;
 
-public class ExpRest extends LinkedList 
-{
-	Exp e; //?
+public class MethodDeclList extends LinkedList<MethodDecl> {
+
 	
 	public void accept(Visitor v) 
 	{

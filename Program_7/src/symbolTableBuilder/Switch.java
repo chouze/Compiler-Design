@@ -10,4 +10,9 @@ public class Switch extends Statement
 		this.id = id;
 		this.caseDefault = caseDefault;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

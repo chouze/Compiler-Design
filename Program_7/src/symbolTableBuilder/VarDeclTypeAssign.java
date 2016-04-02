@@ -8,4 +8,9 @@ public class VarDeclTypeAssign
 	{
 		this.exp = exp;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

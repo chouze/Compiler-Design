@@ -7,5 +7,10 @@ public class IdentifierExp extends Exp
 	public IdentifierExp(String s) 
 	{
 		this.s = s;
-	};
+	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

@@ -10,4 +10,9 @@ public class ElseIf
 		this.condition = condition;
 		this.s = s;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

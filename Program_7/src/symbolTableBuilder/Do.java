@@ -10,4 +10,9 @@ public class Do extends Statement
 		this.s = s;
 		this.condition = condition;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

@@ -10,4 +10,9 @@ public class ExpList
 		this.e = e;
 		this.multipleExp = multipleExp;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

@@ -12,4 +12,9 @@ public class IncrementArray extends IncrementStm
 		this.arrayExp = arrayExp;
 		this.assignExp = assignExp;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

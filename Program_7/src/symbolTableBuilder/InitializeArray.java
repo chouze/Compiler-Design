@@ -12,4 +12,9 @@ public class InitializeArray extends InitializationStm
 		this.arrayExp = arrayExp;
 		this.assignExp = assignExp;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

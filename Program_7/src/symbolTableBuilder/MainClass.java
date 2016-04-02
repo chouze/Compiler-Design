@@ -2,17 +2,23 @@ package symbolTableBuilder;
 
 public class MainClass 
 {
-	Identifier name;
+	Identifier className;
 	Identifier args; 
 	VarDecl v;
-	Statement s;
+	Statement stmt;
+	SymbolTable symTab;
 	
 	public MainClass(Identifier name, Identifier args, VarDecl v, Statement s) 
 	{
-		this.name = name;
+		this.className = name;
 		this.args = args;
 		this.v = v;
-		this.s = s;
+		this.stmt = s;
+	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
 	}
 	
 }

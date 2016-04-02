@@ -11,5 +11,8 @@ public class VarDecl extends java.util.LinkedList
 		this.variableType = variableType;
 	}
 	
-	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

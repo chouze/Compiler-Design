@@ -9,4 +9,9 @@ public class Times extends Exp
 		this.e1 = e1;
 		this.e2 = e2;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

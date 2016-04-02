@@ -8,4 +8,9 @@ public class Block extends Statement
 	{
 		this.sl = sl;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

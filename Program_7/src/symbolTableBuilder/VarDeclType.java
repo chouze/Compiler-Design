@@ -10,4 +10,9 @@ public class VarDeclType
 		this.variableName = variableName;
 		this.variableAssign = variableAssign;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

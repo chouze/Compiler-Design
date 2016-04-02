@@ -10,4 +10,9 @@ public class IncrementSimple extends IncrementStm
 		this.id = id;
 		this.assignExp = assignExp;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

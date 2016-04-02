@@ -10,4 +10,9 @@ public class FormalRest extends java.util.LinkedList
 		this.type = type;
 		this.paramName = paramName;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

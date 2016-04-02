@@ -9,4 +9,9 @@ public class AssignSimple extends Assign
 		super(id);
 		this.assignment = assignment;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

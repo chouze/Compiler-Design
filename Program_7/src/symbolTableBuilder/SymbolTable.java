@@ -29,4 +29,6 @@ public class SymbolTable {
 		System.err.println("Identifier " + i + " already defined in this context.");
 		return null;
 	}
+	
+
 }

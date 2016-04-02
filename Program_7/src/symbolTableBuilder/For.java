@@ -15,4 +15,9 @@ public class For extends Statement
 		this.increment = increment;
 		this.s = s;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }

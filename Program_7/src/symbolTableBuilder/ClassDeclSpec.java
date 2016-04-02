@@ -9,4 +9,8 @@ public class ClassDeclSpec
 		this.className = className;
 	}
 
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }
