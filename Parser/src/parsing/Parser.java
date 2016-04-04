@@ -175,10 +175,11 @@ public class Parser implements symbolTableBuilder.Visitor{
 		while (isToken(tint) || isToken(tboolean) || isToken(tid)) {
 			v.add(VarDecl());
 		}
-		Statement s = new Statement();
+		Statement s = Statement();
 		MainClass n = new MainClass(className, args, v, s);
 		eat(trightbrace);
 		eat(trightbrace);
+		return n;
 	 }
 
 	 ClassDecl ClassDecl() {
@@ -486,9 +487,8 @@ public class Parser implements symbolTableBuilder.Visitor{
 			eat(tid);
 			Assign assign = Assign();
 			eat(tsemi);
-			
-			
-			return new Assign(variable, assign);
+
+			return assign;
 		} 
 		/*
 		else if (isToken(tleftparen)) 
@@ -938,6 +938,390 @@ public class Parser implements symbolTableBuilder.Visitor{
 		
 		throw new ParsingException(token, "expression");
 	
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.Program n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.MainClass n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ClassDeclDeffSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ClassDeclDeffExtend n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ClassDeclList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.VarDecl n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.VarDeclType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.VarDeclTypeAssign n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(VarDeclList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.MethodDecl n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(MethodDeclList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.FormalList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.FormalRest n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IntArrayType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(BooleanType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IntegerType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IdentifierType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.Statement n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Block n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(If n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Do n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(While n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(For n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Switch n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Print n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(AssignSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(AssignArray n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(AssignMultiple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(InitializeSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(InitializeArray n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IncrementSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IncrementArray n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.ElseIf n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(CaseListCase n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(CaseListDefault n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.ExpList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.ExpRest n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(And n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(LessThan n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Plus n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Minus n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Times n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ArrayLookUp n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ArrayLength n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Call n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IntegerLiteral n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(True n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(False n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IdentifierExp n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(This n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(NewArray n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(NewObject n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Not n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Identifier n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.Exp n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.Type n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(StatementList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.InitializationStm n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.IncrementStm n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.CaseList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(FormalRestList formalRestList) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ElseIfList elseIfList) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ExpRestList expRestList) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ClassDeclSpec classDeclSpec) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
