@@ -2,14 +2,18 @@ package parsing;
 
 import lexing.lexer.*;
 import lexing.node.Token;
+import semanticBuild.*;
+import symbolTableBuilder.*;
+
 import java.io.*;
+
 
 /**
  * 
  * @author Christopher Houze, David Carlin, Clifford Black
  *
  */
-public class Parser{
+public class Parser implements symbolTableBuilder.Visitor{
 	Lexer lexer;
 	Token token, lastToken, nextToken;
 	
@@ -38,7 +42,7 @@ public class Parser{
 				token = lexer.next();
 			}while (isToken(tspace) || isToken(tdscomment));
 
-			Program();
+			//Program();
 			
 
 		}catch(LexerException le) {System.err.println(le);}
@@ -123,7 +127,9 @@ public class Parser{
 		return t.getClass().getName().equals("lexing.node." + tokenType);
 	}
 
-	
+	public Program Parse(){
+		return Program();
+	}
 	/**
 	 * 
 	 * 
@@ -133,15 +139,19 @@ public class Parser{
 	 */
 	
 	
-	void Program(){
-		MainClass();
+	Program Program(){
+		MainClass mc = MainClass();
+		ClassDeclList cd = new ClassDeclList();
 		while (isToken(tclas)) {
-			ClassDecl();
+			cd.add(ClassDecl());
 		}
+		Program p = new Program(mc, cd);
+		return p;
 	}
 
-	void MainClass() {
+	 MainClass MainClass() {
 		eat(tclas);
+		Identifier className = new Identifier(token.getText());
 		eat(tid);
 		eat(tleftbrace);
 		eat(tpublic);
@@ -152,13 +162,16 @@ public class Parser{
 		eat(tstring);
 		eat(tleftbracket);
 		eat(trightbracket);
+		Identifier args = new Identifier(token.getText());
 		eat(tid);
 		eat(trightparen);
 		eat(tleftbrace);
+		VarDecl v = new VarDecl();
 		while (isToken(tint) || isToken(tboolean) || isToken(tid)) {
-			VarDecl();
+			v.add(VarDecl());
 		}
-		Statement();
+		Statement s = Statement();
+		MainClass n = new MainClass(className, args, v, s);
 		eat(trightbrace);
 		eat(trightbrace);
 	}
@@ -627,4 +640,5 @@ public class Parser{
 			eat(trightparen);
 		}
 	}
+
 }
