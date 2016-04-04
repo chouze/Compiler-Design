@@ -29,7 +29,8 @@ class AddNum
 		{
 			total = a - b;
 		
-			return total;
 		}
+		
+		return total;
 	}
 }

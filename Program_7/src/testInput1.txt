@@ -39,7 +39,6 @@ class AddNum
 			}
 			else if(i < 10)
 				System.out.println(i < 10);
-			end if
 		}
 				
 
