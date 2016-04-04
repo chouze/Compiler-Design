@@ -73,6 +73,9 @@ public interface Visitor {
 	void visit(InitializationStm n);
 	void visit(IncrementStm n);
 	void visit(CaseList n);
+	void visit(FormalRestList formalRestList);
+	void visit(ElseIfList elseIfList);
+	void visit(ExpRestList expRestList);
 	
 	/*
 	String visit(Exp n);

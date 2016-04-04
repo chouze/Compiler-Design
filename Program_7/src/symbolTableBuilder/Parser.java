@@ -87,6 +87,8 @@ public class Parser
 	{
 		return token.getClass().getName().equals("lexing.node." + tokenType);
 	}
+	
+	
 	/*
 	//find example of Program
 	public Program program()

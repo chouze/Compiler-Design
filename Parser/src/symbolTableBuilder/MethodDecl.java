@@ -5,12 +5,12 @@ public class MethodDecl extends java.util.LinkedList
 	Type type;
 	Identifier methodName;
 	FormalList parameters;
-	VarDecl variables;
-	Statement statements;
+	VarDeclList variables;
+	StatementList statements;
 	Exp expReturn;
 	
 	public MethodDecl(Type type, Identifier methodName,
-			FormalList parameters, VarDecl variables, Statement statements,
+			FormalList parameters, VarDeclList variables, StatementList statements,
 			Exp ex) 
 	{
 		this.type = type;

@@ -4,6 +4,8 @@ import lexing.lexer.*;
 import lexing.node.Token;
 import semanticBuild.*;
 import symbolTableBuilder.*;
+import symbolTableBuilder.Assign;
+import symbolTableBuilder.Exp;
 
 import java.io.*;
 
@@ -139,17 +141,20 @@ public class Parser implements symbolTableBuilder.Visitor{
 	 */
 	
 	
-	Program Program(){
+	Program Program()
+	{
 		MainClass mc = MainClass();
 		ClassDeclList cd = new ClassDeclList();
-		while (isToken(tclas)) {
+		while (isToken(tclas)) 
+		{
 			cd.add(ClassDecl());
 		}
 		Program p = new Program(mc, cd);
 		return p;
 	}
 
-	 MainClass MainClass() {
+	 MainClass MainClass() 
+	 {
 		eat(tclas);
 		Identifier className = new Identifier(token.getText());
 		eat(tid);
@@ -166,21 +171,54 @@ public class Parser implements symbolTableBuilder.Visitor{
 		eat(tid);
 		eat(trightparen);
 		eat(tleftbrace);
-		VarDecl v = new VarDecl();
+		VarDeclList v = new VarDeclList();
 		while (isToken(tint) || isToken(tboolean) || isToken(tid)) {
 			v.add(VarDecl());
 		}
-		Statement s = Statement();
+		Statement s = new Statement();
 		MainClass n = new MainClass(className, args, v, s);
 		eat(trightbrace);
 		eat(trightbrace);
-	}
+	 }
 
-	void ClassDecl() {
-		ClassDeclSpec();
-		ClassDeclDef();
-	}
+	 ClassDecl ClassDecl() {
+		 boolean extendBool = false;
+		 Identifier extendName = null;
+		 VarDeclList varList = new VarDeclList();
+		 MethodDeclList methList = new MethodDeclList();
 
+		 eat(tclas);
+		 Identifier className = new Identifier(token.getText());
+		 eat(tid);
+
+		 if(isToken(textends))
+		 {
+			 eat(textends);
+			 extendName = new Identifier(token.getText());
+			 extendBool = true;
+		 }
+
+		 eat(tleftbrace);
+
+		 while (isToken(tint) || isToken(tboolean) || isToken(tid)) {
+			 varList.add(VarDecl());
+		 }
+		 while (isToken(tpublic)) {
+			 methList.add(MethodDecl());
+		 }
+
+		 eat(trightbrace);
+
+
+
+		 if(extendBool)
+			 return new ClassDeclDeffExtend(className, extendName, varList, methList);
+		 
+		 return new ClassDeclDeffSimple(className, varList, methList);
+	 }
+	 
+
+	/*
 	void ClassDeclSpec() {
 		eat(tclas);
 		eat(tid);
@@ -216,94 +254,142 @@ public class Parser implements symbolTableBuilder.Visitor{
 			eat(trightbrace);
 		}
 	}
-
-	void VarDecl() {
-		Type();
-		VarDeclType();
+	*/
+	VarDecl VarDecl() 
+	{
+		Type type = Type();
+		VarDeclType varType = VarDeclType();
 		eat(tsemi);
+		
+		return new VarDecl(type, varType);
 	}
 
-	void VarDeclType() {
+	VarDeclType VarDeclType() 
+	{
+		Identifier varName = new Identifier(token.getText());
 		eat(tid);
-		VarDeclTypeAssign();
+		VarDeclTypeAssign varAssign = VarDeclTypeAssign();
+		
+		return new VarDeclType(varName, varAssign);
 	}
 
-	void VarDeclTypeAssign() {
-		if (isToken(tassign)){
+	VarDeclTypeAssign VarDeclTypeAssign() 
+	{
 			eat(tassign);
-			Exp();
-		}
-
-		if (isToken(tcomma)){
-			MultiDecl();
-		}
+			Exp exp = Exp();
+			
+			return new VarDeclTypeAssign(exp);
 	}
 
+/*
 	void MultiDecl() {
 		eat(tcomma);
 		eat(tid);
 		VarDeclTypeAssign();
 	}
 
-	void MethodDecl() {
+*/
+
+	MethodDecl MethodDecl() 
+	{
+		VarDeclList varList = new VarDeclList();
+		StatementList statementList = new StatementList();
+		
 		eat(tpublic);
-		Type();
+		Type type = Type();
+		Identifier methodName = new Identifier(token.getText());
 		eat(tid);
 		eat(tleftparen);
-		FormalList();
+		FormalList parameters = FormalList();
 		eat(trightparen);
 		eat(tleftbrace);
 		while (isToken(tint) || isToken(tboolean) || (isToken(tid) && peek(tid))){
-			VarDecl();
+			varList.add(VarDecl());
 		}
 
 
 		while (isToken(tleftbrace) || isToken(tif) || isToken(tdo) || isToken(twhile) || isToken(tfor)
 				|| isToken(tswitch) || isToken(tprintln) || isToken(tid)
 				|| isToken(tleftparen))
-			Statement();
+			statementList.add(Statement());
 		eat(treturn);
-		Exp();
+		Exp exp = Exp();
 		eat(tsemi);
 		eat(trightbrace);
+		
+		return new MethodDecl(type, methodName, parameters, varList, statementList, exp);
 
 	}
 
-	void FormalList() {
+	FormalList FormalList() 
+	{
+		FormalRestList restList = new FormalRestList();
+		
+		Type type = null;
+		Identifier paramName = null;
+		
 		if (isToken(tint) || isToken(tboolean) || isToken(tid)) {
-			Type();
+			type = Type();
+			paramName = new Identifier(token.getText());
 			eat(tid);
 			while (isToken(tcomma))
-				FormalRest();
+				restList.add(FormalRest());
 		}
+		
+		return new FormalList(type, paramName, restList);
 	}
 
-	void FormalRest() {
+	FormalRest FormalRest() 
+	{
 		eat(tcomma);
-		Type();
+		Type type = Type();
+		Identifier name = new Identifier(token.getText());
 		eat(tid);
+		
+		return new FormalRest(type, name);
 	}
 
-	void Type() {
-		if (isToken(tint)) {
+	Type Type() 
+	{
+		Type type = null;
+		
+		if (isToken(tint)) 
+		{
 			eat(tint);
-			IntType();
-		} else if (isToken(tboolean))
+			
+			if(isToken(tleftparen))
+				type = new IntArrayType();
+			else
+				type = new IntegerType();
+		} 
+		else if (isToken(tboolean))
+		{
+			type = new BooleanType();
 			eat(tboolean);
+		}
 		else if (isToken(tid))
+		{
+			type = new IdentifierType(token.getText());
 			eat(tid);
+		}
 		else
 			throw new ParsingException(token);
+		
+		return type;
 	}
 
+	/*
 	void IntType() {
 		if (isToken(tleftparen)) {
 			eat(tleftbracket);
 			eat(trightbracket);
 		}
 	}
+	
+	*/
 
-	void Statement() {
+	Statement Statement() 
+	{		
 		if (isToken(tleftbrace)) { // {Statement*}
 			eat(tleftbrace);
 			while (isToken(tleftbrace) || isToken(tif) || isToken(tdo) || isToken(twhile) || isToken(tfor)
@@ -312,68 +398,100 @@ public class Parser implements symbolTableBuilder.Visitor{
 				Statement();
 			eat(trightbrace);
 		}
-		else if (isToken(tif)) {
+		else if (isToken(tif)) 
+		{
+			ElseIfList elseIfList = new ElseIfList();
 			eat(tif);
 			eat(tleftparen);
-			Exp();
+			Exp exp = Exp();
 			eat(trightparen);
-			Statement();
+			Statement stmt = Statement();
 
-			while (isToken(telse)) { 
-				ElseIf();
-
+			while (isToken(telse)) 
+			{ 
+				elseIfList.add(ElseIf());
 			}
+			
+			return new If(exp, stmt, elseIfList);
 
-		} else if (isToken(tdo)) {
+		}
+		else if (isToken(tdo)) 
+		{
 			eat(tdo);
 			eat(tleftbrace);
-			Statement();
+			Statement stmt = Statement();
 			eat(trightbrace);
 			eat(twhile);
 			eat(tleftparen);
-			Exp();
+			Exp exp = Exp();
 			eat(trightparen);
 			eat(tsemi);
-
-		} else if (isToken(twhile)) {
+			
+			return new Do(stmt, exp);
+		} 
+		else if (isToken(twhile)) 
+		{
 			eat(twhile);
 			eat(tleftparen);
-			Exp();
+			Exp exp = Exp();
 			eat(trightparen);
-			Statement();
-		} else if (isToken(tfor)) {
+			Statement stmt = Statement();
+			
+			return new While(exp, stmt);
+		} 
+		else if (isToken(tfor)) 
+		{
 			eat(tfor);
 			eat(tleftparen);
-			InitializationStm();
+			InitializationStm initial = InitializationStm();
 			eat(tsemi);
-			Exp();
+			Exp exp = Exp();
 			eat(tsemi);
-			IncrementStm();
+			IncrementStm increment = IncrementStm();
 			eat(trightparen);
-			Statement();
-		} else if (isToken(tswitch)) {
+			Statement stmt = Statement();
+			
+			return new For(initial, exp, increment, stmt);
+		} 
+		else if (isToken(tswitch)) 
+		{
 			eat(tswitch);
 			eat(tleftparen);
+			Identifier variable = new Identifier(token.getText());
 			eat(tid);
 			eat(trightparen);
 			eat(tleftbrace);
-			CaseList();
+			CaseList caseList = CaseList();
 			eat(trightbrace);
-		} else if (isToken(tprintln)) {
+			
+			return new Switch(variable, caseList);
+		} 
+		else if (isToken(tprintln)) 
+		{
+			Exp exp = null;
 			eat(tprintln);
 			eat(tleftparen);
 			if(!isToken(trightparen))
 			{
-				Exp();
+				exp = Exp();
 			}
 			eat(trightparen);
 			eat(tsemi);
-
-		} else if (isToken(tid)) {
+			
+			return new Print(exp);
+		} 
+		else if (isToken(tid)) 
+		{
+			Identifier variable = new Identifier(token.getText());
 			eat(tid);
-			Assign();
+			Assign assign = Assign();
 			eat(tsemi);
-		} else if (isToken(tleftparen)) {
+			
+			return new Assign(variable, assign);
+		} 
+		/*
+		else if (isToken(tleftparen)) 
+		{
 			eat(tleftparen);
 			Type();
 			eat(tid);
@@ -385,89 +503,123 @@ public class Parser implements symbolTableBuilder.Visitor{
 			eat(tsemi);
 
 		} 
-		else if(isToken(trightbrace)){
+		*/
+		else if(isToken(trightbrace))
+		{
 			//Don't do anything, don't throw an exception
 		}
-		else{
+		else
+		{
 			throw new ParsingException(token, "statment");
 		}
-
-
+		
+		return null;
 	}
 
-	void ElseIf() {
+	ElseIf ElseIf() 
+	{
 		eat(telse);
 		eat(tleftparen);
-		Exp();
+		Exp exp = Exp();
 		eat(trightparen);
-		Statement();
+		Statement stmt = Statement();
+		
+		return new ElseIf(exp, stmt);
 	}
 
+	/*
 	void Else() {
 		Statement();
 	}
+	*/
 
-	void Assign() {
-		if (isToken(tassign)) {
+	Assign Assign() 
+	{
+		if (isToken(tassign)) 
+		{
 			eat(tassign);
-			Exp();
-		} else if (isToken(tleftbracket)) {
+			Exp exp = Exp();
+			return new AssignSimple(exp);
+		} 
+		else if (isToken(tleftbracket)) 
+		{
 			eat(tleftbracket);
-			Exp();
+			Exp exp1 = Exp();
 			eat(trightbracket);
 			eat(tassign);
-			Exp();
-		} else
+			Exp exp2 = Exp();
+			
+			return new AssignArray(exp1, exp2);
+		} 
+		else
 			throw new ParsingException(token, "assign");
+		
 	}
 
-	void InitializationStm()
+	InitializationStm InitializationStm()
 	{
 
 		if(isToken(tid)) 
 		{ 
+			Identifier varName = new Identifier(token.getText());
+			
 			if(peek(tleftbracket))
 			{
 				eat(tid);
 				eat(tleftbracket);
-				Exp();
+				Exp exp1 = Exp();
 				eat(trightbracket);
 				eat(tassign);
-				Exp();
+				Exp exp2 = Exp();
+				
+				return new InitializeArray(varName, exp1, exp2);
 			}
 			else
 			{
 				eat(tid);
 				eat(tassign);
-				Exp();
+				Exp exp = Exp();
+				return new InitializeSimple(varName, exp);
+				
 			}
 
 		}
+		
+		return null;
 	}
 
-	void IncrementStm() 
+	IncrementStm IncrementStm() 
 	{
 		if(isToken(tid)) 
 		{ 
+			Identifier varName = new Identifier(token.getText());
+			
 			if(peek(tleftbracket))
 			{
 				eat(tid);
 				eat(tleftbracket);
-				Exp();
+				Exp exp1 = Exp();
 				eat(trightbracket);
 				eat(tassign);
-				Exp();
+				Exp exp2 = Exp();
+				
+				return new IncrementArray(varName, exp1, exp2);
 			}
 			else
 			{
 				eat(tid);
 				eat(tassign);
-				Exp();
+				Exp exp = Exp();
+				
+				return new IncrementSimple(varName, exp);
 			}
 		}
+		
+		return null;
 
 	}
 
+	/*
 	void FormalVarExp() {
 		eat(tcomma);
 		eat(tleftparen);
@@ -477,22 +629,33 @@ public class Parser implements symbolTableBuilder.Visitor{
 		Exp();
 		eat(trightparen);
 	}
+	*/
 
-	void CaseList() {
+	CaseList CaseList() {
 		if (isToken(tcase)) {
 			eat(tcase);
-			Exp();
+			Exp exp = Exp();
 			eat(tcolon);
-			Statement();
-			CaseList();
-		} else if (isToken(tdefault)) {
+			Statement stmt = Statement();
+			CaseList caseList = CaseList();
+			
+			return new CaseListCase(exp, stmt, caseList);
+		} 
+		else if (isToken(tdefault)) 
+		{
 			eat(tdefault);
 			eat(tcolon);
-			Statement();
+			Statement stmt = Statement();
+			return new CaseListDefault(stmt);
+		}
+		else
+		{
+			throw new ParsingException(token, "case or default");
 		}
 	}
-
-	void Exp() {
+/*
+	void Exp() 
+	{
 		And();
 		Elist();
 	}
@@ -587,22 +750,38 @@ public class Parser implements symbolTableBuilder.Visitor{
 			eat(trightparen);
 		}
 	}
+	*/
 
-	void ExpList() {
+	ExpList ExpList() 
+	{
+		ExpRestList restList = new ExpRestList();
+		Exp exp = null;
+		
 		if (isToken(tintnum) || isToken(ttrue) || isToken(tfalse) || isToken(tid) || isToken(tthis)
-				|| isToken(tnew) || isToken(tleftparen) || isToken(tnot)) {
-			Exp();
-			while (isToken(tcomma)) {
-				ExpRest();
+				|| isToken(tnew) || isToken(tleftparen) || isToken(tnot)) 
+		{
+			exp = Exp();
+			while (isToken(tcomma)) 
+			{
+				restList.add(ExpRest());
 			}
+			
+			return new ExpList(exp, restList);
 		}
+		
+		return null;
 	}
 
-	void ExpRest() {
+	ExpRest ExpRest() 
+	{
 		eat(tcomma);
-		Exp();
+		Exp exp = Exp();
+		
+		return new ExpRest(exp);
 	}
 
+	
+	/*
 	void Factor() {
 		if (isToken(tintnum))
 			eat(tintnum);
@@ -639,6 +818,385 @@ public class Parser implements symbolTableBuilder.Visitor{
 			eat(tleftparen);
 			eat(trightparen);
 		}
+	}
+	*/
+
+	@Override
+	public void visit(symbolTableBuilder.Program n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.MainClass n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ClassDeclDeffSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ClassDeclDeffExtend n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ClassDeclList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.VarDecl n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.VarDeclType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.VarDeclTypeAssign n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(VarDeclList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.MethodDecl n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(MethodDeclList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.FormalList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.FormalRest n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IntArrayType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(BooleanType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IntegerType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IdentifierType n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.Statement n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Block n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(If n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Do n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(While n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(For n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Switch n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Print n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(AssignSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(AssignArray n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(AssignMultiple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(InitializeSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(InitializeArray n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IncrementSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IncrementArray n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.ElseIf n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(CaseListCase n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(CaseListDefault n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.ExpList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.ExpRest n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.And n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(LessThan n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Plus n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Minus n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Times n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ArrayLookUp n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ArrayLength n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Call n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IntegerLiteral n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(True n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(False n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(IdentifierExp n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(This n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(NewArray n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(NewObject n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.Not n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Identifier n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.Exp n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.Type n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(StatementList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.InitializationStm n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.IncrementStm n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(symbolTableBuilder.CaseList n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(FormalRestList formalRestList) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ElseIfList elseIfList) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(ExpRestList expRestList) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

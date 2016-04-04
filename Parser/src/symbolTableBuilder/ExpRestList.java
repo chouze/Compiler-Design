@@ -1,10 +1,12 @@
 package symbolTableBuilder;
 
-public class StatementList extends java.util.LinkedList<Statement> {
+import java.util.LinkedList;
+
+public class ExpRestList extends LinkedList<ExpRest> {
+
 	
 	public void accept(Visitor v) 
 	{
 		v.visit(this);
 	}
-
 }
