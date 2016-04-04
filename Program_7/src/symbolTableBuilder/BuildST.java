@@ -30,7 +30,8 @@ public class BuildST implements Visitor {
 	// This class
 
 	public BuildST() {
-
+//Temp
+		symTabProg = new SymbolTable();
 	}
 
 	public void visit(Program n) { // Program as defined in Bergmann's parser
@@ -42,12 +43,9 @@ public class BuildST implements Visitor {
 	public void visit(MainClass n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
 		n.className.accept(this);
-
 		symTabProg.put(n.args, new Binding(n.args, IdType.VARIABLE));
 		n.args.accept(this);
-
-		n.symTab = new SymbolTable(); // each mainclass has it's own symboltable
-										// since it is static
+		n.symTab = new SymbolTable(); // each mainclass has it's own symboltable since it is static
 		n.stmt.accept(this); // ??
 	}
 
@@ -317,9 +315,12 @@ public class BuildST implements Visitor {
 	@Override
 	public void visit(Call n) {
 		n.e.accept(this);
-		symTabProg.put(n.id, new Binding(n.id, IdType.METHOD));
+		Binding bind = new Binding(n.id, IdType.METHOD);
+		bind.addParams(n.el);
+		symTabProg.put(n.id, bind);
 		n.id.accept(this);
 		n.el.accept(this);
+		
 	}
 	@Override
 	public void visit(NewArray n) {
@@ -328,7 +329,7 @@ public class BuildST implements Visitor {
 
 	@Override
 	public void visit(NewObject n) {
-		symTabProg.put(n.id, new Binding(n.id, IdType.CLASS)); //think it should be class since it's an instance of a class
+		symTabProg.put(n.id, new Binding(n.id, IdType.CLASS));
 		n.id.accept(this);
 	}
 

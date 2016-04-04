@@ -35,4 +35,27 @@ public class Binding {
 		if(u == IdType.METHOD)
 			parms = new LinkedList<String>();
 	}
+	
+	public void addParams(ExpList el){
+		parms.add(el.e.getClass().toString());
+		if(!el.multipleExp.isEmpty()){
+			for(Object e: el.multipleExp){
+				parms.add(e.getName());
+			}
+		}	
+	}
+	
+	public String toString()
+	{
+		String temp = "(ID: " + id.name + ", Usage: " + usage;
+		
+		if(!(type == null))
+			temp += ", Type: " + type;
+		
+		if(usage == IdType.METHOD){
+			temp += ", Params: " + parms;
+		}
+		
+		return temp + ")";
+	}
 }

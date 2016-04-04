@@ -30,7 +30,14 @@ public class SymbolTable {
 		return null;
 	}
 	
-	
-	
+	public String toString(){	
+		String temp = "";
+		
+		for (String s : symTab.keySet()) {
+			temp += "Binding: " + symTab.get(s) + "\n";
+		}
+		temp += "End table\n";
+		return temp;
+	}
 
 }

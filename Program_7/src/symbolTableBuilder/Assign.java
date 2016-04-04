@@ -8,6 +8,4 @@ public abstract class Assign extends Statement
 	{
 		this.id = id2;
 	}
-
-	
 }
