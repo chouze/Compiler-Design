@@ -40,7 +40,7 @@ public class Binding {
 		parms.add(el.e.getClass().toString());
 		if(!el.multipleExp.isEmpty()){
 			for(Object e: el.multipleExp){
-				parms.add(e.getName());
+				parms.add(e.getClass().toString());
 			}
 		}	
 	}
