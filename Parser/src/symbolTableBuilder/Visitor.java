@@ -76,6 +76,7 @@ public interface Visitor {
 	void visit(FormalRestList formalRestList);
 	void visit(ElseIfList elseIfList);
 	void visit(ExpRestList expRestList);
+	void visit(ClassDeclSpec classDeclSpec);
 	
 	/*
 	String visit(Exp n);
