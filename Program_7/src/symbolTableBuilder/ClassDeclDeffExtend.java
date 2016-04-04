@@ -6,6 +6,7 @@ public class ClassDeclDeffExtend extends ClassDecl
 	Identifier extendedClass;
 	VarDecl variableList;
 	MethodDecl methodList;
+	SymbolTable symTab;
 	
 	public ClassDeclDeffExtend(Identifier className, Identifier extendedClass, VarDecl variableList,
 			MethodDecl methodList) 

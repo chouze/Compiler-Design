@@ -13,10 +13,10 @@ package symbolTableBuilder;
 public interface Visitor {
 	void visit(Program n);
 	void visit(MainClass n);
-	void visit(ClassDeclSpec n);
+	//void visit(ClassDeclSpec n);
 	void visit(ClassDeclDeffSimple n);
 	void visit(ClassDeclDeffExtend n);
-	void visit(ClassDeclList n);
+	void visit(ClassDeclList n); //ask what this is
 	void visit(VarDecl n);
 	void visit(VarDeclType n);
 	void visit(VarDeclTypeAssign n);
@@ -58,7 +58,7 @@ public interface Visitor {
 	void visit(ArrayLookUp n);
 	void visit(ArrayLength n);
 	void visit(Call n);
-	void visit(IntergerLiteral n);
+	void visit(IntegerLiteral n);
 	void visit(True n);
 	void visit(False n);
 	void visit(IdentifierExp n);
@@ -67,6 +67,12 @@ public interface Visitor {
 	void visit(NewObject n);
 	void visit(Not n);
 	void visit(Identifier n);
+	void visit(Exp n);
+	void visit(Type n);
+	void visit(StatementList n);
+	void visit(InitializationStm n);
+	void visit(IncrementStm n);
+	void visit(CaseList n);
 	
 	/*
 	String visit(Exp n);
