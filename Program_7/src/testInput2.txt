@@ -1,0 +1,35 @@
+class Test
+{
+	public static void main ( String [] args )
+	{
+		//This is a comment
+		int i = new AddNum().addNumber(10, 9, 8, 7);
+	}
+}
+
+class AddNum
+{
+	public int addNumber( int a, int b, int c, int d)
+	{
+		int total, firstInt, secondInt;
+		{
+
+			total = 0;
+			firstInt = a;
+			secondInt = b;
+
+			x = a && b < c + d * !AddNum.subNumber(a, b);
+		}
+		return total;
+	}
+	
+	public int subNumber(int a, int b)
+	{
+		int total;
+		{
+			total = a - b;
+		
+			return total;
+		}
+	}
+}
