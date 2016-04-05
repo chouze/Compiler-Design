@@ -23,8 +23,6 @@ public class Driver {
 		
 		Program prog = parser.Parse();
 		bst.visit(prog);
-		
-		System.out.println(bst.symTabProg);
 	}
 
 }
