@@ -1,15 +1,16 @@
 package symbolTableBuilder;
 
+/**
+ * @author David Carlin
+ * @author Clifford Black
+ * @author Christopher Houze
+ * Version 3/31/2016
+ *
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 
-/* 
- * Store Identifiers with their bindings.
- * Quick lookup.
- * 
- * @author ()
- * @version (Mar 2016)
- */
 
 public class SymbolTable {
 	Map<String, Binding> symTab;

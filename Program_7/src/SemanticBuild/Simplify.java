@@ -87,7 +87,13 @@ public class Simplify implements Visitor{
 			}
 		}
 		
-		return new Quotient((Exp)n.left.accept(this), (Exp)n.right.accept(this));
+		Equals eq = new Equals();
+		Exp result =  new Quotient((Exp)n.left.accept(this), (Exp)n.right.accept(this));
+		
+		if( (Boolean)eq.visit(result.left,result.right) )
+			return new Constant(1);
+		
+		return result;
 	}
 
 	public Object visit(Variable n) 
