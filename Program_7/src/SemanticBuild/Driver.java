@@ -93,7 +93,14 @@ public class Driver {
 		System.out.print(" Evaluates to ");
 		System.out.println(intrp.visit(e4));
 		
-
+		
+		e1 = new Sum(new Variable("a"), new Variable("b"));
+		e2 = new Sum(new Variable("b"), new Variable("a"));
+		
+		e3 = new Quotient(e1, e2);
+		System.out.print(toStr.visit(e3));
+		System.out.print(" Evaluates to ");
+		System.out.println(toStr.visit((Exp)simp.visit(e3)));
 	}
 
 }

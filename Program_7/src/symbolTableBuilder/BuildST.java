@@ -5,10 +5,9 @@ package symbolTableBuilder;
  * Provides no functionality other than creating a tree for now.
  * Semantic phase, part 1
  * 
- * @author ()
+ * @author Clifford Black, David Carlin, Christopher Houze
  * @version (Mar 2016)
- */
-/*
+ * 
  * Need to go through each method and determine if a symbol table is needed or not, and if so, what is it's scope.
  * Notes:
  * if it's an identifier, always add it to the program table along with it's IdType.
@@ -16,6 +15,7 @@ package symbolTableBuilder;
  * Type checking is commented out atm since all we need is symbol tables but it's a good idea to know where to type check
  * Need to check types, expressions, and statements.
  * I think for the base cases, like integers, identifiers, etc, we don't need to process anything yet
+ * 
  * 
  */
 

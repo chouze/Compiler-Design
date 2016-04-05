@@ -98,7 +98,12 @@ public class Simplify implements Visitor{
 
 	public Object visit(Variable n) 
 	{
-		return n.value.accept(this);
+		if(n.value != null){
+			return n.value.accept(this);
+		}
+		else{
+			return n;
+		}
 	}
 
 	public Object visit(Exp n) 

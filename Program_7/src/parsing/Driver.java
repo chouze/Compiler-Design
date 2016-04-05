@@ -1,9 +1,9 @@
+package parsing;
 /**
  * @author Christopher Houze, David Carlin, Clifford Black
  */
 import java.io.FileNotFoundException;
 
-import parsing.Parser;
 import symbolTableBuilder.*;
 
 

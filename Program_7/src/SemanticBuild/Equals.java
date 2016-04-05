@@ -47,8 +47,13 @@ public class Equals implements Visitor {
 		if (e1 instanceof Quotient)
 			return (Boolean) visit(e1.left, e2.left) && (Boolean) visit(e1.right, e2.right);
 		
-		if (e1 instanceof Variable)
-			return (Boolean) visit(((Variable)e1).value, ((Variable)e2).value);
+		if (e1 instanceof Variable){
+			if(((Variable)e1).value != null && ((Variable)e2).value != null)
+				return (Boolean) visit(((Variable)e1).value, ((Variable)e2).value);
+			else
+				return ((Variable)e1).variableName.equals(((Variable)e2).variableName);
+		}
+			
 		
 		return ((Constant)e1).value.equals(((Constant)e2).value);
 	}
@@ -75,7 +80,12 @@ public class Equals implements Visitor {
 
 	public Object visit(Variable n) 
 	{
-		return visit(n.left, n.right);
+		if(n.right != null){
+			return visit(n.left, n.right);
+		}
+		else{
+			return visit(n.left);
+		}
 	}
 
 	public Object visit(Exp n) 
