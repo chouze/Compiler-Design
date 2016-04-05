@@ -25,8 +25,6 @@ public class Driver {
 		bst.visit(prog);
 		
 		System.out.println(bst.symTabProg);
-		//System.out.println(bst.symTabMethod);
-		//System.out.println(bst.symTabClass);
 	}
 
 }
