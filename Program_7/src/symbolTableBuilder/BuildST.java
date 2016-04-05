@@ -198,15 +198,6 @@ public class BuildST implements Visitor {
 	}
 
 	@Override
-	public void visit(AssignMultiple n) {
-		n.type.accept(this);	
-		symTabProg.put(n.varName, new Binding(n.varName, IdType.VARIABLE));
-		n.varName.accept(this);
-		n.assignExp.accept(this);
-		n.moreDeclare.accept(this);
-	}
-
-	@Override
 	public void visit(InitializeSimple n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
@@ -242,12 +233,6 @@ public class BuildST implements Visitor {
 		n.s.accept(this);
 	}
 
-	/*
-	 * @Override public void visit(FormalVarExp n) { // TODO Auto-generated
-	 * method stub
-	 * 
-	 * }
-	 */
 	@Override
 	public void visit(CaseListCase n) {
 		n.caseExp.accept(this);
@@ -272,56 +257,99 @@ public class BuildST implements Visitor {
 	}
 
 	@Override
-	public void visit(And n) {
-		n.e1.accept(this);
-		n.e2.accept(this);
-	}
-
-	@Override
-	public void visit(LessThan n) {
-		n.e1.accept(this);
-		n.e2.accept(this);
-	}
-
-	@Override
-	public void visit(Plus n) {
-		n.e1.accept(this);
-		n.e2.accept(this);
-	}
-
-	@Override
-	public void visit(Minus n) {
-		n.e1.accept(this);
-		n.e2.accept(this);
-	}
-
-	@Override
-	public void visit(Times n) {
-		n.e1.accept(this);
-		n.e2.accept(this);
-	}
-
-	@Override
-	public void visit(ArrayLookUp n) {
-		n.e1.accept(this);
-		n.e2.accept(this);
-	}
-
-	@Override
-	public void visit(ArrayLength n) {
-		n.e1.accept(this);
-	}
-
-	@Override
-	public void visit(Call n) {
-		n.e.accept(this);
-		Binding bind = new Binding(n.id, IdType.METHOD);
-		bind.addParams(n.el);
-		symTabProg.put(n.id, bind);
-		n.id.accept(this);
-		n.el.accept(this);
+	public void visit(Alist n) {
+		n.alist.accept(this);
+		n.less.accept(this);
 		
 	}
+
+	@Override
+	public void visit(ClassDecl n) {
+		
+		
+	}
+
+	@Override
+	public void visit(VarDeclList n) {
+		for(VarDecl v: n)
+		{
+			v.type.accept(this);
+			v.variableType.accept(this);
+		}
+	}
+
+	@Override
+	public void visit(MethodDeclList n) {
+		for(MethodDecl m: n)
+		{
+			visit(m);
+		}
+	}
+
+	@Override
+	public void visit(IntArrayType n) {
+		//does nothing
+	}
+
+	@Override
+	public void visit(BooleanType n) {
+		//does nothing
+		
+	}
+
+	@Override
+	public void visit(IntegerType n) {
+		//does nothing
+		
+	}
+
+	@Override
+	public void visit(IdentifierType n) {
+		//does nothing
+	}
+
+	@Override
+	public void visit(Statement n) {
+		//does nothing
+		
+	}
+
+	@Override
+	public void visit(And n) {
+		n.less.accept(this);
+		n.alist.accept(this);
+	}
+
+	@Override
+	public void visit(IntegerLiteral n) {
+		//does nothing
+		
+	}
+
+	@Override
+	public void visit(True n) {
+		//does nothing
+		
+	}
+
+	@Override
+	public void visit(False n) {
+		//does nothing
+		
+	}
+
+	@Override
+	public void visit(IdentifierExp n) {
+		//does nothing
+		
+	}
+
+	@Override
+	public void visit(This n) {
+		//does nothing
+		
+	}
+
 	@Override
 	public void visit(NewArray n) {
 		n.e.accept(this);
@@ -335,110 +363,182 @@ public class BuildST implements Visitor {
 
 	@Override
 	public void visit(Not n) {
-		n.e.accept(this);
-	}
-	
-	/////Abstract and base classes (like constant). Provide nothing for the symbol tree as far as I can tell. Moved it all down here. 
-	@Override
-	public void visit(IntegerLiteral n) {
-		//not sure what to do here, can't "accept" an integer
+		//does nothing
 	}
 
-	@Override
-	public void visit(True n) {
-		// not sure what to do here
-	}
-
-	@Override
-	public void visit(False n) {
-		// not sure what to do here
-	}
-
-	@Override
-	public void visit(IdentifierExp n) {
-		// not sure what to do here
-	}
-
-	@Override
-	public void visit(This n) {
-		// not sure what to do here
-	}
 	@Override
 	public void visit(Identifier n) {
-		//not sure what to do here
-	}
-
-	@Override
-	public void visit(VarDeclList n) {
-		//for VarDecl*, not sure what to do
-	}
-
-	@Override
-	public void visit(MethodDeclList n) {
-		//for MethodDecl*, not sure what to do here
+		//does nothing
 	}
 
 	@Override
 	public void visit(Exp n) {
-		// TODO Auto-generated method stub
+		//does nothing
+		
 	}
 
 	@Override
 	public void visit(Type n) {
-		// TODO Auto-generated method stub
+		//does nothing
 	}
 
 	@Override
 	public void visit(StatementList n) {
-		// TODO Auto-generated method stub
+		for(Statement s: n){
+			visit(s);
+		}
+		
 	}
 
 	@Override
 	public void visit(InitializationStm n) {
-		// TODO Auto-generated method stub
+		//does nothing
+		
 	}
 
 	@Override
 	public void visit(IncrementStm n) {
-		// TODO Auto-generated method stub
+		// does nothing
+		
 	}
 
 	@Override
 	public void visit(CaseList n) {
+		// does nothing
+		
+	}
+
+	@Override
+	public void visit(FormalRestList formalRestList) {
+		
+		
+	}
+
+	@Override
+	public void visit(ElseIfList elseIfList) {
 		// TODO Auto-generated method stub
-	}
-	
-	public void visit(ClassDecl n) {
-		// Abstract class, no need to visit
+		
 	}
 
 	@Override
-	public void visit(IntArrayType n) {
-		//nothing's in the class, not sure what to do
+	public void visit(ExpRestList expRestList) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void visit(BooleanType n) {
-		//nothing's in the class, not sure what to do
+	public void visit(DotArrayList dotArrayList) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void visit(IntegerType n) {
-		//nothing's in the class, not sure what to do
+	public void visit(DotArray n) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void visit(IdentifierType n) {
-		//not sure what to do with a string since you can't exactly "accept" it
+	public void visit(DotArrayArray n) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void visit(Statement n) {
-		//abstract class
+	public void visit(DotArrayMember n) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	
-	
-	// continue in this manner for the following classes:
-	// ClassDeclExtends, VarDecl, MethodDecl, Formal
+	@Override
+	public void visit(Elist n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Factor n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(FactorNew n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Less n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Llist n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(LlistDifference n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(LlistSum n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Member n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(MemberId n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(MemberLength n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(New n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(NotFactor n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(NotSimple n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Term n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Tlist n) {
+		// TODO Auto-generated method stub
+		
+	}
 }
+	
+	

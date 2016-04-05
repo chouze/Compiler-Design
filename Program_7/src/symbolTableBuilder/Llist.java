@@ -1,6 +1,6 @@
 package symbolTableBuilder;
 
-public abstract class Not
+public class Llist 
 {
-	
+
 }

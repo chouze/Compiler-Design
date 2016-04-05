@@ -2,7 +2,7 @@ package symbolTableBuilder;
 
 public class Identifier {
 	String name;
-	Identifier (String n)
+	public Identifier (String n)
 	{
 		name = n;
 	}

@@ -1,13 +1,10 @@
 package symbolTableBuilder;
 
-public class NewArray extends New 
-{
-	Exp e;
+import java.util.LinkedList;
 
-	public NewArray(Exp e) 
-	{
-		this.e = e;
-	}
+public class DotArrayList extends LinkedList<DotArray> 
+{
+
 	
 	public void accept(Visitor v) 
 	{

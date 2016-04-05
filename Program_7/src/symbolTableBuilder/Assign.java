@@ -2,10 +2,9 @@ package symbolTableBuilder;
 
 public abstract class Assign extends Statement 
 {
-	Identifier id;
 	
-	public Assign(Identifier id2) 
+	public Assign() 
 	{
-		this.id = id2;
+
 	}
 }

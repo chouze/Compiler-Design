@@ -1,6 +1,6 @@
 package symbolTableBuilder;
 
-public class StatementList extends java.util.LinkedList {
+public class StatementList extends java.util.LinkedList<Statement> {
 	
 	public void accept(Visitor v) 
 	{

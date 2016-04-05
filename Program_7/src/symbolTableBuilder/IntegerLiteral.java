@@ -1,6 +1,6 @@
 package symbolTableBuilder;
 
-public class IntegerLiteral extends Exp 
+public class IntegerLiteral extends Factor 
 {
 	int i;
 

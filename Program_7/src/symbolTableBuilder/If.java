@@ -4,9 +4,9 @@ public class If extends Statement
 {
 	Exp condition;
 	Statement s;
-	ElseIf elseIf;
+	ElseIfList elseIf;
 	
-	public If (Exp condition, Statement s, ElseIf elseIf){
+	public If (Exp condition, Statement s, ElseIfList elseIf){
 		this.condition = condition;
 		this.s = s;
 		this.elseIf = elseIf;

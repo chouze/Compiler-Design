@@ -1,6 +1,6 @@
 package symbolTableBuilder;
 
-public class VarDecl extends java.util.LinkedList
+public class VarDecl
 {
 	Type type;
 	VarDeclType variableType;
@@ -9,6 +9,10 @@ public class VarDecl extends java.util.LinkedList
 	{
 		this.type = type;
 		this.variableType = variableType;
+	}
+	
+	public VarDecl(){
+		//for 0 occurrences
 	}
 	
 	public void accept(Visitor v) 

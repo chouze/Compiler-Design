@@ -1,6 +1,6 @@
 package symbolTableBuilder;
 
-public class NewObject extends Exp 
+public class NewObject extends New 
 {
 	Identifier id;
 

@@ -1,6 +1,5 @@
 package symbolTableBuilder;
 
-public abstract class Not
-{
-	
+public abstract class New {
+
 }

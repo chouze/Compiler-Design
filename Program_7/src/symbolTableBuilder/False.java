@@ -1,6 +1,6 @@
 package symbolTableBuilder;
 
-public class False extends Exp
+public class False extends Factor
 {
 	public void accept(Visitor v) 
 	{

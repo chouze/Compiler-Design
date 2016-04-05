@@ -1,6 +1,6 @@
 package symbolTableBuilder;
 
-public class IdentifierExp extends Exp 
+public class IdentifierExp extends Factor 
 {
 	String s;
 
