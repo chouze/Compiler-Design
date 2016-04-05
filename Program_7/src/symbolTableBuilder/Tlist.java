@@ -16,5 +16,9 @@ public class Tlist
 		
 	}
 	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 	
 }

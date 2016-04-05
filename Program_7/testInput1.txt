@@ -17,7 +17,7 @@ class AddNum
 		int total;
 		int firstInt;
 		int secondInt;
-		int i;
+		int d;
 		{
 
 			total = 0;

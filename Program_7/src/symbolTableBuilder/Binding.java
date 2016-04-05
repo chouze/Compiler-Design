@@ -37,10 +37,10 @@ public class Binding {
 	}
 	
 	public void addParams(ExpList el){
-		parms.add(el.e.getClass().toString());
+		parms.add(el.e.getClass().getSimpleName());
 		if(!el.multipleExp.isEmpty()){
 			for(Object e: el.multipleExp){
-				parms.add(e.getClass().toString());
+				parms.add(e.getClass().getSimpleName());
 			}
 		}	
 	}
@@ -57,5 +57,17 @@ public class Binding {
 		}
 		
 		return temp + ")";
+	}
+
+	public void addParams(FormalList parameters) 
+	{
+		parms.add(parameters.type.getClass().getSimpleName());
+		if(!parameters.moreParams.isEmpty())
+		{
+			for(Object e: parameters.moreParams){
+				parms.add(e.getClass().getSimpleName());
+			}
+		}	
+		
 	}
 }

@@ -15,5 +15,10 @@ public class Elist
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
+	
 	
 }

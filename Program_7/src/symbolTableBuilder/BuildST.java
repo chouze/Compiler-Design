@@ -20,7 +20,7 @@ package symbolTableBuilder;
  */
 
 public class BuildST implements Visitor {
-	SymbolTable symTab, symTabMethod, symTabClass, symTabProg;
+	public SymbolTable symTab, symTabMethod, symTabClass, symTabProg;
 	// I think it works like this:
 	// symTab is the table in focus
 	// symTabMethod is the table created when a method is created
@@ -46,6 +46,7 @@ public class BuildST implements Visitor {
 		symTabProg.put(n.args, new Binding(n.args, IdType.VARIABLE));
 		n.args.accept(this);
 		n.symTab = new SymbolTable(); // each mainclass has it's own symboltable since it is static
+		n.v.accept(this);
 		n.stmt.accept(this); // ??
 	}
 
@@ -60,12 +61,12 @@ public class BuildST implements Visitor {
 	}
 
 	/*
-	 * @Override public void visit(ClassDeclSpec n) {
+	 *  public void visit(ClassDeclSpec n) {
 	 * symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
 	 * n.className.accept(this); }
 	 */
 
-	@Override
+	
 	public void visit(ClassDeclDeffExtend n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
 		n.className.accept(this);
@@ -79,12 +80,25 @@ public class BuildST implements Visitor {
 
 	}
 
-	@Override
+	
 	public void visit(ClassDeclList n) {
-		// not sure what to do here, it's essentially for ClassDecl*, do I accept ClassDecl multiple times? or call visit(ClassDecl) multiple times?	
+		for(ClassDecl c: n)
+		{
+			if(c instanceof ClassDeclDeffSimple)
+			{
+				visit((ClassDeclDeffSimple)c);
+			}
+			
+			if(c instanceof ClassDeclDeffExtend)
+			{
+				visit((ClassDeclDeffExtend)c);
+			}
+			
+			visit(c);
+		}
 	}
 
-	@Override
+	
 	public void visit(VarDecl n) {
 		Type t = n.type;
 		t.accept(this);
@@ -92,34 +106,36 @@ public class BuildST implements Visitor {
 		
 	}
 
-	@Override
+	
 	public void visit(VarDeclType n) {
 		symTabProg.put(n.variableName, new Binding(n.variableName, IdType.VARIABLE));
 		n.variableName.accept(this);
-		n.variableAssign.accept(this);
+		
+		if(!(n.variableAssign.exp == null))
+			n.variableAssign.accept(this);
 	}
 
-	@Override
+	
 	public void visit(VarDeclTypeAssign n) {
 		Exp e = n.exp;
 		e.accept(this);	
 	}
 
-	@Override
+	
 	public void visit(MethodDecl n) {
-		Type t = n.type;
-		t.accept(this);
-		symTabProg.put(n.methodName, new Binding(n.methodName, IdType.METHOD));
+		Binding bind = new Binding(n.methodName, IdType.METHOD);
+		bind.addParams(n.parameters);
+		n.type.accept(this);
+		symTabProg.put(n.methodName, bind);
 		n.methodName.accept(this);
 		n.parameters.accept(this);
 		n.variables.accept(this);
 		n.statements.accept(this);
 		Exp e = n.expReturn;
-		//if(!(e instanceof "same class as t" )){error} throw error if the return type isnt the same as the type declared in the header
 		e.accept(this);
 	}
 
-	@Override
+	
 	public void visit(FormalList n) {
 		Type t = n.type;
 		t.accept(this);	
@@ -128,7 +144,7 @@ public class BuildST implements Visitor {
 		n.moreParams.accept(this);	
 	}
 
-	@Override
+	
 	public void visit(FormalRest n) {
 		Type t = n.type;
 		t.accept(this);
@@ -136,75 +152,69 @@ public class BuildST implements Visitor {
 		n.paramName.accept(this);
 	}
 	
-	@Override
+	
 	public void visit(Block n) {
 		n.sl.accept(this);
 	}
 
-	@Override
+	
 	public void visit(If n) {
-		//if(!(n.condition instanceof booleanExp)){error} may need booleanExp type
 		n.condition.accept(this);
 		n.s.accept(this);
 		n.elseIf.accept(this);
 	}
 
-	@Override
+	
 	public void visit(Do n) {
 		n.s.accept(this);
-		//if(!(n.condition instanceof booleanExp)){error} may need booleanExp type
 		n.condition.accept(this);
 	}
 
-	@Override
+	
 	public void visit(While n) {
-		//if(!(n.condition instanceof booleanExp)){error} may need booleanExp type
 		n.condition.accept(this);
 		n.s.accept(this);
 	}
 
-	@Override
+	
 	public void visit(For n) {
-		n.initialize.accept(this);
-		//need to check expression type 
+		n.initialize.accept(this); 
 		n.e.accept(this);
 		n.increment.accept(this);
 		n.s.accept(this);
 	}
 
-	@Override
+	
 	public void visit(Switch n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.caseDefault.accept(this);
 	}
 
-	@Override
+	
 	public void visit(Print n) {
-		//not sure if have to type check expression here
 		n.statementToPrint.accept(this);
 	}
 
-	@Override
+	
 	public void visit(AssignSimple n) {
 		n.assignment.accept(this);
 	}
 
-	@Override
+	
 	public void visit(AssignArray n) {
 		n.arrayExp.accept(this);
-		//type check assignExp for integer
 		n.assignExp.accept(this);	
 	}
 
-	@Override
+	
 	public void visit(InitializeSimple n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.assignExp.accept(this);
 	}
 
-	@Override
+	
 	public void visit(InitializeArray n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
@@ -212,14 +222,14 @@ public class BuildST implements Visitor {
 		n.assignExp.accept(this);
 	}
 
-	@Override
+	
 	public void visit(IncrementSimple n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.assignExp.accept(this);
 	}
 
-	@Override
+	
 	public void visit(IncrementArray n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
@@ -227,58 +237,56 @@ public class BuildST implements Visitor {
 		n.assignExp.accept(this);
 	}
 
-	@Override
+	
 	public void visit(ElseIf n) {
 		n.condition.accept(this);
 		n.s.accept(this);
 	}
 
-	@Override
+	
 	public void visit(CaseListCase n) {
 		n.caseExp.accept(this);
 		n.s.accept(this);
 		n.caseList.accept(this);
 	}
 
-	@Override
+	
 	public void visit(CaseListDefault n) {
 		n.s.accept(this);
 	}
 
-	@Override
+	
 	public void visit(ExpList n) {
 		n.e.accept(this);
 		n.multipleExp.accept(this);
 	}
 
-	@Override
+	
 	public void visit(ExpRest n) {
 		n.e.accept(this);
 	}
 
-	@Override
+	
 	public void visit(Alist n) {
 		n.alist.accept(this);
 		n.less.accept(this);
 		
 	}
 
-	@Override
+	
 	public void visit(ClassDecl n) {
-		
-		
+		//does nothing
 	}
 
-	@Override
+	
 	public void visit(VarDeclList n) {
 		for(VarDecl v: n)
 		{
-			v.type.accept(this);
-			v.variableType.accept(this);
+			visit(v);
 		}
 	}
 
-	@Override
+	
 	public void visit(MethodDeclList n) {
 		for(MethodDecl m: n)
 		{
@@ -286,103 +294,104 @@ public class BuildST implements Visitor {
 		}
 	}
 
-	@Override
+	
 	public void visit(IntArrayType n) {
 		//does nothing
 	}
 
-	@Override
+	
 	public void visit(BooleanType n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(IntegerType n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(IdentifierType n) {
 		//does nothing
 	}
 
-	@Override
+	
 	public void visit(Statement n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(And n) {
 		n.less.accept(this);
 		n.alist.accept(this);
 	}
 
-	@Override
+	
 	public void visit(IntegerLiteral n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(True n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(False n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(IdentifierExp n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(This n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(NewArray n) {
 		n.e.accept(this);
 	}
 
-	@Override
+	
 	public void visit(NewObject n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.CLASS));
 		n.id.accept(this);
+		
 	}
 
-	@Override
+	
 	public void visit(Not n) {
 		//does nothing
 	}
 
-	@Override
+	
 	public void visit(Identifier n) {
 		//does nothing
 	}
 
-	@Override
+	
 	public void visit(Exp n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(Type n) {
 		//does nothing
 	}
 
-	@Override
+	
 	public void visit(StatementList n) {
 		for(Statement s: n){
 			visit(s);
@@ -390,153 +399,164 @@ public class BuildST implements Visitor {
 		
 	}
 
-	@Override
+	
 	public void visit(InitializationStm n) {
 		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(IncrementStm n) {
 		// does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(CaseList n) {
 		// does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(FormalRestList formalRestList) {
-		
+		for(FormalRest f: formalRestList){
+			visit(f);
+		}
 		
 	}
 
-	@Override
+	
 	public void visit(ElseIfList elseIfList) {
-		// TODO Auto-generated method stub
-		
+		for(ElseIf e: elseIfList){
+			visit(e);
+		}
 	}
 
-	@Override
+	
 	public void visit(ExpRestList expRestList) {
-		// TODO Auto-generated method stub
-		
+		for(ExpRest e: expRestList){
+			visit(e);
+		}
 	}
 
-	@Override
+	
 	public void visit(DotArrayList dotArrayList) {
-		// TODO Auto-generated method stub
+		for(DotArray e: dotArrayList){
+			visit(e);
+		}
 		
 	}
 
-	@Override
+	
 	public void visit(DotArray n) {
-		// TODO Auto-generated method stub
+		// does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(DotArrayArray n) {
-		// TODO Auto-generated method stub
+		n.exp.accept(this);
 		
 	}
 
-	@Override
+	
 	public void visit(DotArrayMember n) {
-		// TODO Auto-generated method stub
-		
+		n.member.accept(this);
 	}
 
-	@Override
+	
 	public void visit(Elist n) {
-		// TODO Auto-generated method stub
-		
+		n.and.accept(this);
+		n.elist.accept(this);
 	}
 
-	@Override
+	
 	public void visit(Factor n) {
-		// TODO Auto-generated method stub
-		
+		//does nothing
 	}
 
-	@Override
+	
 	public void visit(FactorNew n) {
-		// TODO Auto-generated method stub
+		n.newObject.accept(this);
 		
 	}
 
-	@Override
+	
 	public void visit(Less n) {
-		// TODO Auto-generated method stub
+		n.llist.accept(this);
+		n.term.accept(this);
 		
 	}
 
-	@Override
+	
 	public void visit(Llist n) {
-		// TODO Auto-generated method stub
+		//does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(LlistDifference n) {
-		// TODO Auto-generated method stub
-		
+		n.llist.accept(this);
+		n.term.accept(this);
 	}
 
-	@Override
+	
 	public void visit(LlistSum n) {
-		// TODO Auto-generated method stub
+		n.llist.accept(this);
+		n.term.accept(this);
 		
 	}
 
-	@Override
+	
 	public void visit(Member n) {
-		// TODO Auto-generated method stub
+		// does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(MemberId n) {
-		// TODO Auto-generated method stub
-		
+		Binding bind =new Binding(n.id, IdType.METHOD);
+		bind.addParams(n.expList);
+		symTabProg.put(n.id, bind);
+		n.id.accept(this);
+		n.expList.accept(this);
 	}
 
-	@Override
+	
 	public void visit(MemberLength n) {
-		// TODO Auto-generated method stub
+		// does nothing
 		
 	}
 
-	@Override
+	
 	public void visit(New n) {
-		// TODO Auto-generated method stub
-		
+		// does nothing
 	}
 
-	@Override
+	
 	public void visit(NotFactor n) {
-		// TODO Auto-generated method stub
+		n.factor.accept(this);
+		n.dotList.accept(this);
 		
 	}
 
-	@Override
+	
 	public void visit(NotSimple n) {
-		// TODO Auto-generated method stub
+		n.not.accept(this);
 		
 	}
 
-	@Override
+	
 	public void visit(Term n) {
-		// TODO Auto-generated method stub
+		n.not.accept(this);
+		n.tlist.accept(this);
 		
 	}
 
-	@Override
+	
 	public void visit(Tlist n) {
-		// TODO Auto-generated method stub
+		n.not.accept(this);
+		n.tlist.accept(this);
 		
 	}
 }

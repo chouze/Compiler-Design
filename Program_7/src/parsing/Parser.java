@@ -34,10 +34,11 @@ public class Parser{
 
 	/**
 	 * Constructor 
+	 * @throws FileNotFoundException 
 	 */
-	public Parser()
+	public Parser(String file) throws FileNotFoundException
 	{
-		lexer = new Lexer(new PushbackReader(new InputStreamReader(System.in), 1024));
+		lexer = new Lexer(new PushbackReader(new FileReader(file), 1024));
 		token = null;
 		try{
 			do{

@@ -17,6 +17,7 @@ public class ClassDeclDeffExtend extends ClassDecl
 		this.methodList = methodList;
 	}
 	
+	@Override
 	public void accept(Visitor v) 
 	{
 		v.visit(this);

@@ -11,4 +11,9 @@ public class Term
 		this.tlist = tlist;
 	}
 	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
+	
 }

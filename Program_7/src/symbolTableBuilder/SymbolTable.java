@@ -26,7 +26,7 @@ public class SymbolTable {
 			symTab.put(i.getName(), b);
 			return this;
 		}
-		System.err.println("Identifier " + i + " already defined in this context.");
+		System.err.println("Identifier '" + i.name + "' already defined in this context.");
 		return null;
 	}
 	

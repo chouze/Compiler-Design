@@ -10,4 +10,9 @@ public class And
 		this.less = less;
 		this.alist = alist;
 	}
+	
+	public void accept(Visitor v) 
+	{
+		v.visit(this);
+	}
 }
