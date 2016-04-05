@@ -19,8 +19,8 @@ public class VarDeclType
 		this.variableAssign = variableAssign;
 	}
 	
-	public void accept(Visitor v) 
+	public void accept(Visitor v, Type t) 
 	{
-		v.visit(this);
+		v.visit(this, t);
 	}
 }

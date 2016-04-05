@@ -31,33 +31,39 @@ public class BuildST implements Visitor {
 
 	public BuildST() {
 //Temp
-		symTabProg = new SymbolTable();
+		//symTabProg = new SymbolTable();
 	}
 
 	public void visit(Program n) { // Program as defined in Bergmann's parser
 		symTab = symTabProg = new SymbolTable();
 		n.mainClass.accept(this);
 		n.classDecls.accept(this);
+		System.out.println("Program Table: \n" + symTabProg);
 	}
 
 	public void visit(MainClass n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
 		n.className.accept(this);
-		symTabProg.put(n.args, new Binding(n.args, IdType.VARIABLE));
+		symTabProg.put(n.args, new Binding(n.args, IdType.VARIABLE, "String []"));
 		n.args.accept(this);
-		n.symTab = new SymbolTable(); // each mainclass has it's own symboltable since it is static
+		symTab = symTabClass = n.symTab = new SymbolTable(); // each mainclass has it's own symboltable since it is static
 		n.v.accept(this);
 		n.stmt.accept(this); // ??
+		
+		
+		System.out.println("MainClass " + n.className.name +" Table: \n" + n.symTab);
 	}
 
 	// everytime we put a new symbol into the symboltable, we have to create a
 	// new binding for it
 	public void visit(ClassDeclDeffSimple n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
-		n.className.accept(this);
 		symTab = symTabClass = n.symTab = new SymbolTable(); 
+		n.className.accept(this);
 		n.fields.accept(this); // enter fields into the symbol table
 		n.methods.accept(this);
+		
+		System.out.println("Simple Class " + n.className.name +" Table: \n" + n.symTab);
 	}
 
 	/*
@@ -68,14 +74,16 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(ClassDeclDeffExtend n) {
+		symTab = symTabClass = n.symTab = new SymbolTable(); // class needs a symbol table
+		
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
 		n.className.accept(this);
 
 		symTabProg.put(n.extendedClass, new Binding(n.extendedClass, IdType.CLASS));
 		n.extendedClass.accept(this);
 
-		symTab = symTabClass = n.symTab = new SymbolTable(); // class needs a symbol table
-
+		
+		System.out.println("Extended Class " + n.className.name +" Table: \n" + n.symTab);
 		n.variableList.accept(this);
 
 	}
@@ -86,15 +94,17 @@ public class BuildST implements Visitor {
 		{
 			if(c instanceof ClassDeclDeffSimple)
 			{
-				visit((ClassDeclDeffSimple)c);
+				((ClassDeclDeffSimple)c).accept(this);
+				//visit((ClassDeclDeffSimple)c);
 			}
 			
 			if(c instanceof ClassDeclDeffExtend)
 			{
-				visit((ClassDeclDeffExtend)c);
+				((ClassDeclDeffExtend)c).accept(this);
+				//visit((ClassDeclDeffExtend)c);
 			}
 			
-			visit(c);
+			//visit(c);
 		}
 	}
 
@@ -102,14 +112,15 @@ public class BuildST implements Visitor {
 	public void visit(VarDecl n) {
 		Type t = n.type;
 		t.accept(this);
-		n.variableType.accept(this);
+		n.variableType.accept(this, t);
 		
 	}
 
 	
-	public void visit(VarDeclType n) {
-		symTabProg.put(n.variableName, new Binding(n.variableName, IdType.VARIABLE));
+	public void visit(VarDeclType n, Type t) {
+		symTabProg.put(n.variableName, new Binding(n.variableName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		n.variableName.accept(this);
+		symTab.put(n.variableName, new Binding(n.variableName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		
 		if(!(n.variableAssign.exp == null))
 			n.variableAssign.accept(this);
@@ -123,8 +134,11 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(MethodDecl n) {
-		Binding bind = new Binding(n.methodName, IdType.METHOD);
+		Binding bind = new Binding(n.methodName, IdType.METHOD, n.type.getClass().getSimpleName());
 		bind.addParams(n.parameters);
+		symTabClass.put(n.methodName, bind);
+		//symTab.put(n.methodName, bind);
+		symTab = symTabMethod = n.symTab = new SymbolTable(); 
 		n.type.accept(this);
 		symTabProg.put(n.methodName, bind);
 		n.methodName.accept(this);
@@ -133,13 +147,17 @@ public class BuildST implements Visitor {
 		n.statements.accept(this);
 		Exp e = n.expReturn;
 		e.accept(this);
+		
+		System.out.println("Method " + n.methodName.name +" Table: \n" + n.symTab);
+		
 	}
 
 	
 	public void visit(FormalList n) {
 		Type t = n.type;
 		t.accept(this);	
-		symTabProg.put(n.parameterName, new Binding(n.parameterName, IdType.VARIABLE));
+		symTabProg.put(n.parameterName, new Binding(n.parameterName, IdType.VARIABLE, t.getClass().getSimpleName()));
+		symTab.put(n.parameterName, new Binding(n.parameterName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		n.parameterName.accept(this);
 		n.moreParams.accept(this);	
 	}
@@ -148,7 +166,8 @@ public class BuildST implements Visitor {
 	public void visit(FormalRest n) {
 		Type t = n.type;
 		t.accept(this);
-		symTabProg.put(n.paramName, new Binding(n.paramName, IdType.VARIABLE));
+		symTabProg.put(n.paramName, new Binding(n.paramName, IdType.VARIABLE, t.getClass().getSimpleName()));
+		symTab.put(n.paramName, new Binding(n.paramName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		n.paramName.accept(this);
 	}
 	
@@ -187,6 +206,7 @@ public class BuildST implements Visitor {
 	
 	public void visit(Switch n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
+		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.caseDefault.accept(this);
 	}
@@ -210,6 +230,7 @@ public class BuildST implements Visitor {
 	
 	public void visit(InitializeSimple n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
+		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.assignExp.accept(this);
 	}
@@ -217,6 +238,7 @@ public class BuildST implements Visitor {
 	
 	public void visit(InitializeArray n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
+		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.arrayExp.accept(this);
 		n.assignExp.accept(this);
@@ -225,6 +247,7 @@ public class BuildST implements Visitor {
 	
 	public void visit(IncrementSimple n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
+		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.assignExp.accept(this);
 	}
@@ -232,6 +255,7 @@ public class BuildST implements Visitor {
 	
 	public void visit(IncrementArray n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
+		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.arrayExp.accept(this);
 		n.assignExp.accept(this);
@@ -282,7 +306,8 @@ public class BuildST implements Visitor {
 	public void visit(VarDeclList n) {
 		for(VarDecl v: n)
 		{
-			visit(v);
+			v.accept(this);
+			//visit(v);
 		}
 	}
 
@@ -290,7 +315,8 @@ public class BuildST implements Visitor {
 	public void visit(MethodDeclList n) {
 		for(MethodDecl m: n)
 		{
-			visit(m);
+			m.accept(this);
+			//visit(m);
 		}
 	}
 
@@ -366,6 +392,7 @@ public class BuildST implements Visitor {
 	
 	public void visit(NewObject n) {
 		symTabProg.put(n.id, new Binding(n.id, IdType.CLASS));
+		symTab.put(n.id, new Binding(n.id, IdType.CLASS));
 		n.id.accept(this);
 		
 	}
@@ -420,7 +447,8 @@ public class BuildST implements Visitor {
 	
 	public void visit(FormalRestList formalRestList) {
 		for(FormalRest f: formalRestList){
-			visit(f);
+			f.accept(this);
+			//visit(f);
 		}
 		
 	}
@@ -428,21 +456,29 @@ public class BuildST implements Visitor {
 	
 	public void visit(ElseIfList elseIfList) {
 		for(ElseIf e: elseIfList){
-			visit(e);
+			e.accept(this);
+			//visit(e);
 		}
 	}
 
 	
 	public void visit(ExpRestList expRestList) {
 		for(ExpRest e: expRestList){
-			visit(e);
+			e.accept(this);
+			//visit(e);
 		}
 	}
 
 	
 	public void visit(DotArrayList dotArrayList) {
 		for(DotArray e: dotArrayList){
-			visit(e);
+			if(e instanceof DotArrayArray){
+			((DotArrayArray)e).accept(this);
+			}
+			else if (e instanceof DotArrayMember){
+				((DotArrayMember)e).accept(this);
+			}
+			//visit(e);
 		}
 		
 	}
@@ -518,6 +554,7 @@ public class BuildST implements Visitor {
 		Binding bind =new Binding(n.id, IdType.METHOD);
 		bind.addParams(n.expList);
 		symTabProg.put(n.id, bind);
+		symTab.put(n.id, bind);
 		n.id.accept(this);
 		n.expList.accept(this);
 	}

@@ -73,7 +73,7 @@ public class Binding {
 		if(!parameters.moreParams.isEmpty())
 		{
 			for(Object e: parameters.moreParams){
-				parms.add(e.getClass().getSimpleName());
+				parms.add(((FormalRest)e).type.getClass().getSimpleName());
 			}
 		}	
 		

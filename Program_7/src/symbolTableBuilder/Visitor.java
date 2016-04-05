@@ -16,7 +16,7 @@ public interface Visitor
 	void visit(ClassDeclDeffExtend n);
 	void visit(ClassDeclList n);
 	void visit(VarDecl n);
-	void visit(VarDeclType n);
+	void visit(VarDeclType n, Type t);
 	void visit(VarDeclTypeAssign n);
 	void visit(VarDeclList n);
 	void visit(MethodDecl n);

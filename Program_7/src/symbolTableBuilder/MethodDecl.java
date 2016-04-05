@@ -16,6 +16,7 @@ public class MethodDecl
 	VarDeclList variables;
 	StatementList statements;
 	Exp expReturn;
+	SymbolTable symTab;
 	
 	public MethodDecl(Type type, Identifier methodName,
 			FormalList parameters, VarDeclList variables, StatementList statements,
