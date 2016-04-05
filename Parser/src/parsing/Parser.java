@@ -74,7 +74,7 @@ public class Parser{
 
 		try {
 			if (isToken(name)) {
-				System.out.println("Eat token: " + token.getClass().getName() + " " + token.toString());
+			//	System.out.println("Eat token: " + token.getClass().getName() + " " + token.toString());
 				if (nextToken != null){
 					lastToken = token;
 					token = nextToken;
