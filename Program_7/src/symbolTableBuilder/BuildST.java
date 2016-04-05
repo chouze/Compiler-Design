@@ -35,10 +35,10 @@ public class BuildST implements Visitor {
 	}
 
 	public void visit(Program n) { // Program as defined in Bergmann's parser
-		symTab = symTabProg = new SymbolTable();
+		symTab = symTabProg = n.symTab= new SymbolTable();
 		n.mainClass.accept(this);
 		n.classDecls.accept(this);
-		System.out.println("Program Table: \n" + symTabProg);
+		System.out.println("Program Table: \n" + n.symTab);
 	}
 
 	public void visit(MainClass n) {

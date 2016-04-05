@@ -12,6 +12,7 @@ public class Program
 {
 	MainClass mainClass;
 	ClassDeclList classDecls;
+	SymbolTable symTab;
 	
 	public Program(MainClass mainClass, ClassDeclList classDecls) {
 		super();
