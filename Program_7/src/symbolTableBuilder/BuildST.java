@@ -5,9 +5,10 @@ package symbolTableBuilder;
  * Provides no functionality other than creating a tree for now.
  * Semantic phase, part 1
  * 
- * @author Clifford Black, David Carlin, Christopher Houze
+ * @author ()
  * @version (Mar 2016)
- * 
+ */
+/*
  * Need to go through each method and determine if a symbol table is needed or not, and if so, what is it's scope.
  * Notes:
  * if it's an identifier, always add it to the program table along with it's IdType.
@@ -15,7 +16,6 @@ package symbolTableBuilder;
  * Type checking is commented out atm since all we need is symbol tables but it's a good idea to know where to type check
  * Need to check types, expressions, and statements.
  * I think for the base cases, like integers, identifiers, etc, we don't need to process anything yet
- * 
  * 
  */
 
@@ -44,7 +44,6 @@ public class BuildST implements Visitor {
 	public void visit(MainClass n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
 		n.className.accept(this);
-		symTabProg.put(n.args, new Binding(n.args, IdType.VARIABLE, "String []"));
 		n.args.accept(this);
 		symTab = symTabClass = n.symTab = new SymbolTable(); // each mainclass has it's own symboltable since it is static
 		n.v.accept(this);
@@ -118,7 +117,6 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(VarDeclType n, Type t) {
-		symTabProg.put(n.variableName, new Binding(n.variableName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		n.variableName.accept(this);
 		symTab.put(n.variableName, new Binding(n.variableName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		
@@ -140,7 +138,6 @@ public class BuildST implements Visitor {
 		//symTab.put(n.methodName, bind);
 		symTab = symTabMethod = n.symTab = new SymbolTable(); 
 		n.type.accept(this);
-		symTabProg.put(n.methodName, bind);
 		n.methodName.accept(this);
 		n.parameters.accept(this);
 		n.variables.accept(this);
@@ -156,7 +153,6 @@ public class BuildST implements Visitor {
 	public void visit(FormalList n) {
 		Type t = n.type;
 		t.accept(this);	
-		symTabProg.put(n.parameterName, new Binding(n.parameterName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		symTab.put(n.parameterName, new Binding(n.parameterName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		n.parameterName.accept(this);
 		n.moreParams.accept(this);	
@@ -166,7 +162,6 @@ public class BuildST implements Visitor {
 	public void visit(FormalRest n) {
 		Type t = n.type;
 		t.accept(this);
-		symTabProg.put(n.paramName, new Binding(n.paramName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		symTab.put(n.paramName, new Binding(n.paramName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		n.paramName.accept(this);
 	}
@@ -205,7 +200,6 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(Switch n) {
-		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.caseDefault.accept(this);
@@ -229,7 +223,6 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(InitializeSimple n) {
-		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.assignExp.accept(this);
@@ -237,7 +230,6 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(InitializeArray n) {
-		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.arrayExp.accept(this);
@@ -246,7 +238,6 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(IncrementSimple n) {
-		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.assignExp.accept(this);
@@ -254,7 +245,6 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(IncrementArray n) {
-		symTabProg.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.arrayExp.accept(this);
@@ -391,7 +381,6 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(NewObject n) {
-		symTabProg.put(n.id, new Binding(n.id, IdType.CLASS));
 		symTab.put(n.id, new Binding(n.id, IdType.CLASS));
 		n.id.accept(this);
 		
@@ -553,7 +542,6 @@ public class BuildST implements Visitor {
 	public void visit(MemberId n) {
 		Binding bind =new Binding(n.id, IdType.METHOD);
 		bind.addParams(n.expList);
-		symTabProg.put(n.id, bind);
 		symTab.put(n.id, bind);
 		n.id.accept(this);
 		n.expList.accept(this);
