@@ -10,13 +10,15 @@ package symbolTableBuilder;
 
 public class AssignArray extends Assign 
 {
-	Exp arrayExp;
-	Exp assignExp;
+	Identifier id;
+	Exp index;
+	Exp value;
 	
-	public AssignArray(Exp arrayExp, Exp assignExp) 
+	public AssignArray(Identifier id, Exp arrayExp, Exp assignExp) 
 	{
-		this.arrayExp = arrayExp;
-		this.assignExp = assignExp;
+		this.id = id;
+		this.index = arrayExp;
+		this.value = assignExp;
 	}
 	
 	public void accept(Visitor v) 

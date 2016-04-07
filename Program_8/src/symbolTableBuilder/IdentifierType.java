@@ -17,8 +17,8 @@ public class IdentifierType extends Type
 		this.id = id;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

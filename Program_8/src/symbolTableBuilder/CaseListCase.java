@@ -13,14 +13,16 @@ public class CaseListCase extends CaseList
 	Exp caseExp;
 	Statement s;
 	CaseList caseList;
+	Identifier id;
 	
-	public CaseListCase(Exp caseExp, Statement s, CaseList caseList) 
+	public CaseListCase(Identifier id, Exp caseExp, Statement s, CaseList caseList) 
 	{
 		this.caseExp = caseExp;
 		this.s = s;
 		this.caseList = caseList;
+		this.id = id;
 	}
-	
+
 	public void accept(Visitor v) 
 	{
 		v.visit(this);

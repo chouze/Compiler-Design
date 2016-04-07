@@ -11,14 +11,21 @@ package symbolTableBuilder;
 public class VarDeclType 
 {
 	Identifier variableName;
-	VarDeclTypeAssign variableAssign;
+	Exp exp;
+
 	
-	public VarDeclType(Identifier variableName, VarDeclTypeAssign variableAssign) 
+	public VarDeclType(Identifier varName) 
 	{
-		this.variableName = variableName;
-		this.variableAssign = variableAssign;
+		variableName = varName;
+		exp = null;
 	}
-	
+
+	public VarDeclType(Identifier varName, Exp exp) 
+	{
+		variableName = varName;
+		this.exp = exp;
+	}
+
 	public void accept(Visitor v, Type t) 
 	{
 		v.visit(this, t);

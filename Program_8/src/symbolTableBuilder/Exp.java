@@ -19,9 +19,11 @@ public class Exp extends Factor
 		this.elist = elist;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
+		
+		//throw new RuntimeException();
 	}
 	
 	

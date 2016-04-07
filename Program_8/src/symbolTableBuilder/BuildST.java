@@ -62,7 +62,7 @@ public class BuildST implements Visitor {
 		n.fields.accept(this); // enter fields into the symbol table
 		n.methods.accept(this);
 		
-		System.out.println("Simple Class " + n.className.name +" Table: \n" + n.symTab);
+		System.out.println("SimpleClass " + n.className.name +" Table: \n" + n.symTab);
 	}
 
 	/*
@@ -120,16 +120,9 @@ public class BuildST implements Visitor {
 		n.variableName.accept(this);
 		symTab.put(n.variableName, new Binding(n.variableName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		
-		if(!(n.variableAssign.exp == null))
-			n.variableAssign.accept(this);
+		if(!(n.exp == null))
+			n.exp.accept(this);
 	}
-
-	
-	public void visit(VarDeclTypeAssign n) {
-		Exp e = n.exp;
-		e.accept(this);	
-	}
-
 	
 	public void visit(MethodDecl n) {
 		Binding bind = new Binding(n.methodName, IdType.METHOD, n.type.getClass().getSimpleName());
@@ -217,20 +210,20 @@ public class BuildST implements Visitor {
 
 	
 	public void visit(AssignArray n) {
-		n.arrayExp.accept(this);
-		n.assignExp.accept(this);	
+		n.index.accept(this);
+		n.value.accept(this);	
 	}
 
 	
 	public void visit(InitializeSimple n) {
-		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
+		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE, n.getClass().getSimpleName()));
 		n.id.accept(this);
 		n.assignExp.accept(this);
 	}
 
 	
 	public void visit(InitializeArray n) {
-		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
+		symTab.put(n.id, new Binding(n.id, IdType.VARIABLE, "INTARRAY"));
 		n.id.accept(this);
 		n.arrayExp.accept(this);
 		n.assignExp.accept(this);
@@ -281,9 +274,11 @@ public class BuildST implements Visitor {
 	}
 
 	
-	public void visit(Alist n) {
+	public String visit(Alist n) {
 		n.alist.accept(this);
 		n.less.accept(this);
+		
+		return null;
 		
 	}
 
@@ -311,24 +306,28 @@ public class BuildST implements Visitor {
 	}
 
 	
-	public void visit(IntArrayType n) {
+	public String visit(IntArrayType n) {
+		return null;
 		//does nothing
 	}
 
 	
-	public void visit(BooleanType n) {
-		//does nothing
-		
-	}
-
-	
-	public void visit(IntegerType n) {
+	public String visit(BooleanType n) {
+		return null;
 		//does nothing
 		
 	}
 
 	
-	public void visit(IdentifierType n) {
+	public String visit(IntegerType n) {
+		return null;
+		//does nothing
+		
+	}
+
+	
+	public String visit(IdentifierType n) {
+		return null;
 		//does nothing
 	}
 
@@ -339,37 +338,43 @@ public class BuildST implements Visitor {
 	}
 
 	
-	public void visit(And n) {
+	public String visit(And n) {
 		n.less.accept(this);
 		n.alist.accept(this);
+		return null;
 	}
 
 	
-	public void visit(IntegerLiteral n) {
+	public String visit(IntegerLiteral n) {
+		return null;
 		//does nothing
 		
 	}
 
 	
-	public void visit(True n) {
+	public String visit(True n) {
+		return null;
 		//does nothing
 		
 	}
 
 	
-	public void visit(False n) {
+	public String visit(False n) {
+		return null;
 		//does nothing
 		
 	}
 
 	
-	public void visit(IdentifierExp n) {
+	public String visit(IdentifierExp n) {
+		return null;
 		//does nothing
 		
 	}
 
 	
-	public void visit(This n) {
+	public String visit(This n) {
+		return null;
 		//does nothing
 		
 	}
@@ -387,8 +392,8 @@ public class BuildST implements Visitor {
 	}
 
 	
-	public void visit(Not n) {
-		//does nothing
+	public String visit(Not n) {
+		return null;
 	}
 
 	
@@ -397,13 +402,15 @@ public class BuildST implements Visitor {
 	}
 
 	
-	public void visit(Exp n) {
+	public String visit(Exp n) {
+		return null;
 		//does nothing
 		
 	}
 
 	
-	public void visit(Type n) {
+	public String visit(Type n) {
+		return null;
 		//does nothing
 	}
 
@@ -490,13 +497,15 @@ public class BuildST implements Visitor {
 	}
 
 	
-	public void visit(Elist n) {
+	public String visit(Elist n) {
 		n.and.accept(this);
 		n.elist.accept(this);
+		return null;
 	}
 
 	
-	public void visit(Factor n) {
+	public String visit(Factor n) {
+		return null;
 		//does nothing
 	}
 
@@ -507,15 +516,16 @@ public class BuildST implements Visitor {
 	}
 
 	
-	public void visit(Less n) {
+	public String visit(Less n) {
 		n.llist.accept(this);
 		n.term.accept(this);
+		return null;
 		
 	}
 
 	
-	public void visit(Llist n) {
-		//does nothing
+	public String visit(Llist n) {
+		return null;
 		
 	}
 
@@ -572,16 +582,18 @@ public class BuildST implements Visitor {
 	}
 
 	
-	public void visit(Term n) {
+	public String visit(Term n) {
 		n.not.accept(this);
 		n.tlist.accept(this);
+		return null;
 		
 	}
 
 	
-	public void visit(Tlist n) {
+	public String visit(Tlist n) {
 		n.not.accept(this);
 		n.tlist.accept(this);
+		return null;
 		
 	}
 }

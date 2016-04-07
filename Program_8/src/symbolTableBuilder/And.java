@@ -19,8 +19,8 @@ public class And
 		this.alist = alist;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

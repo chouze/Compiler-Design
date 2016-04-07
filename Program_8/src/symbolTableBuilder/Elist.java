@@ -23,9 +23,9 @@ public class Elist
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 	
 	

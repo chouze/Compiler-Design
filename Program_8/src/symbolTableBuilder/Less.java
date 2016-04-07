@@ -19,9 +19,9 @@ public class Less
 		this.llist = llist;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 	
 }

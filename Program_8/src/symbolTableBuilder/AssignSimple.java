@@ -10,10 +10,12 @@ package symbolTableBuilder;
 
 public class AssignSimple extends Assign 
 {
+	Identifier id;
 	Exp assignment;
 	
-	public AssignSimple(Exp assignment) 
+	public AssignSimple(Identifier id, Exp assignment) 
 	{
+		this.id = id;
 		this.assignment = assignment;
 	}
 	

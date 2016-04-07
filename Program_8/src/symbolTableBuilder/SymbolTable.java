@@ -19,6 +19,11 @@ public class SymbolTable {
 	{
 		symTab = new HashMap<String, Binding>();
 	}
+	
+	public String getType(Identifier id)
+	{
+		return symTab.get(id.name).type;
+	}
 
 	public SymbolTable put(Identifier i, Binding b)
 	{
@@ -30,7 +35,49 @@ public class SymbolTable {
 		System.err.println("Identifier '" + i.name + "' already defined in this context.");
 		return null;
 	}
+	public Binding get(Identifier i){
+		return symTab.get(i);
+	}
 	
+	public boolean check(String name, IdType usage)
+	{
+		return symTab.get(name).usage.equals(usage);
+			
+	}
+	
+	/**
+	 * Check that the given identifier is the correct usage: variable, class, method
+	 */
+	public void check(Identifier i, IdType it){
+		Binding binding = symTab.get(i.getName());
+		if(binding == null)
+			System.err.println("Undefined Symbol " + i.getClass().getSimpleName());
+		if(binding.getIdType() != it)
+			System.err.println("Incorrect usage for " + i);
+	}
+	
+	/**The two Identifiers should be of the same type*/
+	public void check(Identifier i1, Identifier i2){
+		Binding binding1 = symTab.get(i1.getName());
+		Binding binding2 = symTab.get(i2.getName());
+		if(binding1 == null)
+			System.err.println("Undefined Symbol " + i1);
+		if(binding2 == null)
+			System.err.println("Undefined Symbol " + i2);
+		if(!(binding1.getType()).equals(binding2.getType())){
+			System.err.println("Types do not match ... ");
+		}
+	}
+	
+	public void check(Identifier id, String type){
+		Binding b = get(id);
+		if(b==null)
+			System.err.println(id + " undefined ");
+		if(! (get(id)).getType().equals(type))
+		{
+			System.err.println("Wrong type for given identifier " + id + " should be " + type);
+		}
+	}
 	public String toString(){	
 		String temp = "";
 		

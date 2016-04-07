@@ -11,7 +11,8 @@ public class Driver {
 
 	public static void main(String[] args) 
 	{
-		BuildST bst = new BuildST();		
+		BuildST bst = new BuildST();
+		SymbolTableTypeCheck sttc = new SymbolTableTypeCheck();
 		Parser parser = null;
 		
 		try {
@@ -23,6 +24,8 @@ public class Driver {
 		
 		Program prog = parser.Parse();
 		bst.visit(prog);
+		sttc.visit(prog);
+		
 	}
 
 }

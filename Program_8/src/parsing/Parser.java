@@ -229,22 +229,16 @@ public class Parser{
 	{
 		Identifier varName = new Identifier(token.getText());
 		eat(tid);
-		VarDeclTypeAssign varAssign = VarDeclTypeAssign();
 		
-		return new VarDeclType(varName, varAssign);
-	}
-
-	VarDeclTypeAssign VarDeclTypeAssign() 
-	{
 		if(isToken(tassign))
 		{
 			eat(tassign);
 			Exp exp = Exp();
 			
-			return new VarDeclTypeAssign(exp);
+			return new VarDeclType(varName, exp);
 		}
 		
-		return new VarDeclTypeAssign();
+		return new VarDeclType(varName);
 	}
 
 	MethodDecl MethodDecl() 
@@ -417,7 +411,7 @@ public class Parser{
 			eat(tid);
 			eat(trightparen);
 			eat(tleftbrace);
-			CaseList caseList = CaseList();
+			CaseList caseList = CaseList(variable);
 			eat(trightbrace);
 			
 			return new Switch(variable, caseList);
@@ -440,7 +434,7 @@ public class Parser{
 		{
 			Identifier variable = new Identifier(token.getText());
 			eat(tid);
-			Assign assign = Assign();
+			Assign assign = Assign(variable);
 			eat(tsemi);
 
 			return assign;
@@ -471,13 +465,13 @@ public class Parser{
 	}
 	*/
 
-	Assign Assign() 
+	Assign Assign(Identifier id) 
 	{
 		if (isToken(tassign)) 
 		{
 			eat(tassign);
 			Exp exp = Exp();
-			return new AssignSimple(exp);
+			return new AssignSimple(id, exp);
 		} 
 		else if (isToken(tleftbracket)) 
 		{
@@ -487,7 +481,7 @@ public class Parser{
 			eat(tassign);
 			Exp exp2 = Exp();
 			
-			return new AssignArray(exp1, exp2);
+			return new AssignArray(id, exp1, exp2);
 		} 
 		else
 			throw new ParsingException(token, "assign");
@@ -557,15 +551,15 @@ public class Parser{
 
 	}
 
-	CaseList CaseList() {
+	CaseList CaseList(Identifier id) {
 		if (isToken(tcase)) {
 			eat(tcase);
 			Exp exp = Exp();
 			eat(tcolon);
 			Statement stmt = Statement();
-			CaseList caseList = CaseList();
+			CaseList caseList = CaseList(id);
 			
-			return new CaseListCase(exp, stmt, caseList);
+			return new CaseListCase(id, exp, stmt, caseList);
 		} 
 		else if (isToken(tdefault)) 
 		{

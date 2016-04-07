@@ -44,6 +44,16 @@ public class Binding {
 			parms = new LinkedList<String>();
 	}
 	
+	public String getType()
+	{
+		return type;
+	}
+	
+	public IdType getIdType()
+	{
+		return usage;
+	}
+	
 	public void addParams(ExpList el){
 		parms.add(el.e.getClass().getSimpleName());
 		if(!el.multipleExp.isEmpty()){
