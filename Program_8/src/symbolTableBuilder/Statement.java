@@ -10,8 +10,8 @@ package symbolTableBuilder;
 
 public abstract class Statement 
 {
-	public void accept(Visitor v) 
+	public String accept(Visitor v)
 	{
-		v.visit(this);
+		return null;
 	}
 }

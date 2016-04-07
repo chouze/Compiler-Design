@@ -13,7 +13,6 @@ public class VarDeclType
 	Identifier variableName;
 	Exp exp;
 
-	
 	public VarDeclType(Identifier varName) 
 	{
 		variableName = varName;
