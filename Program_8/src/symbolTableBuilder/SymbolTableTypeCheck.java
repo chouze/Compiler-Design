@@ -113,40 +113,47 @@ public class SymbolTableTypeCheck implements Visitor {
 		n.paramName.accept(this);
 	}
 
-	public void visit(Block n) {
+	public String visit(Block n) {
 		n.sl.accept(this);
+		return null;
 	}
 
-	public void visit(If n) {
+	public String visit(If n) {
 		symTab.check(n.condition.accept(this), "BOOLEAN");
 		n.s.accept(this);
 		n.elseIf.accept(this);
+		return null;
 	}
 
-	public void visit(Do n) {
+	public String visit(Do n) {
 		symTab.check(n.condition.accept(this), "BOOLEAN");
 		n.s.accept(this);
+		return null;
 	}
 
-	public void visit(While n) {
+	public String visit(While n) {
 		symTab.check(n.condition.accept(this), "BOOLEAN");
 		n.s.accept(this);
+		return null;
 	}
 
-	public void visit(For n) {
+	public String visit(For n) {
 		n.initialize.accept(this);
 		n.e.accept(this);
 		n.increment.accept(this);
 		n.s.accept(this);
+		return null;
 	}
 
-	public void visit(Switch n) {
+	public String visit(Switch n) {
 		n.id.accept(this);
 		n.caseDefault.accept(this);
+		return null;
 	}
 
-	public void visit(Print n) {
+	public String visit(Print n) {
 		n.statementToPrint.accept(this);
+		return null;
 	}
 
 	public void visit(InitializeSimple n) {
@@ -221,8 +228,8 @@ public class SymbolTableTypeCheck implements Visitor {
 	public void visit(ExpList n, Identifier id) {
 
 		Binding bind = symTab.get(id);
-		symTab.check(n.e.accept(this), symTab.get(id).parms.get(1));
-		n.multipleExp.accept(this);
+		symTab.check(n.e.accept(this), bind.parms.get(1)); //this work
+		n.multipleExp.accept(this, id);
 	}
 
 	public String visit(ExpRest n) {
@@ -428,8 +435,8 @@ public class SymbolTableTypeCheck implements Visitor {
 	}
 
 	public String visit(NewObject n) {
-
-		return n.id.accept(this);
+		symTab = symTabProg.getChild(n.id.name);
+		return n.id.name;
 	}
 
 	public String visit(Not n) {
@@ -454,114 +461,148 @@ public class SymbolTableTypeCheck implements Visitor {
 	}
 
 	//////////////////////////////////////////////////////////////////////// EXP
-	public String visit(Exp n) { // if elist isn't null, return elist, else
-									// return and
-		/*
-		 * String left, right; left = n.and.accept(this); if (n.elist != null) {
-		 * right = n.elist.accept(this); if (!(left.equals(right)))
-		 * System.err.println("Mismatching Types in Exp"); return right; }
-		 * return left;
-		 */
-		System.out.println(n.and.accept(this));
-		return null;
+	public String visit(Exp n) { 
+		String left, right;
+		left = n.and.accept(this);
+		if (n.elist.and != null) {
+			right = n.elist.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in Exp");
+			return right;
+		}
+		return left;
+		// System.out.println(n.and.accept(this));
+		// return null;
 	}
 
 	public String visit(Elist n) {
-		/*
-		 * String left, right; left = n.and.accept(this); if (n.elist != null) {
-		 * right = n.elist.accept(this); if (!(left.equals(right)))
-		 * System.err.println("Mismatching Types in Elist"); return right; }
-		 * return left;
-		 */
-		return n.and.accept(this);
+		String left, right;
+		left = n.and.accept(this);
+		if (n.elist.and != null) {
+			right = n.elist.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in Elist");
+			return right;
+		}
+		return left;
+		// return n.and.accept(this);
 	}
 
 	public String visit(And n) {
-		/*
-		 * String left, right; left = n.less.accept(this); if (n.alist != null)
-		 * { right = n.alist.accept(this); if (!(left.equals(right)))
-		 * System.err.println("Mismatching Types in And"); return right; }
-		 * return left;
-		 */
-		return n.less.accept(this);
+		String left, right;
+		left = n.less.accept(this);
+		if (n.alist.less != null) {
+			right = n.alist.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in And");
+			return right;
+		}
+		return left;
+
+		// return n.less.accept(this);
 	}
 
 	public String visit(Alist n) {
-		/*
-		 * String left, right; left = n.less.accept(this); if (n.alist != null)
-		 * { right = n.alist.accept(this); if (!(left.equals(right)))
-		 * System.err.println("Mismatching Types in Alist"); return right; }
-		 * return left;
-		 */
-		return null;
+		String left, right;
+		left = n.less.accept(this);
+		if (n.alist != null) {
+			right = n.alist.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in Alist");
+			return right;
+		}
+		return left;
+
+		// return null;
 	}
 
 	public String visit(Less n) {
-		/*
-		 * String left, right; left = n.term.accept(this); if ((n.llist !=
-		 * null)&& ((n.llist instanceof LlistDifference) ||(n.llist instanceof
-		 * LlistSum) )) { right = n.llist.accept(this); if
-		 * (!(left.equals(right))) System.err.println(
-		 * "Mismatching Types in Less"); return right; } return left;
-		 */
-		return n.term.accept(this);
+		String left, right;
+		left = n.term.accept(this);
+		if ((n.llist != null) && ((n.llist instanceof LlistDifference) || (n.llist instanceof LlistSum))) {
+			right = n.llist.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in Less");
+			return right;
+		}
+		return left;
+
+		// return n.term.accept(this);
 	}
 
 	public String visit(Llist n) {
-		/*
-		 * if(n instanceof LlistDifference) return
-		 * ((LlistDifference)n).accept(this); else if(n instanceof LlistSum)
-		 * return ((LlistSum)n).accept(this); String llistType =
-		 * n.getClass().getSimpleName(); return null;
-		 */
+		if (n instanceof LlistDifference)
+			return ((LlistDifference) n).accept(this);
+		else if (n instanceof LlistSum)
+			return ((LlistSum) n).accept(this);
+		//String llistType = n.getClass().getSimpleName();
 		return null;
+
+		// return null;
 	}
 
 	public String visit(LlistDifference n) {
-		/*
-		 * String left, right; left = n.llist.accept(this); if (n.llist != null)
-		 * { right = n.term.accept(this); if (!(left.equals(right)))
-		 * System.err.println("Mismatching Types in Less"); return right; }
-		 * return left;
-		 */
-		return null;
+		String left, right;
+		left = n.llist.accept(this);
+		if (n.llist != null) {
+			right = n.term.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in Less");
+			return right;
+		}
+		return left;
+
+		// return null;
 	}
 
 	public String visit(LlistSum n) {
-		/*
-		 * String left, right; left = n.llist.accept(this); if (n.llist != null)
-		 * { right = n.term.accept(this); if (!(left.equals(right)))
-		 * System.err.println("Mismatching Types in Less"); return right; }
-		 * return left;
-		 */
-		return null;
+		String left, right;
+		left = n.llist.accept(this);
+		if (n.llist != null) {
+			right = n.term.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in Less");
+			return right;
+		}
+		return left;
+
+		// return null;
 	}
 
 	public String visit(Term n) {
-		/*
-		 * String left, right; left = n.not.accept(this); if (n.tlist.not !=
-		 * null) { right = n.tlist.accept(this); if (!(left.equals(right)))
-		 * System.err.println("Mismatching Types in Term"); return right; }
-		 * return left;
-		 */
-		return n.not.accept(this);
+		String left, right;
+		left = n.not.accept(this);
+		if (n.tlist.not != null) {
+			right = n.tlist.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in Term");
+			return right;
+		}
+		return left;
+
+		// return n.not.accept(this);
 	}
 
 	public String visit(Tlist n) {
-		/*
-		 * String left, right; left = n.not.accept(this); right =
-		 * n.tlist.accept(this); if (n.tlist.not != null) { right =
-		 * n.tlist.accept(this); if (!(left.equals(right))) System.err.println(
-		 * "Mismatching Types in Term"); return right; } return left;
-		 */
-		return null;
+		String left, right;
+		left = n.not.accept(this);
+		right = n.tlist.accept(this);
+		if (n.tlist.not != null) {
+			right = n.tlist.accept(this);
+			if (!(left.equals(right)))
+				System.err.println("Mismatching Types in Term");
+			return right;
+		}
+		return left;
+
+		// return null;
 	}
 
 	public String visit(NotFactor n) {
 		String returnType = n.factor.accept(this);
-		if (!(n.dotList.isEmpty()))
+		if (!(n.dotList.isEmpty())) {
 			return n.dotList.getLast().accept(this);
-		else
+		} else
 			return returnType;
 	}
 

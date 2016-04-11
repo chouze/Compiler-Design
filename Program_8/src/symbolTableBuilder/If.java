@@ -20,8 +20,8 @@ public class If extends Statement
 		this.elseIf = elseIf;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

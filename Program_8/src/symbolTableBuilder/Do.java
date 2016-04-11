@@ -19,8 +19,8 @@ public class Do extends Statement
 		this.condition = condition;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

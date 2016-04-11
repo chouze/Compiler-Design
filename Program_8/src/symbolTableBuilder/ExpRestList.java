@@ -13,8 +13,8 @@ import java.util.LinkedList;
 public class ExpRestList extends LinkedList<ExpRest> {
 
 	
-	public void accept(Visitor v) 
+	public void accept(Visitor v, Identifier id) 
 	{
-		v.visit(this);
+		v.visit(this, id);
 	}
 }

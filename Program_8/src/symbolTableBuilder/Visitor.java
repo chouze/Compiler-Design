@@ -29,16 +29,16 @@ public interface Visitor
 	void visit(FormalRest n);
 	
 	void visit(Statement n);
-	void visit(Block n);
-	void visit(If n);
+	String visit(Block n);
+	String visit(If n);
 	void visit(ElseIf n);
-	void visit(Do n);
-	void visit(While n);
-	void visit(For n);
-	void visit(Switch n);
+	String visit(Do n);
+	String visit(While n);
+	String visit(For n);
+	String visit(Switch n);
 	void visit(CaseListCase n);
 	void visit(CaseListDefault n);
-	void visit(Print n);
+	String visit(Print n);
 	void visit(InitializeSimple n);
 	void visit(InitializeArray n);
 	void visit(IncrementSimple n);

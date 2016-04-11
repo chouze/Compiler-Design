@@ -178,41 +178,48 @@ public class BuildST implements Visitor {
 		n.paramName.accept(this);
 	}
 
-	public void visit(Block n) {
+	public String visit(Block n) {
 		n.sl.accept(this);
+		return null;
 	}
 
-	public void visit(If n) {
+	public String visit(If n) {
 		n.condition.accept(this);
 		n.s.accept(this);
 		n.elseIf.accept(this);
+		return null;
 	}
 
-	public void visit(Do n) {
+	public String visit(Do n) {
 		n.s.accept(this);
 		n.condition.accept(this);
+		return null;
 	}
 
-	public void visit(While n) {
+	public String visit(While n) {
 		n.condition.accept(this);
 		n.s.accept(this);
+		return null;
 	}
 
-	public void visit(For n) {
+	public String visit(For n) {
 		n.initialize.accept(this);
 		n.e.accept(this);
 		n.increment.accept(this);
 		n.s.accept(this);
+		return null;
 	}
 
-	public void visit(Switch n) {
+	public String visit(Switch n) {
 		//symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.caseDefault.accept(this);
+		return null;
 	}
 
-	public void visit(Print n) {
+	public String visit(Print n) {
 		n.statementToPrint.accept(this);
+		return null;
 	}
 
 	public String visit(AssignSimple n) {
@@ -269,7 +276,7 @@ public class BuildST implements Visitor {
 
 	public void visit(ExpList n, Identifier id) {
 		n.e.accept(this);
-		n.multipleExp.accept(this);
+		n.multipleExp.accept(this, id);
 	}
 
 	public String visit(ExpRest n) {

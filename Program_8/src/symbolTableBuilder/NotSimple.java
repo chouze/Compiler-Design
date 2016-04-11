@@ -17,6 +17,9 @@ public class NotSimple extends Not
 		this.not = not;
 	}
 	
-	
+	public String accept(Visitor v) 
+	{
+		return v.visit(this);
+	}
 	
 }
