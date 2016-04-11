@@ -10,8 +10,5 @@ package symbolTableBuilder;
 
 public abstract class Not
 {
-	public String accept(Visitor v) 
-	{
-		return v.visit(this);
-	}
+	public abstract String accept(Visitor v) ;
 }

@@ -20,8 +20,16 @@ public class Identifier {
 		return name;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
+	}
+	
+	public boolean equals(Identifier id){
+		
+		return (id.name).equals(id.name);
+	}
+	public String toString(){
+		return name;
 	}
 }

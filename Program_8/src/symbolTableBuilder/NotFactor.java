@@ -18,6 +18,10 @@ public class NotFactor extends Not
 		this.factor = factor;
 		this.dotList = dotList;
 	}
+	public String accept(Visitor v) 
+	{
+		return v.visit(this);
+	}
 	
 	
 }

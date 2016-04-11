@@ -9,8 +9,5 @@ package symbolTableBuilder;
  */
 
 public abstract class Factor {
-	public String accept(Visitor v) 
-	{
-		return v.visit(this);
-	}
+	public abstract String accept(Visitor v) ;
 }

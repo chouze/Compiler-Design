@@ -19,8 +19,8 @@ public class ExpList
 		this.multipleExp = multipleExp;
 	}
 	
-	public void accept(Visitor v) 
+	public void accept(Visitor v, Identifier methodId) 
 	{
-		v.visit(this);
+		v.visit(this, methodId);
 	}
 }

@@ -1,5 +1,7 @@
 package symbolTableBuilder;
 
+import java.util.List;
+
 /**
  * @author David Carlin
  * @author Clifford Black
@@ -42,28 +44,28 @@ public interface Visitor
 	void visit(IncrementSimple n);
 	void visit(IncrementArray n);
 
-	void visit(ExpList n);
-	void visit(ExpRest n);
+	void visit(ExpList n, Identifier methodId);
+	String visit(ExpRest n);
 	
-	void visit(Identifier n);
+	
 	void visit(StatementList n);
 	void visit(InitializationStm n);
 	void visit(IncrementStm n);
 	void visit(CaseList n);
 	void visit(FormalRestList formalRestList);
 	void visit(ElseIfList elseIfList);
-	void visit(ExpRestList expRestList);
+	void visit(ExpRestList expRestList, Identifier id);
 	void visit(DotArrayList dotArrayList);
-	void visit(DotArray n);
-	void visit(DotArrayArray n);
+	String visit(DotArray n);
+	String visit(DotArrayArray n);
 	
-	void visit(Member n);
-	void visit(MemberLength n);
+	String visit(Member n);
+	String visit(MemberLength n);
 
 
 	
 	
-	
+	String visit(Identifier n);
 	//Type
 	String visit(Type n);
 	String visit(IntArrayType n);

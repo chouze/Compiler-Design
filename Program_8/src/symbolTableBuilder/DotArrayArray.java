@@ -17,9 +17,9 @@ public class DotArrayArray extends DotArray
 		this.exp = exp;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package symbolTableBuilder;
 
+import java.util.List;
+
 /* 
  * A Visitor which builds symbol tables for a syntax tree. Routes through a program and as identifiers are created, they are bound and added to the Symbol Tree.
  * Provides no functionality other than creating a tree for now.
@@ -21,6 +23,7 @@ package symbolTableBuilder;
 
 public class BuildST implements Visitor {
 	public SymbolTable symTab, symTabMethod, symTabClass, symTabProg;
+	
 	// I think it works like this:
 	// symTab is the table in focus
 	// symTabMethod is the table created when a method is created
@@ -43,6 +46,8 @@ public class BuildST implements Visitor {
 
 	public void visit(MainClass n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
+		
+		
 		n.className.accept(this);
 		n.args.accept(this);
 		symTab = symTabClass = n.symTab = new SymbolTable(); // each mainclass
@@ -50,9 +55,10 @@ public class BuildST implements Visitor {
 																// symboltable
 																// since it is
 																// static
+		symTab.put(new Identifier("args"), new Binding(new Identifier("args"), IdType.VARIABLE, "String[]"));
 		n.v.accept(this);
 		n.stmt.accept(this); // ??
-
+		symTabProg.putChild(n.className.name, n.symTab);
 		System.out.println("MainClass " + n.className.name + " Table: \n" + n.symTab);
 	}
 
@@ -60,11 +66,12 @@ public class BuildST implements Visitor {
 	// new binding for it
 	public void visit(ClassDeclDeffSimple n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
+		
 		symTab = symTabClass = n.symTab = new SymbolTable();
 		n.className.accept(this);
 		n.fields.accept(this); // enter fields into the symbol table
 		n.methods.accept(this);
-
+		symTabProg.putChild(n.className.name, n.symTab);
 		System.out.println("SimpleClass " + n.className.name + " Table: \n" + n.symTab);
 	}
 
@@ -76,15 +83,16 @@ public class BuildST implements Visitor {
 	public void visit(ClassDeclDeffExtend n) {
 		symTab = symTabClass = n.symTab = new SymbolTable(); // class needs a
 																// symbol table
-
+		
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
 		n.className.accept(this);
 
 		symTabProg.put(n.extendedClass, new Binding(n.extendedClass, IdType.CLASS));
 		n.extendedClass.accept(this);
-
-		System.out.println("Extended Class " + n.className.name + " Table: \n" + n.symTab);
+		symTabProg.putChild(n.className.name, n.symTab);
 		n.variableList.accept(this);
+		System.out.println("Extended Class " + n.className.name + " Table: \n" + n.symTab);
+		
 
 	}
 
@@ -126,6 +134,7 @@ public class BuildST implements Visitor {
 
 	public void visit(MethodDecl n) {
 		Binding bind = new Binding(n.methodName, IdType.METHOD, n.type.getClass().getSimpleName());
+		
 		bind.addParams(n.parameters);
 		symTabClass.put(n.methodName, bind);
 		// symTab.put(n.methodName, bind);
@@ -137,7 +146,7 @@ public class BuildST implements Visitor {
 		n.statements.accept(this);
 		Exp e = n.expReturn;
 		e.accept(this);
-
+		symTabClass.putChild(n.methodName.name, n.symTab);
 		System.out.println("Method " + n.methodName.name + " Table: \n" + n.symTab);
 
 	}
@@ -258,13 +267,14 @@ public class BuildST implements Visitor {
 		n.s.accept(this);
 	}
 
-	public void visit(ExpList n) {
+	public void visit(ExpList n, Identifier id) {
 		n.e.accept(this);
 		n.multipleExp.accept(this);
 	}
 
-	public void visit(ExpRest n) {
+	public String visit(ExpRest n) {
 		n.e.accept(this);
+		return null;
 	}
 
 	public String visit(Alist n) {
@@ -371,8 +381,9 @@ public class BuildST implements Visitor {
 		return null;
 	}
 
-	public void visit(Identifier n) {
+	public String visit(Identifier n) {
 		// does nothing
+		return null;
 	}
 
 	public String visit(Exp n) {
@@ -423,7 +434,7 @@ public class BuildST implements Visitor {
 		}
 	}
 
-	public void visit(ExpRestList expRestList) {
+	public void visit(ExpRestList expRestList, Identifier id) {
 		for (ExpRest e : expRestList) {
 			e.accept(this);
 			// visit(e);
@@ -442,14 +453,15 @@ public class BuildST implements Visitor {
 
 	}
 
-	public void visit(DotArray n) {
+	public String visit(DotArray n) {
 		// does nothing
+		return null;
 
 	}
 
-	public void visit(DotArrayArray n) {
+	public String visit(DotArrayArray n) {
 		n.exp.accept(this);
-
+return null;
 	}
 
 	public String visit(DotArrayMember n) {
@@ -498,8 +510,9 @@ public class BuildST implements Visitor {
 		return null;
 	}
 
-	public void visit(Member n) {
+	public String visit(Member n) {
 		// does nothing
+		return null;
 	}
 
 	public String visit(MemberId n) {
@@ -507,13 +520,13 @@ public class BuildST implements Visitor {
 		bind.addParams(n.expList);
 		symTab.put(n.id, bind);
 		n.id.accept(this);
-		n.expList.accept(this);
+		n.expList.accept(this, n.id);
 		return null;
 	}
 
-	public void visit(MemberLength n) {
+	public String visit(MemberLength n) {
 		// does nothing
-
+return null;
 	}
 
 	public String visit(New n) {

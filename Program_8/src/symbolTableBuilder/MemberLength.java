@@ -11,4 +11,8 @@ package symbolTableBuilder;
 public class MemberLength extends Member 
 {
 
+	public String accept(Visitor v) 
+	{
+		return v.visit(this);
+	}
 }

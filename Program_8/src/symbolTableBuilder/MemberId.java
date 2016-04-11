@@ -19,5 +19,9 @@ public class MemberId extends Member
 		this.expList = expList;
 	}
 	
+	public String accept(Visitor v) 
+	{
+		return v.visit(this);
+	}
 	
 }

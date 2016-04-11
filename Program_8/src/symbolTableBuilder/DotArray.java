@@ -10,5 +10,10 @@ package symbolTableBuilder;
 
 public abstract class DotArray 
 {
+
+	public String accept(Visitor v) 
+	{
+		return v.visit(this);
+	}
 	
 }

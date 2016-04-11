@@ -17,8 +17,8 @@ public class NewArray extends New
 		this.e = e;
 	}
 	
-	public void accept(Visitor v) 
+	public String accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }
