@@ -41,11 +41,11 @@ public class SymbolTableTypeCheck implements Visitor {
 		n.args.accept(this);
 		n.v.accept(this);
 		n.stmt.accept(this);
+		
 	}
 
 	public void visit(ClassDeclDeffSimple n) {
 		symTab = symTabClass = n.symTab;
-
 		n.className.accept(this);
 		n.fields.accept(this); // enter fields into the symbol table
 		n.methods.accept(this);
@@ -115,6 +115,7 @@ public class SymbolTableTypeCheck implements Visitor {
 
 	public String visit(Block n) {
 		n.sl.accept(this);
+	
 		return null;
 	}
 
@@ -228,7 +229,7 @@ public class SymbolTableTypeCheck implements Visitor {
 	public void visit(ExpList n, Identifier id) {
 
 		Binding bind = symTab.get(id);
-		symTab.check(n.e.accept(this), bind.parms.get(1)); //this work
+		symTab.check(n.e.accept(this), bind.parms.get(0)); //this work
 		n.multipleExp.accept(this, id);
 	}
 
@@ -274,18 +275,14 @@ public class SymbolTableTypeCheck implements Visitor {
 		// If not there, check Program symbol table
 		IdType usage = ST.get(n).usage;
 		if (!(usage.equals(IdType.CLASS)))
-			return symTab.getType(n);
-		// is a class
-		// change current symboltable to that class symbol table
-		// System.out.println(n.name +": \n"+ST.getChild(n.name));
-		// symTab = ST.getChild(n.name);
-		// System.out.println("/////////////////" +ST.getChild(n.name));
+			return ST.getType(n);
 		return n.name;
 	}
 
 	public void visit(StatementList n) {
 		for (Statement s : n) {
 			visit(s);
+			//symTab = symTabClass;
 		}
 
 	}
@@ -321,11 +318,7 @@ public class SymbolTableTypeCheck implements Visitor {
 	public void visit(ExpRestList expRestList, Identifier id) {
 		Binding bind = symTab.get(id);
 		for (int i = 0; i < expRestList.size(); i++) {
-			String typeInSymTab = bind.parms.get(i + 1); // +1 since we already
-															// tested the first
-															// item in the
-															// params list in
-															// explist
+			String typeInSymTab = bind.parms.get(i + 1);
 			String typeOfExp = expRestList.get(i).accept(this);
 			symTab.check(typeInSymTab, typeOfExp);
 

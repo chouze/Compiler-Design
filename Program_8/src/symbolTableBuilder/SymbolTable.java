@@ -34,7 +34,8 @@ public class SymbolTable {
 		return children.containsKey(id);
 	}
 	public String getType(Identifier id) {
-		return symTab.get(id.name).type;
+		String s = id.name;
+		return symTab.get(s).type;
 	}
 
 	public SymbolTable put(Identifier i, Binding b) {
@@ -91,7 +92,9 @@ public class SymbolTable {
 
 	public void check(String e1, String e2) {
 		if (!e1.equals(e2))
-			System.err.println("Types do not match");
+			System.err.println("Types do not match: " + e1 + " and " + e2);
+		else
+		System.err.println("Types do match: " + e1 + " and " + e2);
 	}
 	
 	public boolean find(Identifier id){
