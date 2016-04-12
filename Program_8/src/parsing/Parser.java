@@ -263,12 +263,13 @@ public class Parser{
 				|| isToken(tswitch) || isToken(tprintln) || isToken(tid)
 				|| isToken(tleftparen))
 			statementList.add(Statement());
+		Block block = new Block(statementList);
 		eat(treturn);
 		Exp exp = Exp();
 		eat(tsemi);
 		eat(trightbrace);
 		
-		return new MethodDecl(type, methodName, parameters, varList, statementList, exp);
+		return new MethodDecl(type, methodName, parameters, varList, block, exp);
 
 	}
 
