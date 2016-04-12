@@ -9,7 +9,6 @@ package symbolTableBuilder;
  */
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SymbolTable {
@@ -55,19 +54,17 @@ public class SymbolTable {
 		return symTab.get(name).usage.equals(usage);
 	}
 
-	/**
-	 * Check that the given identifier is the correct usage: variable, class,
-	 * method
-	 */
+	// Check that the given identifier is the correct usage: variable, class, method
+
 	public void check(Identifier i, IdType it) {
 		Binding binding = symTab.get(i.name);
 		if (binding == null)
 			System.err.println("Undefined Symbol: " + i.name);
-		if (binding.getIdType() != it)
+		else if (binding.getIdType() != it)
 			System.err.println("Incorrect usage for " + i);
 	}
 
-	/** The two Identifiers should be of the same type */
+	/* The two Identifiers should be of the same type */
 	public void check(Identifier i1, Identifier i2) {
 		Binding binding1 = symTab.get(i1);
 		Binding binding2 = symTab.get(i2);
@@ -80,7 +77,7 @@ public class SymbolTable {
 		}
 	}
 
-	/** Check that the given identifier is of the correct type **/
+	/* Check that the given identifier is of the correct type **/
 	public void check(Identifier id, String type) {
 		Binding b = get(id);
 		if (b == null)
@@ -94,7 +91,7 @@ public class SymbolTable {
 		if (!e1.equals(e2))
 			System.err.println("Types do not match: " + e1 + " and " + e2);
 		else
-		System.err.println("Types do match: " + e1 + " and " + e2);
+		System.out.println("Types do match: " + e1 + " and " + e2);
 	}
 	
 	public boolean find(Identifier id){
@@ -107,10 +104,7 @@ public class SymbolTable {
 		for (String s: symTab.keySet()) {
 			temp += "Binding: " + symTab.get(s) + "\n";
 		}
-		//for (String s: children.keySet()) {
-			//temp += "Children of " + s + ": \n" + children.get(s) + "\n";
-		//}
-		
+
 		temp += "End table\n";
 		
 		

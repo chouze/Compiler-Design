@@ -8,9 +8,7 @@ package symbolTableBuilder;
  *
  */
 
-import java.util.LinkedList;
-
-public class ExpRest extends LinkedList 
+public class ExpRest extends java.util.LinkedList<Exp> 
 {
 	Exp e; //?
 	

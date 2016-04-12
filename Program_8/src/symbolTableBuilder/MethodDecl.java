@@ -14,19 +14,19 @@ public class MethodDecl
 	Identifier methodName;
 	FormalList parameters;
 	VarDeclList variables;
-	StatementList statements;
+	Statement statement;
 	Exp expReturn;
 	SymbolTable symTab;
 	
 	public MethodDecl(Type type, Identifier methodName,
-			FormalList parameters, VarDeclList variables, StatementList statements,
+			FormalList parameters, VarDeclList variables, Statement statements,
 			Exp ex) 
 	{
 		this.type = type;
 		this.methodName = methodName;
 		this.parameters = parameters;
 		this.variables = variables;
-		this.statements = statements;
+		this.statement = statements;
 		this.expReturn = ex;
 	}
 	

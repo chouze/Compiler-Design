@@ -1,7 +1,5 @@
 package symbolTableBuilder;
 
-import java.util.List;
-
 /* 
  * A Visitor which builds symbol tables for a syntax tree. Routes through a program and as identifiers are created, they are bound and added to the Symbol Tree.
  * Provides no functionality other than creating a tree for now.
@@ -143,7 +141,7 @@ public class BuildST implements Visitor {
 		n.methodName.accept(this);
 		n.parameters.accept(this);
 		n.variables.accept(this);
-		n.statements.accept(this);
+		n.statement.accept(this);
 		Exp e = n.expReturn;
 		e.accept(this);
 		symTabClass.putChild(n.methodName.name, n.symTab);

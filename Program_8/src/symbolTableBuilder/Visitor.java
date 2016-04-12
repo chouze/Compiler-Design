@@ -1,7 +1,5 @@
 package symbolTableBuilder;
 
-import java.util.List;
-
 /**
  * @author David Carlin
  * @author Clifford Black

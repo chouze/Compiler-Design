@@ -1,7 +1,6 @@
 package symbolTableBuilder;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,17 +14,10 @@ import java.util.Map;
 
 public class SymbolTableTypeCheck implements Visitor {
 	public SymbolTable symTab, symTabMethod, symTabClass, symTabProg;
-
-	// public String thisClass; // need to save the class name in order to
-	// search
-	// it's symbol table for a variable not found in
-	// method
-
-	// how do I search the symbol table of other classes for their methods?
 	public Map<String, SymbolTable> tableMap = new HashMap<String, SymbolTable>();
 
-	public SymbolTableTypeCheck() {
-		// symTabProg = new SymbolTable();
+	public SymbolTableTypeCheck() 
+	{
 
 	}
 
@@ -41,7 +33,7 @@ public class SymbolTableTypeCheck implements Visitor {
 		n.args.accept(this);
 		n.v.accept(this);
 		n.stmt.accept(this);
-		
+
 	}
 
 	public void visit(ClassDeclDeffSimple n) {
@@ -49,7 +41,6 @@ public class SymbolTableTypeCheck implements Visitor {
 		n.className.accept(this);
 		n.fields.accept(this); // enter fields into the symbol table
 		n.methods.accept(this);
-		// thisClass = n.className.name;
 	}
 
 	public void visit(ClassDeclDeffExtend n) {
@@ -80,13 +71,9 @@ public class SymbolTableTypeCheck implements Visitor {
 	}
 
 	public void visit(VarDeclType n, Type t) {
-		// String eType = null;
-		// String tLeft = symTab.getType(n.variableName);
-		// n.variableName.accept(this); <---not needed to accept an identifier
 		symTab.check(n.variableName, IdType.VARIABLE);
 		if (n.exp != null) {
-			symTab.check(n.variableName, n.exp.accept(this)); // should have the
-																// same type
+			symTab.check(n.variableName, n.exp.accept(this)); // should have the same type
 		}
 	}
 
@@ -96,10 +83,9 @@ public class SymbolTableTypeCheck implements Visitor {
 		n.methodName.accept(this);
 		n.parameters.accept(this);
 		n.variables.accept(this);
-		n.statements.accept(this);
+		n.statement.accept(this);
 		String expReturnType = n.expReturn.accept(this);
-		symTab.check(methodReturnType, expReturnType); // if the return type of
-														// the
+		symTab.check(methodReturnType, expReturnType); // if the return type of the
 	}
 
 	public void visit(FormalList n) {
@@ -115,25 +101,25 @@ public class SymbolTableTypeCheck implements Visitor {
 
 	public String visit(Block n) {
 		n.sl.accept(this);
-	
+
 		return null;
 	}
 
 	public String visit(If n) {
-		symTab.check(n.condition.accept(this), "BOOLEAN");
+		symTab.check(n.condition.accept(this), "BooleanType");
 		n.s.accept(this);
 		n.elseIf.accept(this);
 		return null;
 	}
 
 	public String visit(Do n) {
-		symTab.check(n.condition.accept(this), "BOOLEAN");
+		symTab.check(n.condition.accept(this), "BooleanType");
 		n.s.accept(this);
 		return null;
 	}
 
 	public String visit(While n) {
-		symTab.check(n.condition.accept(this), "BOOLEAN");
+		symTab.check(n.condition.accept(this), "BooleanType");
 		n.s.accept(this);
 		return null;
 	}
@@ -160,7 +146,6 @@ public class SymbolTableTypeCheck implements Visitor {
 	public void visit(InitializeSimple n) {
 		symTab.check(n.id, IdType.VARIABLE);
 		String tLeft = symTab.getType(n.id);
-		// n.id.accept(this);
 		String tRight = n.assignExp.accept(this);
 		symTab.check(tLeft, tRight); // should have the same type
 	}
@@ -209,7 +194,7 @@ public class SymbolTableTypeCheck implements Visitor {
 	}
 
 	public void visit(ElseIf n) {
-		symTab.check(n.condition.accept(this), "BOOLEAN");
+		symTab.check(n.condition.accept(this), "BooleanType");
 		n.s.accept(this);
 	}
 
@@ -229,8 +214,9 @@ public class SymbolTableTypeCheck implements Visitor {
 	public void visit(ExpList n, Identifier id) {
 
 		Binding bind = symTab.get(id);
-		symTab.check(n.e.accept(this), bind.parms.get(0)); //this work
+		symTab.check(n.e.accept(this), bind.parms.get(0));
 		n.multipleExp.accept(this, id);
+
 	}
 
 	public String visit(ExpRest n) {
@@ -254,13 +240,15 @@ public class SymbolTableTypeCheck implements Visitor {
 	}
 
 	public void visit(Statement n) {
-		// does nothing
+
 
 	}
 
 	public String visit(Identifier n) {
 		SymbolTable ST;
 		// First check current symbol table for identifier
+		// If not there, check class symbolTable
+		// If not there, check Program symbol table
 		if (symTab.find(n))
 			ST = symTab;
 		else if (symTabClass.find(n))
@@ -271,8 +259,6 @@ public class SymbolTableTypeCheck implements Visitor {
 			System.err.println("Identifier not found: " + n);
 			return null;
 		}
-		// If not there, check class symbolTable
-		// If not there, check Program symbol table
 		IdType usage = ST.get(n).usage;
 		if (!(usage.equals(IdType.CLASS)))
 			return ST.getType(n);
@@ -281,8 +267,7 @@ public class SymbolTableTypeCheck implements Visitor {
 
 	public void visit(StatementList n) {
 		for (Statement s : n) {
-			visit(s);
-			//symTab = symTabClass;
+			s.accept(this);
 		}
 
 	}
@@ -315,8 +300,17 @@ public class SymbolTableTypeCheck implements Visitor {
 		}
 	}
 
-	public void visit(ExpRestList expRestList, Identifier id) {
-		Binding bind = symTab.get(id);
+	public void visit(ExpRestList expRestList, Identifier id) 
+	{	
+		Binding bind;
+		if(symTab.get(id) != null)
+			bind = symTab.get(id);
+		else if(symTabMethod.get(id) != null)
+			bind = symTabMethod.get(id);
+		else if (symTabClass.get(id) != null)
+			bind = symTabClass.get(id);
+		else
+			bind = symTabProg.get(id);
 		for (int i = 0; i < expRestList.size(); i++) {
 			String typeInSymTab = bind.parms.get(i + 1);
 			String typeOfExp = expRestList.get(i).accept(this);
@@ -354,6 +348,7 @@ public class SymbolTableTypeCheck implements Visitor {
 	}
 
 	public String visit(AssignSimple n) {
+		symTab = symTabMethod;
 		symTab.check(n.id, IdType.VARIABLE);
 		String tLeft = symTab.getType(n.id);
 		n.id.accept(this);
@@ -392,30 +387,28 @@ public class SymbolTableTypeCheck implements Visitor {
 	}
 
 	public String visit(IntegerLiteral n) {
-		// return n.getClass().getSimpleName();
 		return "IntegerType";
 	}
 
 	public String visit(True n) {
-		// return n.getClass().getSimpleName();
 		return "BooleanType";
 	}
 
 	public String visit(False n) {
-		// return n.getClass().getSimpleName();
 		return "BooleanType";
 	}
 
 	public String visit(IdentifierExp n) {
-		// return n.getClass().getSimpleName();
-		Binding bind = symTab.get(new Identifier(n.s));
-		if (bind.usage.equals(IdType.CLASS)) { // if it's a class, change the
-												// symbol table
+		if(symTabProg.get(new Identifier(n.s)) != null)
+		{
 			symTab = symTabProg.getChild(n.s);
 			return n.s;
 		}
-		return bind.getType(); // got binding, return the
-								// type
+
+		symTab = symTabMethod;
+		Binding bind = symTab.get(new Identifier(n.s));
+
+		return bind.getType(); // got binding, return the type
 	}
 
 	public String visit(This n) {
@@ -439,7 +432,6 @@ public class SymbolTableTypeCheck implements Visitor {
 			return ((NotSimple) n).accept(this);
 
 		return null;
-		// does nothing
 	}
 
 	public String visit(Type n) {
@@ -453,8 +445,7 @@ public class SymbolTableTypeCheck implements Visitor {
 		return ((MemberLength) n.member).accept(this);
 	}
 
-	//////////////////////////////////////////////////////////////////////// EXP
-	public String visit(Exp n) { 
+	public String visit(Exp n) {
 		String left, right;
 		left = n.and.accept(this);
 		if (n.elist.and != null) {
@@ -464,8 +455,6 @@ public class SymbolTableTypeCheck implements Visitor {
 			return right;
 		}
 		return left;
-		// System.out.println(n.and.accept(this));
-		// return null;
 	}
 
 	public String visit(Elist n) {
@@ -478,35 +467,31 @@ public class SymbolTableTypeCheck implements Visitor {
 			return right;
 		}
 		return left;
-		// return n.and.accept(this);
 	}
 
 	public String visit(And n) {
 		String left, right;
 		left = n.less.accept(this);
-		if (n.alist.less != null) {
+		if (n.alist.less != null) 
+		{
 			right = n.alist.accept(this);
 			if (!(left.equals(right)))
 				System.err.println("Mismatching Types in And");
-			return right;
+			return "BooleanType";
 		}
 		return left;
-
-		// return n.less.accept(this);
 	}
 
 	public String visit(Alist n) {
 		String left, right;
 		left = n.less.accept(this);
-		if (n.alist != null) {
+		if (n.alist.less != null) {
 			right = n.alist.accept(this);
 			if (!(left.equals(right)))
 				System.err.println("Mismatching Types in Alist");
 			return right;
 		}
 		return left;
-
-		// return null;
 	}
 
 	public String visit(Less n) {
@@ -519,47 +504,38 @@ public class SymbolTableTypeCheck implements Visitor {
 			return right;
 		}
 		return left;
-
-		// return n.term.accept(this);
 	}
 
 	public String visit(Llist n) {
 		if (n instanceof LlistDifference)
-			return ((LlistDifference) n).accept(this);
+			return visit((LlistDifference) n);
 		else if (n instanceof LlistSum)
-			return ((LlistSum) n).accept(this);
-		//String llistType = n.getClass().getSimpleName();
+			return visit((LlistSum) n);
 		return null;
-
-		// return null;
 	}
 
 	public String visit(LlistDifference n) {
 		String left, right;
-		left = n.llist.accept(this);
-		if (n.llist != null) {
+		left = n.term.accept(this);
+		if ((n.llist != null) && ((n.llist instanceof LlistDifference) || (n.llist instanceof LlistSum))) {
 			right = n.term.accept(this);
 			if (!(left.equals(right)))
-				System.err.println("Mismatching Types in Less");
+				System.err.println("Mismatching Types in LlistDifference");
 			return right;
 		}
 		return left;
-
-		// return null;
 	}
 
 	public String visit(LlistSum n) {
 		String left, right;
-		left = n.llist.accept(this);
-		if (n.llist != null) {
+		left = n.term.accept(this);
+		if ((n.llist != null) && ((n.llist instanceof LlistDifference) || (n.llist instanceof LlistSum))) {
 			right = n.term.accept(this);
 			if (!(left.equals(right)))
-				System.err.println("Mismatching Types in Less");
+				System.err.println("Mismatching Types in LlistSum");
 			return right;
 		}
 		return left;
-
-		// return null;
 	}
 
 	public String visit(Term n) {
@@ -572,14 +548,11 @@ public class SymbolTableTypeCheck implements Visitor {
 			return right;
 		}
 		return left;
-
-		// return n.not.accept(this);
 	}
 
 	public String visit(Tlist n) {
 		String left, right;
 		left = n.not.accept(this);
-		right = n.tlist.accept(this);
 		if (n.tlist.not != null) {
 			right = n.tlist.accept(this);
 			if (!(left.equals(right)))
@@ -588,7 +561,6 @@ public class SymbolTableTypeCheck implements Visitor {
 		}
 		return left;
 
-		// return null;
 	}
 
 	public String visit(NotFactor n) {
@@ -605,7 +577,6 @@ public class SymbolTableTypeCheck implements Visitor {
 
 	public String visit(Factor n) {
 		return null;
-		// does nothing
 	}
 
 	public String visit(FactorNew n) {
@@ -625,65 +596,5 @@ public class SymbolTableTypeCheck implements Visitor {
 	public String visit(New n) {
 		return null;
 	}
-
-	/*
-	 * public String visit(Exp n){ String tLeft = null, tRight = null; if(n.left
-	 * != null){ tLeft = n.left.accept(this); } if(n.right != null){ tRight =
-	 * n.left.accept(this); } if(tLeft == null) return tRight; if(tRight ==
-	 * null); return tLeft; return checkType(tLeft, tRight); }
-	 * 
-	 * public String visit(And n){ String tLeft = n.left.accept(this); String
-	 * tRight = n.right.accept(this; //Types should be equal //Types should be
-	 * BOOLEAN //return BOOLEAN return checkType(tLeft, tRight, "BOOLEAN",
-	 * "BOOLEAN"); }
-	 * 
-	 * public String visit(LessThan n){ String tLeft = n.left.accept(this);
-	 * String tRight = n.right.accept(this; return checkType(tLeft, tRight,
-	 * "INTEGER", "BOOLEAN"); }
-	 * 
-	 * public String visit(Plus n){ String tLeft = n.left.accept(this); String
-	 * tRight = n.right.accept(this; return checkType(tLeft, tRight, "INTEGER",
-	 * "INTEGER"); }
-	 * 
-	 * //x[expr] public String visit(ArrayLookup n){ String tLeft =
-	 * n.left.accept(this); String tRight = n.right.accept(this;
-	 * checkType(tLeft, "INTARRAY"); return checkType(tRight, "INTEGER", tLeft);
-	 * //return tRight? }
-	 * 
-	 * public String visit(ArrayLength n){ String tLeft = n.left.accept(this);
-	 * return checkType(tLeft, "INTARRAY", "INTEGER"); }
-	 * 
-	 * public String visit(Call n){ String tClass = n.receiver.accept(this);
-	 * SymbolTable symTab = program.getSymbolTable(tClass); if(symTab == null)
-	 * System.err.println("Method not defined in class..." + tClass);
-	 * symTab.check(n.methodName, IdType.METHOD); Binding b =
-	 * symTab.get(n.methodName); List<String> parms = b.getParms(); List<String>
-	 * exps = n.parms.getExps(); if(exps.size() != parms.size())
-	 * System.err.println(
-	 * "Number of actual parms != number of formal parameters"); for(int i = 0;
-	 * i < exps.size(); i++) { if(exps.get(i).accept(this) != parms.get(i)
-	 * System.err.println("Mismatching parameters"); } return b.getType(); }
-	 */
-
-	/*
-	 * //the given identifier should have the given usage //if the usage is
-	 * Variable, return its symbol table private SymbolTable check(Identifier
-	 * id, IdType idtype){ SymbolTable result = symTabMethod; //assume id is a
-	 * local variable Binding b = symTabMethod.get(id); if(b == null) { result =
-	 * symTabClass; symTabClass.check(id, idtype); } else {
-	 * symTabMethod.check(id, idtype); } return result; }
-	 * 
-	 * // return the symbol table for the given identifier, check its type
-	 * private SymbolTable check(Identifier id, String type) { SymbolTable
-	 * result = symTabMethod; //assume id is a local variable Binding b =
-	 * symTabMethod.get(id); if(b == null) { result = symTabClass;
-	 * symTabClass.check(id, type); } else { symTabMethod.check(id, type); }
-	 * return result; }
-	 * 
-	 * private boolean checkType(String e1, String e2) { if(e1.equals(e2))
-	 * return true;
-	 * 
-	 * System.err.println("Types do not match"); return false; }
-	 */
 
 }
