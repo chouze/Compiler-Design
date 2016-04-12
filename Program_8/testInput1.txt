@@ -3,6 +3,9 @@ class Test
 	public static void main ( String [] args )
 	{
 		//This is a comment
+		//So is this
+		//And this one
+
 		int i = new AddNum().addNumber(10, 9);
 		{
 			
@@ -17,7 +20,7 @@ class AddNum
 		int total;
 		int firstInt;
 		int secondInt;
-		int d;
+		int i;
 		{
 
 			total = 0;
@@ -34,7 +37,7 @@ class AddNum
 						{
 							switch(i)
 							{
-								case i < 10:
+								case 10:
 									System.out.println(i < 10);
 								default:
 									i = 10;

@@ -3,7 +3,7 @@ class Test
 	public static void main ( String [] args )
 	{
 		//This is a comment
-		int i = new AddNum().addNumber(10, 9, 8, 7);
+		int i = new AddNum().addNumber(true, 5, 6, 7, 8);
 		{
 			
 		}
@@ -12,20 +12,24 @@ class Test
 
 class AddNum
 {
-	public int addNumber( int a, int b, int c, int d)
+	public int addNumber( boolean a, int b, int c, int d, int e)
 	{
-		int total;
+		boolean total;
 		int firstInt;
 		int secondInt;
+		int methodCheck;
+		
 		{
 
-			total = 0;
-			firstInt = a;
-			secondInt = b;
+			total = true;
+			firstInt = d;
+			secondInt = e;
 
-			x = a && b < c + d * !AddNum.subNumber(a, b);
+			total = !( a && (b < c) );
+			firstInt = d * e + 9 - 6;
+			methodCheck = AddNum.subNumber(firstInt, secondInt);
 		}
-		return total;
+		return firstInt;
 	}
 	
 	public int subNumber(int a, int b)
