@@ -21,7 +21,7 @@ package symbolTableBuilder;
 
 public class BuildST implements Visitor {
 	public SymbolTable symTab, symTabMethod, symTabClass, symTabProg;
-	
+
 	// I think it works like this:
 	// symTab is the table in focus
 	// symTabMethod is the table created when a method is created
@@ -40,37 +40,40 @@ public class BuildST implements Visitor {
 		n.mainClass.accept(this);
 		n.classDecls.accept(this);
 		System.out.println("Program Table: \n" + n.symTab);
+		return null;
 	}
 
 	public Object visit(MainClass n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
-		
-		
+
+
 		n.className.accept(this);
 		n.args.accept(this);
 		symTab = symTabClass = n.symTab = new SymbolTable(); // each mainclass
-																// has it's own
-																// symboltable
-																// since it is
-																// static
+		// has it's own
+		// symboltable
+		// since it is
+		// static
 		symTab.put(new Identifier("args"), new Binding(new Identifier("args"), IdType.VARIABLE, "Object[]"));
 		n.v.accept(this);
 		n.stmt.accept(this); // ??
 		symTabProg.putChild(n.className.name, n.symTab);
 		System.out.println("MainClass " + n.className.name + " Table: \n" + n.symTab);
+		return null;
 	}
 
 	// everytime we put a new symbol into the symboltable, we have to create a
 	// new binding for it
 	public Object visit(ClassDeclDeffSimple n) {
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
-		
+
 		symTab = symTabClass = n.symTab = new SymbolTable();
 		n.className.accept(this);
 		n.fields.accept(this); // enter fields into the symbol table
 		n.methods.accept(this);
 		symTabProg.putChild(n.className.name, n.symTab);
 		System.out.println("SimpleClass " + n.className.name + " Table: \n" + n.symTab);
+		return null;
 	}
 
 	/*
@@ -80,8 +83,8 @@ public class BuildST implements Visitor {
 
 	public Object visit(ClassDeclDeffExtend n) {
 		symTab = symTabClass = n.symTab = new SymbolTable(); // class needs a
-																// symbol table
-		
+		// symbol table
+
 		symTabProg.put(n.className, new Binding(n.className, IdType.CLASS));
 		n.className.accept(this);
 
@@ -90,8 +93,8 @@ public class BuildST implements Visitor {
 		symTabProg.putChild(n.className.name, n.symTab);
 		n.variableList.accept(this);
 		System.out.println("Extended Class " + n.className.name + " Table: \n" + n.symTab);
-		
 
+		return null;
 	}
 
 	public Object visit(ClassDeclList n) {
@@ -108,13 +111,14 @@ public class BuildST implements Visitor {
 
 			// visit(c);
 		}
+		return null;
 	}
 
 	public Object visit(VarDecl n) {
 		Type t = n.type;
 		t.accept(this);
 		n.variableType.accept(this, t);
-
+		return null;
 	}
 
 	public Object visit(VarDeclType n, Type t) {
@@ -128,11 +132,12 @@ public class BuildST implements Visitor {
 
 		if (!(n.exp == null))
 			n.exp.accept(this);
+		return null;
 	}
 
 	public Object visit(MethodDecl n) {
 		Binding bind = new Binding(n.methodName, IdType.METHOD, n.type.getClass().getSimpleName());
-		
+
 		bind.addParams(n.parameters);
 		symTabClass.put(n.methodName, bind);
 		// symTab.put(n.methodName, bind);
@@ -146,7 +151,7 @@ public class BuildST implements Visitor {
 		e.accept(this);
 		symTabClass.putChild(n.methodName.name, n.symTab);
 		System.out.println("Method " + n.methodName.name + " Table: \n" + n.symTab);
-
+		return null;
 	}
 
 	public Object visit(FormalList n) {
@@ -161,6 +166,7 @@ public class BuildST implements Visitor {
 		//symTab.put(n.parameterName, new Binding(n.parameterName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		n.parameterName.accept(this);
 		n.moreParams.accept(this);
+		return null;
 	}
 
 	public Object visit(FormalRest n) {
@@ -174,6 +180,7 @@ public class BuildST implements Visitor {
 			symTab.put(n.paramName, new Binding(n.paramName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		//symTab.put(n.paramName, new Binding(n.paramName, IdType.VARIABLE, t.getClass().getSimpleName()));
 		n.paramName.accept(this);
+		return null;
 	}
 
 	public Object visit(Block n) {
@@ -235,6 +242,7 @@ public class BuildST implements Visitor {
 		//symTab.put(n.id, new Binding(n.id, IdType.VARIABLE, n.getClass().getSimpleName()));
 		n.id.accept(this);
 		n.assignExp.accept(this);
+		return null;
 	}
 
 	public Object visit(InitializeArray n) {
@@ -242,12 +250,14 @@ public class BuildST implements Visitor {
 		n.id.accept(this);
 		n.arrayExp.accept(this);
 		n.assignExp.accept(this);
+		return null;
 	}
 
 	public Object visit(IncrementSimple n) {
 		//symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
 		n.assignExp.accept(this);
+		return null;
 	}
 
 	public Object visit(IncrementArray n) {
@@ -255,26 +265,31 @@ public class BuildST implements Visitor {
 		n.id.accept(this);
 		n.arrayExp.accept(this);
 		n.assignExp.accept(this);
+		return null;
 	}
 
 	public Object visit(ElseIf n) {
 		n.condition.accept(this);
 		n.s.accept(this);
+		return null;
 	}
 
 	public Object visit(CaseListCase n) {
 		n.caseExp.accept(this);
 		n.s.accept(this);
 		n.caseList.accept(this);
+		return null;
 	}
 
 	public Object visit(CaseListDefault n) {
 		n.s.accept(this);
+		return null;
 	}
 
 	public Object visit(ExpList n, Identifier id) {
 		n.e.accept(this);
 		n.multipleExp.accept(this, id);
+		return null;
 	}
 
 	public Object visit(ExpRest n) {
@@ -290,14 +305,15 @@ public class BuildST implements Visitor {
 	}
 
 	public Object visit(ClassDecl n) {
-		// does nothing
+		return null;
 	}
 
 	public Object visit(VarDeclList n) {
 		for (VarDecl v : n) {
 			v.accept(this);
-			// visit(v);
+
 		}
+		return null;
 	}
 
 	public Object visit(MethodDeclList n) {
@@ -305,6 +321,7 @@ public class BuildST implements Visitor {
 			m.accept(this);
 			// visit(m);
 		}
+		return null;
 	}
 
 	public Object visit(IntArrayType n) {
@@ -331,7 +348,7 @@ public class BuildST implements Visitor {
 
 	public Object visit(Statement n) {
 		// does nothing
-
+		return null;
 	}
 
 	public Object visit(And n) {
@@ -404,24 +421,24 @@ public class BuildST implements Visitor {
 
 	public Object visit(StatementList n) {
 		for (Statement s : n) {
-			visit(s);
+			s.accept(this);
 		}
-
+		return null;
 	}
 
 	public Object visit(InitializationStm n) {
 		// does nothing
-
+		return null;
 	}
 
 	public Object visit(IncrementStm n) {
 		// does nothing
-
+		return null;
 	}
 
 	public Object visit(CaseList n) {
 		// does nothing
-
+		return null;
 	}
 
 	public Object visit(FormalRestList formalRestList) {
@@ -429,7 +446,7 @@ public class BuildST implements Visitor {
 			f.accept(this);
 			// visit(f);
 		}
-
+		return null;
 	}
 
 	public Object visit(ElseIfList elseIfList) {
@@ -437,6 +454,7 @@ public class BuildST implements Visitor {
 			e.accept(this);
 			// visit(e);
 		}
+		return null;
 	}
 
 	public Object visit(ExpRestList expRestList, Identifier id) {
@@ -444,6 +462,7 @@ public class BuildST implements Visitor {
 			e.accept(this);
 			// visit(e);
 		}
+		return null;
 	}
 
 	public Object visit(DotArrayList dotArrayList) {
@@ -455,7 +474,7 @@ public class BuildST implements Visitor {
 			}
 			// visit(e);
 		}
-
+		return null;
 	}
 
 	public Object visit(DotArray n) {
@@ -466,7 +485,7 @@ public class BuildST implements Visitor {
 
 	public Object visit(DotArrayArray n) {
 		n.exp.accept(this);
-return null;
+		return null;
 	}
 
 	public Object visit(DotArrayMember n) {
@@ -531,7 +550,7 @@ return null;
 
 	public Object visit(MemberLength n) {
 		// does nothing
-return null;
+		return null;
 	}
 
 	public Object visit(New n) {
@@ -564,5 +583,10 @@ return null;
 		n.tlist.accept(this);
 		return null;
 
+	}
+
+	@Override
+	public Object visit(Object o1, Object o2) {
+		return null;
 	}
 }
