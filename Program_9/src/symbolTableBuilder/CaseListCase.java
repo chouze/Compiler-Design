@@ -23,8 +23,8 @@ public class CaseListCase extends CaseList
 		this.id = id;
 	}
 
-	public void accept(Visitor v) 
+	public Object accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

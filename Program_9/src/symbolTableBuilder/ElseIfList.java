@@ -12,8 +12,8 @@ package symbolTableBuilder;
 public class ElseIfList extends java.util.ArrayList<ElseIf> {
 
 	
-	public void accept(Visitor v) 
+	public Object accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

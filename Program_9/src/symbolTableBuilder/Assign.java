@@ -14,4 +14,8 @@ public abstract class Assign extends Statement
 	{
 		
 	}
+	public Object accept(Visitor v) 
+	{
+		return v.visit(this);
+	}
 }

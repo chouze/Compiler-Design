@@ -19,7 +19,7 @@ public class And
 		this.alist = alist;
 	}
 	
-	public  Object accept(Visitor v) 
+	public Object accept(Visitor v) 
 	{
 		return v.visit(this);
 	}

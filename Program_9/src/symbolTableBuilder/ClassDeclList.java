@@ -10,8 +10,8 @@ package symbolTableBuilder;
 
 public class ClassDeclList extends java.util.ArrayList<ClassDecl>
 {
-	public void accept(Visitor v) 
+	public Object accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

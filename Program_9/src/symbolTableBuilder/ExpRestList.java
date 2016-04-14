@@ -12,8 +12,8 @@ package symbolTableBuilder;
 public class ExpRestList extends java.util.ArrayList<ExpRest> {
 
 	
-	public void accept(Visitor v, Identifier id) 
+	public Object accept(Visitor v, Identifier id) 
 	{
-		v.visit(this, id);
+		return v.visit(this, id);
 	}
 }
