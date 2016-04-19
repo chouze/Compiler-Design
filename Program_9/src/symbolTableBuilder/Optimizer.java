@@ -259,7 +259,7 @@ public class Optimizer implements Visitor {
 		return n;
 	}
 /*
- * ExpRestList, not qure how to visit it just yet, needs work
+ * ExpRestList, not sure how to visit it just yet, needs work
  */
 	public Object visit(ExpRestList n, Identifier id) 
 	{	
