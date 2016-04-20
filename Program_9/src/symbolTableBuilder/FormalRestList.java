@@ -14,8 +14,8 @@ public class FormalRestList extends LinkedList<FormalRest>
 {
 
 	
-	public void accept(Visitor v) 
+	public Object accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

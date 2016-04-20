@@ -11,8 +11,8 @@ package symbolTableBuilder;
 public class VarDeclList extends java.util.ArrayList <VarDecl>{
 	
 	
-	public void accept(Visitor v) 
+	public Object accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

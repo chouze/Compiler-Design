@@ -218,7 +218,7 @@ public class BuildST implements Visitor {
 	public Object visit(Switch n) {
 		//symTab.put(n.id, new Binding(n.id, IdType.VARIABLE));
 		n.id.accept(this);
-		n.caseDefault.accept(this);
+		n.caseList.accept(this);
 		return null;
 	}
 
