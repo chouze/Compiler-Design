@@ -8,7 +8,7 @@ package symbolTableBuilder;
  *
  */
 
-public abstract class New {
+public abstract class New extends Factor{
 	public Object accept(Visitor v) 
 	{
 		return v.visit(this);

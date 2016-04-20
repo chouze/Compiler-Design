@@ -4,15 +4,15 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(Program n) {
-		String m = n.mainClass.accept(this).toString();
+		String m = "Program: " + n.mainClass.accept(this).toString();
 		m += n.classDecls.accept(this);
 		return m;
 	}
 
 	@Override
 	public Object visit(MainClass n) {
-		String s = n.className.accept(this).toString();
-		s += n.args.accept(this);
+		String s = "MainClass: " + n.className.accept(this).toString();
+		s += "Arguments: " + n.args.accept(this);
 		s += n.v.accept(this);
 		s += n.stmt.accept(this);
 		return s;
@@ -25,7 +25,7 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(ClassDeclDeffSimple n) {
-		String s = n.className.name;
+		String s = "ClassName: " + n.className.name;
 		s += n.fields.accept(this);
 		s += n.methods.accept(this);
 		return s;
@@ -33,8 +33,8 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(ClassDeclDeffExtend n) {
-		String s = n.className.name;
-		s += n.extendedClass.accept(this);
+		String s = "ClassName: " + n.className.name;
+		s += " extends " + n.extendedClass.accept(this);
 		s += n.variableList.accept(this);
 		s += n.methodList.accept(this);
 		return s;
@@ -51,7 +51,7 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(VarDecl n) {
-		String s = n.type.accept(this).toString();
+		String s = "VarDecl: " + n.type.accept(this).toString();
 		s += n.variableType.accept(this, n.type);
 		return s;
 	}
@@ -77,11 +77,12 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(MethodDecl n) {
-		String s = n.methodName.accept(this).toString();
+		String s = " MethodName: " + n.methodName.accept(this).toString();
 		s += n.type.accept(this);
 		s += n.parameters.accept(this);
 		s += n.variables.accept(this);
 		s += n.statement.accept(this);
+		s += " Return: " + n.expReturn.accept(this);
 		return s;
 	}
 
@@ -96,7 +97,7 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(FormalList n) {
-		String s = "";
+		String s = "Params: ";
 		s += n.type.accept(this);
 		s += n.parameterName.accept(this);
 		s += n.moreParams.accept(this);
@@ -124,8 +125,8 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(If n) {
-		String s = "";
-		s += n.condition.accept(this);
+		String s = "If ";
+		s += n.condition.accept(this) + "then ";
 		s += n.s.accept(this);
 		s += n.elseIf.accept(this);
 		return s;
@@ -133,28 +134,28 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(ElseIf n) {
-		String s = n.condition.accept(this).toString();
+		String s = "Else If: " + n.condition.accept(this).toString();
 		s += n.s.accept(this);
 		return s;
 	}
 
 	@Override
 	public Object visit(Do n) {
-		String s = n.s.accept(this).toString();
-		s += n.condition.accept(this).toString();
+		String s = "Do: " + n.s.accept(this).toString();
+		s += "While: " + n.condition.accept(this).toString();
 		return s;
 	}
 
 	@Override
 	public Object visit(While n) {
-		String s = n.condition.accept(this).toString();
+		String s = "While: " + n.condition.accept(this).toString();
 		s += n.s.accept(this);
 		return s;
 	}
 
 	@Override
 	public Object visit(For n) {
-		String s = n.initialize.accept(this).toString();
+		String s = "For: " + n.initialize.accept(this).toString();
 		s += n.e.accept(this);
 		s += n.increment.accept(this);
 		s += n.s.accept(this);
@@ -163,14 +164,14 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(Switch n) {
-		String s = n.id.accept(this).toString();
+		String s = "Switch: " + n.id.accept(this).toString();
 		s += n.caseList.accept(this);
 		return s;
 	}
 
 	@Override
 	public Object visit(CaseListCase n) {
-		String s = n.caseExp.accept(this).toString();
+		String s = "Case: " + n.caseExp.accept(this).toString();
 		s += n.s.accept(this);
 		s += n.caseList.accept(this);
 		return s;
@@ -178,21 +179,21 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(CaseListDefault n) {
-		String s = "";
+		String s = "Default: ";
 		s += n.s.accept(this);
 		return s;
 	}
 
 	@Override
 	public Object visit(Print n) {
-		String s = n.statementToPrint.accept(this).toString();
+		String s = "Print: " + n.statementToPrint.accept(this).toString();
 		return s;
 	}
 
 	@Override
 	public Object visit(InitializeSimple n) {
 		String s = n.id.accept(this).toString();
-		s += n.id.accept(this);
+		s += "= " + n.assignExp.accept(this);
 		return s;
 	}
 
@@ -207,7 +208,7 @@ public class ToStringer implements Visitor {
 	@Override
 	public Object visit(IncrementSimple n) {
 		String s = n.id.accept(this).toString();
-		s += n.assignExp.accept(this);
+		s += "= " + n.assignExp.accept(this);
 		return s;
 	}
 
@@ -258,22 +259,41 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(FormalRestList n) {
-		return null;
+		String s = "";
+		for(FormalRest fr: n)
+			s += fr.accept(this);
+		
+		return s;
 	}
 
 	@Override
 	public Object visit(ElseIfList n) {
-		return null;
+		String s = "";
+		for(ElseIf ef: n)
+			s += ef.accept(this);
+		
+		return s;
 	}
 
 	@Override
 	public Object visit(ExpRestList n, Identifier id) {
-		return null;
+		String s = "";
+		for(ExpRest er: n)
+		{
+			s += er.accept(this);
+		}
+		return s;
 	}
 
 	@Override
 	public Object visit(DotArrayList n) {
-		return "";
+
+		String s = "";
+		for(DotArray da: n)
+		{
+			s += da.accept(this);
+		}
+		return s;
 	}
 
 	@Override
@@ -298,7 +318,7 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(Identifier n) {
-		return " " + n.name + " ";
+		return n.name + " ";
 	}
 
 	@Override
@@ -308,27 +328,27 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(IntArrayType n) {
-		return " IntArray ";
+		return "IntArray ";
 	}
 
 	@Override
 	public Object visit(BooleanType n) {
-		return " bool ";
+		return "bool ";
 	}
 
 	@Override
 	public Object visit(IntegerType n) {
-		return " int ";
+		return "int ";
 	}
 
 	@Override
 	public Object visit(IdentifierType n) {
-		return " " + n.id + " ";
+		return n.id + " ";
 	}
 
 	@Override
 	public Object visit(AssignSimple n) {
-		String s = n.id.accept(this).toString();
+		String s = "Assign: " + n.id.accept(this).toString() + "= ";
 		s += n.assignment.accept(this);
 		return s;
 	}
@@ -357,10 +377,10 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(Elist n) {
-		if(n.and == null || n.elist == null){
+		if(n.and == null && n.elist == null){
 			return "";
 		}
-		String s = n.and.accept(this).toString();
+		String s = "&& " + n.and.accept(this).toString();
 		s += n.elist.accept(this);
 		return s;
 	}
@@ -368,16 +388,18 @@ public class ToStringer implements Visitor {
 	@Override
 	public Object visit(And n) {
 		String s = n.less.accept(this).toString();
+		if(n.alist == null)
+			return s;
 		s += n.alist.accept(this);
 		return s;
 	}
 
 	@Override
 	public Object visit(Alist n) {
-		if(n.alist == null || n.less == null){
+		if(n.alist == null && n.less == null){
 			return "";
 		}
-		String s = n.less.accept(this).toString();
+		String s = "< " + n.less.accept(this).toString();
 		s += n.alist.accept(this);
 		return s;
 	}
@@ -385,23 +407,28 @@ public class ToStringer implements Visitor {
 	@Override
 	public Object visit(Less n) {
 		String s = n.term.accept(this).toString();
+		if(n.llist == null)
+			return s;
 		s += n.llist.accept(this);
 		return s;
 	}
 
 	@Override
 	public Object visit(Llist n) {
-		if(n.l == null || n.t == null){
-			return "";
-		}
-		String s = n.l.accept(this).toString();
-		s += n.t.accept(this);
-		return s;
+		
+		if (n instanceof LlistDifference)
+			return (String) visit((LlistDifference) n);
+		if ( n instanceof LlistSum)
+			return (String) visit((LlistSum) n);
+		
+		return "";
 	}
 
 	@Override
 	public Object visit(LlistDifference n) {
-		String s = n.term.accept(this).toString();
+		String s = " - " + n.term.accept(this).toString();
+		if(n.llist == null)
+			return s;
 		s += " - ";
 		s += n.llist.accept(this);
 		return s;
@@ -409,8 +436,9 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(LlistSum n) {
-		String s = n.term.accept(this).toString();
-		s += " + ";
+		String s = " + " + n.term.accept(this).toString();
+		if(n.llist == null)
+			return s;
 		s += n.llist.accept(this);
 		return s;
 	}
@@ -418,16 +446,18 @@ public class ToStringer implements Visitor {
 	@Override
 	public Object visit(Term n) {
 		String s = n.not.accept(this).toString();
+		if(n.tlist == null)
+			return s;
 		s += n.tlist.accept(this);
 		return s;
 	}
 
 	@Override
 	public Object visit(Tlist n) {
-		if(n.not == null || n.tlist == null){
+		if(n.not == null && n.tlist == null){
 			return "";
 		}
-		String s = n.not.accept(this).toString();
+		String s = "* " + n.not.accept(this).toString();
 		s += n.tlist.accept(this);
 		return s;
 	}
@@ -446,13 +476,13 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(NotSimple n) {
-		String s = n.not.accept(this).toString();
+		String s = "!" + n.not.accept(this).toString();
 		return s;
 	}
 
 	@Override
 	public Object visit(DotArrayMember n) {
-		String s = n.member.accept(this).toString();
+		String s = "." + n.member.accept(this).toString();
 		return s;
 	}
 
@@ -464,27 +494,27 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(IntegerLiteral n) {
-		return " "+ n.i + " ";
+		return n.i + " ";
 	}
 
 	@Override
 	public Object visit(True n) {
-		return " true ";
+		return "true ";
 	}
 
 	@Override
 	public Object visit(False n) {
-		return " false ";
+		return "false ";
 	}
 
 	@Override
 	public Object visit(IdentifierExp n) {
-		return " " + n.s + " ";
+		return n.s + " ";
 	}
 
 	@Override
 	public Object visit(This n) {
-		return " this ";
+		return "this ";
 	}
 
 	@Override

@@ -101,7 +101,7 @@ public class Optimizer implements Visitor {
 
 	public Object visit(If n) {
 		//Apparently because we're using elseifs we cant do the simple optimization
-		
+
 		Equal eq = new Equal();
 		if((boolean)eq.visit(n.condition, new True())){
 			return n.s;
@@ -238,16 +238,10 @@ public class Optimizer implements Visitor {
 		}
 		return n;
 	}
-<<<<<<< HEAD
-/*
- * ExpRestList, not sure how to visit it just yet, needs work
- */
-	public Object visit(ExpRestList n, Identifier id) 
-	{	
-=======
-
+	/*
+	 * ExpRestList, not sure how to visit it just yet, needs work
+	 */
 	public Object visit(ExpRestList n, Identifier id) {
->>>>>>> origin/master
 		for (int i = 0; i < n.size(); i++) {
 			ExpRest e = n.get(i);
 			e = (ExpRest)e.accept(this); //Pretty sure this loops through the ExpRestList list and accepts all expressions in it, but not 100%
@@ -260,7 +254,7 @@ public class Optimizer implements Visitor {
 			if (e instanceof DotArrayArray) {
 				e = (DotArrayArray) ((DotArrayArray) e).accept(this);
 			} else if (e instanceof DotArrayMember) {
-				e = (DotArrayArray) ((DotArrayMember) e).accept(this);
+				((DotArrayMember)e).member = (Member) ((DotArrayMember) e).member.accept(this);
 			}
 		}
 		return n;
@@ -407,10 +401,8 @@ public class Optimizer implements Visitor {
 
 	public Object visit(NotFactor n) {
 		n.factor = (Factor) n.factor.accept(this);
-		if (!(n.dotList.isEmpty())) {
-			return n.dotList.get(n.dotList.size() - 1).accept(this); //this was for typing, get the last called dotarray's type
-		} else
-			return n;
+		n.dotList = (DotArrayList) n.dotList.accept(this);
+		return n;
 	}
 
 	public Object visit(FactorNew n) {
