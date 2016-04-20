@@ -368,6 +368,10 @@ public class Optimizer implements Visitor {
 	public Object visit(LlistDifference n) {
 		n.term = (Term) n.term.accept(this);
 		if ((n.llist != null) && ((n.llist instanceof LlistDifference) || (n.llist instanceof LlistSum))) {
+			Equal eq = new Equal();
+			if((boolean) eq.visit(n.term, n.llist)){
+				return new IntegerLiteral(0);
+			}
 			n.llist = (Llist) n.llist.accept(this);
 			return n;
 		}

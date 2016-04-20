@@ -15,7 +15,6 @@ public class ToStringer implements Visitor {
 		s += n.args.accept(this);
 		s += n.v.accept(this);
 		s += n.stmt.accept(this);
-		s += "s";
 		return s;
 	}
 
@@ -274,22 +273,22 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(DotArrayList n) {
-		return "DotArrayList";
+		return "";
 	}
 
 	@Override
 	public Object visit(DotArray n) {
-		return "DotArray";
+		return "";
 	}
 
 	@Override
 	public Object visit(DotArrayArray n) {
-		return "DotArrayList";
+		return "";
 	}
 
 	@Override
 	public Object visit(Member n) {
-		return "Member";
+		return "";
 	}
 
 	@Override
@@ -319,7 +318,7 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(IntegerType n) {
-		return " IntegerType ";
+		return " int ";
 	}
 
 	@Override
