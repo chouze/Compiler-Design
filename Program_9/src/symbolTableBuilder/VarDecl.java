@@ -23,8 +23,8 @@ public class VarDecl
 		//for 0 occurrences
 	}
 	
-	public void accept(Visitor v) 
+	public Object accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

@@ -25,6 +25,8 @@ public class Driver {
 		Program prog = parser.Parse();
 		bst.visit(prog);
 		sttc.visit(prog);
+		ToStringer t = new ToStringer();
+		System.out.println(t.visit(prog));
 		
 	}
 

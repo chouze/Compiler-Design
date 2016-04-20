@@ -100,10 +100,21 @@ public class Optimizer implements Visitor {
 	}
 
 	public Object visit(If n) {
-		n.condition = (Exp) n.condition.accept(this);
-		n.s = (Statement) n.s.accept(this);
-		n.elseIf = (ElseIfList) n.elseIf.accept(this);
-		return n;
+		//Apparently because we're using elseifs we cant do the simple optimization
+		
+		Equal eq = new Equal();
+		if((boolean)eq.visit(n.condition, new True())){
+			return n.s;
+		}
+		else if((boolean)eq.visit(n.condition, new False())){
+			return n.elseIf;
+		}
+		else{
+			n.condition = (Exp) n.condition.accept(this);
+			n.s = (Statement) n.s.accept(this);
+			n.elseIf = (ElseIfList) n.elseIf.accept(this);
+			return n;
+		}
 	}
 
 	public Object visit(Do n) {
@@ -128,7 +139,7 @@ public class Optimizer implements Visitor {
 
 	public Object visit(Switch n) {
 		n.id.accept(this); // identifier
-		n.caseDefault = (CaseList) n.caseDefault.accept(this);
+		n.caseList = (CaseList) n.caseList.accept(this);
 		return n;
 	}
 

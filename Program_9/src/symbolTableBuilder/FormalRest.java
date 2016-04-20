@@ -19,8 +19,8 @@ public class FormalRest extends java.util.ArrayList<FormalRest>
 		this.paramName = paramName;
 	}
 	
-	public void accept(Visitor v) 
+	public Object accept(Visitor v) 
 	{
-		v.visit(this);
+		return v.visit(this);
 	}
 }

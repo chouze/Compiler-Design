@@ -25,8 +25,8 @@ public class VarDeclType
 		this.exp = exp;
 	}
 
-	public void accept(Visitor v, Type t) 
+	public Object accept(Visitor v, Type t) 
 	{
-		v.visit(this, t);
+		return v.visit(this, t);
 	}
 }

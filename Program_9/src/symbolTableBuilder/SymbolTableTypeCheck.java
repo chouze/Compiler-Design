@@ -143,7 +143,7 @@ public class SymbolTableTypeCheck implements Visitor {
 
 	public Object visit(Switch n) {
 		n.id.accept(this);
-		n.caseDefault.accept(this);
+		n.caseList.accept(this);
 		return null;
 	}
 

@@ -939,7 +939,7 @@ public class Equal implements Visitor {
 			Switch b1 = (Switch) o1;
 			Switch b2 = (Switch) o2;
 			
-			return (boolean)visit(b1.id, b2.id) && (boolean)visit(b1.caseDefault, b2.caseDefault);
+			return (boolean)visit(b1.id, b2.id) && (boolean)visit(b1.caseList, b2.caseList);
 		}
 
 		if(o1 instanceof Term){
