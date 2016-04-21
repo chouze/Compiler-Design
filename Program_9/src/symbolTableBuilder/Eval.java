@@ -4,38 +4,55 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(Program n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.mainClass = (MainClass) n.mainClass.accept(this);
+		n.classDecls = (ClassDeclList) n.classDecls.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(MainClass n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.className = (Identifier) n.className.accept(this);
+		n.args = (Identifier) n.args.accept(this);
+		n.v = (VarDeclList) n.v.accept(this);
+		n.stmt = (Statement) n.stmt.accept(this);
+		
+		return n;
 	}
 
-	@Override
-	public Object visit(ClassDecl n) {
-		// TODO Auto-generated method stub
+	public Object visit(ClassDecl n) 
+	{
+		//abstract
 		return null;
 	}
 
 	@Override
 	public Object visit(ClassDeclDeffSimple n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.className = (Identifier) n.className.accept(this);
+		n.fields = (VarDeclList) n.fields.accept(this);
+		n.methods = (MethodDeclList) n.methods.accept(this);
+	
+		return n;
 	}
 
 	@Override
 	public Object visit(ClassDeclDeffExtend n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.className = (Identifier) n.className.accept(this);
+		n.extendedClass = (Identifier) n.extendedClass.accept(this);
+		n.variableList = (VarDeclList) n.variableList.accept(this);
+		n.methodList = (MethodDeclList) n.methodList.accept(this);
+	
+		return n;
 	}
 
 	@Override
 	public Object visit(ClassDeclList n) {
-		// TODO Auto-generated method stub
-		return null;
+		for(ClassDecl cd : n)
+		{
+			cd.accept(this);
+		}
+		
+		return n;
 	}
 
 	@Override
@@ -66,114 +83,163 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(MethodDecl n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.methodName = (Identifier) n.methodName.accept(this);
+		n.type = (Type) n.type.accept(this);
+		n.parameters = (FormalList)n.parameters.accept(this);
+		n.variables = (VarDeclList) n.variables.accept(this);
+		n.statement = (Statement) n.statement.accept(this);
+		n.expReturn = (Exp) n.expReturn.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(MethodDeclList n) {
-		// TODO Auto-generated method stub
-		return null;
+		for(MethodDecl md : n)
+		{
+			md.accept(this);
+		}
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(FormalList n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.type = (Type) n.type.accept(this);
+		n.parameterName = (Identifier) n.parameterName.accept(this);
+		n.moreParams = (FormalRestList) n.moreParams.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(FormalRest n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.type = (Type) n.type.accept(this);
+		n.paramName = (Identifier) n.paramName.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(Statement n) {
-		// TODO Auto-generated method stub
+		//abstract
 		return null;
 	}
 
 	@Override
 	public Object visit(Block n) {
-		return n.sl.accept(this);
+		n.sl = (StatementList) n.sl.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(If n) {
-		return null;
+		n.condition = (Exp) n.condition.accept(this);
+		n.s = (Statement) n.s.accept(this);
+		n.elseIf = (ElseIfList) n.elseIf.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(ElseIf n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.condition = (Exp) n.condition.accept(this);
+		n.s = (Statement) n.s.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(Do n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.condition = (Exp) n.condition.accept(this);
+		n.s = (Statement) n.s.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(While n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.condition = (Exp) n.condition.accept(this);
+		n.s = (Statement) n.s.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(For n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.initialize = (InitializationStm) n.initialize.accept(this);
+		n.e = (Exp) n.e.accept(this);
+		n.increment = (IncrementStm) n.increment.accept(this);
+		n.s = (Statement) n.s.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(Switch n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.id = (Identifier) n.id.accept(this);
+		n.caseList = (CaseList) n.caseList.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(CaseListCase n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.id = (Identifier) n.id.accept(this);
+		n.caseList = (CaseList) n.caseList.accept(this);
+		n.caseExp = (Exp) n.caseExp.accept(this);
+		n.caseList = (CaseListCase) n.caseList.accept(this);
+		
+		return n;		
 	}
 
 	@Override
 	public Object visit(CaseListDefault n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.s = (Statement) n.s.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(Print n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.statementToPrint = (Exp) n.statementToPrint.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(InitializeSimple n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.id = (Identifier) n.id.accept(this);
+		n.assignExp = (Exp) n.assignExp.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(InitializeArray n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.id = (Identifier) n.id.accept(this);
+		n.assignExp = (Exp) n.assignExp.accept(this);
+		n.arrayExp = (Exp) n.arrayExp.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(IncrementSimple n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.id = (Identifier) n.id.accept(this);
+		n.assignExp = (Exp) n.assignExp.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(IncrementArray n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.id = (Identifier) n.id.accept(this);
+		n.assignExp = (Exp) n.assignExp.accept(this);
+		n.arrayExp = (Exp) n.arrayExp.accept(this);
+		
+		return n;
 	}
 
 	@Override
@@ -191,46 +257,59 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(StatementList n) {
-		// TODO Auto-generated method stub
-		return null;
+		for(Statement s : n)
+		{
+			s.accept(this);
+		}
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(InitializationStm n) {
-		// TODO Auto-generated method stub
+		//abstract
 		return null;
 	}
 
 	@Override
 	public Object visit(IncrementStm n) {
-		// TODO Auto-generated method stub
+		//abstract
 		return null;
 	}
 
 	@Override
 	public Object visit(CaseList n) {
-		// TODO Auto-generated method stub
+		//abstract
 		return null;
 	}
 
 	@Override
 	public Object visit(FormalRestList formalRestList) {
-		// TODO Auto-generated method stub
-		return null;
+		for(FormalRest fr : formalRestList)
+		{
+			fr.accept(this);
+		}
+		
+		return formalRestList;
 	}
 
 	@Override
 	public Object visit(ElseIfList elseIfList) {
-		// TODO Auto-generated method stub
-		return null;
+		for(ElseIf ef : elseIfList)
+		{
+			ef.accept(this);
+		}
+		
+		return elseIfList;
 	}
 
 	@Override
 	public Object visit(ExpRestList expRestList, Identifier id) {
-		for (int i = 0; i < expRestList.size(); i++) {
-			ExpRest e = expRestList.get(i);
-			e = (ExpRest)e.accept(this); //Pretty sure this loops through the ExpRestList list and accepts all expressions in it, but not 100%
+		for(ExpRest er : expRestList)
+		{
+			er.accept(this);
 		}
+		
 		return expRestList;
 	}
 
@@ -245,24 +324,29 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(DotArray n) {
-		// TODO Auto-generated method stub
+		//abstract
 		return null;
 	}
 
 	@Override
 	public Object visit(DotArrayArray n) {
-		return n.exp.accept(this);
+		n.exp = (Exp) n.exp.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(Member n) 
 	{
+		//abstract
 		return null;
 	}
 
 	@Override
 	public Object visit(MemberLength n) {
-		return n.length.accept(this);
+		n.length = (Exp) n.length.accept(this);
+		
+		return n;
 	}
 
 	@Override
@@ -273,7 +357,7 @@ public class Eval implements Visitor {
 	@Override
 	public Object visit(Type n) {
 		//abstract
-		return n;
+		return null;
 	}
 
 	@Override
@@ -298,14 +382,19 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(AssignSimple n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.id = (Identifier) n.id.accept(this);
+		n.assignment = (Exp) n.assignment.accept(this);
+		
+		return n;
 	}
 
 	@Override
 	public Object visit(AssignArray n) {
-		// TODO Auto-generated method stub
-		return null;
+		n.id = (Identifier) n.id.accept(this);
+		n.index = (Exp) n.index.accept(this);
+		n.value = (Exp) n.value.accept(this);
+		
+		return n;
 	}
 
 	@Override
@@ -315,8 +404,6 @@ public class Eval implements Visitor {
 		
 		return n;
 	}
-
-
 
 	@Override
 	public Object visit(Object o1, Object o2) {
