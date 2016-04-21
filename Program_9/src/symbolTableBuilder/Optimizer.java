@@ -12,6 +12,7 @@ package symbolTableBuilder;
 public class Optimizer implements Visitor {
 	
 	Equal eq = new Equal();
+	Eval ev = new Eval();
 
 	public Optimizer() {
 
@@ -68,7 +69,7 @@ public class Optimizer implements Visitor {
 
 	public Object visit(VarDeclType n, Type t) {
 		if (n.exp != null) {
-			n.exp = (Exp) n.exp.accept(this);
+			n.exp = (Exp) ev.visit((Exp) n.exp.accept(this));
 		}
 		return n;
 	}
@@ -102,24 +103,9 @@ public class Optimizer implements Visitor {
 	}
 
 	public Object visit(If n) {
-
-		
 		n.s = (Statement)n.s.accept(this);
 		n.elseIf = (ElseIfList)n.elseIf.accept(this);
-		/*
-		boolean test = (Boolean)(eq.visit(n.condition, new True()));
-		if((boolean)eq.visit(n.condition, new True())){
-			return n.s.accept(this);
-		}
-		else if((boolean)eq.visit(n.condition, new False())){
-			return n.elseIf;
-		}
-		else{
-			n.condition = (Exp) n.condition.accept(this);
-			n.s = (Statement) n.s.accept(this);
-			n.elseIf = (ElseIfList) n.elseIf.accept(this);
-			return n;
-		}*/
+		
 		boolean sameStatements = true;
 		for(ElseIf ef : n.elseIf){
 			if(!(boolean) eq.visit(n.s.accept(this), ef.s.accept(this))){
@@ -128,7 +114,6 @@ public class Optimizer implements Visitor {
 				break;
 			}
 		}
-		
 		
 		if(sameStatements){
 			System.out.println("Optimizing: factoring duplicated statements from if\n");
