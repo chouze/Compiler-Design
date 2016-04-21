@@ -412,8 +412,10 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(Exp n) {
-		if(n.elist == null)
+		if(n.elist.and == null && n.elist.elist == null)
+		{
 			return n.and.accept(this);
+		}
 		
 		Object temp1 = n.and.accept(this);
 		Object temp2 = n.elist.accept(this);
@@ -430,8 +432,10 @@ public class Eval implements Visitor {
 	public Object visit(Elist n) {
 		if(n.elist == null && n.and == null)
 			return null;
-		if(n.elist == null)
+		if(n.elist == null){
+			n.elist = new Elist();
 			return n.and.accept(this);
+		}
 		
 		Object temp1 = n.and.accept(this);
 		Object temp2 = n.elist.accept(this);
@@ -447,7 +451,7 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(And n) {
-		if(n.alist == null)
+		if(n.alist.alist == null && n.alist.less == null)
 			return n.less.accept(this);
 		
 		Object temp1 = n.alist.accept(this);
@@ -482,7 +486,7 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(Less n) {
-		if(n.llist == null)
+		if(n.llist.l == null && n.llist.t == null)
 			return n.term.accept(this);
 
 		if(n.llist instanceof LlistSum)
@@ -583,7 +587,7 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(Term n) {
-		if(n.tlist == null)
+		if(n.tlist.tlist == null && n.tlist.not == null)
 		{
 			return n.not.accept(this);
 		}
@@ -624,7 +628,7 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(NotFactor n) {
-		if(n.dotList == null)
+		if(n.dotList.size() == 0)
 		{
 			return n.factor.accept(this);
 		}

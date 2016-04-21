@@ -22,8 +22,7 @@ public class Exp extends Factor
 	public Object accept(Visitor v) 
 	{
 		return v.visit(this);
-		
-		//throw new RuntimeException();
+
 	}
 	
 	
