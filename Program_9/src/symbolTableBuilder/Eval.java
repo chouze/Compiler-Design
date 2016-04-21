@@ -308,146 +308,197 @@ public class Eval implements Visitor {
 		return null;
 	}
 
+
+
+	@Override
+	public Object visit(Object o1, Object o2) {
+		return null;
+	}
+	
 	@Override
 	public Object visit(Exp n) {
-		// TODO Auto-generated method stub
-		return null;
+		if(n.and.accept(this) instanceof Boolean && n.elist.accept(this) instanceof Boolean){
+			return (boolean)n.and.accept(this) && (boolean)n.elist.accept(this);
+		}
+		return n;
 	}
 
 	@Override
 	public Object visit(Elist n) {
-		// TODO Auto-generated method stub
-		return null;
+		if(n.and == null && n.elist == null){
+			return null;
+		}
+		if(n.and.accept(this) instanceof Boolean && n.elist.accept(this) instanceof Boolean){
+			return (boolean)n.and.accept(this) && (boolean)n.elist.accept(this);
+		}
+		return n;
 	}
 
+	
 	@Override
 	public Object visit(And n) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//String s = n.less.accept(this).toString();
+		if(n.alist == null)
+			return n.less.accept(this);
+		if(n.alist.accept(this) instanceof Integer && n.less.accept(this) instanceof Integer){
+			return (Integer)n.less.accept(this) < (Integer)n.alist.accept(this);
+		}
+		return n;
 	}
 
 	@Override
 	public Object visit(Alist n) {
-		// TODO Auto-generated method stub
-		return null;
+		if(n.alist == null){
+			if(n.less == null){
+				return null;
+			}
+			else{
+				return n.less.accept(this);
+			}
+		}
+		if(n.less == null){
+			return n.alist.accept(this);
+		}
+		
+		if(n.alist.accept(this) instanceof Integer && n.less.accept(this) instanceof Integer){
+			return (Integer)n.less.accept(this) < (Integer)n.alist.accept(this);
+		}
+		return n;
 	}
 
+	/**
+	 * From tostringer past here
+	 */
 	@Override
 	public Object visit(Less n) {
-		// TODO Auto-generated method stub
-		return null;
+		String s = n.term.accept(this).toString();
+		if(n.llist == null)
+			return s;
+		s += n.llist.accept(this);
+		return s;
 	}
 
 	@Override
 	public Object visit(Llist n) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if (n instanceof LlistDifference)
+			return (String) visit((LlistDifference) n);
+		if ( n instanceof LlistSum)
+			return (String) visit((LlistSum) n);
+		
+		return "";
 	}
 
 	@Override
 	public Object visit(LlistDifference n) {
-		// TODO Auto-generated method stub
-		return null;
+		String s = " - " + n.term.accept(this).toString();
+		if(n.llist == null)
+			return s;
+		s += n.llist.accept(this);
+		return s;
 	}
 
 	@Override
 	public Object visit(LlistSum n) {
-		// TODO Auto-generated method stub
-		return null;
+		String s = " + " + n.term.accept(this).toString();
+		if(n.llist == null)
+			return s;
+		s += n.llist.accept(this);
+		return s;
 	}
 
 	@Override
 	public Object visit(Term n) {
-		// TODO Auto-generated method stub
-		return null;
+		String s = n.not.accept(this).toString();
+		if(n.tlist == null)
+			return s;
+		s += n.tlist.accept(this);
+		return s;
 	}
 
 	@Override
 	public Object visit(Tlist n) {
-		if(n.not.accept(this) instanceof Boolean){
-			return n.not.accept(this);
+		if(n.not == null && n.tlist == null){
+			return "";
 		}
-		else if(n.not.accept(this) instanceof Integer){
-			return ((Integer)(n.not.accept(this)) * ((Integer) n.tlist.accept(this)));
-		}
-		else{
-			return null;
-		}
+		String s = "* " + n.not.accept(this).toString();
+		s += n.tlist.accept(this);
+		return s;
 	}
 
 	@Override
 	public Object visit(Not n) {
-		return null;
+		return "";
 	}
 
 	@Override
 	public Object visit(NotFactor n) {
-		//TODO do something, maybe
-		return null;
+		String s = n.factor.accept(this).toString();
+		s += n.dotList.accept(this);
+		return s;
 	}
 
 	@Override
 	public Object visit(NotSimple n) {
-		return ! (boolean)n.not.accept(this);
+		String s = "!" + n.not.accept(this).toString();
+		return s;
 	}
 
 	@Override
 	public Object visit(DotArrayMember n) {
-		return n.member.accept(this);
+		String s = "." + n.member.accept(this).toString();
+		return s;
 	}
 
 	@Override
 	public Object visit(Factor n) {
+		
 		return null;
 	}
 
 	@Override
 	public Object visit(IntegerLiteral n) {
-		return n.i;
+		return n.i + " ";
 	}
 
 	@Override
 	public Object visit(True n) {
-		return true;
+		return "true ";
 	}
 
 	@Override
 	public Object visit(False n) {
-		return false;
+		return "false ";
 	}
 
 	@Override
 	public Object visit(IdentifierExp n) {
-		return n.s;
+		return n.s + " ";
 	}
 
 	@Override
 	public Object visit(This n) {
-		return "this";
+		return "this ";
 	}
 
 	@Override
 	public Object visit(FactorNew n) {
-		return n.accept(this);
+		return n.newObject.accept(this).toString();
 	}
 
 	@Override
 	public Object visit(NewArray n) {
-		return n.e.accept(this);
+		return n.e.accept(this).toString();
 	}
 
 	@Override
 	public Object visit(NewObject n) {
-		return n.id.accept(this);
+		return n.id.accept(this).toString();
 	}
 
 	@Override
 	public Object visit(New n) {
-		return null;
-	}
-
-	@Override
-	public Object visit(Object o1, Object o2) {
 		return null;
 	}
 

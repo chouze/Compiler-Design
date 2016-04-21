@@ -102,7 +102,6 @@ public class Optimizer implements Visitor {
 	}
 
 	public Object visit(If n) {
-		//Apparently because we're using elseifs we cant do the simple optimization
 
 		
 		n.s = (Statement)n.s.accept(this);
@@ -121,14 +120,36 @@ public class Optimizer implements Visitor {
 			n.elseIf = (ElseIfList) n.elseIf.accept(this);
 			return n;
 		}*/
-		
+		boolean sameStatements = true;
 		for(ElseIf ef : n.elseIf){
 			if(!(boolean) eq.visit(n.s.accept(this), ef.s.accept(this))){
-				return n;
+				//return n;
+				sameStatements = false;
+				break;
 			}
 		}
-		return n.s;
 		
+		
+		if(sameStatements){
+			System.out.println("Optimizing: factoring duplicated statements from if\n");
+			return n.s;
+		}
+		
+		boolean sameExp = true;
+		for(ElseIf ef : n.elseIf){
+			if(!(boolean) eq.visit(n.condition.accept(this), ef.condition.accept(this))){
+				//return n;
+				sameExp = false;
+				break;
+			}
+		}
+		if(sameExp){
+			//Get rid of the old elseIfs
+			System.out.println("Optimizing: removing elseifs with identical conditions\n");
+			n.elseIf.clear();
+		}
+		
+		return n;
 	}
 
 	public Object visit(Do n) {

@@ -29,7 +29,6 @@ class AddNum
 			
 			if(true){
 				a = b;
-				b = a;
 			}
 			else if(true){
 				a = b;
@@ -52,7 +51,7 @@ class AddNum
 							}
 						}
 					}
-				} while(i < 10);
+				} while(i < 10 && i < 20);
 			}
 			else if(true)
 				System.out.println(i < 10);
