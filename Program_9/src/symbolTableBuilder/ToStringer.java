@@ -429,7 +429,6 @@ public class ToStringer implements Visitor {
 		String s = " - " + n.term.accept(this).toString();
 		if(n.llist == null)
 			return s;
-		s += " - ";
 		s += n.llist.accept(this);
 		return s;
 	}

@@ -454,6 +454,9 @@ public class Equal implements Visitor {
 	
 	@Override
 	public Object visit(Object o1, Object o2) {
+		if(o1 == null && o2 == null){
+			return true;
+		}
 		if(o1 == null){
 			return false;
 		}

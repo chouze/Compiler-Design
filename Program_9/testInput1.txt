@@ -26,8 +26,16 @@ class AddNum
 			total = 0;
 			firstInt = a;
 			secondInt = b;
+			
+			if(true){
+				a = b;
+				b = a;
+			}
+			else if(true){
+				a = b;
+			}
 
-			if(i < 10)
+			if(true)
 			{
 				do
 				{
@@ -46,7 +54,7 @@ class AddNum
 					}
 				} while(i < 10);
 			}
-			else if(i < 10)
+			else if(true)
 				System.out.println(i < 10);
 		}
 				

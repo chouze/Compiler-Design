@@ -10,6 +10,8 @@ package symbolTableBuilder;
  */
 
 public class Optimizer implements Visitor {
+	
+	Equal eq = new Equal();
 
 	public Optimizer() {
 
@@ -102,9 +104,13 @@ public class Optimizer implements Visitor {
 	public Object visit(If n) {
 		//Apparently because we're using elseifs we cant do the simple optimization
 
-		Equal eq = new Equal();
+		
+		n.s = (Statement)n.s.accept(this);
+		n.elseIf = (ElseIfList)n.elseIf.accept(this);
+		/*
+		boolean test = (Boolean)(eq.visit(n.condition, new True()));
 		if((boolean)eq.visit(n.condition, new True())){
-			return n.s;
+			return n.s.accept(this);
 		}
 		else if((boolean)eq.visit(n.condition, new False())){
 			return n.elseIf;
@@ -114,7 +120,15 @@ public class Optimizer implements Visitor {
 			n.s = (Statement) n.s.accept(this);
 			n.elseIf = (ElseIfList) n.elseIf.accept(this);
 			return n;
+		}*/
+		
+		for(ElseIf ef : n.elseIf){
+			if(!(boolean) eq.visit(n.s.accept(this), ef.s.accept(this))){
+				return n;
+			}
 		}
+		return n.s;
+		
 	}
 
 	public Object visit(Do n) {
@@ -171,7 +185,7 @@ public class Optimizer implements Visitor {
 		n.id.accept(this); // identifier
 		n.arrayExp = (Exp) n.arrayExp.accept(this);
 		n.assignExp = (Exp) n.assignExp.accept(this);
-		return null;
+		return n;
 	}
 
 	public Object visit(ElseIf n) {
@@ -219,10 +233,11 @@ public class Optimizer implements Visitor {
 	}
 
 	public Object visit(StatementList n) {
+		StatementList sl = new StatementList();
 		for (Statement s : n) {
-			s.accept(this);
+			sl.add((Statement)s.accept(this));
 		}
-		return n;
+		return sl;
 	}
 
 	public Object visit(VarDeclList n) {
@@ -265,7 +280,7 @@ public class Optimizer implements Visitor {
 	}
 
 	public Object visit(AssignSimple n) {
-		n.id.accept(this); // identifier
+		n.id = (Identifier)n.id.accept(this); // identifier
 		n.assignment = (Exp) n.assignment.accept(this);
 		return n;
 	}
