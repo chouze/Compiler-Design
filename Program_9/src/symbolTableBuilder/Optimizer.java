@@ -152,7 +152,7 @@ public class Optimizer implements Visitor {
 		{
 			n.condition = bool((Boolean) o);
 			if(!(Boolean)o){
-				System.out.println("Optimizing: replaced look with just loop content because loop only executes once");
+				System.out.println("Optimizing: replaced loop with just loop content because loop only executes once");
 				return n.s;
 			}
 		}
