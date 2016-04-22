@@ -1,7 +1,6 @@
 package symbolTableBuilder;
 
 /**
- * SymbolTableTypeCheck
  * 
  * @author David Carlin
  * @author Clifford Black
@@ -10,7 +9,7 @@ package symbolTableBuilder;
  */
 
 public class Optimizer implements Visitor {
-	
+
 	Equal eq = new Equal();
 	Eval ev = new Eval();
 
@@ -68,8 +67,9 @@ public class Optimizer implements Visitor {
 	}
 
 	public Object visit(VarDeclType n, Type t) {
-		if (n.exp != null) {
-			n.exp = (Exp) ev.visit((Exp) n.exp.accept(this));
+		if (n.exp != null && ev.visit(n.exp) != null) {
+			n.exp = (Exp) ev.visit(n.exp);
+			System.out.println("Optimizing: variable declarations with initialization");
 		}
 		return n;
 	}
@@ -85,9 +85,6 @@ public class Optimizer implements Visitor {
 	}
 
 	public Object visit(FormalList n) {
-		n.type.accept(this); // type
-		n.parameterName.accept(this); // identifier
-		n.moreParams.accept(this); // more types/identifiers, no need to optimize
 		return n;
 	}
 
@@ -105,25 +102,23 @@ public class Optimizer implements Visitor {
 	public Object visit(If n) {
 		n.s = (Statement)n.s.accept(this);
 		n.elseIf = (ElseIfList)n.elseIf.accept(this);
-		
+
 		boolean sameStatements = true;
 		for(ElseIf ef : n.elseIf){
 			if(!(boolean) eq.visit(n.s.accept(this), ef.s.accept(this))){
-				//return n;
 				sameStatements = false;
 				break;
 			}
 		}
-		
+
 		if(sameStatements){
-			System.out.println("Optimizing: factoring duplicated statements from if\n");
+			System.out.println("Optimizing: factoring duplicated statements from if");
 			return n.s;
 		}
-		
+
 		boolean sameExp = true;
 		for(ElseIf ef : n.elseIf){
 			if(!(boolean) eq.visit(n.condition.accept(this), ef.condition.accept(this))){
-				//return n;
 				sameExp = false;
 				break;
 			}
@@ -133,32 +128,56 @@ public class Optimizer implements Visitor {
 			System.out.println("Optimizing: removing elseifs with identical conditions\n");
 			n.elseIf.clear();
 		}
-		
+
 		Object o = ev.visit(n.condition);
-		System.out.println(o);
 		if(o instanceof Boolean){
-			System.out.println("Got a hit");
 			if((Boolean)o == true){
+				System.out.println("Optimizing: removed else if as if evaluated to true");
 				return n.s;
 			}
 			else{
-				//figure out a way to return new if using just the elseifs 
+				if(n.elseIf.size() < 2)
+					System.out.println("Optimizing: removed if statement as it evaluated to false, kept else if");
+					return n.elseIf.get(0).s;
 			}
 		}
-		
+
 		return n;
 	}
 
 	public Object visit(Do n) {
 		n.s = (Statement) n.s.accept(this);
-		n.condition = (Exp) n.condition.accept(this);
+		Object o = ev.visit(n.condition);
+		if(o instanceof Boolean)
+		{
+			n.condition = bool((Boolean) o);
+			if(!(Boolean)o){
+				System.out.println("Optimizing: replaced look with just loop content because loop only executes once");
+				return n.s;
+			}
+		}
 		return n;
 	}
 
 	public Object visit(While n) {
-		n.condition = (Exp) n.condition.accept(this);
+		Object o = ev.visit(n.condition);
 		n.s = (Statement) n.s.accept(this);
+		if(o instanceof Boolean)
+		{
+			n.condition = bool((Boolean) o);
+			
+			if(!(Boolean) o)
+				System.out.println("Optimizing: removed while loop as it evaluated to false");
+				return new Block(new StatementList());
+		}
 		return n;
+	}
+
+	private Exp bool(Boolean o) {
+		if(o)
+			return new Exp(new And(new Less(new Term(new NotFactor(new True(), new DotArrayList()), new Tlist()), new Llist()), new Alist()), new Elist());
+		else
+			return new Exp(new And(new Less(new Term(new NotFactor(new False(), new DotArrayList()), new Tlist()), new Llist()), new Alist()), new Elist());
 	}
 
 	public Object visit(For n) {
@@ -271,13 +290,11 @@ public class Optimizer implements Visitor {
 		}
 		return n;
 	}
-	/*
-	 * ExpRestList, not sure how to visit it just yet, needs work
-	 */
+
 	public Object visit(ExpRestList n, Identifier id) {
 		for (int i = 0; i < n.size(); i++) {
 			ExpRest e = n.get(i);
-			e = (ExpRest)e.accept(this); //Pretty sure this loops through the ExpRestList list and accepts all expressions in it, but not 100%
+			e = (ExpRest)e.accept(this);
 		}
 		return n;
 	}
@@ -299,8 +316,18 @@ public class Optimizer implements Visitor {
 
 	public Object visit(AssignSimple n) {
 		n.id = (Identifier)n.id.accept(this); // identifier
-		n.assignment = (Exp) n.assignment.accept(this);
+		Object o = ev.visit(n.assignment);
+		if(o instanceof Integer)
+		{
+			n.assignment = integer((Integer) o);
+			System.out.println("Optimizing: simplified assigning expression");
+		}
+
 		return n;
+	}
+
+	private Exp integer(Integer o) {
+		return new Exp(new And(new Less(new Term(new NotFactor(new IntegerLiteral(o), new DotArrayList()), new Tlist()), new Llist()), new Alist()), new Elist());
 	}
 
 	public Object visit(AssignArray n) {
@@ -316,7 +343,6 @@ public class Optimizer implements Visitor {
 	}
 
 	public Object visit(NewObject n) {
-		n.id.accept(this); // identifier
 		return n;
 	}
 

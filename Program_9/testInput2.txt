@@ -36,8 +36,7 @@ class AddNum
 	{
 		int total;
 		{
-			total = a - a;
-		
+			total = a - a;	
 		}
 		
 		return total;

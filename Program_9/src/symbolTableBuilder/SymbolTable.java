@@ -90,8 +90,6 @@ public class SymbolTable {
 	public void check(String e1, String e2) {
 		if (!e1.equals(e2))
 			System.err.println("Types do not match: " + e1 + " and " + e2);
-		else
-		System.out.println("Types do match: " + e1 + " and " + e2);
 	}
 	
 	public boolean find(Identifier id){

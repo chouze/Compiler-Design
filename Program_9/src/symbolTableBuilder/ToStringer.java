@@ -1,5 +1,12 @@
 package symbolTableBuilder;
 
+/**
+ * 
+ * @author Clifford Black
+ * @author David Carlin
+ * @author Chris Houze
+ *
+ */
 public class ToStringer implements Visitor {
 
 	@Override
@@ -62,7 +69,7 @@ public class ToStringer implements Visitor {
 		if(n.exp != null){
 			s += n.exp.accept(this);
 		}
-		
+
 		return s;
 	}
 
@@ -262,7 +269,7 @@ public class ToStringer implements Visitor {
 		String s = "";
 		for(FormalRest fr: n)
 			s += fr.accept(this);
-		
+
 		return s;
 	}
 
@@ -271,7 +278,7 @@ public class ToStringer implements Visitor {
 		String s = "";
 		for(ElseIf ef: n)
 			s += ef.accept(this);
-		
+
 		return s;
 	}
 
@@ -415,12 +422,12 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(Llist n) {
-		
+
 		if (n instanceof LlistDifference)
 			return (String) visit((LlistDifference) n);
 		if ( n instanceof LlistSum)
 			return (String) visit((LlistSum) n);
-		
+
 		return "";
 	}
 
@@ -487,7 +494,7 @@ public class ToStringer implements Visitor {
 
 	@Override
 	public Object visit(Factor n) {
-		
+
 		return null;
 	}
 

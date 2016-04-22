@@ -6,7 +6,7 @@ class Test
 		//So is this
 		//And this one
 
-		int i = new AddNum().addNumber(10, 9);
+		int i = new AddNum().addNumber(8, 9);
 		{
 			
 		}
@@ -24,7 +24,7 @@ class AddNum
 		{
 
 			total = 10 + 3;
-			firstInt = a;
+			firstInt = 12 - 3;
 			secondInt = b;
 			
 			
@@ -35,11 +35,11 @@ class AddNum
 				a = b;
 			}
 
-			if(10 < 10)
+			if(11 < 12)
 			{
 				do
 				{
-					while(i < 10 - 10)
+					while(1 < 11 - 11)
 					{
 						for(i = 1; i < 10; i = i + 10)
 						{
@@ -48,11 +48,16 @@ class AddNum
 								case 10:
 									System.out.println(i < 10);
 								default:
-									i = 10;
+									i = 15;
 							}
 						}
 					}
-				} while(i < 10 && i < 20);
+				} while(5 < 1 && 5 < 20);
+				
+				do
+				{
+					System.out.println(a);
+				} while (5 < 1);
 			}
 			else if(i < 10)
 				System.out.println(i < 10);

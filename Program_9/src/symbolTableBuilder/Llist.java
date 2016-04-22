@@ -10,12 +10,12 @@ package symbolTableBuilder;
 
 public class Llist 
 {
-	Llist l;
-	Term t;
+	Llist llist;
+	Term term;
 	public Llist(Llist l, Term t) 
 	{
-		this.t = t;
-		this.l = l;
+		this.term = t;
+		this.llist = l;
 	}
 	
 	public Llist()

@@ -816,7 +816,7 @@ public class Equal implements Visitor {
 			Llist b1 = (Llist) o1;
 			Llist b2 = (Llist) o2;
 			
-			return (boolean)visit(b1.l, b2.l) && (boolean)visit(b1.t, b2.t);
+			return (boolean)visit(b1.llist, b2.llist) && (boolean)visit(b1.term, b2.term);
 		}
 		
 		if(o1 instanceof LlistDifference){

@@ -26,9 +26,10 @@ public class Driver {
 		bst.visit(prog);
 		sttc.visit(prog);
 		ToStringer t = new ToStringer();
-		System.out.println(t.visit(prog));
+		System.out.println(t.visit(prog) + "\n");
 		Optimizer o = new Optimizer();
 		prog = (Program)o.visit(prog);
+		System.out.println();
 		System.out.println(t.visit(prog));
 		
 	}

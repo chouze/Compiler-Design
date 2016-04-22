@@ -1,5 +1,12 @@
 package symbolTableBuilder;
 
+/**
+ * 
+ * @author Clifford Black
+ * @author David Carlin
+ * @author Chris Houze
+ *
+ */
 public class Eval implements Visitor {
 
 	@Override
@@ -421,7 +428,7 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(Exp n) {
-		if(n.elist.and == null && n.elist.elist == null)
+		if(n.elist.accept(this) == null)
 		{
 			return n.and.accept(this);
 		}
@@ -436,10 +443,6 @@ public class Eval implements Visitor {
 			return temp1;
 		}
 		return null;
-		
-		//n.and = (And) temp1;
-		//n.elist = (Elist) temp2;
-		//return n;
 	}
 
 	@Override
@@ -447,7 +450,6 @@ public class Eval implements Visitor {
 		if(n.elist == null && n.and == null)
 			return null;
 		if(n.elist == null){
-			//n.elist = new Elist();
 			return n.and.accept(this);
 		}
 		
@@ -462,9 +464,6 @@ public class Eval implements Visitor {
 		}
 		
 		return null;
-		//n.and = (And) temp1;
-		//n.elist = (Elist) temp2;
-		//return n;
 	}
 
 
@@ -475,7 +474,6 @@ public class Eval implements Visitor {
 		
 		Object temp1 = n.alist.accept(this);
 		Object temp2 = n.less.accept(this);
-		
 		if(temp1 instanceof Integer && temp2 instanceof Integer)
 			return ((Integer)temp2) < ((Integer)temp1);
 		
@@ -483,11 +481,6 @@ public class Eval implements Visitor {
 			return temp1;
 		}
 		return null;
-		
-		//n.alist = (Alist) temp1;
-		//n.less = (Less) temp2;
-		//return n;
-		
 	}
 
 	@Override
@@ -507,14 +500,11 @@ public class Eval implements Visitor {
 			return temp1;
 		}
 		return null;
-		//n.alist = (Alist) temp1;
-		//n.less = (Less) temp2;
-		//return n;
 	}
 
 	@Override
 	public Object visit(Less n) {
-		if(n.llist.l == null && n.llist.t == null)
+		if(n.llist.llist == null && n.llist.term == null)
 			return n.term.accept(this);
 
 		if(n.llist instanceof LlistSum)
@@ -543,10 +533,6 @@ public class Eval implements Visitor {
 			return n.term.accept(this);
 		}
 		return null;
-
-		//n.term = (Term) n.term.accept(this);
-		//n.llist = (Llist) n.llist.accept(this);
-		//return n;
 	}
 
 	/**
@@ -565,7 +551,7 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(LlistDifference n) {
-		if(n.llist.l == null && n.llist.t == null)
+		if(n.llist.llist == null && n.llist.term == null)
 			return n.term.accept(this);
 
 		if(n.llist instanceof LlistSum)
@@ -592,15 +578,11 @@ public class Eval implements Visitor {
 			return n.term.accept(this);
 		}
 		return null;
-		
-		//n.term = (Term) n.term.accept(this);
-		//n.llist = (Llist) n.llist.accept(this);
-		//return n;
 	}
 
 	@Override
 	public Object visit(LlistSum n) {
-		if(n.llist.l == null && n.llist.t == null)
+		if(n.llist.llist == null && n.llist.term == null)
 			return n.term.accept(this);
 
 		if(n.llist instanceof LlistSum)
@@ -627,10 +609,6 @@ public class Eval implements Visitor {
 			return n.term.accept(this);
 		}
 		return null;
-		
-		//n.term = (Term) n.term.accept(this);
-		//n.llist = (Llist) n.llist.accept(this);
-		//return n;
 	}
 
 	@Override
@@ -653,26 +631,20 @@ public class Eval implements Visitor {
 		}
 		
 		return null;
-		//n.not = (Not)temp2;
-		//n.tlist = (Tlist) temp1;
-		//return n;
 	}
 
 	@Override
 	public Object visit(Tlist n) {
-		if(n.not == null && n.tlist == null){
+		if(n.not.accept(this) == null){
 			return null;
 		}
 
-		if(n.tlist == null)
+		if(n.tlist.accept(this) == null)
 		{
 			return n.not.accept(this);
 		}
 		
 		return (Integer)n.not.accept(this) * (Integer)n.tlist.accept(this);
-		//n.not = (Not)n.not.accept(this);
-		//n.tlist = (Tlist) n.tlist.accept(this);
-		//return n;
 	}
 
 	@Override
@@ -686,13 +658,8 @@ public class Eval implements Visitor {
 		{
 			return n.factor.accept(this);
 		}
-		
-		//Cheating a bit
-		//TODO: fix this
+
 		return null;
-		//n.dotList = (DotArrayList) n.dotList.accept(this);
-		//n.factor = (Factor) n.factor.accept(this);
-		//return n;
 	}
 
 	@Override
@@ -703,9 +670,6 @@ public class Eval implements Visitor {
 		}
 		//should always be a boolean, if not
 		return null;
-		
-		
-		//return n.not.accept(this);
 	}
 
 	@Override
@@ -736,9 +700,6 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(IdentifierExp n) {
-		//return n.s;
-		//We don't really care about identifiers at this point, and checking for 
-		//string only complicates things
 		return null; 
 	}
 
