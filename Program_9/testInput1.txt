@@ -27,6 +27,7 @@ class AddNum
 			firstInt = a;
 			secondInt = b;
 			
+			
 			if(true){
 				a = b;
 			}
@@ -34,7 +35,7 @@ class AddNum
 				a = b;
 			}
 
-			if(i < 10)
+			if(10 < 10)
 			{
 				do
 				{

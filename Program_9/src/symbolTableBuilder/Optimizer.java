@@ -134,6 +134,18 @@ public class Optimizer implements Visitor {
 			n.elseIf.clear();
 		}
 		
+		Object o = ev.visit(n.condition);
+		System.out.println(o);
+		if(o instanceof Boolean){
+			System.out.println("Got a hit");
+			if((Boolean)o == true){
+				return n.s;
+			}
+			else{
+				//figure out a way to return new if using just the elseifs 
+			}
+		}
+		
 		return n;
 	}
 

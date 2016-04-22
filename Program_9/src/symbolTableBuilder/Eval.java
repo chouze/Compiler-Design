@@ -409,6 +409,15 @@ public class Eval implements Visitor {
 	public Object visit(Object o1, Object o2) {
 		return null;
 	}
+	
+	/***************************
+	 * Eval only needs to work for expressions
+	 * 
+	 * Remember that the purpose of this visitor is not to simplify or do anything like that
+	 * Rather, it is to look at an expression, and evaluate it if it contains.
+	 * 
+	 * It should not be making any changes to the actual AST
+	 */
 
 	@Override
 	public Object visit(Exp n) {
@@ -423,9 +432,14 @@ public class Eval implements Visitor {
 		if(temp1 instanceof Boolean && temp2 instanceof Boolean)
 			return ((Boolean)temp2) && ((Boolean)temp1);
 		
-		n.and = (And) temp1;
-		n.elist = (Elist) temp2;
-		return n;
+		if(temp1 instanceof Integer){
+			return temp1;
+		}
+		return null;
+		
+		//n.and = (And) temp1;
+		//n.elist = (Elist) temp2;
+		//return n;
 	}
 
 	@Override
@@ -433,7 +447,7 @@ public class Eval implements Visitor {
 		if(n.elist == null && n.and == null)
 			return null;
 		if(n.elist == null){
-			n.elist = new Elist();
+			//n.elist = new Elist();
 			return n.and.accept(this);
 		}
 		
@@ -443,45 +457,59 @@ public class Eval implements Visitor {
 		if(temp1 instanceof Boolean && temp2 instanceof Boolean)
 			return ((Boolean)temp2) && ((Boolean)temp1);
 		
-		n.and = (And) temp1;
-		n.elist = (Elist) temp2;
-		return n;
+		if(temp1 instanceof Integer){
+			return temp1;
+		}
+		
+		return null;
+		//n.and = (And) temp1;
+		//n.elist = (Elist) temp2;
+		//return n;
 	}
 
 
 	@Override
 	public Object visit(And n) {
-		if(n.alist.alist == null && n.alist.less == null)
+		if(n.alist.accept(this) == null)
 			return n.less.accept(this);
 		
 		Object temp1 = n.alist.accept(this);
 		Object temp2 = n.less.accept(this);
 		
-		if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
-			return ((IntegerLiteral)temp2).i < ((IntegerLiteral)temp1).i;
+		if(temp1 instanceof Integer && temp2 instanceof Integer)
+			return ((Integer)temp2) < ((Integer)temp1);
 		
-		n.alist = (Alist) temp1;
-		n.less = (Less) temp2;
-		return n;
+		if(temp1 instanceof Boolean){
+			return temp1;
+		}
+		return null;
+		
+		//n.alist = (Alist) temp1;
+		//n.less = (Less) temp2;
+		//return n;
 		
 	}
 
 	@Override
 	public Object visit(Alist n) {
-		if(n.alist == null && n.less == null)
+		if(n.alist == null && n.alist == null)
 			return null;
-		if(n.alist == null)
+		if(n.alist.accept(this) == null)
 			return n.less.accept(this);
 		
 		Object temp1 = n.alist.accept(this);
 		Object temp2 = n.less.accept(this);
 		
-		if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
-			return ((IntegerLiteral)temp2).i < ((IntegerLiteral)temp1).i;
+		if(temp1 instanceof Integer && temp2 instanceof Integer)
+			return ((Integer)temp2) < ((Integer)temp1);
 		
-		n.alist = (Alist) temp1;
-		n.less = (Less) temp2;
-		return n;
+		if(temp1 instanceof Boolean){
+			return temp1;
+		}
+		return null;
+		//n.alist = (Alist) temp1;
+		//n.less = (Less) temp2;
+		//return n;
 	}
 
 	@Override
@@ -493,27 +521,37 @@ public class Eval implements Visitor {
 		{
 			Object temp1 = n.term.accept(this);
 			Object temp2 = n.llist.accept(this);
-			if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
+			if(temp1 instanceof Integer && temp2 instanceof Integer)
 			{
-				return new IntegerLiteral((((IntegerLiteral) temp1).i) + (((IntegerLiteral) temp2).i)); 
+				return ((Integer) temp1) + ((Integer) temp2); 
 			}
+			
+			
 		}
 
 		if(n.llist instanceof LlistDifference)
 		{
 			Object temp1 = n.term.accept(this);
 			Object temp2 = n.llist.accept(this);
-			if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
+			if(temp1 instanceof Integer && temp2 instanceof Integer)
 			{
-				return new IntegerLiteral((((IntegerLiteral) temp1).i) - (((IntegerLiteral) temp2).i)); 
+				return ((Integer) temp1) - ((Integer) temp2); 
 			}
 		}
+		
+		if(n.term.accept(this) instanceof Boolean){
+			return n.term.accept(this);
+		}
+		return null;
 
-		n.term = (Term) n.term.accept(this);
-		n.llist = (Llist) n.llist.accept(this);
-		return n;
+		//n.term = (Term) n.term.accept(this);
+		//n.llist = (Llist) n.llist.accept(this);
+		//return n;
 	}
 
+	/**
+	 * Should this be abstract?
+	 */
 	@Override
 	public Object visit(Llist n) {
 
@@ -527,16 +565,16 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(LlistDifference n) {
-		if(n.llist == null)
+		if(n.llist.l == null && n.llist.t == null)
 			return n.term.accept(this);
 
 		if(n.llist instanceof LlistSum)
 		{
 			Object temp1 = n.term.accept(this);
 			Object temp2 = n.llist.accept(this);
-			if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
+			if(temp1 instanceof Integer && temp2 instanceof Integer)
 			{
-				return new IntegerLiteral((((IntegerLiteral) temp1).i) + (((IntegerLiteral) temp2).i)); 
+				return ((Integer) temp1) + ((Integer) temp2); 
 			}
 		}
 
@@ -544,29 +582,34 @@ public class Eval implements Visitor {
 		{
 			Object temp1 = n.term.accept(this);
 			Object temp2 = n.llist.accept(this);
-			if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
+			if(temp1 instanceof Integer && temp2 instanceof Integer)
 			{
-				return new IntegerLiteral((((IntegerLiteral) temp1).i) - (((IntegerLiteral) temp2).i)); 
+				return ((Integer) temp1) - ((Integer) temp2); 
 			}
 		}
 		
-		n.term = (Term) n.term.accept(this);
-		n.llist = (Llist) n.llist.accept(this);
-		return n;
+		if(n.term.accept(this) instanceof Boolean){
+			return n.term.accept(this);
+		}
+		return null;
+		
+		//n.term = (Term) n.term.accept(this);
+		//n.llist = (Llist) n.llist.accept(this);
+		//return n;
 	}
 
 	@Override
 	public Object visit(LlistSum n) {
-		if(n.llist == null)
+		if(n.llist.l == null && n.llist.t == null)
 			return n.term.accept(this);
 
 		if(n.llist instanceof LlistSum)
 		{
 			Object temp1 = n.term.accept(this);
 			Object temp2 = n.llist.accept(this);
-			if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
+			if(temp1 instanceof Integer && temp2 instanceof Integer)
 			{
-				return new IntegerLiteral((((IntegerLiteral) temp1).i) + (((IntegerLiteral) temp2).i)); 
+				return ((Integer) temp1) + ((Integer) temp2); 
 			}
 		}
 
@@ -574,15 +617,20 @@ public class Eval implements Visitor {
 		{
 			Object temp1 = n.term.accept(this);
 			Object temp2 = n.llist.accept(this);
-			if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
+			if(temp1 instanceof Integer && temp2 instanceof Integer)
 			{
-				return new IntegerLiteral((((IntegerLiteral) temp1).i) - (((IntegerLiteral) temp2).i)); 
+				return ((Integer) temp1) - ((Integer) temp2); 
 			}
 		}
 		
-		n.term = (Term) n.term.accept(this);
-		n.llist = (Llist) n.llist.accept(this);
-		return n;
+		if(n.term.accept(this) instanceof Boolean){
+			return n.term.accept(this);
+		}
+		return null;
+		
+		//n.term = (Term) n.term.accept(this);
+		//n.llist = (Llist) n.llist.accept(this);
+		//return n;
 	}
 
 	@Override
@@ -595,14 +643,19 @@ public class Eval implements Visitor {
 		//deal with multiplication
 		Object temp1 = n.tlist.accept(this);
 		Object temp2 = n.not.accept(this);
-		if(temp1 instanceof IntegerLiteral && temp2 instanceof IntegerLiteral)
+		if(temp1 instanceof Integer && temp2 instanceof Integer)
 		{
-			return new IntegerLiteral((((IntegerLiteral) temp1).i) * (((IntegerLiteral) temp2).i)); 
+			return ((Integer) temp1) * ((Integer) temp2); 
 		}
 
-		n.not = (Not)temp2;
-		n.tlist = (Tlist) temp1;
-		return n;
+		if(temp1 instanceof Boolean){
+			return temp1;
+		}
+		
+		return null;
+		//n.not = (Not)temp2;
+		//n.tlist = (Tlist) temp1;
+		//return n;
 	}
 
 	@Override
@@ -615,10 +668,11 @@ public class Eval implements Visitor {
 		{
 			return n.not.accept(this);
 		}
-
-		n.not = (Not)n.not.accept(this);
-		n.tlist = (Tlist) n.tlist.accept(this);
-		return n;
+		
+		return (Integer)n.not.accept(this) * (Integer)n.tlist.accept(this);
+		//n.not = (Not)n.not.accept(this);
+		//n.tlist = (Tlist) n.tlist.accept(this);
+		//return n;
 	}
 
 	@Override
@@ -632,15 +686,26 @@ public class Eval implements Visitor {
 		{
 			return n.factor.accept(this);
 		}
-
-		n.dotList = (DotArrayList) n.dotList.accept(this);
-		n.factor = (Factor) n.factor.accept(this);
-		return n;
+		
+		//Cheating a bit
+		//TODO: fix this
+		return null;
+		//n.dotList = (DotArrayList) n.dotList.accept(this);
+		//n.factor = (Factor) n.factor.accept(this);
+		//return n;
 	}
 
 	@Override
 	public Object visit(NotSimple n) {
-		return n.not.accept(this);
+		Object o = n.not.accept(this);
+		if(o instanceof Boolean){
+			return !(Boolean)o;
+		}
+		//should always be a boolean, if not
+		return null;
+		
+		
+		//return n.not.accept(this);
 	}
 
 	@Override
@@ -656,7 +721,7 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(IntegerLiteral n) {
-		return n;
+		return n.i;
 	}
 
 	@Override
@@ -671,7 +736,10 @@ public class Eval implements Visitor {
 
 	@Override
 	public Object visit(IdentifierExp n) {
-		return n.s;
+		//return n.s;
+		//We don't really care about identifiers at this point, and checking for 
+		//string only complicates things
+		return null; 
 	}
 
 	@Override
