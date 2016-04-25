@@ -104,14 +104,22 @@ public class Optimizer implements Visitor {
 		n.elseIf = (ElseIfList)n.elseIf.accept(this);
 
 		boolean sameStatements = true;
+		boolean oneTrue = false;
 		for(ElseIf ef : n.elseIf){
 			if(!(boolean) eq.visit(n.s.accept(this), ef.s.accept(this))){
 				sameStatements = false;
 				break;
 			}
+			if(ef != null && ef.condition != null){
+				Object o = ev.visit(ef.condition);
+				if(o instanceof Boolean && (boolean)o){
+					oneTrue = true;
+				}
+				
+			}
 		}
 
-		if(sameStatements){
+		if(sameStatements && oneTrue){
 			System.out.println("Optimizing: factoring duplicated statements from if");
 			return n.s;
 		}
