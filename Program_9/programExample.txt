@@ -1,0 +1,30 @@
+class AreaCalculator
+{
+	public static void main ( String [] args )
+	{
+		//checks to see if the number is even or odd
+
+		int side1 = 2;
+		int side2 = 3;
+		int area = 0;
+		{
+			area = Area.calculate(side1, side2);
+		}
+	}
+}
+
+class Area
+{
+	public int calculate(int a, int b)
+	{
+		int side1 = a;
+		int side2 = b;
+		int area = 0;
+		
+		{
+			area = side1 * side2;
+		}
+		
+		return area;	
+	}
+}
